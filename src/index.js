@@ -1,8 +1,11 @@
 import './utils/initialisationManager.js'
 
+import bb from './utils/blackboard.js'
+
 import {leftClick,rightClick} from './utils/mouseEvents.js'
 
-import init from '../init.js' //json
+import init from '../assets/json/init.js' //json
+import keyToAction from '../assets/json/keyToActions.js' //json
 
 var scene = bb.fastGet('liveObjects','scene').getScene();
 var camera = bb.fastGet('liveObjects','camera').getCamera();
@@ -19,9 +22,9 @@ init.objects.map((item)=>{
     let category = bb.fastGet("objects",item.category);
     if(typeof category !== "function"){console.log("There is no category "+item.category)}
     if(item.name === undefined 
-    || !bb.fastGet('liveObjects',item.name)){
-        let it = new category({name:item.name});
-        bb.fastSet('liveObjects',item.name,it);
+    || !bb.fastGet('liveObjects',item.meta.name)){
+        let it = new category(item.meta);
+        bb.fastSet('liveObjects',item.meta.name,it);
         if(item.color)it.setColor(item.color);
         if(item.position)it.setPosition(item.position.x,item.position.y);
         scene.add(it.getObject());
@@ -37,9 +40,13 @@ renderer.domElement.addEventListener("click", leftClick, true);
 renderer.domElement.addEventListener("contextmenu", rightClick, true);
 
 document.onkeydown = function(ev) {
-    console.log(ev);
-    if(ev.key === "1"){
-        bb.fastGet('actions','changeColor')(document.getElementById("inputss").value,'#ffffff');
+    // console.log(ev);
+    for(var key in keyToAction){
+        if(ev.code === key){
+            console.log(keyToAction[key]);
+            // keyToAction[key].map((action)=>bb.fastGet('actions',action)(document.getElementById("inputss").value));
+            keyToAction[key].map((action)=>bb.fastGet('actions',action)(bb.fastGet('state','focusedObject')));
+        }
     }
 };
 
