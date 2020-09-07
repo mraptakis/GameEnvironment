@@ -26,7 +26,7 @@ function hudState(){
         let hudChildren = document.querySelectorAll('.hudChild');
         hudChildren.forEach(element => {
             element.style.visibility = (isVisible)?"visible":"hidden";
-            element.style.opacity = (isVisible)?"1":"0";
+            element.style.opacity = (isVisible)?"0.9":"0";
         });
     }
     return toggleVisibility;

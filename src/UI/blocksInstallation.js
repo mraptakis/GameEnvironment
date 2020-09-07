@@ -51,7 +51,7 @@ Blockly.Blocks['get_object'] = {
             .setCheck('String')
             .appendField('Get Object');
         this.setColour(colourPalette.object);
-        this.setOutput(true, 'VALUE');
+        this.setOutput(true, 'Object');
         this.setTooltip('Get an object by name.');
         this.setHelpUrl('none');
         return 0;
@@ -67,6 +67,7 @@ Blockly.JavaScript['get_object'] = function(block) {
 Blockly.Blocks['console_log'] = {
     init: function() {
         this.appendValueInput('CON_LOG')
+            .setCheck('Object')
             .appendField('Log');
         this.setColour(colourPalette.object);
         this.setTooltip('Get an object by name.');
@@ -87,6 +88,7 @@ Blockly.JavaScript['console_log'] = function(block) {
 Blockly.Blocks['colour_change_choose_object'] = {
     init: function() {
         this.appendValueInput('Obj')
+            .setCheck('Object')
             .appendField('Object');
         this.appendValueInput('Colour')
             .setCheck('Colour')
@@ -111,7 +113,7 @@ Blockly.JavaScript['colour_change_choose_object'] = function(block) {
 Blockly.Blocks['create_object'] = {
     init: function() {
         this.appendValueInput('Categ')
-            .setCheck('String')
+            .setCheck('ObjectCat')
             .appendField('Category');
         this.appendValueInput('Name')
             .setCheck('String')
@@ -135,7 +137,7 @@ Blockly.Blocks['create_object'] = {
 };
 
 Blockly.JavaScript['create_object'] = function(block) {
-    var argument0 = Blockly.JavaScript.valueToCode(block, 'Categ',
+    var argument0 = Blockly.JavaScript.statementToCode  (block, 'Categ',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument1 = Blockly.JavaScript.valueToCode(block, 'Name',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
@@ -151,4 +153,62 @@ return 'bb.fastGet("actions","createObject")({\
 "colour":'+argument2+',\
 "position":{"x":'+argument3+',"y":'+ argument4 +'} \
 });\n';
+};
+
+import bb from '../utils/blackboard.js'
+
+Blockly.Blocks['dropdown_categ'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'TESTF')
+            .appendField('Category');
+        this.setColour(colourPalette.object);
+        this.setOutput(true, 'ObjectCat');
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+      },
+
+    getCategories(){
+        let map = bb.getComponent('objects').itemMap;
+        let categs = [];
+        for(let i in map){
+            if(i !== "camera" 
+            && i !== "scene")
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['dropdown_categ'] = function(block) {
+    let inp_val = block.getFieldValue('TESTF');
+    return '"' + inp_val + '"';
+};
+
+Blockly.Blocks['dropdown_obj'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'TESTF')
+            .appendField('Object');
+        this.setColour(colourPalette.object);
+        this.setOutput(true, 'Object');
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+      },
+
+    getCategories(){
+        let map = bb.getComponent('liveObjects').itemMap;
+        let categs = [];
+        for(let i in map){
+            if(i !== "camera" 
+            && i !== "scene")
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['dropdown_obj'] = function(block) {
+    let inp_val = block.getFieldValue('TESTF');
+    return 'bb.fastGet("liveObjects","' + inp_val + '")';
 };

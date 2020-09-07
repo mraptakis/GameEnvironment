@@ -12,6 +12,7 @@ import '../objects/Camera.js'
 import '../objects/Sphere.js'
 import '../objects/Box.js'
 import '../objects/Plane.js'
+import '../objects/Line.js'
 
 import '../actions/changeColor.js'
 import '../actions/moveObject.js'

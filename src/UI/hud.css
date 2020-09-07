@@ -7,6 +7,14 @@
     text-align: center;
 }
 
+#fpsCounter {
+    position: absolute;
+    color:white;
+    top:0;
+    right:20px;
+    text-align: right;
+}
+
 #objMenuButton {
     position: absolute;
     top: 25px;
@@ -32,7 +40,8 @@
     background-color: black;
     text-align: center;
     height: 25px;
-    border-radius: 10px;    
+    border-radius: 10px;   
+    cursor: pointer; 
 }
 
 #blocklyDiv {
@@ -102,7 +111,7 @@
 
 .hudChild {
     visibility: visible;
-    opacity: 1;
+    opacity: 0.9;
     transition: visibility 0s, opacity 1s linear;
 }
 
