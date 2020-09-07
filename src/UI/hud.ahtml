@@ -2,6 +2,12 @@
 
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+    <category name="Objects" colour="%{BKY_MATH_HUE}">
+      <block type="move_right"></block>
+      <block type="colour_change"></block>
+      <block type="get_object"></block>
+      <block type="console_log"></block>
+    </category>
     <category name="Logic" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>

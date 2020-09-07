@@ -1,23 +1,4 @@
 import bb from '../utils/blackboard.js'
-Blockly.Blocks['colour_change'] = {
-    init: function() {
-      this.appendValueInput('VALUE')
-          .setCheck('Colour')
-          .appendField('Change Colour');
-      this.setColour(24);
-      this.setTooltip('Change the colour of the object it refers.');
-      this.setHelpUrl('none');
-      this.setPreviousStatement(true);
-      this.setNextStatement(true);
-      return 0;
-    }
-  };
-
-  Blockly.JavaScript['colour_change'] = function(block) {
-    var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
-        Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return 'bb.fastGet("actions","changeColor")(undefined,'+argument0 + ')';
-  };
 
 function readTextFile(file,onFinish){
     var rawFile = new XMLHttpRequest();

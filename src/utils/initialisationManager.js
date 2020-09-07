@@ -5,6 +5,7 @@ import bb from '../utils/blackboard.js'
 bb.fastSet('state','focusedObject',undefined);
 
 import '../UI/hud.js'
+import '../UI/blocksInstallation.js'
 
 import '../objects/Scene.js'
 import '../objects/Camera.js'
