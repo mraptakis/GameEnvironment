@@ -52,6 +52,10 @@ function onHudLoaded(){
         Blockly.Xml.clearWorkspaceAndLoadFromXml(xml,Blockly.mainWorkspace);
     });
 
+    document.getElementById('bindScriptToKey').addEventListener('click',()=>{
+        localStorage.setItem(document.getElementById('keyToBind').value ,Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));
+    });
+
     let blocklyDiv = document.getElementById('blocklyDiv');
     blocklyDiv.style.height = "500px";
     blocklyDiv.style.width = "500px";

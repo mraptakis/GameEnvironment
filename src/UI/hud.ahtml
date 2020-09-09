@@ -6,7 +6,7 @@
       <block type="dropdown_obj"></block>
       <block type="dropdown_categ"></block>
       <block type="create_object"></block>
-      <block type="move_right"></block>
+      <block type="move_object"></block>
       <block type="colour_change"></block>
       <block type="colour_change_choose_object"></block>
       <block type="get_object"></block>
@@ -326,6 +326,8 @@
 <div id="playScriptButton" class="hudChild button"></div>
 <div id="saveScriptButton" class="hudChild button"></div>
 <div id="loadScriptButton" class="hudChild button"></div>
+<div id="bindScriptToKey" class="hudChild button"></div>
+<input type="text" id="keyToBind" class="hudChild">
 <textarea readOnly=true id="consoleArea" class="hudChild"></textarea>
 
 <!-- Top Middle Side -->

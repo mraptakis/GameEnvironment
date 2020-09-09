@@ -27,7 +27,12 @@ export default {
         {
             "meta":{
                 "name": "PLAAANE",
-                "texture": "./assets/textures/blueprint.jpg"
+                "texture": "./assets/textures/blueprint.jpg",
+                "dim":{
+                    "width": 15,
+                    "height": 10
+                },
+                "rotation":{"x":-1}
             },
             "category": "Plane",
             "color" : "#0080ff",

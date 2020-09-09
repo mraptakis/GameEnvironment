@@ -5,9 +5,9 @@ import bb from '../utils/blackboard.js'
 class Box extends Object {
     
     action;
-    constructor({name,texture}){
+    constructor({name,texture,dim}){
         super(name);
-        this.geometry = new THREE.BoxGeometry();
+        this.geometry = new THREE.BoxGeometry((dim&&dim.width)?dim.width:1, (dim&&dim.height)?dim.height:1,1);
         let materialInfo = {};
 
         if(texture)materialInfo.map = new THREE.TextureLoader().load( texture );

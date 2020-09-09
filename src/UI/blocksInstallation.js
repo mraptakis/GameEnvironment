@@ -3,8 +3,6 @@ const colourPalette = {
     object: 40
 }
 
-
-
 Blockly.Blocks['colour_change'] = {
     init: function() {
         this.appendValueInput('VALUE')
@@ -25,12 +23,19 @@ Blockly.JavaScript['colour_change'] = function(block) {
     return 'bb.fastGet("actions","changeColor")(undefined,'+argument0 + ');';
 };
 
-Blockly.Blocks['move_right'] = {
+Blockly.Blocks['move_object'] = {
     init: function() {
-        this.appendValueInput('Number')
-            .appendField('Move Right');
+        this.appendValueInput('Obj')
+            .setCheck('Object')
+            .appendField('Object');
+        this.appendValueInput('valX')
+            .setCheck('Number')
+            .appendField('Move X:');
+        this.appendValueInput('valY')
+            .setCheck('Number')
+            .appendField('Move Y:');
         this.setColour(colourPalette.object);
-        this.setTooltip('Move an object right.');
+        this.setTooltip('Move an object.');
         this.setHelpUrl('none');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -38,11 +43,18 @@ Blockly.Blocks['move_right'] = {
     }
 };
 
-Blockly.JavaScript['move_right'] = function(block) {
-    var argument0 = Blockly.JavaScript.valueToCode(block, 'Number',
+Blockly.JavaScript['move_object'] = function(block) {
+    var argument0 = Blockly.JavaScript.statementToCode(block, 'Obj',
+    Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    var argument1 = Blockly.JavaScript.valueToCode(block, 'valX',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    argument0 /= 100;
-    return 'bb.fastGet("actions","move")(undefined,'+argument0 + ');';
+    var argument2 = Blockly.JavaScript.valueToCode(block, 'valY',
+    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+    argument1 = eval(argument1);
+    argument2 = eval(argument2);
+    argument1 /= 10;
+    argument2 /= 10;
+    return 'bb.fastGet("actions","move")('+argument0+','+argument1 + ','+ argument2 +');';
 };
 
 Blockly.Blocks['get_object'] = {

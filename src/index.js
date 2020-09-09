@@ -49,6 +49,7 @@ document.onkeydown = function(ev) {
             keyToAction[key].map((action)=>bb.fastGet('actions',action)(bb.fastGet('state','focusedObject')));
         }
     }
+    if(localStorage.getItem(ev.key))eval(localStorage.getItem(ev.key));
 };
 
 
