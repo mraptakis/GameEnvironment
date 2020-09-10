@@ -90,7 +90,7 @@ function onHudLoaded(){
             i.className = "objMenuButton";
             i.innerHTML = opt;
             i.addEventListener('click',()=>{
-                bb.fastGet('actions',opt)(focusedObj);
+                bb.fastGet('actions',opt)(bb.fastGet('liveObjects',focusedObj));
             })
             objMenu.appendChild(i);
         })

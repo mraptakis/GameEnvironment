@@ -1,6 +1,4 @@
-import Object from './Object.js'
-
-import bb from '../utils/blackboard.js'
+import Object from './ObjectThreeJS.js'
 
 class Camera extends Object {
     camera
@@ -28,5 +26,4 @@ class Camera extends Object {
 
 const cameraObj = new Camera();
 
-bb.fastSet('liveObjects','camera',cameraObj);
-bb.fastSet('objects','camera',Camera);
+export default cameraObj;

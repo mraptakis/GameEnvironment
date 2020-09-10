@@ -1,10 +1,9 @@
-import Object from './Object.js'
+import ActionObject from './ActionObject.js'
 
-import bb from '../utils/blackboard.js'
+import bb from '../../../utils/blackboard.js'
 
-class Plane extends Object {
+class Plane extends ActionObject {
     
-    action;
     constructor({name,texture,rotation,dim}){
         super(name);
         this.geometry = new THREE.PlaneGeometry( (dim&&dim.width)?dim.width:1, (dim&&dim.height)?dim.height:1, 32 );
@@ -28,15 +27,7 @@ class Plane extends Object {
         // this.mesh.rotation.z += 0.01;
     }
 
-    setAction(str){
-        this.action = str;
-    }
-
-    getAction(){
-        return this.action;
-    }
-
 }
 
 
-bb.fastSet('objects','Plane', Plane);
+bb.fastInstall('objects','Plane', Plane);

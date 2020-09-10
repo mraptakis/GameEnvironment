@@ -45,7 +45,7 @@
 }
 
 #blocklyDiv {
-    visibility: hidden;
+    /* visibility: hidden; */
     position: absolute;
     width: 500px;
     height: 500px;
@@ -53,7 +53,7 @@
 }
 
 #playScriptButton {
-    visibility: hidden;
+    /* visibility: hidden; */
     position: absolute;
     width: 30px;
     height: 30px;
@@ -65,7 +65,7 @@
 }
 
 #saveScriptButton {
-    visibility: hidden;
+    /* visibility: hidden; */
     position: absolute;
     width: 30px;
     height: 30px;
@@ -77,7 +77,7 @@
 }
 
 #loadScriptButton {
-    visibility: hidden;
+    /* visibility: hidden; */
     position: absolute;
     width: 30px;
     height: 30px;
@@ -89,7 +89,7 @@
 }
 
 #bindScriptToKey {
-    visibility: hidden;
+    /* visibility: hidden; */
     position: absolute;
     width: 30px;
     height: 30px;
@@ -99,7 +99,7 @@
 }
 
 #keyToBind {
-    visibility: hidden;
+    /* visibility: hidden; */
     position: absolute;
     width: 30px;
     height: 30px;
@@ -109,7 +109,7 @@
 }
 
 #consoleArea {
-    visibility: hidden;
+    /* visibility: hidden; */
     position: absolute;
     width: 500px;
     height: 200px;

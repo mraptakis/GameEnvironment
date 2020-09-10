@@ -1,10 +1,9 @@
-import Object from './Object.js'
+import ActionObject from './ActionObject.js'
 
-import bb from '../utils/blackboard.js'
+import bb from '../../../utils/blackboard.js'
 
-class Box extends Object {
+class Box extends ActionObject {
     
-    action;
     constructor({name,texture,dim}){
         super(name);
         this.geometry = new THREE.BoxGeometry((dim&&dim.width)?dim.width:1, (dim&&dim.height)?dim.height:1,1);
@@ -25,15 +24,7 @@ class Box extends Object {
         // this.mesh.rotation.y += 0.01;
     }
 
-    setAction(str){
-        this.action = str;
-    }
-
-    getAction(){
-        return this.action;
-    }
-
 }
 
 
-bb.fastSet('objects','Box',Box);
+bb.fastInstall('objects','Box',Box);
