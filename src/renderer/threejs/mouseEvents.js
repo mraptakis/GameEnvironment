@@ -14,6 +14,12 @@ export default function translator(_x,_y){
     return [x,y]
 }
 
+function translator2(_x,_y){
+    let x = (window.innerWidth*(_x + 1))/2;
+    let y = (window.innerHeight*(-_y + 1))/2;
+    return [x,y]
+}
+
 function rightClick(e){
     e.preventDefault();
     [mouse.x,mouse.y] = translator(e.offsetX,e.offsetY);
@@ -37,7 +43,6 @@ if(!bb.fastGet('renderer','rightClick')){
 function leftClick(e){
     e.preventDefault();
     [mouse.x,mouse.y] = translator(e.offsetX,e.offsetY);
-
     raycaster.setFromCamera( mouse, camera.getCamera() );  
 
     var intersects = raycaster.intersectObjects( scene.getScene().children );
@@ -45,6 +50,7 @@ function leftClick(e){
     if(intersects.length > 0){
         focusTransition(intersects[0].object.name);
         eval(bb.fastGet('liveObjects',intersects[0].object.name).getAction()); 
+        console.log(translator2(0,0));
         return true;
     }
     return false;

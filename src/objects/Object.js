@@ -2,11 +2,11 @@ export default class Object {
     name
     renderer
 
-    value
+    values = {}
 
     options = []
 
-    isMovable;
+    isMovable
 
     constructor(_name){
         if(!_name)name = "Unnamed Object"+Math.random(5);
@@ -36,12 +36,17 @@ export default class Object {
         return this.options;
     }
 
-    getValue(){
-        return this.value;
+    getValues(){
+        return this.values;
     }
 
-    setValue(val){
-        this.value = val;
+    setValue(val,v){
+        this.values[val].val = v;
+        this.values[val].onChange(v);
+    }
+    
+    getValue(val){
+        return this.values[val].val;
     }
 
     move(x,y){

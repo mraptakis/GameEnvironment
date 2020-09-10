@@ -9,7 +9,7 @@ export default {
                 "texture": "./assets/textures/wood.jpeg"
             },
             "category": "Box",
-            "position": {"x":900,"y":500}
+            "position": {"x":45,"y":45}
         },
         {
             "meta":{
@@ -17,7 +17,7 @@ export default {
             },
             "category": "Sphere",
             "color" : "#ffff00",
-            "position": {"x":900,"y":350}
+            "position": {"x":38,"y":45}
         },
         {
             "meta":{
@@ -25,7 +25,15 @@ export default {
             },
             "category": "Sphere",
             "color" : "#00ffff",
-            "position": {"x":750,"y":500}
+            "position": {"x":52,"y":45}
+        },
+        {
+            "meta":{
+                "name": "SPHEEERE3"
+            },
+            "category": "Sphere",
+            "color" : "#00ff00",
+            "position": {"x":45,"y":33}
         },
         {
             "meta":{
@@ -39,15 +47,7 @@ export default {
             },
             "category": "Plane",
             "color" : "#0080ff",
-            "position": {"x":750,"y":500}
-        },
-        {
-            "meta":{
-                "name": "SPHEEERE3"
-            },
-            "category": "Sphere",
-            "color" : "#00ff00",
-            "position": {"x":1050,"y":500}
+            "position": {"x":30,"y":70}
         },
         {
             "meta":{
@@ -56,7 +56,7 @@ export default {
             },
             "category": "Text",
             "color" : "#00ff00",
-            "position": {"x":1000,"y":100}
+            "position": {"x":40,"y":20}
         }
     ]
 }

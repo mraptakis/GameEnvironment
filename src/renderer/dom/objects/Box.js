@@ -2,6 +2,12 @@ import ActionObject from './ActionObject.js'
 
 import bb from '../../../utils/blackboard.js'
 
+function fromPercentageToPx(x,y){
+    x = x/100 * window.innerWidth;
+    y = y/100 * window.innerHeight;
+    return [x,y];
+}
+
 class Box extends ActionObject {
     
     constructor({name,texture,dim}){
@@ -9,8 +15,9 @@ class Box extends ActionObject {
         
         this.div = document.createElement('div');
         this.div.id = name;
-        this.div.style.width = (dim&&dim.width)?dim.width: "100px";
-        this.div.style.height = (dim&&dim.height)?dim.height: "100px";
+        let [defaultX,defaultY] = fromPercentageToPx(5,5);
+        this.div.style.width = (dim&&dim.width)?dim.width: defaultX+"px";
+        this.div.style.height = (dim&&dim.height)?dim.height: defaultX+"px";
 
         
         if(texture){

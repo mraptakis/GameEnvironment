@@ -236,8 +236,6 @@ Blockly.Blocks['dropdown_categ'] = {
         let map = bb.getComponent('objects').itemMap;
         let categs = [];
         for(let i in map){
-            if(i !== "camera" 
-            && i !== "scene")
                 categs.push([i,i]);
         }
         return categs;
@@ -247,6 +245,67 @@ Blockly.Blocks['dropdown_categ'] = {
 Blockly.JavaScript['dropdown_categ'] = function(block) {
     let inp_val = block.getFieldValue('TESTF');
     return '"' + inp_val + '"';
+};
+
+Blockly.Blocks['object_field'] = {
+    validate: function(newValue) {
+        this.getSourceBlock().updateConnections(newValue);
+        return newValue;
+    },
+    
+    init: function() {
+        this.appendDummyInput()
+            .appendField('Set object')
+            .appendField(new Blockly.FieldDropdown(this.getObjects(),this.validate), 'MODE')
+            .appendField("'s");
+        this.appendDummyInput('values')
+            .appendField('field')
+            .appendField(new Blockly.FieldDropdown([["field","field"]]), 'FIELD')
+            .appendField('to');
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object field.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    },
+
+    updateConnections: function(newValue) {
+        let values = bb.fastGet('liveObjects',newValue).getValues();
+        let toAdd = [];
+        
+        for(let i in values){
+            toAdd.push([i,i])
+        }
+        
+        if(toAdd.length === 0)toAdd = [['field','field']];
+        this.removeInput('values', /* no error */ true);
+        this.removeInput('value',true);
+        this.appendDummyInput('values')
+            .appendField('field')
+            .appendField(new Blockly.FieldDropdown(toAdd), 'FIELD')
+            .appendField('to');
+        this.appendValueInput('value')
+            .appendField('Value');
+    },
+
+    getObjects(){
+        let map = bb.getComponent('liveObjects').itemMap;
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['object_field'] = function(block) {
+    let obj_val = block.getFieldValue('MODE');
+    let field_val = block.getFieldValue('FIELD');
+    let val_val = Blockly.JavaScript.valueToCode (block, 'value',
+    Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    console.log('bb.fastGet("liveObjects","'+obj_val+'").setValue("'+field_val+'",'+val_val+');');
+    // return 'console.log("' + obj_val + "->"+field_val + " = " + val_val+'")';
+    return 'bb.fastGet("liveObjects","'+obj_val+'").setValue("'+field_val+'",'+val_val+');';
 };
 
 Blockly.Blocks['dropdown_obj'] = {
@@ -264,8 +323,6 @@ Blockly.Blocks['dropdown_obj'] = {
         let map = bb.getComponent('liveObjects').itemMap;
         let categs = [];
         for(let i in map){
-            if(i !== "camera" 
-            && i !== "scene")
                 categs.push([i,i]);
         }
         return categs;

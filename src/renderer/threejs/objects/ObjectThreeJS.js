@@ -5,7 +5,11 @@ import Object from '../../../objects/Object.js'
 import translator from '../mouseEvents.js'
 
 import scene from './Scene.js'
-
+function fromPercentageToPx(x,y){
+    x = x/100 * window.innerWidth;
+    y = y/100 * window.innerHeight;
+    return [x,y];
+}
 export default class ObjectThreeJS extends Object{
     material
     geometry 
@@ -22,6 +26,7 @@ export default class ObjectThreeJS extends Object{
 
     setPosition(x,y){
         if(!this.isMovable)return;
+        [x,y] = fromPercentageToPx(x,y);
         [x,y] = translator(x,y);
         this.mesh.position.x = x;
         this.mesh.position.y = y;

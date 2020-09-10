@@ -26,7 +26,10 @@ clickWrapper.addEventListener('click',(ev)=>{
 
 clickWrapper.addEventListener('contextmenu',(ev) => {
     console.log(ev.offsetX,ev.offsetY);
-    bb.fastGet('renderer','rightClick').forEach((it)=>it(ev));
+    let funcs = bb.fastGet('renderer','rightClick');
+    for(var f in funcs){
+        if(funcs[f](ev))break;
+    }
 })
 
 init.objects.forEach((item)=>{

@@ -22,6 +22,14 @@ class Text extends ActionObject {
         this.options.push('changeColor');
         this.options.push('removeObject');
 
+
+        this.values['text'] = {
+            val: this.div.innerHTML,
+            onChange: (newVal) => {
+                this.div.innerHTML = newVal;
+            }
+        }
+
     }
 
     animate(){
@@ -39,11 +47,6 @@ class Text extends ActionObject {
 
     setColor(col){
         this.div.style.color = col;
-    }
-
-    setValue(val){
-        this.value = val;
-        this.div.innerHTML = val;
     }
 
 }

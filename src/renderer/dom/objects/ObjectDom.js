@@ -9,6 +9,12 @@ function pxToNumber(str){
     return parseInt(str);
 }
 
+function fromPercentageToPx(x,y){
+    x = x/100 * window.innerWidth;
+    y = y/100 * window.innerHeight;
+    return [x,y];
+}
+
 export default class ObjectDom extends Object{
     div
 
@@ -18,11 +24,11 @@ export default class ObjectDom extends Object{
     }
 
     setColor(col){
-        console.log("setColor",col);
         this.div.style.backgroundColor = col;
     }
 
     setPosition(x,y){
+        [x,y] = fromPercentageToPx(x,y);
         this.div.style.left = x +"px";
         this.div.style.top = y +"px";
     }
