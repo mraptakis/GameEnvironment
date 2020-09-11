@@ -7,16 +7,12 @@ function pxToNumber(str){
 }
 class Text extends ActionObject {
     
-    constructor({name,texture,dim,defaultText}){
+    constructor({name,texture,dim,defaultText,div}){
         super(name);
         
-        this.div = document.createElement('div');
-        this.div.id = name;
-        this.div.innerHTML = (defaultText)?defaultText:name;
-        // this.div.style.width = (dim&&dim.width)?dim.width: "100px";
-        // this.div.style.height = (dim&&dim.height)?dim.height: "100px";
+        if(div)this.div = div;
+        else this.createElement({name,texture,dim,defaultText});
 
-        this.div.style.position = "absolute";
 
         this.options.push('move')
         this.options.push('changeColor');
@@ -40,17 +36,17 @@ class Text extends ActionObject {
 
     }
 
-    animate(){
-        
+    createElement({name,texture,dim,defaultText}){
+        this.div = document.createElement('div');
+        this.div.id = name;
+        this.div.innerHTML = (defaultText)?defaultText:name;
+        this.div.style.position = "absolute";
+        // this.div.style.width = (dim&&dim.width)?dim.width: "100px";
+        // this.div.style.height = (dim&&dim.height)?dim.height: "100px";
     }
 
-    getBoundingBox(){
-        return {
-            x: pxToNumber(this.div.style.left),
-            y: pxToNumber(this.div.style.top),
-            width: (this.div.offsetWidth),
-            height: (this.div.offsetHeight)
-        }
+    animate(){
+        
     }
 
     setColor(col){

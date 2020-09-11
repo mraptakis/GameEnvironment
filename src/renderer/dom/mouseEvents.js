@@ -17,6 +17,7 @@ function pxToNumber(str){
 function focused(obj,x,y){
     if(obj.renderer !== 'dom')return false;
     let boundingBox = obj.getBoundingBox();
+    // console.log(obj.name,boundingBox);
     if(boundingBox.x < x
     && boundingBox.x + boundingBox.width > x
     && boundingBox.y < y
@@ -33,7 +34,7 @@ function rightClick(e){
     for(var it in aliveItems){
         // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){
-            dragElement(aliveItems[it]);
+            aliveItems[it].getObject().click();
             focusTransition(it);
             return true;
         }

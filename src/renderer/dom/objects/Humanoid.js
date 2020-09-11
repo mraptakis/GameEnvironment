@@ -33,13 +33,35 @@ class Humanoid extends ActionObject {
         let body = document.createElement('div');
         body.id = name+"body";
         body.style.position = "absolute";
-        body.style.width = "80%";
+        body.style.width = "50%";
         body.style.paddingTop = "80%";
         body.style.top = "20%";
-        body.style.left = "10%";
+        body.style.left = "25%";
         body.style.borderRadius = "40px";
 
         this.div.appendChild(body);
+
+        let leftArm = document.createElement('div');
+        leftArm.id = name+"leftArm";
+        leftArm.style.position = "absolute";
+        leftArm.style.width = "20%";
+        leftArm.style.paddingTop = "20%";
+        leftArm.style.top = "25%";
+        leftArm.style.left = "10%";
+        leftArm.style.borderRadius = "30px";
+
+        this.div.appendChild(leftArm);
+
+        let rightArm = document.createElement('div');
+        rightArm.id = name+"rightArm";
+        rightArm.style.position = "absolute";
+        rightArm.style.width = "20%";
+        rightArm.style.paddingTop = "20%";
+        rightArm.style.top = "25%";
+        rightArm.style.left = "70%";
+        rightArm.style.borderRadius = "30px";
+
+        this.div.appendChild(rightArm);
 
         let leftLeg = document.createElement('div');
         leftLeg.id = name+"leftLeg";

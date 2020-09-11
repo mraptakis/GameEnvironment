@@ -328,18 +328,24 @@
     <category name="Functions" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
 </xml>
 <div id="blocklyDiv" class="hudChild"></div>
-<div id="playScriptButton" class="hudChild button"></div>
-<div id="saveScriptButton" class="hudChild button"></div>
-<div id="loadScriptButton" class="hudChild button"></div>
-<div id="bindScriptToKey" class="hudChild button"></div>
-<input type="text" id="keyToBind" class="hudChild">
-<textarea readOnly=true id="consoleArea" class="hudChild"></textarea>
+<div id="playScriptButton" category="Box" class="hudChild button"></div>
+<div id="saveScriptButton" category="Box" class="hudChild button"></div>
+<div id="loadScriptButton" category="Box" class="hudChild button"></div>
+<div id="bindScriptToKey" category="Box" class="hudChild button"></div>
+<input type="text" category="Box" id="keyToBind" class="hudChild">
+<textarea readOnly=true category="Box" id="consoleArea" class="hudChild"></textarea>
 
 <!-- Top Middle Side -->
-<div id="focusedObjText" class="hudChild"></div>
+<div id="focusedObjText" category="Text" class="hudChild"></div>
+
+<!-- <div id="vid" category="Box" style="width: 500px; height: 1000px; position: absolute; left:700px; top:500px;">
+  <video width=100%  preload="auto" autoplay loop muted="muted" volume="0"> 
+      <source src="assets/test.mp4" type="video/mp4"> 
+  </video>
+</div> -->
 
 <!-- Top Right Side -->
-<div id="fpsCounter" class="hudChild"></div>
+<div id="fpsCounter" category="Text" class="hudChild"></div>
 <div id="objMenuButton" class="hudChild button"></div>
 <div id="objMenu" class="hudChild"></div>
 

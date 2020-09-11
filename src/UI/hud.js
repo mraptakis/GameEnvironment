@@ -11,6 +11,7 @@ function readTextFile(file,onFinish){
             {
                 var allText = rawFile.responseText;
                 document.body.insertAdjacentHTML('beforeend',allText);
+                convertHTMLtoObjects();
                 onFinish();
             }
         }
@@ -18,6 +19,19 @@ function readTextFile(file,onFinish){
     rawFile.send(null);
 }
 readTextFile('./src/UI/hud.ahtml',onHudLoaded);
+
+function convertHTMLtoObjects(){
+    let children = [ ...document.body.children ];
+    children.map(child => {
+        if(child.attributes.getNamedItem("category")){
+            let objCat = bb.fastGet('objects',child.attributes["category"].nodeValue);
+            document.body.removeChild(child);
+            let obj = new objCat({name:child.id,div:child});
+            bb.fastSet('liveObjects',child.id,obj);
+            obj.add();
+        }
+    })
+}
 
 function hudState(){
     let isVisible = true;
@@ -34,8 +48,7 @@ function hudState(){
 
 
 function onHudLoaded(){
-    let toggle = document.getElementById('hudToggle');
-    toggle.addEventListener('click',hudState());
+    document.getElementById('hudToggle').addEventListener('click',hudState());
 
     document.getElementById('playScriptButton').addEventListener('click',()=>{
         console.log(Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace));

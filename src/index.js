@@ -6,6 +6,8 @@ import FPSCounter from './utils/fps.js'
 import init from '../assets/json/init.js' //json
 import keyToAction from '../assets/json/keyToActions.js' //json
 
+bb.fastInstall('actions',"printBlackboard",()=>{bb.print()});
+
 let clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";
     clickWrapper.style.width = window.innerWidth + 'px';
