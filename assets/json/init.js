@@ -13,7 +13,11 @@ export default {
         },
         {
             "meta":{
-                "name": "SPHE"
+                "name": "SPHE",
+                "dim": {
+                    "width": 10,
+                    "height": 10
+                }
             },
             "category": "Sphere",
             "color" : "#ffff00",
@@ -29,9 +33,9 @@ export default {
         },
         {
             "meta":{
-                "name": "SPHEEERE3"
+                "name": "HUUUMAN"
             },
-            "category": "Sphere",
+            "category": "Humanoid",
             "color" : "#00ff00",
             "position": {"x":45,"y":33}
         },
