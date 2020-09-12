@@ -4,8 +4,10 @@ import bb from '../utils/blackboard.js'
 
 bb.fastSet('state','focusedObject',undefined);
 
-import '../UI/hud.js'
-import '../UI/blocksInstallation.js'
+import '../UI/hud/hud.js'
+import '../UI/keyboard/keyboard.js'
+
+import '../scripting/blockly/blockly.js'
 
 import '../renderer/dom/renderer.js'
 import '../renderer/threejs/renderer.js'
@@ -14,7 +16,6 @@ import '../actions/changeColor.js'
 import '../actions/moveObject.js'
 import '../actions/removeObject.js'
 import '../actions/createObject.js'
-import '../actions/changeValue.js'
 
 
 import requirements from '../../assets/json/strictRequirementsAfterLoad.js' // json

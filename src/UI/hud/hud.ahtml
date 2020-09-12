@@ -1,10 +1,9 @@
-<link rel="stylesheet" href="./src/UI/hud.css">
+<link rel="stylesheet" href="./src/UI/hud/hud.css">
 
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="Objects" colour="%{BKY_MATH_HUE}">
       <block type="object_field"></block>
-      <block type="value_change_choose_object"></block>
       <block type="dropdown_obj"></block>
       <block type="dropdown_categ"></block>
       <block type="create_object"></block>
@@ -331,8 +330,6 @@
 <div id="playScriptButton" category="Box" class="hudChild button"></div>
 <div id="saveScriptButton" category="Box" class="hudChild button"></div>
 <div id="loadScriptButton" category="Box" class="hudChild button"></div>
-<div id="bindScriptToKey" category="Box" class="hudChild button"></div>
-<input type="text" category="Box" id="keyToBind" class="hudChild">
 <textarea readOnly=true category="Box" id="consoleArea" class="hudChild"></textarea>
 
 <!-- Top Middle Side -->

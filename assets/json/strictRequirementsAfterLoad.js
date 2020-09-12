@@ -3,5 +3,10 @@ export default {
         "leftClick",
         "rightClick",
         "render"
+    ],
+    "scripting": [
+        "currentScriptAsText",
+        "currentScriptAsCode",
+        "clearAndLoadFromText"
     ]
 }
