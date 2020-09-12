@@ -6,10 +6,10 @@ import FPSCounter from './utils/fps.js'
 import init from '../assets/json/init.js' //json
 import keyToAction from '../assets/json/keyToActions.js' //json
 
-bb.fastInstall('actions',"printBlackboard",()=>{bb.print()});
 
 let clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";
+    clickWrapper.classList += " hudChild";
     clickWrapper.style.width = window.innerWidth + 'px';
     clickWrapper.style.height = window.innerHeight + 'px';
     clickWrapper.style.opacity = 0;
@@ -52,20 +52,20 @@ init.objects.forEach((item)=>{
         if(item.color)it.setColor(item.color);
         if(item.position)it.setPosition(item.position.x,item.position.y);
         it.add();
-        console.log(item);
     }
 })
 
 document.onkeydown = function(ev) {
-    // console.log(ev);
     for(var key in keyToAction){
         if(ev.code === key){
-            console.log(keyToAction[key]);
-            // keyToAction[key].map((action)=>bb.fastGet('actions',action)(document.getElementById("inputss").value));
             keyToAction[key].map((action)=>bb.fastGet('actions',action)(bb.fastGet('state','focusedObject')));
         }
     }
-    if(localStorage.getItem(ev.key))eval(localStorage.getItem(ev.key));
+    if(localStorage.getItem(ev.code)){
+        // let code = bb.fastGet('scripting','fromTextToCode')(localStorage.getItem(ev.code));
+        // eval(code);
+        eval(localStorage.getItem(ev.code));
+    }
 };
 
 

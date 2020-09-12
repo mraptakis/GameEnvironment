@@ -26,6 +26,7 @@
     <div class="keyboardKey">P</div>
   </div>
   <div class="keyboardRow">
+    <div class="keyboardHalfSpace"></div>
     <div class="keyboardKey">A</div>
     <div class="keyboardKey">S</div>
     <div class="keyboardKey">D</div>
@@ -35,8 +36,10 @@
     <div class="keyboardKey">J</div>
     <div class="keyboardKey">K</div>
     <div class="keyboardKey">L</div>
+    <div class="keyboardHalfSpace"></div>
   </div>
   <div class="keyboardRow">
+    <div class="keyboardFullSpace"></div>
     <div class="keyboardKey">Z</div>
     <div class="keyboardKey">X</div>
     <div class="keyboardKey">C</div>
@@ -44,5 +47,7 @@
     <div class="keyboardKey">B</div>
     <div class="keyboardKey">N</div>
     <div class="keyboardKey">M</div>
+    <div class="keyboardFullSpace"></div>
+    <div class="keyboardFullSpace"></div>
   </div>
 </div>

@@ -7,6 +7,7 @@ export default {
     "scripting": [
         "currentScriptAsText",
         "currentScriptAsCode",
+        "fromTextToCode",
         "clearAndLoadFromText"
     ]
 }

@@ -35,8 +35,10 @@ function convertHTMLtoObjects(){
 
 function onKeyboardInteraction(value){
     function action(){
-        console.log(value);
-        localStorage.setItem(value ,bb.fastGet('scripting','currentScriptAsCode')());
+        if(isNaN(value))
+            localStorage.setItem("Key"+value ,bb.fastGet('scripting','currentScriptAsCode')());
+        else
+            localStorage.setItem("Digit"+value ,bb.fastGet('scripting','currentScriptAsCode')());
     }
 
     return action;
