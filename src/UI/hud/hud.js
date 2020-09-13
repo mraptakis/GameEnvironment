@@ -50,6 +50,8 @@ function hudState(){
 function onHudLoaded(){
     document.getElementById('hudToggle').addEventListener('click',hudState());
 
+
+    let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
         let code = bb.fastGet('scripting','currentScriptAsCode')();
         // console.log(code);
@@ -58,12 +60,45 @@ function onHudLoaded(){
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
         let text = bb.fastGet('scripting','currentScriptAsText')();
-        localStorage.setItem('code' ,text);
+        // localStorage.setItem('code' ,text);
+        bb.fastGet('liveObjects',bb.fastGet('state','focusedObject')).setEvent(tabOpen,text);
     });
 
     document.getElementById('loadScriptButton').addEventListener('click',()=>{
         bb.fastGet('scripting','clearAndLoadFromText')(localStorage.getItem('code'));
     });
+
+    function tabInfo(obj,id){
+        return ()=>{
+            let text = bb.fastGet('liveObjects',obj).getEvent(id);
+            if(text === null)bb.fastGet('scripting','clear')();
+            else bb.fastGet('scripting','clearAndLoadFromText')(text);
+            tabOpen = id;
+        };
+    }
+
+    function onFocuseChange(objName){
+        console.log("Α",objName);
+        let eventsTab = document.getElementById('eventsTab');
+        eventsTab.innerHTML = "";
+        tabOpen = "onClick";
+        if(objName === undefined)return;
+        let firstObject = true;
+        for(let i in bb.fastGet('liveObjects',objName).getEvents()){
+            let elem = document.createElement('div');
+            elem.classList = "eventTab";
+            elem.innerHTML = i;
+            elem.addEventListener('click',tabInfo(objName,i));
+            eventsTab.appendChild(elem);
+            if(firstObject){
+                elem.click();
+                firstObject = false;
+            }
+        }
+        bb.installWatch('state','focusedObject',onFocuseChange);
+    }
+    
+    bb.installWatch('state','focusedObject',onFocuseChange);
 
     let blocklyDiv = document.getElementById('blocklyDiv');
     blocklyDiv.style.height = "500px";

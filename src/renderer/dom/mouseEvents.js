@@ -57,7 +57,6 @@ function mouseDown(e){
     for(var it in aliveItems){
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             dragElement(aliveItems[it].getObject(),e);
-            focusTransition(it);
             return true;
         }
     }

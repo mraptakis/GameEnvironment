@@ -1,6 +1,6 @@
 'use strict';
 
-import bb from '../utils/blackboard.js'
+import bb from './blackboard.js'
 
 bb.fastSet('state','focusedObject',undefined);
 

@@ -1,4 +1,4 @@
-import './utils/initialisationManager.js'
+import './utils/initializationManager.js'
 
 import bb from './utils/blackboard.js'
 import FPSCounter from './utils/fps.js'
@@ -71,7 +71,7 @@ document.onkeydown = function(ev) {
 
 
 let aliveItems = bb.getComponent('liveObjects').itemMap;
-
+let renderers = bb.fastGet('renderer','render');
 bb.print();
 
 
@@ -82,7 +82,7 @@ function gameLoop() {
     for(var it in aliveItems){
         aliveItems[it].animate();
     }
-    bb.fastGet('renderer','render').forEach((it)=>it())
+    renderers.forEach((it)=>it());
     
 }
 gameLoop();
