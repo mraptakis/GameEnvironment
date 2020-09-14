@@ -9,7 +9,6 @@ import keyToAction from '../assets/json/keyToActions.js' //json
 
 let clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";
-    clickWrapper.classList += " hudChild";
     clickWrapper.style.width = window.innerWidth + 'px';
     clickWrapper.style.height = window.innerHeight + 'px';
     clickWrapper.style.opacity = 0;
@@ -71,7 +70,7 @@ document.onkeydown = function(ev) {
 
 
 let aliveItems = bb.getComponent('liveObjects').itemMap;
-let renderers = bb.fastGet('renderer','render');
+
 bb.print();
 
 
@@ -82,7 +81,7 @@ function gameLoop() {
     for(var it in aliveItems){
         aliveItems[it].animate();
     }
-    renderers.forEach((it)=>it());
+    bb.fastGet('renderer','render').forEach((it)=>it())
     
 }
 gameLoop();

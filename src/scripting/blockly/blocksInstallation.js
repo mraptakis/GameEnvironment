@@ -281,8 +281,6 @@ Blockly.JavaScript['object_field'] = function(block) {
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    console.log('bb.fastGet("liveObjects","'+obj_val+'").setValue("'+field_val+'",'+val_val+');');
-    // return 'console.log("' + obj_val + "->"+field_val + " = " + val_val+'")';
     return 'bb.fastGet("liveObjects","'+obj_val+'").setValue("'+field_val+'",'+val_val+');';
 };
 

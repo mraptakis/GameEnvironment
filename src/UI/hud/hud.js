@@ -54,31 +54,23 @@ function onHudLoaded(){
     let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
         let code = bb.fastGet('scripting','currentScriptAsCode')();
-        // console.log(code);
         eval(code);
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
         let text = bb.fastGet('scripting','currentScriptAsText')();
-        // localStorage.setItem('code' ,text);
         bb.fastGet('liveObjects',bb.fastGet('state','focusedObject')).setEvent(tabOpen,text);
-    });
-
-    document.getElementById('loadScriptButton').addEventListener('click',()=>{
-        bb.fastGet('scripting','clearAndLoadFromText')(localStorage.getItem('code'));
     });
 
     function tabInfo(obj,id){
         return ()=>{
             let text = bb.fastGet('liveObjects',obj).getEvent(id);
-            if(text === null)bb.fastGet('scripting','clear')();
-            else bb.fastGet('scripting','clearAndLoadFromText')(text);
+            bb.fastGet('scripting','clearAndLoadFromText')(text);
             tabOpen = id;
         };
     }
 
     function onFocuseChange(objName){
-        console.log("Α",objName);
         let eventsTab = document.getElementById('eventsTab');
         eventsTab.innerHTML = "";
         tabOpen = "onClick";
@@ -99,25 +91,6 @@ function onHudLoaded(){
     }
     
     bb.installWatch('state','focusedObject',onFocuseChange);
-
-    let blocklyDiv = document.getElementById('blocklyDiv');
-    blocklyDiv.style.height = "500px";
-    blocklyDiv.style.width = "500px";
-
-    Blockly.inject('blocklyDiv',{
-        toolbox: document.getElementById('toolbox'),
-        scrollbars: true,
-        zoom:
-         {controls: true,
-          wheel: true,
-          startScale: 1.0,
-          maxScale: 2,
-          minScale: 0.5,
-          scaleSpeed: 1.2,
-          pinch: true}
-    });
-    
-    Blockly.JavaScript.addReservedWords('code');
 
     objMenuButton.addEventListener('click',()=>{
         if(document.getElementById('objMenu'))document.getElementById('objMenu').remove();
@@ -140,4 +113,7 @@ function onHudLoaded(){
         })
         console.log(options);
     });
+
+    bb.fastGet('scripting','injectInDiv')(document.getElementById('languageDiv'));
+
 }

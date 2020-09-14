@@ -34,8 +34,9 @@ function rightClick(e){
     for(var it in aliveItems){
         // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){
-            aliveItems[it].getObject().click();
+            // aliveItems[it].getObject().click();
             focusTransition(it);
+            aliveItems[it].triggerEvent('onRightClick');
             return true;
         }
     }
@@ -77,14 +78,11 @@ function leftClick(e){
         // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             focusTransition(it);
+            aliveItems[it].triggerEvent('onClick');
             return true;
         }
     }
     return false;
-    // if(intersects.length > 0){
-    //     focusTransition(intersects[0].object.name);
-    //     eval(bb.fastGet('liveObjects',intersects[0].object.name).getAction()); 
-    // }
 
 }
 

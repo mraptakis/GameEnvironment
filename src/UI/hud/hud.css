@@ -44,13 +44,22 @@
     cursor: pointer; 
 }
 
-#eventsTab {
+#languageDiv {
     /* visibility: hidden; */
     position: absolute;
     width: 500px;
     height: 500px;
+    top: 40px;
+}
+
+#eventsTab {
+    /* visibility: hidden; */
+    position: absolute;
+    width: 500px;
+    height: 20px;
     top: 20px;
     background-color: darkgray;
+    overflow-x: hidden;
 }
 
 .eventTab {
@@ -65,21 +74,6 @@
     color:white;
     border-right: 2px solid darkgray;
     background-color: gray;
-}
-
-#blocklyDiv {
-    /* visibility: hidden; */
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    top: 40px;
-}
-#blocklyDiv2 {
-    /* visibility: hidden; */
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    top: 40px;
 }
 
 #playScriptButton {
@@ -104,38 +98,6 @@
     background-image: url(../../../assets/images/save.png); /* save.png from 'www.flaticon.com' from user FreePik */
     background-position: center;
     background-size: contain;
-}
-
-#loadScriptButton {
-    /* visibility: hidden; */
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 140px;
-    left: 520px;
-    background-image: url(../../../assets/images/load.png); /* save.png from 'www.flaticon.com' from user FreePik */
-    background-position: center;
-    background-size: contain;
-}
-
-#bindScriptToKey {
-    /* visibility: hidden; */
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 170px;
-    left: 520px;
-    background-color: red;
-}
-
-#keyToBind {
-    /* visibility: hidden; */
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 170px;
-    left: 550px;
-    border:0;
 }
 
 #consoleArea {

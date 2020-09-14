@@ -1,5 +1,7 @@
 import logAction from "../utils/logs.js"
 
+import bb from '../utils/blackboard.js'
+
 export default class Object {
     name
     renderer
@@ -26,6 +28,8 @@ export default class Object {
 
         this.events['onClick'] = localStorage.getItem(this.name+"_onClick");
         this.events['onRightClick'] = localStorage.getItem(this.name+"_onRightClick");
+        this.events['onRemove'] = localStorage.getItem(this.name+"_onRemove");
+        this.events['onMove'] = localStorage.getItem(this.name+"_onMove");
 
     }
 
@@ -73,6 +77,10 @@ export default class Object {
     setEvent(ev,code){
         localStorage.setItem(this.name+"_"+ev,code);
         this.events[ev] = code;
+    }
+
+    triggerEvent(ev){
+        eval(bb.fastGet('scripting','fromTextToCode')(this.events[ev]));
     }
 
     move(x,y){
