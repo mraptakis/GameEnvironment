@@ -40,9 +40,6 @@ function rightClick(e){
             return true;
         }
     }
-    // if(intersects.length > 0){
-    //     bb.fastGet('liveObjects',intersects[0].object.name).setAction(Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace)); 
-    // }
 }
 
 if(!bb.fastGet('renderer','rightClick')){

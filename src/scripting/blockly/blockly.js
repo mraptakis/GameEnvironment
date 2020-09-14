@@ -13,19 +13,24 @@ bb.fastInstall('scripting','currentScriptAsCode',()=>{
 bb.fastInstall('scripting','clear',()=>{
     Blockly.mainWorkspace.clear();
 });
+
 let elem = document.createElement('div');
 elem.id = 'blocklyDiv2';
 document.body.appendChild(elem);
 let test = Blockly.inject('blocklyDiv2',{toolbox: document.getElementById('toolbox')});
 
-bb.fastInstall('scripting','fromTextToCode',(text) => {
+bb.fastInstall('scripting','executeCode',(text) => {
+    eval(text);
+});
+
+bb.fastInstall('scripting','executeText',(text) => {
     if(text === undefined 
     || text === ""
     || text === null)
         return;
     text = Blockly.Xml.textToDom(text);
     Blockly.Xml.clearWorkspaceAndLoadFromXml(text,test);
-    return Blockly.JavaScript.workspaceToCode(test);
+    eval(Blockly.JavaScript.workspaceToCode(test));
 });
 
 bb.fastInstall('scripting','clearAndLoadFromText',(text)=>{

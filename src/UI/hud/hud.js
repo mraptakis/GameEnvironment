@@ -34,9 +34,10 @@ function convertHTMLtoObjects(){
 }
 
 function hudState(){
-    let isVisible = true;
+    let isVisible = (bb.fastGet('state','mode') === "editing")?true:false;
     function toggleVisibility(){
         isVisible = !isVisible;
+        bb.fastSet('state','mode',(isVisible)?"editing":"play");
         let hudChildren = document.querySelectorAll('.hudChild');
         hudChildren.forEach(element => {
             element.style.visibility = (isVisible)?"visible":"hidden";
@@ -54,7 +55,7 @@ function onHudLoaded(){
     let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
         let code = bb.fastGet('scripting','currentScriptAsCode')();
-        eval(code);
+        bb.fastGet('scripting','executeCode')(code);
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
@@ -73,8 +74,11 @@ function onHudLoaded(){
     function onFocuseChange(objName){
         let eventsTab = document.getElementById('eventsTab');
         eventsTab.innerHTML = "";
+        if(objName === undefined){
+            bb.installWatch('state','focusedObject',onFocuseChange);
+            return;
+        }
         tabOpen = "onClick";
-        if(objName === undefined)return;
         let firstObject = true;
         for(let i in bb.fastGet('liveObjects',objName).getEvents()){
             let elem = document.createElement('div');

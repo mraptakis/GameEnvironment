@@ -334,7 +334,7 @@ Blockly.Blocks['object_event'] = {
 Blockly.JavaScript['object_event'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
-    return 'eval(bb.fastGet("scripting","fromTextToCode")(bb.fastGet("liveObjects","'+obj_val+'").getEvent("'+field_val+'")));';
+    return 'bb.fastGet("liveObjects","'+obj_val+'").triggerEvent("'+field_val+'");';
 };
 
 Blockly.Blocks['dropdown_obj'] = {

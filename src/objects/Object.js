@@ -21,6 +21,7 @@ export default class Object {
         this.isMovable = true;
 
         this.values['log me'] = {
+            val: this.name,
             onChange: () => {
                 logAction(this.name);
             }
@@ -80,7 +81,7 @@ export default class Object {
     }
 
     triggerEvent(ev){
-        eval(bb.fastGet('scripting','fromTextToCode')(this.events[ev]));
+        bb.fastGet('scripting','executeText')(this.events[ev]);
     }
 
     move(x,y){

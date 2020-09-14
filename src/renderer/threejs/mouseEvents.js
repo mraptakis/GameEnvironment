@@ -29,10 +29,10 @@ function rightClick(e){
 
     var intersects = raycaster.intersectObjects( scene.getScene().children );
     
-    // if(intersects.length > 0){
-    //     bb.fastGet('liveObjects',intersects[0].object.name).setAction(Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace)); 
-    //     return true;
-    // }
+    if(intersects.length > 0){
+        //TODO: do something
+        return true;
+    }
     return false;
 }
 if(!bb.fastGet('renderer','rightClick')){
@@ -72,7 +72,7 @@ function leftClick(e){
     
     if(intersects.length > 0){
         focusTransition(intersects[0].object.name);
-        // eval(bb.fastGet('liveObjects',intersects[0].object.name).getAction()); 
+        // TODO: do something
         return true;
     }
     return false;

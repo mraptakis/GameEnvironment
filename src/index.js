@@ -6,6 +6,7 @@ import FPSCounter from './utils/fps.js'
 import init from '../assets/json/init.js' //json
 import keyToAction from '../assets/json/keyToActions.js' //json
 
+import changeFocus from './transitionHandlers/focusedObject.js'
 
 let clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";
@@ -20,12 +21,16 @@ let clickWrapper = document.createElement('div');
 clickWrapper.addEventListener('click',(ev)=>{
     console.log(ev.offsetX,ev.offsetY);
     let funcs = bb.fastGet('renderer','leftClick');
+    let anythingFocused = false;
     for(var f in funcs){
-        if(funcs[f](ev))break;
+        anythingFocused = funcs[f](ev);
+        if(anythingFocused)break;
     }
+    if(!anythingFocused)changeFocus(undefined);
 });
 
 clickWrapper.addEventListener('mousedown',(ev)=>{
+    if(bb.fastGet('state','mode') !== "editing")return;
     console.log(ev.offsetX,ev.offsetY);
     let funcs = bb.fastGet('renderer','mouseDown');
     for(var f in funcs){
@@ -60,10 +65,9 @@ document.onkeydown = function(ev) {
             keyToAction[key].map((action)=>bb.fastGet('actions',action)(bb.fastGet('state','focusedObject')));
         }
     }
+    if(bb.fastGet('state','mode') === "editing")return;
     if(localStorage.getItem(ev.code)){
-        // let code = bb.fastGet('scripting','fromTextToCode')(localStorage.getItem(ev.code));
-        // eval(code);
-        eval(localStorage.getItem(ev.code));
+        bb.fastGet('scripting','executeCode')(localStorage.getItem(ev.code));
     }
 };
 
