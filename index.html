@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="el">
 	<head>
 		<meta charset="utf-8">
 		<title>Blockly Lab</title>
@@ -8,6 +8,7 @@
 			body { margin: 0; }
 			canvas { display: block; overflow: hidden; }
 			#scene { overflow: hidden; }
+			div { user-select: none; }
 		</style>
 		<!-- <script src="http://www.skulpt.org/js/skulpt.min.js" type="text/javascript"></script> 
 		<script src="http://www.skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script> TO ADD THIS  -->
@@ -17,6 +18,11 @@
 		<script src="./libs/blockly/msg/js/en.js"></script>
 		<script src="./libs/three.js"></script>
 		<script type="module" src="src/index.js"></script>
+		<!-- <script type="text/javascript">
+			// set the pyodide files URL (packages.json, pyodide.asm.data etc)
+			window.languagePluginUrl = 'https://pyodide-cdn2.iodide.io/v0.15.0/full/';
+		</script>
+		<script src="./libs/pyodide.js"></script> -->
 	</head>
 	<body>
 	</body>

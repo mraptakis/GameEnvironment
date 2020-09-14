@@ -35,6 +35,8 @@ function convertHTMLtoObjects(){
 
 function hudState(){
     let isVisible = (bb.fastGet('state','mode') === "editing")?true:false;
+    toggleVisibility();
+    toggleVisibility();
     function toggleVisibility(){
         isVisible = !isVisible;
         bb.fastSet('state','mode',(isVisible)?"editing":"play");
@@ -68,6 +70,7 @@ function onHudLoaded(){
             let text = bb.fastGet('liveObjects',obj).getEvent(id);
             bb.fastGet('scripting','clearAndLoadFromText')(text);
             tabOpen = id;
+            document.getElementById('openTab').innerHTML = tabOpen;
         };
     }
 
@@ -75,6 +78,8 @@ function onHudLoaded(){
         let eventsTab = document.getElementById('eventsTab');
         eventsTab.innerHTML = "";
         if(objName === undefined){
+            document.getElementById('openTab').innerHTML = "";
+            bb.fastGet('scripting','clearAndLoadFromText')("");
             bb.installWatch('state','focusedObject',onFocuseChange);
             return;
         }

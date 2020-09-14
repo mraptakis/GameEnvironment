@@ -73,7 +73,18 @@
     cursor: pointer;
     color:white;
     border-right: 2px solid darkgray;
+    border-radius: 5px;
     background-color: gray;
+}
+
+#openTab {
+    position: absolute;
+    color:black;
+    width: 100px;
+    top: 50px;
+    left: 380px;
+    text-align: right;
+    font-size: 20px;
 }
 
 #playScriptButton {
