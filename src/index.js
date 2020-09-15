@@ -25,7 +25,7 @@ document.onkeydown = function(ev) {
             keyToAction[key].map((action)=>bb.fastGet('actions',action)(bb.fastGet('state','focusedObject')));
         }
     }
-    if(bb.fastGet('state','mode') === "editing")return;
+    // if(bb.fastGet('state','mode') === "editing")return;
     if(localStorage.getItem(ev.code)){
         bb.fastGet('scripting','executeCode')(localStorage.getItem(ev.code));
     }

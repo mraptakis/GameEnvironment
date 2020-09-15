@@ -40,8 +40,6 @@ class Box extends ActionObject {
 
     animate(){
         this.triggerEvent('onEachFrame');
-        // this.triggerEvent('onClick');
-        // console.log("a");
     }
 
 }

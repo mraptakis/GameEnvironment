@@ -46,9 +46,9 @@ export default class ObjectThreeJS extends Object{
 
     move(x,y){
         if(!this.isMovable)return;
-        [x,y] = translator(x,y);
-        this.mesh.position.x -= x;
-        this.mesh.position.y -= y;
+        // [x,y] = translator(x,y);
+        this.mesh.position.z += x;
+        this.mesh.position.x += y;
     }
 
     animate(){}

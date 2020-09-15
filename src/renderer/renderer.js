@@ -16,7 +16,6 @@ let clickWrapper = document.createElement('div');
     document.body.appendChild(clickWrapper);
 
 clickWrapper.addEventListener('click',(ev)=>{
-    console.log(ev.offsetX,ev.offsetY);
     let funcs = bb.fastGet('renderer','leftClick');
     let anythingFocused = false;
     for(var f in funcs){
@@ -28,7 +27,6 @@ clickWrapper.addEventListener('click',(ev)=>{
 
 clickWrapper.addEventListener('mousedown',(ev)=>{
     if(bb.fastGet('state','mode') !== "editing")return;
-    console.log(ev.offsetX,ev.offsetY);
     let funcs = bb.fastGet('renderer','mouseDown');
     for(var f in funcs){
         if(funcs[f](ev))break;
@@ -36,7 +34,6 @@ clickWrapper.addEventListener('mousedown',(ev)=>{
 });
 
 clickWrapper.addEventListener('contextmenu',(ev) => {
-    console.log(ev.offsetX,ev.offsetY);
     let funcs = bb.fastGet('renderer','rightClick');
     for(var f in funcs){
         if(funcs[f](ev))break;

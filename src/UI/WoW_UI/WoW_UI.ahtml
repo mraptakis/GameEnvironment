@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="./src/UI/WoW_UI/WoW_UI.css">
+
+<div id="actionBar1" category="WoW" class="WoW_hotkey">1</div>
+<div id="actionBar2" category="WoW" class="WoW_hotkey">2</div>
+<div id="actionBar3" category="WoW" class="WoW_hotkey">3</div>
+<div id="actionBar4" category="WoW" class="WoW_hotkey">4</div>
+<div id="actionBar5" category="WoW" class="WoW_hotkey">5</div>
+<div id="actionBar6" category="WoW" class="WoW_hotkey">6</div>
+<div id="actionBar7" category="WoW" class="WoW_hotkey">7</div>
+<div id="actionBar8" category="WoW" class="WoW_hotkey">8</div>
+<div id="actionBar9" category="WoW" class="WoW_hotkey">9</div>
+<div id="actionBar10" category="WoW" class="WoW_hotkey">0</div>
+<div id="actionBar11" category="WoW" class="WoW_hotkey">f1</div>
+<div id="actionBar12" category="WoW" class="WoW_hotkey">f2</div>
+<div id="actionBar13" category="WoW" class="WoW_hotkey">f3</div>
+<div id="actionBar14" category="WoW" class="WoW_hotkey">f4</div>
+<div id="actionBar15" category="WoW" class="WoW_hotkey">f5</div>
+<div id="actionBar16" category="WoW" class="WoW_hotkey">f6</div>
+<div id="actionBar17" category="WoW" class="WoW_hotkey">f7</div>
+<div id="actionBar18" category="WoW" class="WoW_hotkey">f8</div>
+<div id="actionBar19" category="WoW" class="WoW_hotkey">f9</div>
+<div id="actionBar20" category="WoW" class="WoW_hotkey">f10</div>

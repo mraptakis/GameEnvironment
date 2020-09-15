@@ -30,7 +30,7 @@ function rightClick(e){
     var intersects = raycaster.intersectObjects( scene.getScene().children );
     
     if(intersects.length > 0){
-        //TODO: do something
+        bb.fastGet('liveObjects',intersects[0].object.name).triggerEvent('onRightClick');
         return true;
     }
     return false;
@@ -72,7 +72,7 @@ function leftClick(e){
     
     if(intersects.length > 0){
         focusTransition(intersects[0].object.name);
-        // TODO: do something
+        bb.fastGet('liveObjects',intersects[0].object.name).triggerEvent('onClick');
         return true;
     }
     return false;

@@ -1,0 +1,96 @@
+.WoW_hotkey {
+    position: absolute;
+    height:50px;
+    width: calc(5% - 4px);
+    /* width: 50px; */
+    float: left;
+    bottom: 10px;
+    background-color: green;
+    border: 2px solid black;
+    border-radius: 10%;    
+    background-position: center;
+    background-size: contain;
+    color: white;
+}
+
+#actionBar1 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 0;
+}
+#actionBar2 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 5%;
+}
+#actionBar3 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 10%;
+}
+
+#actionBar4 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 15%;
+}
+#actionBar5 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 20%;
+}
+#actionBar6 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 25%;
+}
+#actionBar7 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 30%;
+}
+#actionBar8 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 35%;
+}
+#actionBar9 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 40%;
+}
+#actionBar10 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 45%;
+}
+#actionBar11 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 50%;
+}
+#actionBar12 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 55%;
+}
+#actionBar13 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 60%;
+}
+#actionBar14 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 65%;
+}
+#actionBar15 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 70%;
+}
+#actionBar16 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 75%;
+}
+#actionBar17 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 80%;
+}
+#actionBar18 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 85%;
+}
+#actionBar19 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 90%;
+}
+#actionBar20 {
+    background-image: url(../../../assets/images/wow/Absolution.png);
+    left: 95%;
+}

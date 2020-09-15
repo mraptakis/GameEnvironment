@@ -1,5 +1,7 @@
 import Object from './ObjectThreeJS.js'
 
+import bb from '../../../utils/blackboard.js'
+
 class Scene extends Object {
     scene
     constructor(){
@@ -32,3 +34,5 @@ class Scene extends Object {
 const sceneObj = new Scene();
 
 export default sceneObj;
+
+bb.fastSet('liveObjects','scene',sceneObj);

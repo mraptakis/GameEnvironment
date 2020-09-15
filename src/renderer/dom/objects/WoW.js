@@ -8,17 +8,17 @@ function fromPercentageToPx(x,y){
     return [x,y];
 }
 
-class Sphere extends ActionObject {
+class WoW extends ActionObject {
     
     constructor({name,texture,dim,div}){
         super(name);
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
-        
-        this.options.push('move');
+
         this.options.push('changeColor');
         this.options.push("removeObject");
-
+        
+        this.isMovable = false;
     }
 
     createElement({name,texture,dim}){
@@ -28,20 +28,17 @@ class Sphere extends ActionObject {
         this.div.style.width = X+"px";
         this.div.style.height = X+"px";
         this.div.style.position = "absolute";
-        this.div.style.borderRadius = "1000px";
-
-        
         if(texture){
-            this.div.style.backgroundImage = texture;
+            this.div.style.backgroundImage = "url('"+texture+"')";
             this.div.style.backgroundSize = 'cover';
             this.div.style.backgroundPosition = 'center';
         }
     }
 
     animate(){
-        // this.mesh.position.x += 0.01;
-        // this.mesh.position.y += 0.01;
     }
+
 }
 
-bb.fastInstall('objects','Sphere',Sphere);
+
+bb.fastInstall('objects','WoW',WoW);
