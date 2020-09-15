@@ -14,7 +14,7 @@ init.objects.forEach((item)=>{
         let it = new category(item.meta);
         bb.fastSet('liveObjects',item.meta.name,it);
         if(item.color)it.setColor(item.color);
-        if(item.position)it.setPosition(item.position.x,item.position.y);
+        if(item.position)it.setPosition(item.position.x,item.position.y,item.position.z);
         it.add();
     }
 })

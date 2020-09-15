@@ -1,7 +1,5 @@
 import Object from './ObjectThreeJS.js'
 
-import bb from '../../../utils/blackboard.js'
-
 class Scene extends Object {
     scene
     constructor(){
@@ -9,7 +7,7 @@ class Scene extends Object {
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.TextureLoader().load( './assets/textures/sky.jpeg' );;
 
-        this.isMovable = false;
+        this.options['isMovable'] = false;
 
     }
 
@@ -29,10 +27,12 @@ class Scene extends Object {
         this.scene.remove(it);
     }
 
+    getCategory(){
+        return "Scene";
+    }
+
 }
 
 const sceneObj = new Scene();
 
 export default sceneObj;
-
-bb.fastSet('liveObjects','scene',sceneObj);

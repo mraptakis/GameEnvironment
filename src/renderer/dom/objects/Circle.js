@@ -8,17 +8,13 @@ function fromPercentageToPx(x,y){
     return [x,y];
 }
 
-class Sphere extends ActionObject {
+class Circle extends ActionObject {
     
     constructor({name,texture,dim,div}){
         super(name);
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
         
-        this.options.push('move');
-        this.options.push('changeColor');
-        this.options.push("removeObject");
-
     }
 
     createElement({name,texture,dim}){
@@ -44,4 +40,4 @@ class Sphere extends ActionObject {
     }
 }
 
-bb.fastInstall('objects','Sphere',Sphere);
+bb.fastInstall('objects','Circle',Circle);

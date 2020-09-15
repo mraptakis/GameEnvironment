@@ -16,16 +16,16 @@ class Sphere extends ActionObject {
 
         this.mesh = new THREE.Mesh( this.geometry, this.material );
         this.mesh.name = name;
-        
-        this.options.push('move');
-        this.options.push('changeColor');
-        this.options.push("removeObject");
 
     }
 
     animate(){
         // this.mesh.position.x += 0.01;
         // this.mesh.position.y += 0.01;
+    }
+
+    getCategory(){
+        return "Sphere";
     }
 }
 

@@ -8,15 +8,12 @@ function fromPercentageToPx(x,y){
     return [x,y];
 }
 
-class Box extends ActionObject {
+class Square extends ActionObject {
     
     constructor({name,texture,dim,div}){
         super(name);
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
-
-        this.options.push('changeColor');
-        this.options.push("removeObject");
 
         this.events['onEachFrame'] = localStorage.getItem(this.name+"_onEachFrame");
         this.events['test1'] = localStorage.getItem(this.name+"_test1");
@@ -45,4 +42,4 @@ class Box extends ActionObject {
 }
 
 
-bb.fastInstall('objects','Box',Box);
+bb.fastInstall('objects','Square',Square);

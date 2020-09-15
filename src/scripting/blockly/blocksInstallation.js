@@ -224,6 +224,71 @@ Blockly.JavaScript['dropdown_categ'] = function(block) {
     return '"' + inp_val + '"';
 };
 
+Blockly.Blocks['object_attr'] = {
+    validate: function(newValue) {
+        this.getSourceBlock().updateConnections(newValue);
+        return newValue;
+    },
+    
+    init: function() {
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AK_SET_OBJECT)
+            .appendField(new Blockly.FieldDropdown(this.getObjects(),this.validate), 'MODE')
+            .appendField(Blockly.Msg.AK_APOSS);
+        this.appendDummyInput('values')
+            // .appendField(Blockly.Msg.AK_FIELD)
+            .appendField("attribute")
+            .appendField(new Blockly.FieldDropdown([["log me","log me"]]), 'FIELD')
+            .appendField(Blockly.Msg.AK_TO);
+        this.appendValueInput('value')
+            .setCheck("Boolean")
+            .appendField(Blockly.Msg.AK_VALUE);
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object field.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    },
+
+    updateConnections: function(newValue) {
+        let values = bb.fastGet('liveObjects',newValue).getOptions();
+        let toAdd = [];
+        
+        for(let i in values){
+            toAdd.push([i,i])
+        }
+        
+        if(toAdd.length === 0)toAdd = [['log me','log me']];
+        this.removeInput('values', /* no error */ true);
+        this.removeInput('value',true);
+        this.appendDummyInput('values')
+            // .appendField(Blockly.Msg.AK_FIELD)
+            .appendField("attribute")
+            .appendField(new Blockly.FieldDropdown(toAdd), 'FIELD')
+            .appendField(Blockly.Msg.AK_TO);
+        this.appendValueInput('value')
+            .setCheck("Boolean")
+            .appendField(Blockly.Msg.AK_VALUE);
+    },
+
+    getObjects(){
+        let map = bb.getComponent('liveObjects').itemMap;
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['object_attr'] = function(block) {
+    let obj_val = block.getFieldValue('MODE');
+    let field_val = block.getFieldValue('FIELD');
+    let val_val = Blockly.JavaScript.valueToCode (block, 'value',
+    Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    return 'bb.fastGet("liveObjects","'+obj_val+'").setOption("'+field_val+'",'+val_val+');';
+};
+
 Blockly.Blocks['object_field'] = {
     validate: function(newValue) {
         this.getSourceBlock().updateConnections(newValue);

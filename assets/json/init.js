@@ -6,16 +6,29 @@ export default {
         {
             "meta":{
                 "name": "BOOOOOX",
-                "texture": "./assets/textures/wood.jpeg"
+                "texture": "./assets/textures/wood.jpeg",
+                dim:{
+                    width: 2,
+                    height: 2,
+                    depth: 2
+                }
             },
             "category": "Box",
-            "position": {"x":90,"y":90}
+            "position": {x:1,y:1,z:-1}
         },
         {
             "meta":{
-                "name": "SPHEEERE"
+                "name": "SPHEEERE",
+                "texture": "./assets/textures/wood.jpeg"
             },
             "category": "Sphere",
+            "position": {x:0,y:0,z:0}
+        },
+        {
+            "meta":{
+                "name": "SQUAAAARE"
+            },
+            "category": "Square",
             "color" : "#00ffff",
             "position": {"x":90,"y":10}
         },
@@ -39,7 +52,7 @@ export default {
             },
             "category": "Plane",
             "color" : "#0080ff",
-            "position": {"x":100,"y":100}
+            "position": {x:0,y:0,z:0}
         },
         {
             "meta":{

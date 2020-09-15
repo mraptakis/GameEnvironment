@@ -91,8 +91,6 @@ class Humanoid extends ActionObject {
             this.div.style.backgroundPosition = 'center';
         }
 
-        this.options.push('changeColor');
-        this.options.push("removeObject");
     }
 
     animate(){

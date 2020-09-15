@@ -18,8 +18,6 @@ class Plane extends ActionObject {
         this.mesh.userData = this;
         if(rotation)this.mesh.rotation.x = rotation.x;
 
-        this.options.push("removeObject");
-
     }
 
     animate(){
@@ -27,6 +25,9 @@ class Plane extends ActionObject {
         // this.mesh.rotation.z += 0.01;
     }
 
+    getCategory(){
+        return "Plane";
+    }
 }
 
 

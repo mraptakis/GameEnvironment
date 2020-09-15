@@ -19,15 +19,17 @@ class Line extends ActionObject {
         this.mesh = new THREE.Line( this.geometry, this.material );
         this.mesh.name = name;
 
-        this.options.push('changeColor');
-        this.options.push("removeObject");
-
-        this.isMovable = false;
+        this.options['isMovable'] = false;
     }
 
     animate(){
         // this.mesh.rotation.x += 0.01;
         // this.mesh.rotation.y += 0.01;
+    }
+
+
+    getCategory(){
+        return "Line";
     }
 
 }

@@ -7,7 +7,7 @@ class Box extends ActionObject {
     constructor({name,texture,dim}){
         super(name);
         bb.fastInstall('state','player',name);
-        this.geometry = new THREE.BoxGeometry((dim&&dim.width)?dim.width:1, (dim&&dim.height)?dim.height:1,1);
+        this.geometry = new THREE.BoxGeometry((dim&&dim.width)?dim.width:1, (dim&&dim.height)?dim.height:1,(dim&&dim.depth)?dim.depth:1);
         let materialInfo = {};
 
         if(texture)materialInfo.map = new THREE.TextureLoader().load( texture );
@@ -19,8 +19,6 @@ class Box extends ActionObject {
         this.goal = new THREE.Object3D;
         this.goal.position.set(0, 4, -4);
         this.mesh.add( this.goal );
-        this.options.push('changeColor');
-        this.options.push("removeObject");
 
         this.events['onEachFrame'] = localStorage.getItem(this.name+"_onEachFrame");
 
@@ -32,6 +30,11 @@ class Box extends ActionObject {
 
     getGoal(){
         return this.goal;
+    }
+
+
+    getCategory(){
+        return "Box";
     }
 
 }

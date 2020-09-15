@@ -8,13 +8,9 @@ class Camera extends Object {
     constructor(){
         super("camera");
         this.camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.5, 1000 );
-        this.camera.position.z = 1;
-        // var w = window.innerWidth;
-        // var h =  window.innerHeight;
-        // var fullWidth = w * 3;
-        // var fullHeight = h;
-        // this.camera.setViewOffset( fullWidth, fullHeight, w * 1, h * 0, w, h );
-        this.isMovable = false;
+
+        this.options['isMovable'] = false;
+        
         this.vect = new THREE.Vector3;
     }
 
@@ -27,10 +23,15 @@ class Camera extends Object {
     }
 
     animate(){
-        let obj = bb.fastGet('liveObjects','BOOOOOX');
+        let obj = bb.fastGet('liveObjects',bb.fastGet('state','player'));
         this.vect.setFromMatrixPosition(obj.getGoal().matrixWorld);
         this.camera.position.lerp(this.vect, 0.1);
         this.camera.lookAt(obj.getObject().position);
+    }
+
+
+    getCategory(){
+        return "Camera";
     }
 
 }

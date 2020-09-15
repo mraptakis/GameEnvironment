@@ -8,3 +8,7 @@ import './moveForward.js'
 import './moveBackward.js'
 import './moveLeft.js'
 import './moveRight.js'
+
+
+
+import './dummyAction.js'

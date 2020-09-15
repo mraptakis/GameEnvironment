@@ -3,6 +3,7 @@
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="%{BKY_OBJECT_TITLE}" colour="%{BKY_MATH_HUE}">
+      <block type="object_attr"></block>
       <block type="object_event"></block>
       <block type="object_field"></block>
       <block type="dropdown_obj"></block>
@@ -345,8 +346,6 @@
 
 <!-- Top Right Side -->
 <div id="fpsCounter" category="Text" class="hudChild"></div>
-<div id="objMenuButton" class="hudChild button"></div>
-<div id="objMenu" class="hudChild"></div>
 
 <!-- Bottom Right Side -->
 <div id="hudToggle" class="button"></div>

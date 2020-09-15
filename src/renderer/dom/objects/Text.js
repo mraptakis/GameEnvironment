@@ -13,12 +13,6 @@ class Text extends ActionObject {
         if(div)this.div = div;
         else this.createElement({name,texture,dim,defaultText});
 
-
-        this.options.push('move')
-        this.options.push('changeColor');
-        this.options.push('removeObject');
-
-
         this.values['text'] = {
             val: this.div.innerHTML,
             onChange: (newVal) => {

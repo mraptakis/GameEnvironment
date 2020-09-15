@@ -14,11 +14,8 @@ class WoW extends ActionObject {
         super(name);
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
-
-        this.options.push('changeColor');
-        this.options.push("removeObject");
         
-        this.isMovable = false;
+        this.options['isMovable'] = false;
     }
 
     createElement({name,texture,dim}){

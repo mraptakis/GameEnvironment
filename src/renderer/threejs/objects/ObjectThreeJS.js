@@ -24,14 +24,18 @@ export default class ObjectThreeJS extends Object{
         this.material.color = new THREE.Color(col);
     }
 
-    setPosition(x,y){
-        if(!this.isMovable)return;
-        [x,y] = fromPercentageToPx(x,y);
-        [x,y] = translator(x,y);
+    setPosition(x,y,z = 1){
+        // [x,y] = fromPercentageToPx(x,y);
+        // [x,y] = translator(x,y);
         this.mesh.position.x = x;
         this.mesh.position.y = y;
+        this.mesh.position.z = z;
     }
-    
+
+    getPosition(){
+        return this.mesh.position;
+    }
+
     getGeometry(){
         return this.geometry;
     }
@@ -44,11 +48,12 @@ export default class ObjectThreeJS extends Object{
         return this.material;
     }
 
-    move(x,y){
-        if(!this.isMovable)return;
+    move(x,y,z){
+        if(!this.options['isMovable'])return;
         // [x,y] = translator(x,y);
-        this.mesh.position.z += x;
-        this.mesh.position.x += y;
+        this.mesh.position.x += x;
+        this.mesh.position.y += y;
+        this.mesh.position.z += z;
     }
 
     animate(){}
