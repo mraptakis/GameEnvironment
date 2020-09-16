@@ -22,12 +22,6 @@ class Line extends Object {
         this.options['isMovable'] = false;
     }
 
-    animate(){
-        // this.mesh.rotation.x += 0.01;
-        // this.mesh.rotation.y += 0.01;
-    }
-
-
     getCategory(){
         return "Line";
     }

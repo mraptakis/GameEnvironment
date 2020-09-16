@@ -34,7 +34,6 @@ function convertHTMLtoObjects(){
 }
 
 function updateInfo(object){
-    console.log(object);
     if(object === undefined || bb.fastGet('state','mode') !== 'editing'){
         document.getElementById('mainInfoBox').style.display = "none";
         bb.installWatch('state','focusedObject',updateInfo);
@@ -73,8 +72,6 @@ function updateInfo(object){
 }
 
 function onObjectInfoLoaded(){
-    console.log("Object Info Loaded...");
-
     bb.installWatch('state','focusedObject',updateInfo);
     updateInfo(undefined);
 }

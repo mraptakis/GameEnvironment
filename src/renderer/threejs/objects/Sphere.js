@@ -19,11 +19,6 @@ class Sphere extends Object {
 
     }
 
-    animate(){
-        // this.mesh.position.x += 0.01;
-        // this.mesh.position.y += 0.01;
-    }
-
     getCategory(){
         return "Sphere";
     }

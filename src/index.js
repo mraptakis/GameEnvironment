@@ -2,6 +2,7 @@ import './utils/initializationManager.js'
 
 import bb from './utils/blackboard.js'
 import FPSCounter from './utils/fps.js'
+import inputManager from './utils/inputManager.js'
 
 import init from '../assets/json/init.js' //json
 import keyToAction from '../assets/json/keyToActions.js' //json
@@ -19,18 +20,11 @@ init.objects.forEach((item)=>{
     }
 })
 
-document.onkeydown = function(ev) {
-    for(var key in keyToAction){
-        if(ev.code === key){
-            keyToAction[key].map((action)=>bb.fastGet('actions',action)(bb.fastGet('state','focusedObject')));
-        }
-    }
-    // if(bb.fastGet('state','mode') === "editing")return;
-    if(localStorage.getItem(ev.code)){
-        bb.fastGet('scripting','executeCode')(localStorage.getItem(ev.code));
-    }
+function inpHandler(key) {
+    if(keyToAction[key])keyToAction[key].forEach((action)=>bb.fastGet('actions',action)(bb.fastGet('state','focusedObject')));
+    
+    if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
 };
-
 
 
 let aliveItems = bb.getComponent('liveObjects').itemMap;
@@ -42,8 +36,10 @@ function gameLoop() {
     requestAnimationFrame( gameLoop );
     
     FPSCounter();
+    inputManager.getPressedKeys().forEach((key)=>inpHandler(key));
+    // console.log(inputManager.getPressedKeys());
     for(var it in aliveItems){
-        aliveItems[it].animate();
+        aliveItems[it].newFrame();
     }
     bb.fastGet('renderer','render').forEach((it)=>it())
     

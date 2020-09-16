@@ -35,11 +35,6 @@ class Square extends Object {
         }
     }
 
-    animate(){
-        this.triggerEvent('onEachFrame');
-    }
-
-
     getCategory(){
         return "Square";
     }

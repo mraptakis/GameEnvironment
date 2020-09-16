@@ -17,15 +17,11 @@ class Box extends Object {
         this.mesh.name = name;
 
         this.goal = new THREE.Object3D;
-        this.goal.position.set(0, 4, -4);
+        this.goal.position.set(0, 5, -5);
         this.mesh.add( this.goal );
 
         this.events['onEachFrame'] = localStorage.getItem(this.name+"_onEachFrame");
 
-    }
-
-    animate(){
-        this.triggerEvent('onEachFrame');
     }
 
     getGoal(){

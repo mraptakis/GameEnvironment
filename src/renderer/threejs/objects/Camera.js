@@ -22,10 +22,10 @@ class Camera extends Object {
         return this.camera;
     }
 
-    animate(){
+    newFrame(){
         let obj = bb.fastGet('liveObjects',bb.fastGet('state','player'));
         this.vect.setFromMatrixPosition(obj.getGoal().matrixWorld);
-        this.camera.position.lerp(this.vect, 0.1);
+        this.camera.position.lerp(this.vect, 0.2);
         this.camera.lookAt(obj.getObject().position);
     }
 

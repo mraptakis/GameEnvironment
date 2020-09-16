@@ -20,11 +20,6 @@ class Plane extends Object {
 
     }
 
-    animate(){
-        // this.mesh.rotation.x += 0.01;
-        // this.mesh.rotation.z += 0.01;
-    }
-
     getCategory(){
         return "Plane";
     }

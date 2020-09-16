@@ -2,8 +2,6 @@ import bb from '../../../utils/blackboard.js'
 
 import Object from '../../../objects/Object.js'
 
-import translator from '../mouseEvents.js'
-
 import scene from './Scene.js'
 function fromPercentageToPx(x,y){
     x = x/100 * window.innerWidth;
@@ -24,7 +22,7 @@ export default class ObjectThreeJS extends Object{
         this.material.color = new THREE.Color(col);
     }
 
-    setPosition(x,y,z = 1){
+    setPosition(x,y,z = 0){
         // [x,y] = fromPercentageToPx(x,y);
         // [x,y] = translator(x,y);
         this.mesh.position.x = x;
@@ -48,7 +46,7 @@ export default class ObjectThreeJS extends Object{
         return this.material;
     }
 
-    move(x,y,z){
+    move(x,y,z = 0){
         if(!this.options['isMovable'])return;
         // [x,y] = translator(x,y);
         this.mesh.position.x += x;
@@ -57,6 +55,10 @@ export default class ObjectThreeJS extends Object{
     }
 
     animate(){}
+
+    newFrame(){
+        this.triggerEvent('onEachFrame');
+    }
 
     add(){
         scene.addItem(this.mesh);

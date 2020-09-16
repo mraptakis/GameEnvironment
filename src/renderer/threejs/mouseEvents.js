@@ -57,11 +57,11 @@ function mouseDown(e){
     return false;
 }
 
-if(!bb.fastGet('renderer','mouseDown')){
-    bb.fastSet('renderer','mouseDown',[mouseDown]);
-}else{
-    bb.fastGet('renderer',"mouseDown").push(mouseDown);
-}
+// if(!bb.fastGet('renderer','mouseDown')){
+//     bb.fastSet('renderer','mouseDown',[mouseDown]);
+// }else{
+//     bb.fastGet('renderer',"mouseDown").push(mouseDown);
+// }
 
 function leftClick(e){
     e.preventDefault();

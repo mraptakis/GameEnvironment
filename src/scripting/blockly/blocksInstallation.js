@@ -36,6 +36,9 @@ Blockly.Blocks['move_object'] = {
         this.appendValueInput('valY')
             .setCheck('Number')
             .appendField(Blockly.Msg.AK_MOVEY);
+        this.appendValueInput('valZ')
+            .setCheck('Number')
+            .appendField("move on Z");
         this.setColour(colourPalette.object);
         this.setTooltip('Move an object.');
         this.setHelpUrl('none');
@@ -52,11 +55,12 @@ Blockly.JavaScript['move_object'] = function(block) {
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     var argument2 = Blockly.JavaScript.valueToCode(block, 'valY',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+    var argument3 = Blockly.JavaScript.valueToCode(block, 'valZ',
+    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     argument1 = eval(argument1);
     argument2 = eval(argument2);
-    argument1 /= 10;
-    argument2 /= 10;
-    return 'bb.fastGet("actions","move")('+argument0+','+argument1 + ','+ argument2 +');';
+    argument3 = eval(argument3);
+    return 'bb.fastGet("actions","move")('+argument0+','+argument1 + ','+ argument2 + ','+ argument3 +');';
 };
 
 Blockly.Blocks['get_object'] = {

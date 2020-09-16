@@ -95,6 +95,7 @@ export default class Object {
     }
 
     triggerEvent(ev){
+        if(!this.events[ev])return;
         bb.fastGet('scripting','executeText')(this.events[ev]);
     }
 
@@ -104,6 +105,10 @@ export default class Object {
 
     animate(){
         throw Error("animate needs to be implemented");
+    }
+
+    newFrame(){
+        throw Error("newFrame needs to be implemented");
     }
 
     add(){

@@ -1,10 +1,11 @@
 #mainInfoBox {
     position: absolute;
-    width: 30%;
+    width: auto;
     right:0;
     top: 20%;
     height: auto;
     background-color: grey;
+    padding: 10px;
 }
 
 #objName {
@@ -30,7 +31,6 @@
 
 #attributeInfo {
     margin-left: 10px;
-    margin-bottom: 10px;
 }
 
 .InfoBox_thinLine {
