@@ -1,8 +1,8 @@
-import ActionObject from './ActionObject.js'
+import Object from './ObjectThreeJS.js'
 
 import bb from '../../../utils/blackboard.js'
 
-class Line extends ActionObject {
+class Line extends Object {
     
     constructor({name,texture,point1,point2}){
         super(name);

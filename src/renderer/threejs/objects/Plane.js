@@ -1,8 +1,8 @@
-import ActionObject from './ActionObject.js'
+import Object from './ObjectThreeJS.js'
 
 import bb from '../../../utils/blackboard.js'
 
-class Plane extends ActionObject {
+class Plane extends Object {
     
     constructor({name,texture,rotation,dim}){
         super(name);

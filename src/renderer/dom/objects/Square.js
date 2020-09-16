@@ -1,4 +1,4 @@
-import ActionObject from './ActionObject.js'
+import Object from './ObjectDom.js'
 
 import bb from '../../../utils/blackboard.js'
 
@@ -8,7 +8,7 @@ function fromPercentageToPx(x,y){
     return [x,y];
 }
 
-class Square extends ActionObject {
+class Square extends Object {
     
     constructor({name,texture,dim,div}){
         super(name);
@@ -39,6 +39,10 @@ class Square extends ActionObject {
         this.triggerEvent('onEachFrame');
     }
 
+
+    getCategory(){
+        return "Square";
+    }
 }
 
 

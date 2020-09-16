@@ -1,8 +1,8 @@
-import ActionObject from './ActionObject.js'
+import Object from './ObjectThreeJS.js'
 
 import bb from '../../../utils/blackboard.js'
 
-class Sphere extends ActionObject {
+class Sphere extends Object {
     
     constructor({name,texture}){
         super(name);

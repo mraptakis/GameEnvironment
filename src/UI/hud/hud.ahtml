@@ -333,7 +333,7 @@
 <div id="openTab" class="hudChild"></div>
 <div id="playScriptButton" class="hudChild button"></div>
 <div id="saveScriptButton" class="hudChild button"></div>
-<textarea readOnly=true id="consoleArea" class="hudChild"></textarea>
+<textarea readOnly=true id="consoleArea" category="Square" class="hudChild"></textarea>
 
 <!-- Top Middle Side -->
 <div id="focusedObjText" category="Text" class="hudChild"></div>

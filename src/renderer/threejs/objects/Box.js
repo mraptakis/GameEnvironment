@@ -1,8 +1,8 @@
-import ActionObject from './ActionObject.js'
+import Object from './ObjectThreeJS.js'
 
 import bb from '../../../utils/blackboard.js'
 
-class Box extends ActionObject {
+class Box extends Object {
     goal
     constructor({name,texture,dim}){
         super(name);

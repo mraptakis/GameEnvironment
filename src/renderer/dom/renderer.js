@@ -7,7 +7,6 @@ import './objects/Circle.js'
 import './objects/Square.js'
 import './objects/Text.js'
 import './objects/Humanoid.js'
-// import './objects/WoW.js'
 
 if(!bb.fastGet('renderer','render')){
     bb.fastSet('renderer','render',[()=>{}]);

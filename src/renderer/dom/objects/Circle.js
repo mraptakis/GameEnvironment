@@ -1,4 +1,4 @@
-import ActionObject from './ActionObject.js'
+import Object from './ObjectDom.js'
 
 import bb from '../../../utils/blackboard.js'
 
@@ -8,7 +8,7 @@ function fromPercentageToPx(x,y){
     return [x,y];
 }
 
-class Circle extends ActionObject {
+class Circle extends Object {
     
     constructor({name,texture,dim,div}){
         super(name);
@@ -34,9 +34,8 @@ class Circle extends ActionObject {
         }
     }
 
-    animate(){
-        // this.mesh.position.x += 0.01;
-        // this.mesh.position.y += 0.01;
+    getCategory(){
+        return "Circle";
     }
 }
 

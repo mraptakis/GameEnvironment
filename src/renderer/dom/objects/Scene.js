@@ -34,6 +34,10 @@ class Scene extends Object {
         this.div.removeChild(it);
     }
 
+    getCategory(){
+        return "Scene";
+    }
+
 }
 
 const sceneObj = new Scene();
