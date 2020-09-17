@@ -1,5 +1,3 @@
-import logManager from "../utils/logs.js"
-
 import bb from '../utils/blackboard.js'
 
 export default class Object {
@@ -113,11 +111,11 @@ export default class Object {
         throw Error("newFrame needs to be implemented");
     }
 
-    add(){
+    add(){  //Add this item on renderer
         throw Error("add needs to be implemented");
     }
 
-    remove(){
+    remove(){ // Remove this item from blackboard and from renderer to.
         throw Error("remove needs to be implemented");
     }
 

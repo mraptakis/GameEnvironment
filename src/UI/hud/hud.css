@@ -33,6 +33,7 @@
     width: 500px;
     height: 500px;
     top: 40px;
+    overflow: hidden;
 }
 
 #eventsTab {

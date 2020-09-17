@@ -1,5 +1,7 @@
 import Object from './ObjectDom.js'
 
+import Value from '../../../objects/Value.js'
+
 import bb from '../../../utils/blackboard.js'
 
 function fromPercentageToPx(x,y){
@@ -90,6 +92,12 @@ class Humanoid extends Object {
             this.div.style.backgroundSize = 'cover';
             this.div.style.backgroundPosition = 'center';
         }
+
+
+        this.values['colour'] = new Value({
+            onChange: (value) => this.setColor(value),
+            getValue: () => {return this.div.children[0].style.backgroundColor;}
+        });
 
     }
 

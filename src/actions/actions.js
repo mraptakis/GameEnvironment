@@ -1,4 +1,4 @@
-import './onObject/changeColor.js'
+import './onObject/changeColorObject.js'
 import './onObject/moveObject.js'
 import './onObject/removeObject.js'
 import './onObject/renameObject.js'

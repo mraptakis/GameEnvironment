@@ -1,6 +1,7 @@
 import bb from '../../../utils/blackboard.js'
 
 import Object from '../../../objects/Object.js'
+import Value from '../../../objects/Value.js'
 
 import scene from './Scene.js'
 function fromPercentageToPx(x,y){
@@ -16,46 +17,26 @@ export default class ObjectThreeJS extends Object{
     constructor(name){
         super(name);
         this.renderer = 'threejs';
-
-        this.values['x'] = {
-            val: 0,
-            onChange: (value) => {
-                this.mesh.position.x = value;
-            },
-            getValue: () => {
-                return this.mesh.position.x.toFixed(2);
-            }
-        }
-
-        this.values['y'] = {
-            val: 0,
-            onChange: (value) => {
-                this.mesh.position.y = value;
-            },
-            getValue: () => {
-                return this.mesh.position.y.toFixed(2);
-            }
-        }
-
-        this.values['z'] = {
-            val: 0,
-            onChange: (value) => {
-                this.mesh.position.z = value;
-            },
-            getValue: () => {
-                return this.mesh.position.z.toFixed(2);
-            }
-        }
         
-        this.values['colour'] = {
-            val: 0,
-            onChange: (value) => {
-                this.material.color = value;
-            },
-            getValue: () => {
-                return "#"+this.material.color.getHexString();
-            }
-        }
+        this.values['x'] = new Value({
+            onChange: (value) => this.mesh.position.x = value,
+            getValue: () => {return this.mesh.position.x.toFixed(2);}
+        });
+
+        this.values['y'] = new Value({
+            onChange: (value) => this.mesh.position.y = value,
+            getValue: () => {return this.mesh.position.y.toFixed(2);}
+        });
+
+        this.values['z'] = new Value({
+            onChange: (value) => this.mesh.position.z = value,
+            getValue: () => {return this.mesh.position.z.toFixed(2);}
+        });
+
+        this.values['colour'] = new Value({
+            onChange: (value) => this.material.color = new THREE.Color(value),
+            getValue: () => {return "#"+this.material.color.getHexString();}
+        });
     }
 
     setColor(col){
@@ -97,10 +78,10 @@ export default class ObjectThreeJS extends Object{
     animate(){}
 
     setName(newName){
+        bb.fastRemove('liveObjects',this.name);
         if(bb.fastGet('state','player') === this.name)bb.fastSet('state','player',newName);
         this.name = newName;
         this.mesh.name = newName;
-        bb.fastRemove('liveObjects',this.name);
         bb.fastSet('liveObjects',this.name,this);
     }
 
@@ -109,13 +90,12 @@ export default class ObjectThreeJS extends Object{
     }
 
     add(){
+        bb.fastSet('liveObjects',this.name,this);
         scene.addItem(this.mesh);
     }
 
     remove(){
-        console.log("removing "+this.name);
         bb.fastRemove('liveObjects',this.name);
-        bb.fastSet('state','focusedObject',undefined);
         scene.getScene().remove(this.mesh);
     }
 

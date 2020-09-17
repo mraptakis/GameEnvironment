@@ -128,6 +128,31 @@ Blockly.JavaScript['colour_change_choose_object'] = function(block) {
     return 'bb.fastGet("actions","changeColor")('+argument0+','+argument1 + ');';
 };
 
+Blockly.Blocks['name_change_choose_object'] = {
+    init: function() {
+        this.appendValueInput('Obj')
+            .setCheck('Object')
+            .appendField(Blockly.Msg.AK_OBJECT);
+        this.appendValueInput('Name')
+            .setCheck('String')
+            .appendField('new name');
+        this.setColour(colourPalette.colour);
+        this.setTooltip('Change the colour of the object it refers.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        return 0;
+    }
+};
+
+Blockly.JavaScript['name_change_choose_object'] = function(block) {
+    var argument0 = Blockly.JavaScript.statementToCode(block, 'Obj',
+    Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    var argument1 = Blockly.JavaScript.valueToCode(block, 'Name',
+    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+    return 'bb.fastGet("actions","renameObject")('+argument0+','+argument1 + ');';
+};
+
 Blockly.Blocks['every_seconds_do'] = {
     init: function() {
         this.appendValueInput('msecs')
@@ -198,6 +223,9 @@ Blockly.Blocks['create_object'] = {
         this.appendValueInput('PosY')
             .setCheck('Number')
             .appendField(Blockly.Msg.AK_AXISY);
+        this.appendValueInput('PosZ')
+            .setCheck('Number')
+            .appendField('Z axis');
         this.setColour(colourPalette.colour);
         this.setTooltip('Create a new object with the given arguments.');
         this.setHelpUrl('none');
@@ -218,11 +246,13 @@ Blockly.JavaScript['create_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument4 = Blockly.JavaScript.valueToCode(block, 'PosY',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    var argument5 = Blockly.JavaScript.valueToCode(block, 'PosZ',
+    Blockly.JavaScript.ORDER_NONE) || '\'\'';
 return 'bb.fastGet("actions","createObject")({\
 "category":'+argument0+',\
 "name":'+argument1+',\
 "colour":'+argument2+',\
-"position":{"x":'+argument3+',"y":'+ argument4 +'} \
+"position":{"x":'+argument3+',"y":'+ argument4+',"z":'+ argument5 +'} \
 });\n';
 };
 

@@ -1,5 +1,7 @@
 import Object from './ObjectDom.js'
 
+import Value from '../../../objects/Value.js'
+
 import bb from '../../../utils/blackboard.js'
 function pxToNumber(str){
     str.substr(1,str.length-4);
@@ -13,20 +15,20 @@ class Text extends Object {
         if(div)this.div = div;
         else this.createElement({name,texture,dim,defaultText});
 
-        this.values['text'] = {
-            val: this.div.innerHTML,
-            onChange: (newVal) => {
-                this.div.innerHTML = newVal;
-            }
-        }
+        this.values['text'] = new Value({
+            onChange: (value) => this.div.innerHTML = value,
+            getValue: () => {return this.div.innerHTML;}
+        });
 
-        this.values['bold'] = {
-            val: false,
-            onChange: (newVal) => {
-                if(newVal)this.div.style.fontWeight = "bold";
-                else this.div.style.fontWeight = "normal";
-            }
-        }
+        this.values['colour'] = new Value({
+            onChange: (value) => this.div.style.color = value,
+            getValue: () => {return this.div.style.color;}
+        });
+
+        this.values['bold'] = new Value({
+            value: false,
+            onChange: (newVal) => this.div.style.fontWeight = (newVal)?"bold":"normal"
+        });
 
     }
 
@@ -35,8 +37,6 @@ class Text extends Object {
         this.div.id = name;
         this.div.innerHTML = (defaultText)?defaultText:name;
         this.div.style.position = "absolute";
-        // this.div.style.width = (dim&&dim.width)?dim.width: "100px";
-        // this.div.style.height = (dim&&dim.height)?dim.height: "100px";
     }
 
     getCategory(){

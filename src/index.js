@@ -13,7 +13,6 @@ init.objects.forEach((item)=>{
     if(item.meta.name === undefined 
     || !bb.fastGet('liveObjects',item.meta.name)){
         let it = new category(item.meta);
-        bb.fastSet('liveObjects',item.meta.name,it);
         if(item.color)it.setColor(item.color);
         if(item.position)it.setPosition(item.position.x,item.position.y,item.position.z);
         it.add();

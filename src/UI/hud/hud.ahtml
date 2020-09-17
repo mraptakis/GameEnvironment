@@ -11,6 +11,7 @@
       <block type="create_object"></block>
       <block type="move_object"></block>
       <block type="colour_change"></block>
+      <block type="name_change_choose_object"></block>
       <block type="colour_change_choose_object"></block>
       <block type="get_object"></block>
       <block type="console_log"></block>
