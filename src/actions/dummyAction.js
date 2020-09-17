@@ -1,6 +1,6 @@
 import bb from '../utils/blackboard.js'
 
-import logAction from '../utils/logs.js'
+import logManager from '../utils/logs.js'
 
 function dummyAction(){
     let obj = bb.fastGet('liveObjects',bb.fastGet('state','focusedObject'));
@@ -14,7 +14,7 @@ function dummyAction(){
         bb.fastSet('liveObjects',name,it);
         it.setPosition(pos.x,pos.y,pos.z);
         it.add();
-        logAction("Created Object ["+name+"]");
+        logManager.logAction("Created Object ["+name+"]");
     }
 
 }

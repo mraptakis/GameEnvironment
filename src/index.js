@@ -22,7 +22,7 @@ init.objects.forEach((item)=>{
 
 function inpHandler(key) {
     if(keyToAction[key])keyToAction[key].forEach((action)=>bb.fastGet('actions',action)(bb.fastGet('state','focusedObject')));
-    
+    if(bb.fastGet('state','mode') === 'editing')return;
     if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
 };
 

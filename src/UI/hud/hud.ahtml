@@ -17,6 +17,7 @@
     </category>
     <category name="%{BKY_HELPERS_TITLE}" colour="%{BKY_TEXTS_HUE}">
       <block type="every_seconds_do"></block>
+      <block type="after_seconds_do"></block>
     </category>
     <category name="%{BKY_LOGIC_TITLE}" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_if"></block>
@@ -286,7 +287,6 @@
       <block type="lists_sort"></block>
     </category>
     <category name="%{BKY_COLOUR_TITLE}" colour="%{BKY_COLOUR_HUE}">
-      <block type="colour_change"></block>
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb">

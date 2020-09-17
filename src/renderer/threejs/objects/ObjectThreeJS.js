@@ -16,6 +16,46 @@ export default class ObjectThreeJS extends Object{
     constructor(name){
         super(name);
         this.renderer = 'threejs';
+
+        this.values['x'] = {
+            val: 0,
+            onChange: (value) => {
+                this.mesh.position.x = value;
+            },
+            getValue: () => {
+                return this.mesh.position.x.toFixed(2);
+            }
+        }
+
+        this.values['y'] = {
+            val: 0,
+            onChange: (value) => {
+                this.mesh.position.y = value;
+            },
+            getValue: () => {
+                return this.mesh.position.y.toFixed(2);
+            }
+        }
+
+        this.values['z'] = {
+            val: 0,
+            onChange: (value) => {
+                this.mesh.position.z = value;
+            },
+            getValue: () => {
+                return this.mesh.position.z.toFixed(2);
+            }
+        }
+        
+        this.values['colour'] = {
+            val: 0,
+            onChange: (value) => {
+                this.material.color = value;
+            },
+            getValue: () => {
+                return "#"+this.material.color.getHexString();
+            }
+        }
     }
 
     setColor(col){

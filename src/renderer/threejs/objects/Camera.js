@@ -11,6 +11,21 @@ class Camera extends Object {
 
         this.options['isMovable'] = false;
         
+        delete this.values['x'];
+        delete this.values['y'];
+        delete this.values['z'];
+        delete this.values['colour'];
+
+        this.values['distance'] = {
+            val: 90,
+            onChange: (v)=>{
+                this.camera.fov = v;
+            },
+            getValue: ()=>{
+                return this.camera.fov;
+            }
+        }
+
         this.vect = new THREE.Vector3;
     }
 

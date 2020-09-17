@@ -86,7 +86,6 @@ Blockly.JavaScript['get_object'] = function(block) {
 Blockly.Blocks['console_log'] = {
     init: function() {
         this.appendValueInput('CON_LOG')
-            .setCheck('Object')
             .appendField(Blockly.Msg.AK_LOG);
         this.setColour(colourPalette.object);
         this.setTooltip('Get an object by name.');
@@ -98,7 +97,7 @@ Blockly.Blocks['console_log'] = {
 };
 
 Blockly.JavaScript['console_log'] = function(block) {
-    var argument0 = Blockly.JavaScript.statementToCode(block, 'CON_LOG',
+    var argument0 = Blockly.JavaScript.valueToCode(block, 'CON_LOG',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     return 'console.log('+argument0+');';
 };
@@ -154,6 +153,32 @@ Blockly.JavaScript['every_seconds_do'] = function(block) {
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     console.log('setInterval(()=>{'+argument1+'},'+argument0+');');
     return 'setInterval(()=>{'+argument1+'},'+argument0+');';
+};
+
+Blockly.Blocks['after_seconds_do'] = {
+    init: function() {
+        this.appendValueInput('msecs')
+            .setCheck('Number')
+            .appendField("after")
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AK_MILLISECONDS);
+        this.appendStatementInput('Value')
+            .appendField(Blockly.Msg.AK_DO);
+        this.setColour(colourPalette.colour);
+        this.setTooltip('do something every');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        return 0;
+    }
+};
+
+Blockly.JavaScript['after_seconds_do'] = function(block) {
+    var argument0 = Blockly.JavaScript.valueToCode(block, 'msecs',
+    Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    var argument1 = Blockly.JavaScript.statementToCode(block, 'Value',
+    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+    return 'setTimeout(()=>{'+argument1+'},'+argument0+');';
 };
 
 Blockly.Blocks['create_object'] = {

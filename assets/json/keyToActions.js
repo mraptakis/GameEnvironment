@@ -7,7 +7,7 @@ export default {
     "KeyA": ["moveLeft"],
     "KeyD": ["moveRight"],
     "KeyP": ["printBlackboard"],
-    "KeyL": ["dummyAction"],
+    // "KeyL": ["dummyAction"],
     // "KeyO": ["downloadScript"],
     // "KeyI": ["loadScript"]
 }

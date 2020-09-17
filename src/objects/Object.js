@@ -1,4 +1,4 @@
-import logAction from "../utils/logs.js"
+import logManager from "../utils/logs.js"
 
 import bb from '../utils/blackboard.js'
 
@@ -15,13 +15,6 @@ export default class Object {
     constructor(_name){
         this.name = _name;
 
-        this.values['log me'] = {
-            val: this.name,
-            onChange: () => {
-                logAction(this.name);
-            }
-        }
-
         this.events['onClick'] = localStorage.getItem(this.name+"_onClick");
         this.events['onRightClick'] = localStorage.getItem(this.name+"_onRightClick");
         this.events['onRemove'] = localStorage.getItem(this.name+"_onRemove");
@@ -29,6 +22,7 @@ export default class Object {
 
         this.options['isMovable'] = true;
         this.options['isRemovable'] = true;
+        this.options['isVisible'] = true;
 
     }
 
@@ -74,10 +68,11 @@ export default class Object {
 
     setValue(val,v){
         this.values[val].val = v;
-        this.values[val].onChange(v);
+        if(this.values[val].onChange)this.values[val].onChange(v);
     }
     
     getValue(val){
+        if(this.values[val].getValue)return this.values[val].getValue();
         return this.values[val].val;
     }
 

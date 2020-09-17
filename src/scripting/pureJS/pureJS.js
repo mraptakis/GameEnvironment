@@ -25,10 +25,20 @@ bb.fastInstall('scripting','fromTextToCode',(text) => {
 });
 
 bb.fastInstall('scripting','executeText',(text) => {
+    // try{
+    //     eval(text);
+    // }catch(e){
+    //     console.log(e);
+    // }
     eval(text);
 });
 
 bb.fastInstall('scripting','executeCode',(text) => {
+    // try{
+    //     eval(text);
+    // }catch(e){
+    //     console.log(e);
+    // }
     eval(text);
 });
 
