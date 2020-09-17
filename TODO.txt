@@ -2,7 +2,7 @@ EASY
     - Make set blocks for field,events,attributes
     - Break down file blocksinstallation.js to smaller .js files
     - Change from px to move on drag.js
-    - create Add buttons for user created fields,events,attributes
+    - Create Add buttons for user created fields,events,attributes
 
 HARD
     - Add divs in threejs so i can add div in 3D space 

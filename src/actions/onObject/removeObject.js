@@ -1,8 +1,8 @@
-import bb from '../utils/blackboard.js'
+import bb from '../../utils/blackboard.js'
 
-import focusObject from '../transitionHandlers/focusedObject.js'
+import focusObject from '../../transitionHandlers/focusedObject.js'
 
-import logManager from '../utils/logs.js'
+import logManager from '../../utils/logs.js'
 
 function removeObject(obj){
     if(!obj)obj = bb.fastGet('state','focusedObject');

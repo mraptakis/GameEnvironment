@@ -1,4 +1,4 @@
-import bb from '../utils/blackboard.js'
+import bb from '../../utils/blackboard.js'
 
 function move(obj,x = 0,y = 0,z = 0){
     if(!obj)obj = bb.fastGet('state','focusedObject');

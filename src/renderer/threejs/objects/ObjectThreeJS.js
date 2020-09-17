@@ -96,6 +96,14 @@ export default class ObjectThreeJS extends Object{
 
     animate(){}
 
+    setName(newName){
+        if(bb.fastGet('state','player') === this.name)bb.fastSet('state','player',newName);
+        this.name = newName;
+        this.mesh.name = newName;
+        bb.fastRemove('liveObjects',this.name);
+        bb.fastSet('liveObjects',this.name,this);
+    }
+
     newFrame(){
         this.triggerEvent('onEachFrame');
     }

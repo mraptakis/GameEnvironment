@@ -50,6 +50,13 @@ export default class Object {
         return this.name;
     }
 
+    setName(newName){
+        bb.fastRemove('liveObjects',this.name);
+        if(bb.fastGet('state','player') === this.name)bb.fastSet('state','player',newName);
+        this.name = newName;
+        bb.fastSet('liveObjects',this.name);
+    }
+
     getOptions(){
         return this.options;
     }
