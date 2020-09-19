@@ -12,9 +12,10 @@ init.objects.forEach((item)=>{
     if(typeof category !== "function"){console.log("There is no category "+item.category)}
     if(item.meta.name === undefined 
     || !bb.fastGet('liveObjects',item.meta.name)){
+        if(!category)return;
         let it = new category(item.meta);
         if(item.color)it.setColor(item.color);
-        if(item.position)it.setPosition(item.position.x,item.position.y,item.position.z);
+        if(item.position)it.setPosition(item.position.x,item.position.y);
         it.add();
     }
 })

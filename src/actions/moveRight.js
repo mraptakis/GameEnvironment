@@ -1,10 +1,7 @@
 import bb from '../utils/blackboard.js'
 
-function moveRight(){
-    let funcs = bb.fastGet('renderer','moveRight');
-    for(var f in funcs){
-        if(funcs[f]())break;
-    }
+function moveRight(step = 3){
+    bb.fastGet('state','player').move(step,0);
 }
 
 bb.fastSet('actions','moveRight',moveRight);

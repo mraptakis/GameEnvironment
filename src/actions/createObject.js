@@ -8,7 +8,7 @@ function createObject({category,name,colour,position}){
     if(!bb.fastGet('liveObjects',name)){
         let it = new catO({name});
         if(colour)it.setColor(colour);
-        if(position)it.setPosition(position.x,position.y,position.z);
+        if(position)it.setPosition(position.x,position.y);
         it.add();
         logManager.logAction("Created Object ["+name+"]");
     }

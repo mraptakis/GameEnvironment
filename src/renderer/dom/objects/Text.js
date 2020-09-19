@@ -16,16 +16,19 @@ class Text extends Object {
         else this.createElement({name,texture,dim,defaultText});
 
         this.values['text'] = new Value({
+            tag: "x",
             onChange: (value) => this.div.innerHTML = value,
             getValue: () => {return this.div.innerHTML;}
         });
 
         this.values['colour'] = new Value({
+            tag: "texture",
             onChange: (value) => this.div.style.color = value,
             getValue: () => {return this.div.style.color;}
         });
 
         this.values['bold'] = new Value({
+            tag: "x",
             value: false,
             onChange: (newVal) => this.div.style.fontWeight = (newVal)?"bold":"normal"
         });

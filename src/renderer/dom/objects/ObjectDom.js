@@ -20,16 +20,19 @@ export default class ObjectDom extends Object{
         this.renderer = 'dom';
 
         this.values['x'] = new Value({
+            tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this.div.style.left = value+"px"},
             getValue: () => {return this.div.offsetLeft+"px";}
         });
 
         this.values['y'] = new Value({
+            tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this.div.style.top = value+"px"},
             getValue: () => {return this.div.offsetTop+"px";}
         });
 
         this.values['colour'] = new Value({
+            tag: "texture",
             onChange: (value) => this.div.style.backgroundColor = value,
             getValue: () => {return this.div.style.backgroundColor;}
         });

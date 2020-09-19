@@ -1,0 +1,19 @@
+body { 
+	margin: 0; 
+	background-image: url("./assets/textures/sky.jpeg");
+	background-position: center;
+    background-size: cover;
+}
+
+canvas { 
+	display: block; 
+	overflow: hidden; 
+}
+
+#scene { 
+	overflow: hidden; 
+}
+
+div { 
+	user-select: none; 
+}

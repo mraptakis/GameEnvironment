@@ -28,7 +28,7 @@ export default class Object {
         throw Error("setColor needs to be implemented");
     }
 
-    setPosition(x,y,z){
+    setPosition(x,y){
         throw Error("setPosition needs to be implemented");
     }
 
@@ -50,7 +50,7 @@ export default class Object {
 
     setName(newName){
         bb.fastRemove('liveObjects',this.name);
-        if(bb.fastGet('state','player') === this.name)bb.fastSet('state','player',newName);
+        if(bb.fastGet('state','player') === this)bb.fastSet('state','player',this);
         this.name = newName;
         bb.fastSet('liveObjects',this.name);
     }

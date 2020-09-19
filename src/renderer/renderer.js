@@ -1,5 +1,6 @@
 import './dom/renderer.js'
-import './threejs/renderer.js'
+import './pixi/renderer.js'
+// import './threejs/renderer.js'
 
 import bb from '../utils/blackboard.js'
 

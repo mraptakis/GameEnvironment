@@ -1,10 +1,7 @@
 import bb from '../utils/blackboard.js'
 
-function moveBWD(){
-    let funcs = bb.fastGet('renderer','moveBWD');
-    for(var f in funcs){
-        if(funcs[f]())break;
-    }
+function moveBWD(step = 3){
+    bb.fastGet('state','player').move(0,step);
 }
 
 bb.fastSet('actions','moveBackward',moveBWD);

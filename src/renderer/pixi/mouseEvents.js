@@ -3,19 +3,16 @@ import bb from '../../utils/blackboard.js'
 import focusTransition from '../../transitionHandlers/focusedObject.js'
 import dragElement from '../../transitionHandlers/drag.js';
 
+import scene from './objects/Scene.js'
+
 var mouse = { x : 0, y : 0 };
 
 function translator(ev){
     return [ev.offsetX,ev.offsetY]
 }
 
-function pxToNumber(str){
-    str.substr(1,str.length-4);
-    return parseInt(str);
-}
-
 function focused(obj,x,y){
-    if(obj.renderer !== 'dom')return false;
+    if(obj.renderer !== 'pixi')return false;
     let boundingBox = obj.getBoundingBox();
     // console.log(obj.name,boundingBox);
     if(boundingBox.x < x
@@ -34,12 +31,12 @@ function rightClick(e){
     for(var it in aliveItems){
         // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){
-            // aliveItems[it].getObject().click();
             focusTransition(it);
             aliveItems[it].triggerEvent('onRightClick');
             return true;
         }
     }
+    return false;
 }
 
 if(!bb.fastGet('renderer','rightClick')){
@@ -67,7 +64,6 @@ if(!bb.fastGet('renderer','mouseDown')){
     bb.fastGet('renderer',"mouseDown").push(mouseDown);
 }
 
-
 function leftClick(e){
     e.preventDefault();
     [mouse.x,mouse.y] = translator(e);
@@ -81,7 +77,6 @@ function leftClick(e){
         }
     }
     return false;
-
 }
 
 if(!bb.fastGet('renderer','leftClick')){

@@ -36,9 +36,6 @@ Blockly.Blocks['move_object'] = {
         this.appendValueInput('valY')
             .setCheck('Number')
             .appendField(Blockly.Msg.AK_MOVEY);
-        this.appendValueInput('valZ')
-            .setCheck('Number')
-            .appendField("move on Z");
         this.setColour(colourPalette.object);
         this.setTooltip('Move an object.');
         this.setHelpUrl('none');
@@ -55,12 +52,9 @@ Blockly.JavaScript['move_object'] = function(block) {
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     var argument2 = Blockly.JavaScript.valueToCode(block, 'valY',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    var argument3 = Blockly.JavaScript.valueToCode(block, 'valZ',
-    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     argument1 = eval(argument1);
     argument2 = eval(argument2);
-    argument3 = eval(argument3);
-    return 'bb.fastGet("actions","move")('+argument0+','+argument1 + ','+ argument2 + ','+ argument3 +');';
+    return 'bb.fastGet("actions","move")('+argument0+','+argument1 + ','+ argument2 +');';
 };
 
 Blockly.Blocks['get_object'] = {
@@ -223,9 +217,6 @@ Blockly.Blocks['create_object'] = {
         this.appendValueInput('PosY')
             .setCheck('Number')
             .appendField(Blockly.Msg.AK_AXISY);
-        this.appendValueInput('PosZ')
-            .setCheck('Number')
-            .appendField('Z axis');
         this.setColour(colourPalette.colour);
         this.setTooltip('Create a new object with the given arguments.');
         this.setHelpUrl('none');
@@ -246,13 +237,11 @@ Blockly.JavaScript['create_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument4 = Blockly.JavaScript.valueToCode(block, 'PosY',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    var argument5 = Blockly.JavaScript.valueToCode(block, 'PosZ',
-    Blockly.JavaScript.ORDER_NONE) || '\'\'';
 return 'bb.fastGet("actions","createObject")({\
 "category":'+argument0+',\
 "name":'+argument1+',\
 "colour":'+argument2+',\
-"position":{"x":'+argument3+',"y":'+ argument4+',"z":'+ argument5 +'} \
+"position":{"x":'+argument3+',"y":'+ argument4+'} \
 });\n';
 };
 

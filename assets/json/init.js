@@ -8,13 +8,13 @@ export default {
                 "name": "BOOOOOX",
                 "texture": "./assets/textures/wood.jpeg",
                 dim:{
-                    width: 2,
-                    height: 2,
-                    depth: 2
+                    width: 100,
+                    height: 100,
                 }
             },
             "category": "Box",
-            "position": {x:1,y:1,z:-1}
+            "position": {x:600,y:600},
+            color: "#ffff00"
         },
         {
             "meta":{
@@ -22,7 +22,7 @@ export default {
                 "texture": "./assets/textures/wood.jpeg"
             },
             "category": "Sphere",
-            "position": {x:0,y:0,z:0}
+            "position": {x:0,y:0}
         },
         {
             "meta":{
@@ -48,11 +48,10 @@ export default {
                     "width": 100,
                     "height": 100
                 },
-                "rotation":{"x":-1.57}
             },
             "category": "Plane",
             "color" : "#0080ff",
-            "position": {x:0,y:0,z:0}
+            "position": {x:0,y:0}
         },
         {
             "meta":{

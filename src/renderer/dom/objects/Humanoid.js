@@ -95,6 +95,7 @@ class Humanoid extends Object {
 
 
         this.values['colour'] = new Value({
+            tag: "texture",
             onChange: (value) => this.setColor(value),
             getValue: () => {return this.div.children[0].style.backgroundColor;}
         });
