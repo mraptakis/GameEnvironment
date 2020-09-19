@@ -11,7 +11,7 @@
 #fpsCounter {
     position: absolute;
     color:white;
-    top:0;
+    top:30px;
     right:20px;
 }
 
@@ -32,7 +32,7 @@
     position: absolute;
     width: 500px;
     height: 500px;
-    top: 40px;
+    top: 60px;
     overflow: hidden;
 }
 
@@ -41,7 +41,7 @@
     position: absolute;
     width: 500px;
     height: 20px;
-    top: 20px;
+    top: 40px;
     background-color: darkgray;
     overflow-x: hidden;
 }
@@ -61,11 +61,15 @@
     background-color: gray;
 }
 
+.eventTab:hover {
+    background-color: darkgray;
+}
+
 #openTab {
     position: absolute;
     color:black;
     width: 100px;
-    top: 50px;
+    top: 70px;
     left: 380px;
     text-align: right;
     font-size: 20px;

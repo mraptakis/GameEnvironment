@@ -38,10 +38,27 @@
     height: 2px;
     background-color: darkgrey;
     margin: 10px 10px 10px 0;
+    margin-top: 25px;
 }
 
 .InfoBox_prompt {
     color: white;
     font-size: 20px;
     padding-bottom: 2px;
+}
+
+.InfoBox_inputText {
+    width: 85%;
+    float: left;
+    height: 13px;
+}
+
+.InfoBox_addButton {
+    text-align: center;
+    color: black;
+    float:left;
+    width: 10%;
+    cursor: pointer;
+    background-color: darkgray;
+    border-radius: 10px;
 }

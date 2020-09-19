@@ -59,6 +59,10 @@ export default class Object {
         return this.options;
     }
 
+    addOption(opt){
+        this.options[opt] = true;
+    }
+
     getOption(opt){
         return this.options[opt];
     }
@@ -69,6 +73,12 @@ export default class Object {
 
     getValues(){
         return this.values;
+    }
+
+    addValue(val,v=""){
+        if(this.values[val])return;
+        this.values[val] = {};
+        this.values[val].val = v;
     }
 
     setValue(val,v){
@@ -83,6 +93,10 @@ export default class Object {
 
     getEvents(){
         return this.events;
+    }
+
+    addEvent(ev){
+        this.events[ev] = "";
     }
 
     getEvent(ev){

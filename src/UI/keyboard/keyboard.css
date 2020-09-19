@@ -23,6 +23,10 @@
     cursor: pointer;
 }
 
+.keyboardKey:hover {
+    background-color: darkgray;
+}
+
 .keyboardHalfSpace {
     width:25px;
     height: 30px;
