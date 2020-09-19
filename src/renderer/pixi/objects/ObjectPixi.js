@@ -5,6 +5,12 @@ import Value from '../../../objects/Value.js'
 
 import scene from './Scene.js';
 
+function fromPercentageToPx(x,y){
+    x = x/100 * window.innerWidth;
+    y = y/100 * window.innerHeight;
+    return [x,y];
+}
+
 export default class ObjectPixi extends Object{
     obj
     constructor(name){
@@ -35,6 +41,7 @@ export default class ObjectPixi extends Object{
     }
 
     setPosition(x,y){
+        [x,y] = fromPercentageToPx(x,y);
         this.obj.x = x;
         this.obj.y = y;
     }

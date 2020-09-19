@@ -15,8 +15,6 @@ class Square extends Object {
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
 
-        this.events['onEachFrame'] = localStorage.getItem(this.name+"_onEachFrame");
-
     }
 
     createElement({name,texture,dim}){

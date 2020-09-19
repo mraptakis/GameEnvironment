@@ -20,7 +20,7 @@ import logManager from '../utils/logs.js'
 // }
 
 function dummyAction(){
-    bb.fastSet('state','player',bb.fastGet('liveObjects','SPHEEERE'));
+    console.log(bb.fastGet('liveObjects',bb.fastGet('state','focusedObject')).getPositional());
 }
 
 bb.fastSet('actions','dummyAction',dummyAction)

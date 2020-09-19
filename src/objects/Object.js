@@ -17,11 +17,20 @@ export default class Object {
         this.events['onRightClick'] = localStorage.getItem(this.name+"_onRightClick");
         this.events['onRemove'] = localStorage.getItem(this.name+"_onRemove");
         this.events['onMove'] = localStorage.getItem(this.name+"_onMove");
+        this.events['onEachFrame'] = localStorage.getItem(this.name+"_onEachFrame");
 
         this.options['isMovable'] = true;
         this.options['isRemovable'] = true;
         this.options['isVisible'] = true;
 
+    }
+
+    getPositional(){
+        let toReturn = [];
+        for(let i in this.values){
+            if(this.values[i].tag === "positional")toReturn.push([i,this.getValue(i)]);
+        }
+        return toReturn;
     }
 
     setColor(col){
