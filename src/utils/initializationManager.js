@@ -7,6 +7,8 @@ bb.fastSet('state','focusedObject',undefined);
 
 import '../UI/UI.js'
 
+import '../physics/physics.js'
+
 import '../scripting/scripting.js'
 
 import '../renderer/renderer.js'

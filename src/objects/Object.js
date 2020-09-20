@@ -22,13 +22,16 @@ export default class Object {
         this.options['isMovable'] = true;
         this.options['isRemovable'] = true;
         this.options['isVisible'] = true;
+        this.options['isSolid'] = false;
 
     }
 
     getPositional(){
-        let toReturn = [];
+        let toReturn = {};
         for(let i in this.values){
-            if(this.values[i].tag === "positional")toReturn.push([i,this.getValue(i)]);
+            // if(this.values[i].tag === "positional")toReturn.push([i,this.getValue(i)]);
+
+            if(this.values[i].tag === "positional")toReturn[i]=this.getValue(i);
         }
         return toReturn;
     }

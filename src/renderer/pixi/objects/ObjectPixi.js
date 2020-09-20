@@ -20,13 +20,13 @@ export default class ObjectPixi extends Object{
         this.values['x'] = new Value({
             tag: "positional",
             onChange: (value) => this.obj.x = value,
-            getValue: () => {return this.obj.x.toFixed(2);}
+            getValue: () => {return this.obj.x.toFixed(2)+"px";}
         });
 
         this.values['y'] = new Value({
             tag: "positional",
             onChange: (value) => this.obj.y = value,
-            getValue: () => {return this.obj.y.toFixed(2);}
+            getValue: () => {return this.obj.y.toFixed(2)+"px";}
         });
 
         this.values['colour'] = new Value({

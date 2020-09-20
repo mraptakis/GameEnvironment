@@ -1,5 +1,7 @@
 import Object from './ObjectDom.js'
 
+import Value from '../../../objects/Value.js'
+
 import bb from '../../../utils/blackboard.js'
 
 function fromPercentageToPx(x,y){
@@ -14,6 +16,18 @@ class Square extends Object {
         super(name);
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
+
+        this.values['width'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.div.style.width = value+"px";},
+            getValue: () => {return this.div.style.width;}
+        });
+
+        this.values['height'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.div.style.height = value+"px";},
+            getValue: () => {return this.div.style.height;}
+        });
 
     }
 

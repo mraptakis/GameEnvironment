@@ -16,7 +16,9 @@ init.objects.forEach((item)=>{
         let it = new category(item.meta);
         if(item.color)it.setColor(item.color);
         if(item.position)it.setPosition(item.position.x,item.position.y);
+        if(item.attributes)item.attributes.forEach((attr)=>it.setOption(attr,true));
         it.add();
+        bb.fastGet('physics','addToWorld')(it);
     }
 })
 
@@ -31,11 +33,12 @@ let aliveItems = bb.getComponent('liveObjects').itemMap;
 
 bb.print();
 
-
 function gameLoop() {
     requestAnimationFrame( gameLoop );
     
     FPSCounter();
+    // if(bb.fastGet('state','mode') !== 'editing')
+        bb.fastGet('physics','update')();
     inputManager.getPressedKeys().forEach((key)=>inpHandler(key));
     // console.log(inputManager.getPressedKeys());
     for(var it in aliveItems){

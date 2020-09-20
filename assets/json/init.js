@@ -53,25 +53,27 @@ export default {
         },
         {
             meta:{
-                name: "PLAAANE",
-                texture: "./assets/textures/blueprint.jpg",
-                dim:{
-                    width: 100,
-                    height: 100
-                },
-            },
-            category: "Plane",
-            color: "#0080ff",
-            position: {x:0,y:0}
-        },
-        {
-            meta:{
                 name: "TEEEEXT",
                 defaultText: "This is a text"
             },
             category: "Text",
             color: "#00ff00",
-            position: {x:40,y:10}
-        }
+            position: {x:40,y:20}
+        },
+        {
+            meta:{
+                name: "FLOOOOR",
+                dim:{
+                    width: 100,
+                    height: 5
+                },
+            },
+            attributes: [
+                "isSolid"
+            ],
+            category: "Box",
+            color: "#000000",
+            position: {x:0,y:90}
+        },
     ]
 }

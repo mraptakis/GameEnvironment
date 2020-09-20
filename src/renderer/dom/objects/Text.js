@@ -33,6 +33,18 @@ class Text extends Object {
             onChange: (newVal) => this.div.style.fontWeight = (newVal)?"bold":"normal"
         });
 
+        this.values['width'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.div.style.width = value+"px";},
+            getValue: () => {return this.div.offsetWidth+"px";}
+        });
+
+        this.values['height'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.div.style.height = value+"px";},
+            getValue: () => {return this.div.offsetHeight+"px";}
+        });
+
     }
 
     createElement({name,texture,dim,defaultText}){

@@ -2,6 +2,8 @@ import bb from '../../../utils/blackboard.js'
 
 import Object from './ObjectPixi.js'
 
+import Value from '../../../objects/Value.js'
+
 function fromPercentageToPx(x,y){
     x = x/100 * window.innerWidth;
     y = y/100 * window.innerHeight;
@@ -21,6 +23,12 @@ class Sphere extends Object {
 
         this.obj.name = name;
         this.setColor("#ffffff");
+
+        this.values['r'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.obj.width = value*2;this.obj.height = value*2;},
+            getValue: () => {return this.obj.width/2+"px";}
+        });
 
     }
 

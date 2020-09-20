@@ -100,6 +100,18 @@ class Humanoid extends Object {
             getValue: () => {return this.div.children[0].style.backgroundColor;}
         });
 
+        this.values['width'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.div.style.width = value+"px";},
+            getValue: () => {return this.div.style.width;}
+        });
+
+        this.values['height'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.div.style.height = value+"px";},
+            getValue: () => {return this.div.style.height;}
+        });
+
     }
 
 

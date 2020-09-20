@@ -2,7 +2,7 @@ import bb from '../../utils/blackboard.js'
 
 const colourPalette = {
     colour: 24,
-    object: 40
+    object: 190
 }
 
 Blockly.Blocks['colour_change'] = {

@@ -10,6 +10,7 @@ function createObject({category,name,colour,position}){
         if(colour)it.setColor(colour);
         if(position)it.setPosition(position.x,position.y);
         it.add();
+        bb.fastGet('physics','addToWorld')(it);
         logManager.logAction("Created Object ["+name+"]");
     }
 }
