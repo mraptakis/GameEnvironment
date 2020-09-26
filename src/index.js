@@ -18,7 +18,7 @@ init.objects.forEach((item)=>{
         if(item.position)it.setPosition(item.position.x,item.position.y);
         if(item.attributes)item.attributes.forEach((attr)=>it.setOption(attr,true));
         it.add();
-        bb.fastGet('physics','addToWorld')(it);
+        if(bb.fastGet('physics','addToWorld'))bb.fastGet('physics','addToWorld')(it);
     }
 })
 
@@ -38,7 +38,7 @@ function gameLoop() {
     
     FPSCounter();
     // if(bb.fastGet('state','mode') !== 'editing')
-        bb.fastGet('physics','update')();
+    if(bb.fastGet('physics','update'))bb.fastGet('physics','update')();
     inputManager.getPressedKeys().forEach((key)=>inpHandler(key));
     // console.log(inputManager.getPressedKeys());
     for(var it in aliveItems){

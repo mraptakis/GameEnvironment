@@ -94,6 +94,7 @@ export default class Object {
     }
 
     setValue(val,v){
+        if(!this.values[val])return;
         this.values[val].val = v;
         if(this.values[val].onChange)this.values[val].onChange(v);
     }

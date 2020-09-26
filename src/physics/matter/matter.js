@@ -19,11 +19,18 @@ class MatterJS {
         this.objMap[item.getName()] = {realObject: item};
         let objMapItem = this.objMap[item.getName()];
         for(let i in pos){
-            objMapItem[i] = trimPX(pos[i]);
+            if(typeof pos[i] === "string")
+                objMapItem[i] = trimPX(pos[i]);
+            else if(typeof pos[i] === "number")
+                objMapItem[i] = pos[i];
         }
         let options = {
-            isStatic: item.getOption('isSolid')
+            isStatic: item.getOption('isSolid'),
+            density: 0.01,
+            restitution: 0.2,
+            friction: 0.3
         };
+        if(objMapItem['rotation'])options['angle'] = objMapItem['rotation'];
         if(pos.r !== undefined){
             let x = objMapItem.x + objMapItem.r/2;
             let y = objMapItem.y + objMapItem.r/2;
@@ -35,13 +42,19 @@ class MatterJS {
         }
         objMapItem["phObject"].name = item.getName();
         Matter.World.add(this.engine.world, objMapItem["phObject"]);
-        console.log(objMapItem);
     }
 
     removeFromWorld(name){
         if(!this.objMap[name])throw Error("This item doesn't exist in matter world");
         Matter.World.remove(this.engine.world, this.objMap[name]["phObject"]);
         delete this.objMap[name];
+    }
+
+    applyForce(object,position,force){
+        let body = this.objMap[object.getName()].phObject;
+        let pos = Matter.Vector.create(position[0],position[1]);
+        let f = Matter.Vector.create(force[0],force[1]);
+        Matter.Body.applyForce(body, pos, f);
     }
 
     update(){
@@ -56,6 +69,7 @@ class MatterJS {
             if(body.label === "Rectangle Body"){
                 realObj.setValue('x',body.position.x - proxy.width/2);
                 realObj.setValue('y',body.position.y - proxy.height/2);
+                realObj.setValue('rotation',body.angle);
             }else {
                 realObj.setValue('x',body.position.x - proxy.r);
                 realObj.setValue('y',body.position.y - proxy.r);
@@ -68,6 +82,7 @@ const matter = new MatterJS();
 
 bb.fastInstall('physics','addToWorld',(item)=>matter.addToWorld(item));
 bb.fastInstall('physics','removeFromWorld',(item)=>matter.removeFromWorld(item));
+bb.fastInstall('physics','force',(rObj,position,force)=>matter.applyForce(rObj,position,force));
 bb.fastInstall('physics','update',()=>matter.update());
 
 

@@ -112,6 +112,9 @@ class Humanoid extends Object {
             getValue: () => {return this.div.style.height;}
         });
 
+
+        this.div.style.transform = 'rotate(30deg)';
+
     }
 
 

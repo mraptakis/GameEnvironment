@@ -31,6 +31,15 @@ export default class ObjectDom extends Object{
             getValue: () => {return this.div.offsetTop+"px";}
         });
 
+        this.values['rotation'] = new Value({
+            tag: "positional",
+            onChange: (value) => {this.div.style.transform = "rotate("+value+"deg)"},
+            getValue: () => {
+                let val = this.div.style.getPropertyValue("transform");
+                return (val)?val.slice(7,-1):0;
+            }
+        });
+
         this.values['colour'] = new Value({
             tag: "texture",
             onChange: (value) => this.div.style.backgroundColor = value,

@@ -20,9 +20,10 @@ class Circle extends Object {
         this.values['r'] = new Value({
             tag: "positional",
             onChange: (value) => {this.div.style.width = value*2+"px";this.div.style.height = value*2+"px";},
-            getValue: () => {return this.div.style.width/2;}
+            getValue: () => {return (this.div.style.width.slice(0,-2)/2)+"px";}
         });
     }
+
 
     createElement({name,texture,dim}){
         this.div = document.createElement('div');

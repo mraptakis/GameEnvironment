@@ -1,7 +1,4 @@
 export default {
-    "meta": {
-        "renderer": "three.js",
-    },
     "objects": [
         {
             meta:{
@@ -37,11 +34,15 @@ export default {
         },
         {
             meta:{
-                name: "SQUAAAARE"
+                name: "VIDDEO",
+                dim: {
+                    width: 20,
+                    height: 30
+                }
             },
             category: "Square",
             color : "#00ffff",
-            position: {x:90,y:10}
+            position: {x:40,y:60}
         },
         {
             meta:{
@@ -58,7 +59,7 @@ export default {
             },
             category: "Text",
             color: "#00ff00",
-            position: {x:40,y:20}
+            position: {x:40,y:20},
         },
         {
             meta:{
