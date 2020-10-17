@@ -14,6 +14,9 @@ class Square extends Object {
     
     constructor({name,texture,dim,div}){
         super(name);
+
+        bb.fastInstall('state','player',this);
+        
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
 

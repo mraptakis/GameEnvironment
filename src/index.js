@@ -33,18 +33,43 @@ let aliveItems = bb.getComponent('liveObjects').itemMap;
 
 bb.print();
 
-function gameLoop() {
-    requestAnimationFrame( gameLoop );
-    
-    FPSCounter();
-    // if(bb.fastGet('state','mode') !== 'editing')
-    if(bb.fastGet('physics','update'))bb.fastGet('physics','update')();
-    inputManager.getPressedKeys().forEach((key)=>inpHandler(key));
-    // console.log(inputManager.getPressedKeys());
-    for(var it in aliveItems){
-        aliveItems[it].newFrame();
+function GameLoop() {
+
+    let _map = {
+        'Render': ()=>{bb.fastGet('renderer','render').forEach((it)=>it())},
+        'Input': ()=>{inputManager.getPressedKeys().forEach((key)=>inpHandler(key));},
+        'ProgressAnimations': ()=>{},
+        'AI': ()=>{},
+        'Physics': ()=>{if(bb.fastGet('physics','update'))bb.fastGet('physics','update')()},
+        'CollisionChecking': ()=>{},
+        'CommitDestructions': ()=>{},
+        'UserCode': ()=>{},
+        'FPS': ()=>FPSCounter()
+    };
+
+    let _loopIterationOrder = [
+        'Render',
+        'Input',
+        'ProgressAnimations',
+        'AI',
+        'Physics',
+        'CollisionChecking',
+        'CommitDestructions',
+        'UserCode',
+        'FPS'
+    ];
+
+    function run(){
+        _loopIterationOrder.forEach(item => _map[item]());
     }
-    bb.fastGet('renderer','render').forEach((it)=>it())
-    
+
+    return run;
 }
-gameLoop();
+
+let gameLoop = new GameLoop();
+
+function refresh() {
+    requestAnimationFrame( refresh );
+    gameLoop();
+}
+refresh();
