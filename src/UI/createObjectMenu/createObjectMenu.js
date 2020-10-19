@@ -20,7 +20,7 @@ function readTextFile(file,onFinish){
     }
     rawFile.send(null);
 }
-readTextFile('./src/UI/objectMenu/objectMenu.ahtml',onObjectMenuLoaded);
+readTextFile('./src/UI/createObjectMenu/createObjectMenu.ahtml',onCreateObjectMenuLoaded);
 
 function convertHTMLtoObjects(){
     let children = [ ...document.body.children ];
@@ -37,11 +37,11 @@ function convertHTMLtoObjects(){
 
 
 function toggleObjectMenu(){
-    let wrapper = document.getElementById('objectMenuWrapper');
-    let toggleBut = document.getElementById('objectMenu_makeBig');
+    let wrapper = document.getElementById('createObjectMenuWrapper');
+    let toggleBut = document.getElementById('createObjectMenu_makeBig');
     if(wrapper.style.height === '200px'){
         wrapper.style.height = 0;
-        toggleBut.style.bottom = 0;
+        toggleBut.style.bottom = '20px';
     }else{
         wrapper.style.height = '200px';
         toggleBut.style.bottom = '200px';
@@ -50,63 +50,55 @@ function toggleObjectMenu(){
 }
 
 function updateObjectList(){
-    let items = bb.getComponent('liveObjects').itemMap;
-    let objWrapper = document.getElementById('objectMenuWrapper');
+    let items = bb.getComponent('objects').itemMap;
+    let objWrapper = document.getElementById('createObjectMenuWrapper');
     objWrapper.innerHTML = '';
     for(let i in items){
         let wrap = document.createElement('div');
-        wrap.classList += 'objectMenu_itemWrapper';
+        wrap.classList += 'createObjectMenu_itemWrapper';
         objWrapper.appendChild(wrap);
 
         let title = document.createElement('div');
-        title.classList += 'objectMenu_objName';
+        title.classList += 'createObjectMenu_objName';
         title.innerHTML = i;
         wrap.appendChild(title);
         
 
         let body = document.createElement('div');
-        body.classList += 'objectMenu_body';
-        if(items[i].renderer === 'dom'){
-            let newItem = items[i].getObject().cloneNode(true);
-            body.appendChild(newItem);
-            newItem.id = newItem.id+'_objectMenu';
-            newItem.classList = '';
-            newItem.style.top = '';
-            newItem.style.left = '';
-            newItem.style.position = '';
-            newItem.style.transform = 'rotate(0)';
-        }else{
-            body.innerHTML = 'Copying for '+i+' isn\'t possible at the moment';
-        }
+        body.classList += 'createObjectMenu_body';
+        
+        let inpNamePrompt = document.createElement('div');
+        inpNamePrompt.innerHTML = 'Name:';
+        inpNamePrompt.style.width = "20%";
+        inpNamePrompt.style.height = '20px';
+        inpNamePrompt.style.float = 'left';
+        body.appendChild(inpNamePrompt);
 
-        body.onmouseenter = () => {
-            let pos = bb.fastGet('liveObjects',i).getPositional();
-            let mark = document.createElement('div');
-            mark.id = 'objectMenu_focus';
-            mark.style.width = pos.width;
-            mark.style.height = pos.height;
-            mark.style.top = pos.y;
-            mark.style.left = pos.x;
-            mark.style.transform = 'rotate('+ pos.rotation +')';
-            document.body.appendChild(mark);
+        let inpName = document.createElement('input');
+        inpName.type = 'text';
+        inpName.style.width = "75%";
+        inpName.style.height = '20px';
+        inpName.placeholder = 'Object name';
+        body.appendChild(inpName);
 
-        }
 
-        body.onclick = () => {
-            focusObject(i);
+        let createBut = document.createElement('button');
+        // body.innerHTML = 'Click to create an object of type '+i;
+        createBut.onclick = () => {
+            if(inpName.value === '')return;
+            bb.fastGet('actions','createObject')({category:i,name:inpName.value,colour:'#ff00ff',position:{x:50,y:50}});
         }
+        createBut.innerHTML = 'Create';
+        body.appendChild(createBut);
 
-        body.onmouseleave = () => {
-            document.getElementById('objectMenu_focus').remove();
-        }
 
         wrap.appendChild(body);
 
     }
 }
 
-function onObjectMenuLoaded(){
-    let toggleBut = document.getElementById('objectMenu_makeBig');
+function onCreateObjectMenuLoaded(){
+    let toggleBut = document.getElementById('createObjectMenu_makeBig');
     toggleBut.addEventListener('click',toggleObjectMenu)
 
 }

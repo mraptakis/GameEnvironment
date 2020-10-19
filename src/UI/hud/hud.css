@@ -6,6 +6,7 @@
     width: 50%;
     left: 25%;
     text-align: center;
+    overflow: hidden;
 }
 
 #fpsCounter {
@@ -103,7 +104,7 @@
     /* visibility: hidden; */
     position: absolute;
     width: 500px;
-    height: 150px;
+    height: 200px;
     top: 540px;
     font-size: 20px;
     color: white;
