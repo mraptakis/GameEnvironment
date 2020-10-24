@@ -13,8 +13,6 @@ function fromPercentageToPx(x,y){
 class Box extends Object {
     constructor({name,texture,dim}){
         super(name);
-
-        bb.fastInstall('state','player',this);
         let [X,Y] = fromPercentageToPx((dim&&dim.width)?dim.width:5,(dim&&dim.height)?dim.height: 5);
         this.obj = new PIXI.Sprite(PIXI.Texture.WHITE);
         this.obj.width = X;
@@ -25,13 +23,13 @@ class Box extends Object {
         this.values['width'] = new Value({
             tag: "positional",
             onChange: (value) => {this.obj.width = value;},
-            getValue: () => {return this.obj.width+"px";}
+            getValue: () => {return this.obj.width;}
         });
 
         this.values['height'] = new Value({
             tag: "positional",
             onChange: (value) => {this.obj.height = value;},
-            getValue: () => {return this.obj.height+"px";}
+            getValue: () => {return this.obj.height;}
         });
 
     }

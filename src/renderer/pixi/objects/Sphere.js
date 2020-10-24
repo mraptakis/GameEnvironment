@@ -27,7 +27,7 @@ class Sphere extends Object {
         this.values['r'] = new Value({
             tag: "positional",
             onChange: (value) => {this.obj.width = value*2;this.obj.height = value*2;},
-            getValue: () => {return this.obj.width/2+"px";}
+            getValue: () => {return this.obj.width/2;}
         });
 
     }

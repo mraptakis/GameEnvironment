@@ -22,13 +22,13 @@ export default class ObjectDom extends Object{
         this.values['x'] = new Value({
             tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this.div.style.left = value+"px"},
-            getValue: () => {return this.div.offsetLeft+"px";}
+            getValue: () => {return this.div.offsetLeft;}
         });
 
         this.values['y'] = new Value({
             tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this.div.style.top = value+"px"},
-            getValue: () => {return this.div.offsetTop+"px";}
+            getValue: () => {return this.div.offsetTop;}
         });
 
         this.values['rotation'] = new Value({
@@ -36,7 +36,7 @@ export default class ObjectDom extends Object{
             onChange: (value) => {this.div.style.transform = "rotate("+value+"deg)"},
             getValue: () => {
                 let val = this.div.style.getPropertyValue("transform");
-                return (val)?val.slice(7,-1):0;
+                return (val)?val.slice(7,-4):0;
             }
         });
 
@@ -52,7 +52,7 @@ export default class ObjectDom extends Object{
     }
 
     setPosition(x,y){
-        [x,y] = fromPercentageToPx(x,y);
+        // [x,y] = fromPercentageToPx(x,y);
         this.div.style.left = x +"px";
         this.div.style.top = y +"px";
     }

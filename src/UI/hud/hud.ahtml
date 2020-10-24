@@ -3,6 +3,8 @@
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="%{BKY_OBJECT_TITLE}" colour="%{BKY_MATH_HUE}">
+      <block type="remove_object"></block>
+      <block type="get_object_field"></block>
       <block type="object_attr"></block>
       <block type="object_event"></block>
       <block type="object_field"></block>

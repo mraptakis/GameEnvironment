@@ -5,8 +5,8 @@ import Value from '../../../objects/Value.js'
 import bb from '../../../utils/blackboard.js'
 
 function fromPercentageToPx(x,y){
-    x = x/100 * window.innerWidth;
-    y = y/100 * window.innerHeight;
+    // x = x/100 * window.innerWidth;
+    // y = y/100 * window.innerHeight;
     return [x,y];
 }
 
@@ -14,8 +14,6 @@ class Square extends Object {
     
     constructor({name,texture,dim,div}){
         super(name);
-
-        bb.fastInstall('state','player',this);
         
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
@@ -23,13 +21,13 @@ class Square extends Object {
         this.values['width'] = new Value({
             tag: "positional",
             onChange: (value) => {this.div.style.width = value+"px";},
-            getValue: () => {return this.div.style.width;}
+            getValue: () => {return this.div.style.width.slice(0,-2);}
         });
 
         this.values['height'] = new Value({
             tag: "positional",
             onChange: (value) => {this.div.style.height = value+"px";},
-            getValue: () => {return this.div.style.height;}
+            getValue: () => {return this.div.style.height.slice(0,-2);}
         });
 
     }

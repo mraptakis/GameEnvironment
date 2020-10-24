@@ -5,7 +5,6 @@ import bb from '../../../utils/blackboard.js'
 class Box extends Object {
     constructor({name,texture,dim}){
         super(name);
-        bb.fastInstall('state','player',this);
         this.geometry = new THREE.BoxGeometry((dim&&dim.width)?dim.width:1, (dim&&dim.height)?dim.height:1,(dim&&dim.depth)?dim.depth:1);
         let materialInfo = {};
 
