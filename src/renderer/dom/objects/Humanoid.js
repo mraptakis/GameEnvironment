@@ -14,9 +14,6 @@ class Humanoid extends Object {
     
     constructor({name,texture,dim}){
         super(name);
-        
-
-        bb.fastInstall('state','player',this);
 
         this.div = document.createElement('div');
         this.div.id = name;

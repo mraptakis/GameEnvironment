@@ -19,8 +19,10 @@ function inpHandler(key) {
     if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
 };
 
+
 let aliveItems;
 let animatorManager;
+
 app.addInitialiseFunction(()=>{
 
     init.objects.forEach((item)=>{
@@ -82,5 +84,21 @@ game.extra = ()=>{
 game.physics = ()=>{
     if(bb.fastGet('physics','update'))bb.fastGet('physics','update')()
 };
+
+
+
+// TODO: Change this function to an appropriate file
+
+function triggerStateModeChange(e){
+    if(e === 'play'){
+        for(let i in aliveItems)
+            aliveItems[i].triggerEvent('onGameStart');
+    }
+    bb.installWatch('state','mode',triggerStateModeChange);
+}
+
+bb.installWatch('state','mode',triggerStateModeChange);
+
+
 
 app.main();

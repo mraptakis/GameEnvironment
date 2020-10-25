@@ -26,7 +26,7 @@ export default class Animator {
     }
 
     destroy(){
-        animatorManager.cancel(this);
+        animatorManager.markAsSuspended(this);
     }
 
     stop(){

@@ -7,7 +7,20 @@ export default {
                     width: 60,
                     height: 120
                 },
-                frame: "mario_big_right_walking"
+                film: "mario_big_right_walking"
+            },
+            category: "Rectangle",
+            color : "#ffffff",
+            position: {x:300,y:830}
+        },
+        {
+            meta:{
+                name: "coin",
+                dim: {
+                    width: 40,
+                    height: 60
+                },
+                film: "coin_spinning"
             },
             category: "Rectangle",
             color : "#ffffff",

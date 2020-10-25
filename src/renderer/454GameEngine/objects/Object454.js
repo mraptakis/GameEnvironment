@@ -63,6 +63,8 @@ export default class Object454 extends Object{
     move(x,y){
         this._x += x;
         this._y += y;
+        if(x !== 0 || y !== 0)
+            this.triggerEvent('onMove');
     }
 
     getBoundingBox(){

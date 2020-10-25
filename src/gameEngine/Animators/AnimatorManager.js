@@ -7,15 +7,6 @@ class AnimatorManager{
         this._suspended.push(anim);
     }
 
-    cancel(anim){
-        let index = this._suspended.indexOf(anim);
-        if(index > -1){
-            this._suspended.splice(this._suspended.indexOf(anim),1);
-        }else{
-            throw Error('Error while canceling animation',anim);
-        }
-    }
-
     markAsRunning(anim){
         if(anim.hasFinished())throw Error(anim,'already running');
         let index = this._suspended.indexOf(anim);
@@ -41,11 +32,16 @@ class AnimatorManager{
     progress(currTime) {
         for (let an in this._running)
             this._running[an].progress(currTime);
+        this.destroyFinishedAnimators();
     }
 
     timeShift(dt) {
         for (let an in this._running)
-        this._running[an].timeShift(dt);
+            this._running[an].timeShift(dt);
+    }
+
+    destroyFinishedAnimators(){
+        this._suspended = [];
     }
 
 }

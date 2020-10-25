@@ -20,7 +20,37 @@ import logManager from '../utils/logs.js'
 // }
 
 function dummyAction(){
-    console.log(bb.fastGet('liveObjects',bb.fastGet('state','focusedObject')).getPositional());
+    const FRAnimator = bb.fastGet('gameEngine','FrameRangeAnimator');
+    const FRAnimation = bb.fastGet('gameEngine','FrameRangeAnimation');
+    const animationFilmHolder = bb.fastGet('gameEngine','animationFilmHolder');
+    let player = bb.fastGet('state','player');
+
+    let animator = new FRAnimator();
+    let animation = new FRAnimation({
+        start: 0,
+        end: animationFilmHolder.getFilm(player.getFilm()).totalFrames-1,
+        id: player.getFilm(),
+        reps: 10,
+        dx: 26,
+        dy: 0,
+        delay: 90
+    });
+
+    animator.onStart = ()=>console.log('ANIMATION STARTED');
+    animator.onAction = (th)=>{
+        console.log('ANIMATION RUNNING');
+        player.setFrame(th.currentFrame);
+        player.move(th.animation.dx,th.animation.dy);
+    };
+    animator.onFinish = ()=>{
+        console.log('ANIMATION FINISHED');
+    }
+
+    animator.start({
+        animation: animation,
+        timestamp: new Date().getTime(),
+    })
+
 }
 
 bb.fastSet('actions','dummyAction',dummyAction)
