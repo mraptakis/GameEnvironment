@@ -7,7 +7,7 @@ export default {
                     width: 60,
                     height: 120
                 },
-                film: "mario_big_right_walking"
+                film: "mario_big_right_idle"
             },
             category: "Rectangle",
             color : "#ffffff",
@@ -28,15 +28,16 @@ export default {
         },
         {
             meta:{
-                name: "VIDDEO",
+                name: "coin2",
                 dim: {
-                    width: 200,
-                    height: 200
-                }
+                    width: 40,
+                    height: 60
+                },
+                film: "coin_spinning"
             },
-            category: "Square",
-            color : "#00ffff",
-            position: {x:740,y:460}
+            category: "Rectangle",
+            color : "#ffffff",
+            position: {x:700,y:460}
         },
         {
             meta:{

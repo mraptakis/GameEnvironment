@@ -47,6 +47,7 @@ app.addInitialiseFunction(()=>{
 app.addLoadFunction(()=>{
     let animationFilmHolder = bb.fastGet('gameEngine', 'animationFilmHolder');
     animationFilmHolder.loadAll();
+    bb.fastGet('gameEngine', 'animationManager').loadAll();
 
     let asset = animationFilmHolder.getFilm("mario_big_right_walking").bitmap;
     if(!bb.fastGet('assets',asset)){

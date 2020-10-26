@@ -8,7 +8,6 @@ class AnimatorManager{
     }
 
     markAsRunning(anim){
-        if(anim.hasFinished())throw Error(anim,'already running');
         let index = this._suspended.indexOf(anim);
         if(index > -1){
             this._suspended.splice(this._suspended.indexOf(anim),1);
@@ -19,7 +18,6 @@ class AnimatorManager{
     }
 
     markAsSuspended(anim){
-        if(!anim.hasFinished())throw Error(anim,'already suspended');
         let index = this._running.indexOf(anim);
         if(index > -1){
             this._running.splice(this._running.indexOf(anim),1);

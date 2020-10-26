@@ -4,7 +4,7 @@ import animatorManager from './Animators/AnimatorManager.js'
 import MovingAnimator from './Animators/AnimatorCategories/MovingAnimator.js'
 import FrameRangeAnimator from './Animators/AnimatorCategories/FrameRangeAnimator.js'
 
-
+import animationManager from './Animations/AnimationManager.js'
 import animationFilmHolder from './Animations/AnimationFilmHolder.js'
 import MovingAnimation from './Animations/AnimationCategories/MovingAnimation.js'
 import FrameRangeAnimation from './Animations/AnimationCategories/FrameRangeAnimation.js'
@@ -13,6 +13,8 @@ import FrameRangeAnimation from './Animations/AnimationCategories/FrameRangeAnim
 
 bb.fastInstall('gameEngine', 'animatorManager', animatorManager);
 bb.fastInstall('gameEngine', 'animationFilmHolder', animationFilmHolder);
+
+bb.fastInstall('gameEngine', 'animationManager', animationManager);
 
 bb.fastInstall('gameEngine', 'MovingAnimator', MovingAnimator);
 bb.fastInstall('gameEngine', 'FrameRangeAnimator', FrameRangeAnimator);

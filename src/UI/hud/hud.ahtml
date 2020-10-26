@@ -18,6 +18,10 @@
       <block type="get_object"></block>
       <block type="console_log"></block>
     </category>
+    <category name="Animations" colour="%{BKY_MATH_HUE}">
+      <block type="get_animation"></block>
+      <block type="play_animation"></block>
+    </category>
     <category name="%{BKY_HELPERS_TITLE}" colour="%{BKY_TEXTS_HUE}">
       <block type="every_seconds_do"></block>
       <block type="after_seconds_do"></block>

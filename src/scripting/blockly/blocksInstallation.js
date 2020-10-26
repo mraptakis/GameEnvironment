@@ -552,3 +552,64 @@ Blockly.JavaScript['remove_object'] = function(block) {
 
     return `bb.fastGet("actions","removeObject")(${argument0});`;
 };
+
+
+///////////////////////////////////////////////////////////////////////
+
+Blockly.Blocks['get_animation'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'TESTF')
+            .appendField("animation");
+        this.setColour(colourPalette.object);
+        this.setOutput(true, 'Animation');
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+      },
+
+    getCategories(){
+        let map = bb.fastGet('gameEngine','animationManager')._animations;
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['get_animation'] = function(block) {
+    let inp_val = block.getFieldValue('TESTF');
+    return inp_val;
+};
+
+
+Blockly.Blocks['play_animation'] = {
+    init: function() {
+        this.appendValueInput('Anim')
+            .setCheck('Animation')
+            .appendField("play animation");
+        this.appendValueInput('Obj')
+            .setCheck('Object')
+            .appendField("on "+Blockly.Msg.AK_OBJECT);
+        this.setColour(colourPalette.colour);
+        this.setTooltip('remove an object with the given arguments.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        return 0;
+    }
+};
+
+Blockly.JavaScript['play_animation'] = function(block) {
+    var argument0 = Blockly.JavaScript.statementToCode(block, 'Anim',
+    Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    var argument1 = Blockly.JavaScript.statementToCode(block, 'Obj',
+    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+    argument0 = argument0.trim();
+    argument1 = argument1.trim();
+    return `bb.fastGet('actions','playAnimation')(
+        {
+           object: ${argument1},
+           anim: '${argument0}' 
+        });`;
+};
