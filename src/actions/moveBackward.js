@@ -7,4 +7,4 @@ function moveBWD(step = 0.1){
         bb.fastGet('state','player').move(0,step*30);
 }
 
-bb.fastSet('actions','moveBackward',moveBWD);
+bb.fastInstall('actions','moveBackward',moveBWD);

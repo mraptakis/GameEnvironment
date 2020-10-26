@@ -17,6 +17,8 @@ import '../renderer/renderer.js'
 
 import '../actions/actions.js'
 
+import '../sound/sound.js'
+
 
 import requirements from '../../assets/json/strictRequirementsAfterLoad.js' // json
 

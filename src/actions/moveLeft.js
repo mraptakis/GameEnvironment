@@ -7,4 +7,4 @@ function moveLeft(step = 0.1){
         bb.fastGet('state','player').move(-step*30,0);
 }
 
-bb.fastSet('actions','moveLeft',moveLeft);
+bb.fastInstall('actions','moveLeft',moveLeft);

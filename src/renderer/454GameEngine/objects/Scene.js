@@ -25,7 +25,8 @@ class Scene {
     }
 
     removeItem(id){
-        this._items.splice(this._items.findIndex(id),1);
+        let i = this._items.indexOf(id);
+        this._items.splice(i,1);
     }
 
 

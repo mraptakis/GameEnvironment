@@ -8,4 +8,4 @@ function moveFWD(step = 0.1){
 }
 
 
-bb.fastSet('actions','moveForward',moveFWD);
+bb.fastInstall('actions','moveForward',moveFWD);

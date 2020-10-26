@@ -11,6 +11,9 @@ export default class Object454 extends Object{
     _y;
     _color;
     _rotation;
+    _film;
+    _frame;
+    _animator;
 
     constructor(name){
         super(name);
@@ -82,12 +85,34 @@ export default class Object454 extends Object{
         this.triggerEvent('onEachFrame');
     }
 
+    setFrame(newFrame){
+        this._frame = newFrame;
+    }
+
+    getFilm(){
+        return this._film;
+    }
+
+    setFilm(film){
+        this._film = film;
+    }
+
+    setAnimator(animator){
+        if(this._animator !== undefined)this._animator.stop();
+        this._animator = animator;
+    }
+
+    getAnimator(){
+        return this._animator;
+    }
+
     add(){
         bb.fastSet('liveObjects',this.name,this);
         scene.addItem(this);
     }
 
     remove(){
+        if(this._animator !== undefined)this._animator.stop();
         bb.fastRemove('liveObjects',this.name);
         scene.removeItem(this);
     }

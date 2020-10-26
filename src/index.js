@@ -26,7 +26,7 @@ let animatorManager;
 app.addInitialiseFunction(()=>{
 
     init.objects.forEach((item)=>{
-        let category = bb.fastGet("objects",item.category);
+        let category = bb.fastGet('objects',item.category);
         if(typeof category !== "function"){console.log("There is no category "+item.category)}
         if(item.meta.name === undefined 
         || !bb.fastGet('liveObjects',item.meta.name)){

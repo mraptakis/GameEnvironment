@@ -8,9 +8,6 @@ import bb from '../../../utils/blackboard.js'
 class Rectangle extends Object {
     _width;
     _height;
-    _film;
-    _frame;
-    _animator;
 
     constructor({name,dim,film}){
         super(name);
@@ -32,27 +29,6 @@ class Rectangle extends Object {
             onChange: (value) => {this._height = value;},
             getValue: () => {return this._height;}
         });
-    }
-
-    setFrame(newFrame){
-        this._frame = newFrame;
-    }
-
-    getFilm(){
-        return this._film;
-    }
-
-    setFilm(film){
-        this._film = film;
-    }
-
-    setAnimator(animator){
-        if(this._animator !== undefined)this._animator.stop();
-        this._animator = animator;
-    }
-
-    getAnimator(){
-        return this._animator;
     }
 
     getCategory(){

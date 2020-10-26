@@ -14,4 +14,4 @@ function move(obj,x = 0,y = 0){
     }
 }
 
-bb.fastSet('actions','move',move)
+bb.fastInstall('actions','move',move)
