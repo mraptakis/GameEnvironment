@@ -11,7 +11,7 @@ export default {
             },
             category: "Rectangle",
             color : "#ffffff",
-            position: {x:300,y:830}
+            position: {x:300,y:800}
         },
         {
             meta:{

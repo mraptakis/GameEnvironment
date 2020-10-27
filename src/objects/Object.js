@@ -16,9 +16,11 @@ export default class Object {
         this.events['onClick'] = localStorage.getItem(this.name+"_onClick");
         this.events['onRightClick'] = localStorage.getItem(this.name+"_onRightClick");
         this.events['onGameStart'] = localStorage.getItem(this.name+"_onGameStart");
+        this.events['onCollision'] = localStorage.getItem(this.name+"_onCollision");
         this.events['onRemove'] = localStorage.getItem(this.name+"_onRemove");
         this.events['onMove'] = localStorage.getItem(this.name+"_onMove");
         this.events['onEachFrame'] = localStorage.getItem(this.name+"_onEachFrame");
+
 
         this.options['isMovable'] = true;
         this.options['isRemovable'] = true;

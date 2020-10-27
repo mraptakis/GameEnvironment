@@ -21,6 +21,7 @@
     <category name="Animations" colour="%{BKY_MATH_HUE}">
       <block type="get_animation"></block>
       <block type="play_animation"></block>
+      <block type="play_animation_extended"></block>
     </category>
     <category name="%{BKY_HELPERS_TITLE}" colour="%{BKY_TEXTS_HUE}">
       <block type="every_seconds_do"></block>

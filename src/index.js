@@ -22,6 +22,8 @@ function inpHandler(key) {
 
 let aliveItems;
 let animatorManager;
+let animationFilmHolder;
+let animationManager;
 
 app.addInitialiseFunction(()=>{
 
@@ -42,23 +44,28 @@ app.addInitialiseFunction(()=>{
 
     aliveItems = bb.getComponent('liveObjects').itemMap;
     animatorManager = bb.fastGet('gameEngine','animatorManager');
+    animationManager = bb.fastGet('gameEngine','animationManager');
+    animationFilmHolder = bb.fastGet('gameEngine', 'animationFilmHolder');
 });
 
 app.addLoadFunction(()=>{
-    let animationFilmHolder = bb.fastGet('gameEngine', 'animationFilmHolder');
     animationFilmHolder.loadAll();
-    bb.fastGet('gameEngine', 'animationManager').loadAll();
-
-    let asset = animationFilmHolder.getFilm("mario_big_right_walking").bitmap;
-    if(!bb.fastGet('assets',asset)){
-        let img = new Image();
-        img.src = asset;
-        bb.fastInstall('assets',asset,img);
-    }
-    
+    animationManager.loadAll();
+    animationFilmHolder.getAssetsToLoad().forEach((asset)=>{
+        if(!bb.fastGet('assets',asset)){
+            let img = new Image();
+            img.src = asset;
+            bb.fastInstall('assets',asset,img);
+        }
+    });
     bb.print();
 });
 
+
+
+game.render = ()=>{
+    bb.fastGet('renderer','render').forEach((it)=>it());
+};
 
 game.input = ()=>{
     inputManager.getPressedKeys().forEach((key)=>inpHandler(key));
@@ -66,10 +73,41 @@ game.input = ()=>{
 
 game.animation = ()=>{
     animatorManager.progress(new Date().getTime());
+};
+
+game.ai = ()=>{
+
 }
 
-game.render= ()=>{
-    bb.fastGet('renderer','render').forEach((it)=>it());
+game.physics = ()=>{
+    if(bb.fastGet('physics','update'))bb.fastGet('physics','update')()
+};
+
+function collided(obj1,obj2){
+    if(obj1 === obj2)return;
+    // console.log(obj1,obj2);
+    let pos1 = obj1.getPositional();
+    let pos2 = obj2.getPositional();
+    // debugger;
+    if(pos1.x >= pos2.x + pos2.width || pos2.x >= pos1.x + pos1.width){
+        return false;
+    }
+
+    if(pos1.y >= pos2.y + pos2.height || pos2.y >= pos1.y + pos1.height){
+        return false;
+    }
+
+    obj1.triggerEvent('onCollision');
+    obj2.triggerEvent('onCollision');
+    console.log(obj1.name,obj2.name);
+}
+
+game.collisions = ()=>{
+    for(let i in aliveItems){
+        for(let j in aliveItems){
+            collided(aliveItems[i],aliveItems[j]);
+        }
+    }
 };
 
 game.userCode = ()=>{
@@ -80,10 +118,6 @@ game.userCode = ()=>{
 
 game.extra = ()=>{
     FPSCounter();
-};
-
-game.physics = ()=>{
-    if(bb.fastGet('physics','update'))bb.fastGet('physics','update')()
 };
 
 
