@@ -1,5 +1,10 @@
 export default {
-    "objects": [
+    state:{
+        name: 'initial',
+        background_color: '#000000',
+        background: './assets/textures/sky.jpeg'
+    },
+    objects: [
         {
             meta:{
                 name: "from454ENGINE",

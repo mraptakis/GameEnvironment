@@ -8,6 +8,6 @@ export default {
     "KeyD": ["moveRight"],
     "KeyP": ["printBlackboard"],
     "KeyM": ["dummyAction"],
-    // "KeyO": ["downloadScript"],
-    // "KeyI": ["loadScript"]
+    "KeyO": ["downloadScript"],
+    "KeyI": ["loadScript"]
 }

@@ -6,7 +6,7 @@ import bb from './utils/blackboard.js'
 import FPSCounter from './utils/fps.js'
 import inputManager from './utils/inputManager.js'
 
-import init from '../assets/json/init.js' //json
+import init from '../assets/json/pacman.js' //json
 import keyToAction from '../assets/json/keyToActions.js' //json
 
 
@@ -27,6 +27,9 @@ let animationManager;
 
 app.addInitialiseFunction(()=>{
 
+    document.body.style.backgroundColor = init.state.background_color;
+    if(init.state.background)document.body.style.backgroundImage = `url('${init.state.background}')`;
+
     init.objects.forEach((item)=>{
         let category = bb.fastGet('objects',item.category);
         if(typeof category !== "function"){console.log("There is no category "+item.category)}
@@ -37,6 +40,16 @@ app.addInitialiseFunction(()=>{
             if(item.color)it.setColor(item.color);
             if(item.position)it.setPosition(item.position.x,item.position.y);
             if(item.attributes)item.attributes.forEach((attr)=>it.setOption(attr,true));
+            if(item.fields){
+                for(let f in item.fields){
+                    it.addValue(f,item.fields[f]);
+                }
+            }
+            if(item.events){
+                for(let e in item.events){
+                    it.addEvent(item.events[e]);
+                }
+            }
             it.add();
             if(bb.fastGet('physics','addToWorld'))bb.fastGet('physics','addToWorld')(it);
         }
@@ -72,7 +85,7 @@ game.input = ()=>{
 };
 
 game.animation = ()=>{
-    animatorManager.progress(new Date().getTime());
+    animatorManager.progress(bb.fastGet('state','gameTime'));
 };
 
 game.ai = ()=>{
@@ -85,6 +98,7 @@ game.physics = ()=>{
 
 function collided(obj1,obj2){
     if(obj1 === obj2)return;
+    if(!obj1.getOption('isCollidable') || !obj2.getOption('isCollidable'))return;
     // console.log(obj1,obj2);
     let pos1 = obj1.getPositional();
     let pos2 = obj2.getPositional();

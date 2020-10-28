@@ -646,23 +646,23 @@ Blockly.JavaScript['play_animation_extended'] = function(block) {
     var statements_onstart = Blockly.JavaScript.statementToCode(block, 'onStart');
     var statements_onend = Blockly.JavaScript.statementToCode(block, 'onEnd');
     
-    const reg = /;/gi;
-    statements_onstart = statements_onstart.replace(reg,'');
-    statements_onend = statements_onend.replace(reg,'');
+    // const reg = /;/gi;
+    // statements_onstart = statements_onstart.replace(reg,'');
+    // statements_onend = statements_onend.replace(reg,'');
     
     console.log(`bb.fastGet('actions','playAnimation')(
         {
            object: ${argument1},
            anim: '${argument0}',
-           onStart: ()=>eval(${statements_onstart}),
-           onFinish: ()=>eval(${statements_onend})
+           onStart: ()=>eval("${statements_onstart}"),
+           onFinish: ()=>eval("${statements_onend}")
         });`);
-    // console.log(statements_onend);
+
     return `bb.fastGet('actions','playAnimation')(
         {
            object: ${argument1},
            anim: '${argument0}',
-           onStart: ()=>eval(${statements_onstart}),
-           onFinish: ()=>eval(${statements_onend})
+           onStart: ()=>eval("${statements_onstart}"),
+           onFinish: ()=>eval("${statements_onend}")
         });`;
 };

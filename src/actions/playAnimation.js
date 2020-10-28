@@ -5,13 +5,13 @@ const FRAnimator = bb.fastGet('gameEngine','FrameRangeAnimator');
 
 function playAnimation({object,anim,onStart,onFinish}){
 
+    if(!anim)return;
+
     let obj = (object)?object:bb.fastGet('state','player');
     let animator = new FRAnimator();
     let animation = animationManager.getAnimation(anim);
 
     let oldFilm;
-
-    console.log(onStart,onFinish);
 
     animator.onStart = ()=>{
         if(onStart)onStart();
@@ -31,7 +31,7 @@ function playAnimation({object,anim,onStart,onFinish}){
 
     animator.start({
         animation: animation.animation,
-        timestamp: new Date().getTime(),
+        timestamp: bb.fastGet('state','gameTime'),
     })
 }
 

@@ -26,6 +26,7 @@ export default class Object {
         this.options['isRemovable'] = true;
         this.options['isVisible'] = true;
         this.options['isSolid'] = false;
+        this.options['isCollidable'] = true;
 
     }
 
@@ -91,13 +92,11 @@ export default class Object {
     }
 
     addValue(val,v=""){
-        if(this.values[val])return;
         this.values[val] = {};
         this.values[val].val = v;
     }
 
     setValue(val,v){
-        if(!this.values[val])return;
         this.values[val].val = v;
         if(this.values[val].onChange)this.values[val].onChange(v);
     }
@@ -112,7 +111,8 @@ export default class Object {
     }
 
     addEvent(ev){
-        this.events[ev] = "";
+        let code = localStorage.getItem(this.name+"_"+ev);
+        this.events[ev] = (code)?code:"";
     }
 
     getEvent(ev){
