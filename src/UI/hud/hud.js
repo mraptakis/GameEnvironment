@@ -74,6 +74,19 @@ function onHudLoaded(){
         };
     }
 
+    let logAllActions = "";
+
+    let consoleArea = document.getElementById('consoleArea');
+    function onActionChange(newMessage){
+        consoleArea.value += '\n'+newMessage;
+        consoleArea.scrollTop = consoleArea.scrollHeight;
+        logAllActions += newMessage+'\n';
+        console.log(logAllActions);
+        bb.installWatch('state','lastAction',onActionChange);
+    }
+
+    bb.installWatch('state','lastAction',onActionChange);
+
     function onFocuseChange(objName){
         let eventsTab = document.getElementById('eventsTab');
         eventsTab.innerHTML = "";

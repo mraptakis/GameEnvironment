@@ -4,12 +4,11 @@ class InputManager {
     currentlyPressed = {}
     
     keyPressed(key){
-        if(this.currentlyPressed[key] === true)return;
+        if(this.currentlyPressed[key] === false)return;
         this.currentlyPressed[key] = true;
     }
     
     keyReleased(key){
-        if(this.currentlyPressed[key] !== true)return;
         delete this.currentlyPressed[key];
     }
     
@@ -27,7 +26,7 @@ class InputManager {
 
 let inputManager = new InputManager();
 
-document.onkeypress = (ev)=>inputManager.keyPressed(ev.code);
+document.onkeydown = (ev)=>inputManager.keyPressed(ev.code);
 
 document.onkeyup = (ev)=>inputManager.keyReleased(ev.code);
 

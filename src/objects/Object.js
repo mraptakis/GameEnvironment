@@ -1,5 +1,5 @@
 import bb from '../utils/blackboard.js'
-
+import log from '../utils/logs.js'
 export default class Object {
     name
     renderer
@@ -92,16 +92,28 @@ export default class Object {
     }
 
     addValue(val,v=""){
+        if(this.values[val]){
+            log.logError('Couldn\'t create value '+val+' because it already exists');
+            return;
+        }
         this.values[val] = {};
         this.values[val].val = v;
     }
 
     setValue(val,v){
+        if(!this.values[val]){
+            log.logError('Couldn\'t set value '+val+' because it doesn\'t exists');
+            return;
+        }
         this.values[val].val = v;
         if(this.values[val].onChange)this.values[val].onChange(v);
     }
     
     getValue(val){
+        if(!this.values[val]){
+            log.logError('Couldn\'t get value '+val+' because it doesn\'t exists');
+            return;
+        }
         if(this.values[val].getValue)return this.values[val].getValue();
         return this.values[val].val;
     }

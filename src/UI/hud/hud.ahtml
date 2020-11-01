@@ -23,6 +23,13 @@
       <block type="play_animation"></block>
       <block type="play_animation_extended"></block>
     </category>
+    <category name="Sounds" colour="%{BKY_LOOPS_HUE}">
+      <block type="play_sound"></block>
+      <block type="stop_sound"></block>
+      <block type="play_background"></block>
+      <block type="stop_background"></block>
+      <block type="stop_every_sound"></block>
+    </category>
     <category name="%{BKY_HELPERS_TITLE}" colour="%{BKY_TEXTS_HUE}">
       <block type="every_seconds_do"></block>
       <block type="after_seconds_do"></block>

@@ -36,6 +36,7 @@ class Rectangle extends Object {
     }
 
     render(ctx){
+        if(!this.getOption('isVisible'))return;
         if(!this._film){
             ctx.fillStyle = this._color;
             ctx.fillRect(this._x, this._y, this._width, this._height);

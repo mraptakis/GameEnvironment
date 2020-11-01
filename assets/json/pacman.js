@@ -1,69 +1,22 @@
 export default {
     state:{
         name: 'initial_pac',
-        background_color: '#000000'
+        background_color: '#000000',
+        background: './assets/textures/sky.jpeg'
     },
     objects: [
         {
             meta:{
                 name: "player",
                 dim: {
-                    width: 30,
-                    height: 60
+                    width: 60,
+                    height: 120
                 },
                 film: "mario_big_right_idle"
             },
             category: "Rectangle",
             color : "#ffffff",
-            position: {x:500,y:800}
-        },
-        {
-            meta:{
-                name: "leftWall",
-                dim: {
-                    width: 10,
-                    height: 800
-                },
-            },
-            category: "Rectangle",
-            color : "#ffffff",
-            position: {x:300,y:150}
-        },
-        {
-            meta:{
-                name: "rightWall",
-                dim: {
-                    width: 10,
-                    height: 800
-                },
-            },
-            category: "Rectangle",
-            color : "#ffffff",
-            position: {x:1200,y:150}
-        },
-        {
-            meta:{
-                name: "topWall",
-                dim: {
-                    width: 890,
-                    height: 10
-                },
-            },
-            category: "Rectangle",
-            color : "#ffffff",
-            position: {x:310,y:150}
-        },
-        {
-            meta:{
-                name: "botWall",
-                dim: {
-                    width: 890,
-                    height: 10
-                },
-            },
-            category: "Rectangle",
-            color : "#ffffff",
-            position: {x:310,y:940}
+            position: {x:500,y:750}
         },
         {
             meta:{
@@ -114,9 +67,28 @@ export default {
             events: [
                 "increaseCounterAndShow"
             ],
+            attributes: {
+                isCollidable: false
+            },
             category: "Text",
             color : "#ffffff",
             position: {x:1150,y:100}
+        },
+        {
+            meta:{
+                name: "floor",
+                dim: {
+                    width: 10000,
+                    height: 80
+                }
+            },
+            attributes: {
+                isSolid: true,
+                isMovable: false
+            },
+            category: "Rectangle",
+            color : "#00ff00",
+            position: {x:0,y:870}
         }
     ]
 }

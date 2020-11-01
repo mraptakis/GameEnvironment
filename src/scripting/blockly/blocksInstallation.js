@@ -654,15 +654,153 @@ Blockly.JavaScript['play_animation_extended'] = function(block) {
         {
            object: ${argument1},
            anim: '${argument0}',
-           onStart: ()=>eval("${statements_onstart}"),
-           onFinish: ()=>eval("${statements_onend}")
+           onStart: ()=>{eval(${(statements_onstart)?("\""+statements_onstart+"\""):"\'\'"})},
+           onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
         });`);
 
     return `bb.fastGet('actions','playAnimation')(
         {
            object: ${argument1},
            anim: '${argument0}',
-           onStart: ()=>eval("${statements_onstart}"),
-           onFinish: ()=>eval("${statements_onend}")
+           onStart: ()=>{eval(${(statements_onstart)?("\""+statements_onstart+"\""):"\'\'"})},
+           onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
         });`;
+};
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////// SOUNDS
+
+
+Blockly.Blocks['play_sound'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("play sound")
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'SOUND')
+            .appendField("once");
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+      },
+
+    getCategories(){
+        let map = bb.fastGet('sound','getSounds')();
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['play_sound'] = function(block) {
+    let inp_val = block.getFieldValue('SOUND');
+    return `bb.fastGet('sound','playSound')('${inp_val}');`;
+};
+
+Blockly.Blocks['stop_sound'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("stop sound")
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'SOUND');
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+      },
+
+    getCategories(){
+        let map = bb.fastGet('sound','getSounds')();
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['stop_sound'] = function(block) {
+    let inp_val = block.getFieldValue('SOUND');
+    return `bb.fastGet('sound','stopSound')('${inp_val}');`;
+};
+
+Blockly.Blocks['play_background'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("play")
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'SOUND')
+            .appendField("as background music");
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+      },
+
+    getCategories(){
+        let map = bb.fastGet('sound','getSounds')();
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['play_background'] = function(block) {
+    let inp_val = block.getFieldValue('SOUND');
+    return `bb.fastGet('sound','playBackground')('${inp_val}');`;
+};
+
+Blockly.Blocks['stop_background'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("stop background")
+            .appendField(new Blockly.FieldDropdown(this.getCategories()), 'SOUND')
+            .appendField("music");
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+      },
+
+    getCategories(){
+        let map = bb.fastGet('sound','getSounds')();
+        let categs = [];
+        for(let i in map){
+                categs.push([i,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['stop_background'] = function(block) {
+    let inp_val = block.getFieldValue('SOUND');
+    return `bb.fastGet('sound','stopBackground')('${inp_val}');`;
+};
+
+Blockly.Blocks['stop_every_sound'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("stop all sounds and music");
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object by name.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+      }
+};
+
+Blockly.JavaScript['stop_every_sound'] = function(block) {
+    return `bb.fastGet('sound','stopAllSounds')();`;
 };

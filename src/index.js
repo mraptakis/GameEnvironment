@@ -15,7 +15,7 @@ let game = app.game;
 
 function inpHandler(key) {
     if(keyToAction[key])keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
-    if(bb.fastGet('state','mode') === 'editing')return;
+    // if(bb.fastGet('state','mode') === 'editing')return;
     if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
 };
 
@@ -39,7 +39,12 @@ app.addInitialiseFunction(()=>{
             let it = new category(item.meta);
             if(item.color)it.setColor(item.color);
             if(item.position)it.setPosition(item.position.x,item.position.y);
-            if(item.attributes)item.attributes.forEach((attr)=>it.setOption(attr,true));
+            if(item.attributes){
+                for(let a in item.attributes){
+                    if(typeof item.attributes[a] !== "boolean")throw Error('Attributes must be boolean');
+                    it.setOption(a,item.attributes[a]);
+                }
+            }
             if(item.fields){
                 for(let f in item.fields){
                     it.addValue(f,item.fields[f]);
