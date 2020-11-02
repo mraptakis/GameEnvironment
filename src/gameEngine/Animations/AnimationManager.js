@@ -1,4 +1,4 @@
-import json from './AnimationManagerJSON.js'
+import json from '../../../assets/json/AnimationManagerJSON.js'
 
 import FrameRangeAnimation from './AnimationCategories/FrameRangeAnimation.js'
 import animationFilmHolder from './AnimationFilmHolder.js'

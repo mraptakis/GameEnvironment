@@ -155,4 +155,14 @@ bb.installWatch('state','mode',triggerStateModeChange);
 
 
 
+window.onbeforeunload = function(e) {
+    console.log(bb.fastGet('gameEngine',"animationFilmHolder"));
+    bb.fastGet('gameEngine','animationFilmHolder')._films = {};
+    let objs = bb.getComponent('liveObjects').itemMap;
+    for(let i in objs){
+        objs[i].remove();
+    }
+    return true;
+};
+
 app.main();

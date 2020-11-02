@@ -37,9 +37,13 @@ class Rectangle extends Object {
 
     render(ctx){
         if(!this.getOption('isVisible'))return;
+        
+        let [drawX,drawY] = this.getMapCoords();
+
+
         if(!this._film){
             ctx.fillStyle = this._color;
-            ctx.fillRect(this._x, this._y, this._width, this._height);
+            ctx.fillRect(drawX, drawY, this._width, this._height);
             ctx.fillStyle = "#ffffff";
         }else{
             let info = bb.fastGet('gameEngine','animationFilmHolder').getFilm(this._film);
@@ -47,7 +51,7 @@ class Rectangle extends Object {
             let img = info.bitmap;
             ctx.drawImage(bb.fastGet('assets',img),
             box.x,box.y,box.width,box.height,
-            this._x, this._y, this._width, this._height);
+            drawX, drawY, this._width, this._height);
         }
     }
 }

@@ -70,6 +70,13 @@ export default class Object454 extends Object{
             this.triggerEvent('onMove');
     }
 
+    getMapCoords(){
+        // return [this._x,this._y];
+        let stage = bb.fastGet('liveObjects','Stage');
+
+        return [this._x - stage.getValue('x'),this._y - stage.getValue('y')];
+    }
+
     getBoundingBox(){
         return {
             x: this._x,

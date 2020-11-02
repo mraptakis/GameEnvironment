@@ -78,7 +78,7 @@ export default {
             meta:{
                 name: "floor",
                 dim: {
-                    width: 10000,
+                    width: 1920,
                     height: 80
                 }
             },
