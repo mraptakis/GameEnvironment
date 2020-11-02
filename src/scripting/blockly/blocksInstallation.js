@@ -650,13 +650,13 @@ Blockly.JavaScript['play_animation_extended'] = function(block) {
     // statements_onstart = statements_onstart.replace(reg,'');
     // statements_onend = statements_onend.replace(reg,'');
     
-    console.log(`bb.fastGet('actions','playAnimation')(
-        {
-           object: ${argument1},
-           anim: '${argument0}',
-           onStart: ()=>{eval(${(statements_onstart)?("\""+statements_onstart+"\""):"\'\'"})},
-           onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
-        });`);
+    // console.log(`bb.fastGet('actions','playAnimation')(
+    //     {
+    //        object: ${argument1},
+    //        anim: '${argument0}',
+    //        onStart: ()=>{eval(${(statements_onstart)?("\""+statements_onstart+"\""):"\'\'"})},
+    //        onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
+    //     })`);
 
     return `bb.fastGet('actions','playAnimation')(
         {
@@ -664,7 +664,7 @@ Blockly.JavaScript['play_animation_extended'] = function(block) {
            anim: '${argument0}',
            onStart: ()=>{eval(${(statements_onstart)?("\""+statements_onstart+"\""):"\'\'"})},
            onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
-        });`;
+        })`;
 };
 
 

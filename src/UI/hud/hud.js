@@ -81,7 +81,6 @@ function onHudLoaded(){
         consoleArea.value += '\n'+newMessage;
         consoleArea.scrollTop = consoleArea.scrollHeight;
         logAllActions += newMessage+'\n';
-        console.log(logAllActions);
         bb.installWatch('state','lastAction',onActionChange);
     }
 

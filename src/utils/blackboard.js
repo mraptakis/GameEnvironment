@@ -52,6 +52,11 @@ class BlackboardComponent{
     console.log(this.name,this.itemMap,this.watches);
   }
 
+  clear(){
+    this.itemMap = {};
+    this.watches = {};
+  }
+
 }
 
 class Blackboard {
@@ -102,6 +107,16 @@ class Blackboard {
   print(){
     for(let component in this.componentMap){
       this.componentMap[component].print();
+    }
+  }
+
+  clear(){
+    for(let component in this.componentMap){
+      this.componentMap[component].clear();
+    }
+
+    for(let component in this.componentMap){
+      delete this.componentMap[component];
     }
   }
 

@@ -44,6 +44,8 @@ export default class Object454 extends Object{
             getValue: () => {return this._color;}
         });
 
+        this._stage = bb.fastGet('liveObjects','Stage');
+
     }
 
     setColor(col){
@@ -72,9 +74,8 @@ export default class Object454 extends Object{
 
     getMapCoords(){
         // return [this._x,this._y];
-        let stage = bb.fastGet('liveObjects','Stage');
-
-        return [this._x - stage.getValue('x'),this._y - stage.getValue('y')];
+        
+        return [this._x - this._stage.getValue('x'),this._y - this._stage.getValue('y')];
     }
 
     getBoundingBox(){
@@ -117,9 +118,11 @@ export default class Object454 extends Object{
         bb.fastSet('liveObjects',this.name,this);
         scene.addItem(this);
     }
-
+    
     remove(){
         if(this._animator !== undefined)this._animator.stop();
+        this._stage = undefined;
+        this.clear();
         bb.fastRemove('liveObjects',this.name);
         scene.removeItem(this);
     }

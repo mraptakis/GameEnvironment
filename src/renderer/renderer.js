@@ -19,27 +19,28 @@ let clickWrapper = document.createElement('div');
     clickWrapper.style.left = 0;
     document.body.appendChild(clickWrapper);
 
+
+let funcsLC = bb.fastGet('renderer','leftClick');
 clickWrapper.addEventListener('click',(ev)=>{
-    let funcs = bb.fastGet('renderer','leftClick');
     let anythingFocused = false;
-    for(var f in funcs){
-        anythingFocused = funcs[f](ev);
+    for(var f in funcsLC){
+        anythingFocused = funcsLC[f](ev);
         if(anythingFocused)break;
     }
     if(!anythingFocused)changeFocus(undefined);
 });
 
+let funcsMD = bb.fastGet('renderer','mouseDown');
 clickWrapper.addEventListener('mousedown',(ev)=>{
     if(bb.fastGet('state','mode') !== "editing")return;
-    let funcs = bb.fastGet('renderer','mouseDown');
-    for(var f in funcs){
-        if(funcs[f](ev))break;
+    for(var f in funcsMD){
+        if(funcsMD[f](ev))break;
     }
 });
 
+let funcsRC = bb.fastGet('renderer','rightClick');
 clickWrapper.addEventListener('contextmenu',(ev) => {
-    let funcs = bb.fastGet('renderer','rightClick');
-    for(var f in funcs){
-        if(funcs[f](ev))break;
+    for(var f in funcsRC){
+        if(funcsRC[f](ev))break;
     }
 })

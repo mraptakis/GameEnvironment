@@ -28,6 +28,8 @@ export default class Object {
         this.options['isSolid'] = false;
         this.options['isCollidable'] = true;
 
+        this._executer = bb.fastGet('scripting','executeText');
+
     }
 
     getPositional(){
@@ -138,7 +140,7 @@ export default class Object {
 
     triggerEvent(ev){
         if(!this.events[ev])return;
-        bb.fastGet('scripting','executeText')(this.events[ev]);
+        this._executer(this.events[ev]);
     }
 
     move(x,y){
@@ -155,6 +157,21 @@ export default class Object {
 
     add(){  //Add this item on renderer
         throw Error("add needs to be implemented");
+    }
+
+    clear(){
+        for(let i in this.events){
+            delete this.events[i];
+        }
+
+        for(let i in this.options){
+            delete this.options[i];
+        }
+
+        for(let i in this.values){
+            delete this.values[i];
+        }
+
     }
 
     remove(){ // Remove this item from blackboard and from renderer to.

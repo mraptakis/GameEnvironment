@@ -112,6 +112,11 @@ class EnvironmentObject extends Object {
         this.triggerEvent('onEachFrame');
     }
 
+    remove(){
+        this.clear();
+        bb.fastRemove('liveObjects',this.name);
+    }
+
     getCategory(){
         return 'Stage';
     }

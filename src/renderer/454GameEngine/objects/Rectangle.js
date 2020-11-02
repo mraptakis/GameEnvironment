@@ -29,6 +29,8 @@ class Rectangle extends Object {
             onChange: (value) => {this._height = value;},
             getValue: () => {return this._height;}
         });
+
+        this._AnimationFilmHolder = bb.fastGet('gameEngine','animationFilmHolder');
     }
 
     getCategory(){
@@ -46,7 +48,7 @@ class Rectangle extends Object {
             ctx.fillRect(drawX, drawY, this._width, this._height);
             ctx.fillStyle = "#ffffff";
         }else{
-            let info = bb.fastGet('gameEngine','animationFilmHolder').getFilm(this._film);
+            let info = this._AnimationFilmHolder.getFilm(this._film);
             let box = info.getFrameBox(this._frame);
             let img = info.bitmap;
             ctx.drawImage(bb.fastGet('assets',img),

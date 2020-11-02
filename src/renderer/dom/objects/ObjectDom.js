@@ -96,6 +96,7 @@ export default class ObjectDom extends Object{
     }
 
     remove(){
+        this.clear();
         bb.fastRemove('liveObjects',this.name);
         scene.remove(this.div);
     }

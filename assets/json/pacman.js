@@ -16,7 +16,7 @@ export default {
             },
             category: "Rectangle",
             color : "#ffffff",
-            position: {x:500,y:750}
+            position: {x:500,y:780}
         },
         {
             meta:{
@@ -88,7 +88,7 @@ export default {
             },
             category: "Rectangle",
             color : "#00ff00",
-            position: {x:0,y:870}
+            position: {x:0,y:900}
         }
     ]
 }

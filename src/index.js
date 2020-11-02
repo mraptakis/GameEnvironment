@@ -27,15 +27,14 @@ let animationManager;
 
 app.addInitialiseFunction(()=>{
 
-    document.body.style.backgroundColor = init.state.background_color;
+    if(init.state.background_color)document.body.style.backgroundColor = init.state.background_color;
     if(init.state.background)document.body.style.backgroundImage = `url('${init.state.background}')`;
 
     init.objects.forEach((item)=>{
         let category = bb.fastGet('objects',item.category);
-        if(typeof category !== "function"){console.log("There is no category "+item.category)}
+        if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
         if(item.meta.name === undefined 
         || !bb.fastGet('liveObjects',item.meta.name)){
-            if(!category)return;
             let it = new category(item.meta);
             if(item.color)it.setColor(item.color);
             if(item.position)it.setPosition(item.position.x,item.position.y);
@@ -81,8 +80,10 @@ app.addLoadFunction(()=>{
 
 
 
+let rend = bb.fastGet('renderer','render');
 game.render = ()=>{
-    bb.fastGet('renderer','render').forEach((it)=>it());
+    if(rend)
+    rend.forEach((it)=>it());
 };
 
 game.input = ()=>{
@@ -96,9 +97,9 @@ game.animation = ()=>{
 game.ai = ()=>{
 
 }
-
+let phUpdate = bb.fastGet('physics','update');
 game.physics = ()=>{
-    if(bb.fastGet('physics','update'))bb.fastGet('physics','update')()
+    if(phUpdate)phUpdate();
 };
 
 function collided(obj1,obj2){
@@ -155,14 +156,16 @@ bb.installWatch('state','mode',triggerStateModeChange);
 
 
 
-window.onbeforeunload = function(e) {
-    console.log(bb.fastGet('gameEngine',"animationFilmHolder"));
-    bb.fastGet('gameEngine','animationFilmHolder')._films = {};
-    let objs = bb.getComponent('liveObjects').itemMap;
-    for(let i in objs){
-        objs[i].remove();
-    }
-    return true;
-};
+// window.onbeforeunload = function(e) {
+//     app.game.stop();
+//     bb.fastGet('gameEngine','animationFilmHolder').cleanUp();
+//     Blockly = undefined;
+//     let objs = bb.getComponent('liveObjects').itemMap;
+//     for(let i in objs){
+//         objs[i].remove();
+//     }
+//     bb.clear();
+//     return true;
+// };
 
 app.main();

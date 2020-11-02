@@ -1,6 +1,6 @@
 export default {
     // "Digit1": ["changeColor"],
-    // "Digit2": ["changeColor"],
+    "Digit2": ["lol"],
     // "KeyD": ["move"],
     "KeyW": ["moveForward"],
     "KeyS": ["moveBackward"],
