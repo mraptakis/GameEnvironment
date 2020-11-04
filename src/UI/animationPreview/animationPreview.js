@@ -159,6 +159,11 @@ function createPopUp(film){
     startAnim.innerHTML = 'Try Animation';
     editArea.appendChild(startAnim);
 
+    let createAnim = document.createElement('div');
+    createAnim.id = 'animationPreviewCreate_popup_editarea_create';
+    createAnim.innerHTML = 'Create Animation';
+    editArea.appendChild(createAnim);
+
     let animator = new FRAnimator();
     let animation = new FRAnimation({
         id: '_prevCreate',
@@ -241,8 +246,8 @@ function createPopUp(film){
     }
 
     startAnim.addEventListener('click',restartAnimation);
-    // delaySlider.addEventListener('change',restartAnimation);
-    popUpClose.addEventListener('click',saveAnimation);
+    createAnim.addEventListener('click',saveAnimation);
+    popUpClose.addEventListener('click',destroyPopUP);
     popUpCloseBack.addEventListener('click',destroyPopUP);
 
 }
