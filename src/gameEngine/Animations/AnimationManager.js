@@ -23,8 +23,8 @@ class AnimationManager {
         });
     }
 
-    register(anim){ // class Animation
-        this._animations[anim.id] = anim;
+    register(anim,film){ // class Animation
+        this._animations[anim.id] = {animation:anim,film:animationFilmHolder.getFilm(film)};
     }
 
     getAnimation(id){
