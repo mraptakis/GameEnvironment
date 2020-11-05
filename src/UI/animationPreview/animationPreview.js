@@ -129,7 +129,7 @@ function createPopUp(film){
     editArea.appendChild(repsWrapper);
 
     let repsPrompt = document.createElement('div');
-    repsPrompt.innerHTML = 'Dy: ';
+    repsPrompt.innerHTML = 'Repetitions: ';
     repsPrompt.classList += 'animationPreviewCreate_popup_editarea_prompt';
     repsWrapper.appendChild(repsPrompt);
 
@@ -169,10 +169,10 @@ function createPopUp(film){
         id: '_prevCreate',
         start: 0,
         end: film.totalFrames - 1,
-        dx: 3,
-        dy: 5,
+        dx: 0,
+        dy: 0,
         reps: -1,
-        delay: 100
+        delay: 90
     });
     let ctx = mainAreaCanvas.getContext('2d');
     ctx.width = mainAreaCanvas.width;
@@ -245,6 +245,10 @@ function createPopUp(film){
         }),film.id);
     }
 
+    dxInput.addEventListener('change',restartAnimation);
+    dyInput.addEventListener('change',restartAnimation);
+    repsInput.addEventListener('change',restartAnimation);
+    delaySlider.addEventListener('change',restartAnimation);
     startAnim.addEventListener('click',restartAnimation);
     createAnim.addEventListener('click',saveAnimation);
     popUpClose.addEventListener('click',destroyPopUP);

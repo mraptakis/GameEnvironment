@@ -84,7 +84,8 @@
     top: 0;
     width: 100%;
     height: 30px;
-    background-color: lightgrey;
+    background-color: rgb(51, 82, 255);
+    color: white;
     text-align: center;
     font-size: large;
 }
@@ -92,13 +93,13 @@
 #animationPreviewCreate_popup_close {
     right: 0;
     padding: 4px;
-    background-color: lightgrey;
+    background-color: rgb(51, 82, 255);
     cursor: pointer;
     float: right;
 }
 
 #animationPreviewCreate_popup_close:hover {
-    background-color: grey;
+    text-decoration: underline;
 }
 
 
@@ -127,13 +128,33 @@
 }
 
 #animationPreviewCreate_popup_editarea_play {
-    width: 100%;
-    height: 50px;
+    cursor: pointer;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    background-color: rgb(51, 82, 255);
+    color: white;
+}
+
+#animationPreviewCreate_popup_editarea_create {
+    cursor: pointer;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    background-color: rgb(51, 82, 255);
+    color: white;
+}
+
+#animationPreviewCreate_popup_editarea_play:hover {
+    text-decoration: underline;
+}
+
+#animationPreviewCreate_popup_editarea_create:hover {
+    text-decoration: underline;
 }
 
 .animationPreviewCreate_popup_editarea_wrap {
-    width: 100%;
-    height: 50px;
+    padding: 10px;
 }
 
 .animationPreviewCreate_popup_editarea_prompt {
