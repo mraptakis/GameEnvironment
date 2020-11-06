@@ -43,7 +43,8 @@
     width: 500px;
     height: 20px;
     top: 40px;
-    background-color: #3352ff;
+    background-color: var(--main-color);
+    color: var(--main-text);
     overflow-x: hidden;
 }
 

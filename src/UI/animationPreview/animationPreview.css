@@ -26,7 +26,6 @@
 
 .animationPreview_itemWrapper {
     width: 200px;
-    background-color: thistle;
     margin: 0 20px 0 20px;
     float: left;
     overflow: hidden;
@@ -46,6 +45,7 @@
     width: 100%;
     height: 180px;
     text-align: center;
+    background-color: var(--canvas-default-bg-color);
 }
 
 .animationPreview_film {
@@ -84,8 +84,8 @@
     top: 0;
     width: 100%;
     height: 30px;
-    background-color: rgb(51, 82, 255);
-    color: white;
+    background-color: var(--main-color);
+    color: var(--main-color-text);
     text-align: center;
     font-size: large;
 }
@@ -93,7 +93,8 @@
 #animationPreviewCreate_popup_close {
     right: 0;
     padding: 4px;
-    background-color: rgb(51, 82, 255);
+    background-color: var(--main-color);
+    color: var(--main-color-text);
     cursor: pointer;
     float: right;
 }
@@ -124,7 +125,7 @@
 #animationPreviewCreate_popup_mainarea_canvas {
     width: 100%;
     height: 100%;
-    background-color: lightgray;
+    background-color: var(--canvas-default-bg-color);
 }
 
 #animationPreviewCreate_popup_editarea_play {
@@ -132,8 +133,8 @@
     text-align: center;
     padding: 5px;
     margin: 5px;
-    background-color: rgb(51, 82, 255);
-    color: white;
+    background-color: var(--main-color);
+    color: var(--main-color-text);
 }
 
 #animationPreviewCreate_popup_editarea_create {
@@ -141,8 +142,8 @@
     text-align: center;
     padding: 5px;
     margin: 5px;
-    background-color: rgb(51, 82, 255);
-    color: white;
+    background-color: var(--main-color);
+    color: var(--main-color-text);
 }
 
 #animationPreviewCreate_popup_editarea_play:hover {

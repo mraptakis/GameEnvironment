@@ -1,3 +1,9 @@
+:root {
+	--main-color: #0e61a5;
+	--main-color-text: black;
+	--canvas-default-bg-color: lightgrey;
+}
+
 body { 
 	margin: 0; 
     background-size: cover;

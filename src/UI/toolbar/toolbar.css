@@ -3,7 +3,8 @@
     top: 0;
     width: 100%;
     height: 30px;
-    background-color: #3352ff;
+    background-color: var(--main-color);
+    color: var(--main-text);
 }
 
 .toolbar_item {
@@ -16,7 +17,7 @@
 }
 
 .toolbar_item:hover {
-    background-color: #556bd6;
+    background-color: var(--main-color);
 }
 
 .toolbar_dropdown {
@@ -24,7 +25,8 @@
     top: 30px;
     width: auto;
     height: auto;
-    background-color: #3352ff;
+    background-color: var(--main-color);
+    color: var(--main-text);
 }
 
 .toolbar_dropdown_button {
