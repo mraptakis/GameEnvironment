@@ -83,6 +83,7 @@ function createPopUp(film){
 
     let delaySlider = document.createElement('input');
     delaySlider.type = 'range';
+    delaySlider.id = 'animationPreviewCreate_popup_editarea_delaySlider';
     delaySlider.min = '20';
     delaySlider.max = '200';
     delaySlider.step = '1';
@@ -156,7 +157,7 @@ function createPopUp(film){
 
     let startAnim = document.createElement('div');
     startAnim.id = 'animationPreviewCreate_popup_editarea_play';
-    startAnim.innerHTML = 'Try Animation';
+    startAnim.innerHTML = 'Reset Position';
     editArea.appendChild(startAnim);
 
     let createAnim = document.createElement('div');
@@ -177,26 +178,21 @@ function createPopUp(film){
     let ctx = mainAreaCanvas.getContext('2d');
     ctx.width = mainAreaCanvas.width;
     ctx.height = mainAreaCanvas.height;
-
-    let currPos = {x:undefined,y:undefined};
+    let firstBox = film.getFrameBox(0);
+    let currPos = {x:(mainAreaCanvas.width/2) - (firstBox.width*2/2),y:(mainAreaCanvas.height/2) - (firstBox.height*2/2)};
 
     animator.onAction = (th)=>{
-        let firstBox = film.getFrameBox(th.currentFrame);
-        if(currPos.x === undefined){
-            currPos.x = (mainAreaCanvas.width/2) - (firstBox.width*2/2);
-            currPos.y = (mainAreaCanvas.height/2) - (firstBox.height*2/2)
-        } else {
-            currPos.x += th.animation.dx;
-            currPos.y += th.animation.dy;
-            if(currPos.x > mainAreaCanvas.width)
-                currPos.x = -firstBox.width;
-            else if(currPos.x + firstBox.width < 0)
-                currPos.x = mainAreaCanvas.width-firstBox.width;
-            if(currPos.y > mainAreaCanvas.height)
-                currPos.y = -firstBox.height;
-            else if(currPos.y + firstBox.height < 0)
-                currPos.y = mainAreaCanvas.height-firstBox.height;
-        }
+        firstBox = film.getFrameBox(th.currentFrame);
+        currPos.x += th.animation.dx;
+        currPos.y += th.animation.dy;
+        if(currPos.x > mainAreaCanvas.width)
+            currPos.x = -firstBox.width;
+        else if(currPos.x + firstBox.width < 0)
+            currPos.x = mainAreaCanvas.width-firstBox.width;
+        if(currPos.y > mainAreaCanvas.height)
+            currPos.y = -firstBox.height;
+        else if(currPos.y + firstBox.height < 0)
+            currPos.y = mainAreaCanvas.height-firstBox.height;
         ctx.clearRect(0,0,mainAreaCanvas.width,mainAreaCanvas.height);
         ctx.drawImage(bb.fastGet('assets',film.bitmap),
             firstBox.x,firstBox.y,firstBox.width,firstBox.height,
@@ -215,7 +211,6 @@ function createPopUp(film){
 
     function restartAnimation(){
         if(!animator.hasFinished())animator.stop();
-        currPos = {x:undefined,y:undefined};
         animation = undefined;
         animation = new FRAnimation({
             id: '_prevCreate',
@@ -249,7 +244,7 @@ function createPopUp(film){
     dyInput.addEventListener('change',restartAnimation);
     repsInput.addEventListener('change',restartAnimation);
     delaySlider.addEventListener('change',restartAnimation);
-    startAnim.addEventListener('click',restartAnimation);
+    startAnim.addEventListener('click',()=>{currPos = {x:(mainAreaCanvas.width/2) - (firstBox.width*2/2),y:(mainAreaCanvas.height/2) - (firstBox.height*2/2)};});
     createAnim.addEventListener('click',saveAnimation);
     popUpClose.addEventListener('click',destroyPopUP);
     popUpCloseBack.addEventListener('click',destroyPopUP);

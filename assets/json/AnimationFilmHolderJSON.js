@@ -3,6 +3,13 @@ export default {
         filmToLoad: '#$@#$342.png'
     },
     boxes: {
+         "turtle_green_left_flying_1": {
+            "x":90,
+            "y":0,
+            "width":16,
+            "height":24,
+            "sprite_url":"./assets/images/sprites.png"
+         },
         "turtle_green_left_flying_2": {
            "x":120,
            "y":0,

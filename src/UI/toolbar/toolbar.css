@@ -12,12 +12,12 @@
     padding-top: 5px;
     padding-bottom: 7px;
     margin-left: 10px;
-    color:white;
+    color: var(--main-color-text);
     cursor: pointer;
 }
 
 .toolbar_item:hover {
-    background-color: var(--main-color);
+    background-color: var(--main-color-hover);
 }
 
 .toolbar_dropdown {
@@ -42,14 +42,18 @@
     background-size: contain;
 }
 
+.toolbar_dropdown_button:hover {
+    background-color: var(--main-color-hover);
+}
+
 .toolbar_dropdown_item {
     height: 20px;
     padding: 5px;
-    color:white;
+    color: var(--main-color-text);
     border-bottom: 1px solid black;
     cursor: pointer;
 }
 
 .toolbar_dropdown_item:hover {
-    background-color: #556bd6;
+    background-color: var(--main-color-hover);
 }

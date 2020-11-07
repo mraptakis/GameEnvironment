@@ -57,20 +57,21 @@
     padding-right: 5px;
     float: left;
     cursor: pointer;
-    color:white;
+    color: var(--main-buttons-text-color);
     border-right: 2px solid darkgray;
     border-radius: 5px;
-    background-color: #841515;
+    background-color: var(--main-buttons-background-color);
 }
 
 .eventTab:hover {
-    background-color: #bd2626;
+    background-color: var(--main-buttons-background-color-hover);
 }
 
 #openTab {
     position: absolute;
     color:black;
-    width: 100px;
+    max-width: 120px;
+    overflow: hidden;
     top: 70px;
     left: 380px;
     text-align: right;
