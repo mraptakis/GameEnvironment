@@ -34,8 +34,8 @@ function convertHTMLtoObjects(){
     })
 }
 
-const FRAnimator = bb.fastGet('gameEngine','FrameRangeAnimator');
-const FRAnimation = bb.fastGet('gameEngine','FrameRangeAnimation');
+const FRAnimator = bb.fastGet('animation','FrameRangeAnimator');
+const FRAnimation = bb.fastGet('animation','FrameRangeAnimation');
 
 function createPopUp(film){
     let wrap = document.createElement('div');
@@ -229,7 +229,7 @@ function createPopUp(film){
 
     function saveAnimation(){
         if(idInput.value !== "")
-        bb.fastGet('gameEngine','animationManager').register(new FRAnimation({
+        bb.fastGet('animation','registerNewAnimation')(new FRAnimation({
             id: idInput.value,
             start: 0,
             end: film.totalFrames - 1,
@@ -255,7 +255,7 @@ function createPopUp(film){
 let animatorsForPreview = [];
 
 function showAnimations(){
-    let items = bb.fastGet('gameEngine','animationFilmHolder')._films;
+    let items = bb.fastGet('animation','getAllFilms')();
 
     let objWrapper = document.getElementById('animationPreviewWrapper');
     objWrapper.innerHTML = '';

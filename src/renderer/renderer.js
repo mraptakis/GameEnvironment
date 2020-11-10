@@ -11,8 +11,8 @@ import changeFocus from '../transitionHandlers/focusedObject.js'
 
 let clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";
-    clickWrapper.style.width = window.innerWidth + 'px';
-    clickWrapper.style.height = window.innerHeight + 'px';
+    clickWrapper.style.width = '100vw';
+    clickWrapper.style.height = '100vh';
     clickWrapper.style.opacity = 0;
     clickWrapper.style.position = 'absolute';
     clickWrapper.style.top = 0;

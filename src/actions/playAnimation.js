@@ -1,7 +1,7 @@
 import bb from '../utils/blackboard.js'
 
-const animationManager = bb.fastGet('gameEngine','animationManager');
-const FRAnimator = bb.fastGet('gameEngine','FrameRangeAnimator');
+const getAnimation = bb.fastGet('animation','getAnimation');
+const FRAnimator = bb.fastGet('animation','FrameRangeAnimator');
 
 function playAnimation({object,anim,onStart,onFinish}){
 
@@ -9,7 +9,7 @@ function playAnimation({object,anim,onStart,onFinish}){
 
     let obj = (object)?object:bb.fastGet('state','player');
     let animator = new FRAnimator();
-    let animation = animationManager.getAnimation(anim);
+    let animation = getAnimation(anim);
 
     let oldFilm;
 

@@ -1,1 +1,12 @@
 - Create ScrollingManager and map coordinates from there.
+
+- Scale canvas ctx
+    => problem with picking and scaling is not intuitive to people
+
+- CollisionManager
+    => how am I going to show it?
+    => who owns the code?
+    => how am i going to handle collision with different objects?
+- add unique IDs to everything instead of just names
+    => this doesn't help on reload / sharing
+- invoke functions through blackboard

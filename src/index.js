@@ -5,13 +5,14 @@ import App from './app.js'
 import bb from './utils/blackboard.js'
 import FPSCounter from './utils/fps.js'
 import inputManager from './utils/inputManager.js'
+import installWatches from './utils/watches.js'
 
 import init from '../assets/json/pacman.js' //json
 import keyToAction from '../assets/json/keyToActions.js' //json
 
 
-let app = new App();
-let game = app.game;
+const app = new App();
+const game = app.game;
 
 function inpHandler(key) {
     if(keyToAction[key])keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
@@ -19,11 +20,12 @@ function inpHandler(key) {
     if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
 };
 
-
-let aliveItems;
-let animatorManager;
-let animationFilmHolder;
-let animationManager;
+const aliveItems            = bb.getComponent('liveObjects').itemMap;
+const progressAllAnimations = bb.fastGet('animation','progress');
+const animationLoader       = bb.fastGet('animation','load');
+const assetsToLoad          = bb.fastGet('animation', 'requiredAssets');
+const rend                  = bb.fastGet('renderer','render');
+const phUpdate              = bb.fastGet('physics','update');
 
 app.addInitialiseFunction(()=>{
 
@@ -59,31 +61,24 @@ app.addInitialiseFunction(()=>{
         }
     });
 
-    aliveItems = bb.getComponent('liveObjects').itemMap;
-    animatorManager = bb.fastGet('gameEngine','animatorManager');
-    animationManager = bb.fastGet('gameEngine','animationManager');
-    animationFilmHolder = bb.fastGet('gameEngine', 'animationFilmHolder');
 });
 
 app.addLoadFunction(()=>{
-    animationFilmHolder.loadAll();
-    animationManager.loadAll();
-    animationFilmHolder.getAssetsToLoad().forEach((asset)=>{
+    animationLoader();
+    assetsToLoad().forEach((asset)=>{
         if(!bb.fastGet('assets',asset)){
             let img = new Image();
             img.src = asset;
             bb.fastInstall('assets',asset,img);
         }
     });
+    installWatches();
     bb.print();
 });
 
-
-
-let rend = bb.fastGet('renderer','render');
 game.render = ()=>{
     if(rend)
-    rend.forEach((it)=>it());
+        rend.forEach((it)=>it());
 };
 
 game.input = ()=>{
@@ -91,24 +86,23 @@ game.input = ()=>{
 };
 
 game.animation = ()=>{
-    animatorManager.progress(bb.fastGet('state','gameTime'));
+    progressAllAnimations(bb.fastGet('state','gameTime'));
 };
 
 game.ai = ()=>{
-
 }
-let phUpdate = bb.fastGet('physics','update');
+
 game.physics = ()=>{
     if(phUpdate)phUpdate();
 };
 
+
+// TODO: move this to collisionManager
 function collided(obj1,obj2){
     if(obj1 === obj2)return;
     if(!obj1.getOption('isCollidable') || !obj2.getOption('isCollidable'))return;
-    // console.log(obj1,obj2);
     let pos1 = obj1.getPositional();
     let pos2 = obj2.getPositional();
-    // debugger;
     if(pos1.x >= pos2.x + pos2.width || pos2.x >= pos1.x + pos1.width){
         return false;
     }
@@ -139,21 +133,6 @@ game.userCode = ()=>{
 game.extra = ()=>{
     FPSCounter();
 };
-
-
-
-// TODO: Change this function to an appropriate file
-
-function triggerStateModeChange(e){
-    if(e === 'play'){
-        for(let i in aliveItems)
-            aliveItems[i].triggerEvent('onGameStart');
-    }
-    bb.installWatch('state','mode',triggerStateModeChange);
-}
-
-bb.installWatch('state','mode',triggerStateModeChange);
-
 
 
 // window.onbeforeunload = function(e) {

@@ -568,7 +568,7 @@ Blockly.Blocks['get_animation'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('gameEngine','animationManager')._animations;
+        let map = bb.fastGet('animation','getAllAnimations')();
         let categs = [];
         for(let i in map){
                 categs.push([i,i]);
