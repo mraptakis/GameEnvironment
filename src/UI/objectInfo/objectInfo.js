@@ -5,6 +5,7 @@ import transition from '../../transitionHandlers/focusedObject.js'
 export default {name:'objectInfo',link: './src/UI/objectInfo/objectInfo.ahtml',cb:onObjectInfoLoaded};
 
 function updateInfo(object){
+    if(!document.getElementById('mainInfoBox'))return;
     if(object === undefined || bb.fastGet('state','mode') !== 'editing'){
         document.getElementById('mainInfoBox').style.display = "none";
         bb.installWatch('state','focusedObject',updateInfo);
@@ -84,5 +85,6 @@ function updateInfo(object){
 }
 
 function onObjectInfoLoaded(){
-    updateInfo(undefined);
+    let focObj = bb.fastGet('state','focusedObject');
+    updateInfo((focObj)?focObj:undefined);
 }

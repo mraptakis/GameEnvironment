@@ -18,16 +18,13 @@ import logManager from '../utils/logs.js'
 //     }
 
 // }
-let counter = 0;
+
 function dummyAction(){
-    console.log(bb.fastGet('UI','getUIs')());
-    if(counter === 0){
-        bb.fastGet('UI','hideUI')('createObjectMenu');
-        counter++;
-    }else {
-        bb.fastGet('UI','loadUI')('createObjectMenu');
-        counter = 0;
-    }
+    let root = document.documentElement;
+    
+    const mainThemeColor = '--main-color';
+    
+    root.style.setProperty(mainThemeColor, '#000000');
     console.log('dummy action');
 }
 

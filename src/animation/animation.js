@@ -30,3 +30,8 @@ bb.fastInstall('animation', 'FrameRangeAnimator', FrameRangeAnimator);
 
 bb.fastInstall('animation', 'MovingAnimation', MovingAnimation);
 bb.fastInstall('animation', 'FrameRangeAnimation', FrameRangeAnimation);
+
+
+bb.fastInstall('debugForAlex', 'animatorManager', animatorManager);
+bb.fastInstall('debugForAlex', 'animationManager', animationManager);
+bb.fastInstall('debugForAlex', 'animationFilmHolder', animationFilmHolder);

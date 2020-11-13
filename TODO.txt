@@ -4,7 +4,7 @@
 
 IDE:
 
-    - Extra UI to manipulate theme-colors and/or which UI built-in components I want to be able to see
+    - (Done) Extra UI to manipulate theme-colors!! and/or which UI built-in components I want to be able to see
 
     - add object preview for 454engine.
 
@@ -16,6 +16,8 @@ ENGINE:
     - Add tickAnimator (!important)
 
     - invoke functions through blackboard
+
+    - Pause/start
 
     - Add states for objects
 

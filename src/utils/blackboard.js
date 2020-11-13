@@ -23,19 +23,19 @@ class BlackboardComponent{
   }
 
   installItem(itemName,value){
-    if(this.itemMap[itemName] !== undefined) return false;
+    if(this.itemMap[itemName] !== undefined) return undefined;
     this.itemMap[itemName] = value;
     return true;
   }
 
   removeItem(itemName){
-    if(this.itemMap[itemName] === undefined) return false;
+    if(this.itemMap[itemName] === undefined) return undefined;
     delete this.itemMap[itemName];
     return true;
   }
 
   getItem(itemName){
-    if(this.itemMap[itemName] === undefined) return false;
+    if(this.itemMap[itemName] === undefined) return undefined;
     return this.itemMap[itemName];
   }
 
@@ -63,20 +63,20 @@ class Blackboard {
   componentMap = {};
 
   installComponent(componentName){
-    if(this.componentMap[componentName] !== undefined)return false;
+    if(this.componentMap[componentName] !== undefined)return undefined;
     this.componentMap[componentName] = new BlackboardComponent(componentName);
     return true;
   }
 
   removeComponent(componentName){
-    if(this.componentMap[componentName] === undefined)return false;
+    if(this.componentMap[componentName] === undefined)return undefined;
     delete this.componentMap[componentName];
     return true;
   }
 
 
   installWatch(componentName,itemName,cb){
-    if(this.componentMap[componentName] === undefined)return false;
+    if(this.componentMap[componentName] === undefined)return undefined;
     this.componentMap[componentName].installWatch(itemName,cb);
   }
 
@@ -86,7 +86,7 @@ class Blackboard {
   }
 
   fastRemove(componentName,itemName){
-    if(this.componentMap[componentName] === undefined)return false;
+    if(this.componentMap[componentName] === undefined)return undefined;
     this.componentMap[componentName].removeItem(itemName);
   }
 
@@ -96,7 +96,7 @@ class Blackboard {
   }
 
   fastGet(componentName,itemName){
-    if(this.componentMap[componentName] === undefined)return false;
+    if(this.componentMap[componentName] === undefined)return undefined;
     return this.componentMap[componentName].getItem(itemName);
   }
 
