@@ -15,8 +15,8 @@ const app = new App();
 const game = app.game;
 
 function inpHandler(key) {
-    if(keyToAction[key])keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
     // if(bb.fastGet('state','mode') === 'editing')return;
+    if(keyToAction[key])keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
     if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
 };
 

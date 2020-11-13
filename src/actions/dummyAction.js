@@ -18,11 +18,17 @@ import logManager from '../utils/logs.js'
 //     }
 
 // }
-
+let counter = 0;
 function dummyAction(){
-    bb.fastGet('sound','addSound')('aaaa','demoSound');
-    bb.fastGet('sound','playSound')('aaaa');
-    console.log(bb.fastGet('sound','getSounds')());
+    console.log(bb.fastGet('UI','getUIs')());
+    if(counter === 0){
+        bb.fastGet('UI','hideUI')('createObjectMenu');
+        counter++;
+    }else {
+        bb.fastGet('UI','loadUI')('createObjectMenu');
+        counter = 0;
+    }
+    console.log('dummy action');
 }
 
 bb.fastInstall('actions','dummyAction',dummyAction)
