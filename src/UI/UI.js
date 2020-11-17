@@ -6,6 +6,7 @@ import toolbar from './toolbar/toolbar.js'
 import objMenu from'./objectMenu/objectMenu.js'
 import createObjMenu from './createObjectMenu/createObjectMenu.js'
 import aninPrev from './animationPreview/animationPreview.js'
+import colPrev from './collisionPreview/collisionPreview.js'
 import hud from './hud/hud.js'
 
 class UIManager {
@@ -97,6 +98,7 @@ uiManager.installUI({name:toolbar.name,link:toolbar.link,cb:toolbar.cb},false);
 uiManager.installUI({name:objMenu.name,link:objMenu.link,cb:objMenu.cb});
 uiManager.installUI({name:createObjMenu.name,link:createObjMenu.link,cb:createObjMenu.cb});
 uiManager.installUI({name:aninPrev.name,link:aninPrev.link,cb:aninPrev.cb});
+uiManager.installUI({name:colPrev.name,link:colPrev.link,cb:colPrev.cb});
 
 uiManager.loadAll();
 

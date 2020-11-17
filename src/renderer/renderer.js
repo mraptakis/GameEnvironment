@@ -32,7 +32,8 @@ clickWrapper.addEventListener('click',(ev)=>{
 
 let funcsMD = bb.fastGet('renderer','mouseDown');
 clickWrapper.addEventListener('mousedown',(ev)=>{
-    if(bb.fastGet('state','mode') !== "editing")return;
+    // TODO: ADD THE FOLLOWING COMMENT AS AN OPTION
+    // if(bb.fastGet('state','mode') !== "editing")return;
     for(var f in funcsMD){
         if(funcsMD[f](ev))break;
     }

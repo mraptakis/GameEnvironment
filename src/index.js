@@ -21,11 +21,13 @@ function inpHandler(key) {
 };
 
 const aliveItems            = bb.getComponent('liveObjects').itemMap;
-const progressAllAnimations = bb.fastGet('animation','progress');
-const animationLoader       = bb.fastGet('animation','load');
+const progressAllAnimations = bb.fastGet('animation', 'progress');
+const animationLoader       = bb.fastGet('animation', 'load');
 const assetsToLoad          = bb.fastGet('animation', 'requiredAssets');
-const rend                  = bb.fastGet('renderer','render');
-const phUpdate              = bb.fastGet('physics','update');
+const rend                  = bb.fastGet('renderer', 'render');
+const phUpdate              = bb.fastGet('physics', 'update');
+const collisionCheck        = bb.fastGet('collisions', 'checkAndInvoke');
+// const addCollision          = bb.fastGet('collisions', 'installCollision');
 
 app.addInitialiseFunction(()=>{
 
@@ -73,6 +75,8 @@ app.addLoadFunction(()=>{
         }
     });
     installWatches();
+    // addCollision('coin1','coin2','console.log("coin1 me coin2")');
+    // addCollision('coin1','coin3','console.log("coin1 me coin3")');
     bb.print();
 });
 
@@ -96,32 +100,8 @@ game.physics = ()=>{
     if(phUpdate)phUpdate();
 };
 
-
-// TODO: move this to collisionManager
-function collided(obj1,obj2){
-    if(obj1 === obj2)return;
-    if(!obj1.getOption('isCollidable') || !obj2.getOption('isCollidable'))return;
-    let pos1 = obj1.getPositional();
-    let pos2 = obj2.getPositional();
-    if(pos1.x >= pos2.x + pos2.width || pos2.x >= pos1.x + pos1.width){
-        return false;
-    }
-
-    if(pos1.y >= pos2.y + pos2.height || pos2.y >= pos1.y + pos1.height){
-        return false;
-    }
-
-    obj1.triggerEvent('onCollision');
-    obj2.triggerEvent('onCollision');
-    console.log(obj1.name,obj2.name);
-}
-
 game.collisions = ()=>{
-    for(let i in aliveItems){
-        for(let j in aliveItems){
-            collided(aliveItems[i],aliveItems[j]);
-        }
-    }
+    collisionCheck(aliveItems);
 };
 
 game.userCode = ()=>{

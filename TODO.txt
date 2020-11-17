@@ -24,10 +24,11 @@ ENGINE:
     - Create ScrollingManager and map coordinates from there.
 
     - CollisionManager
-        => how am I going to show it?
-        => who owns the code?
-        => how am Ι going to handle collision with different objects?
+        => how am I going to show it? (pop up window for adding, lines between objects edit)
+        => who owns the code? (CollisionManager)
+        => how am Ι going to handle collision with different objects? (different scripts)
 
+    - Add Options (e.g. I want to be able to move things with my mouse while playing)
 
 FEATURES:
 

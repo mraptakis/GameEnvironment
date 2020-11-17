@@ -70,10 +70,10 @@
 #openTab {
     position: absolute;
     color:black;
-    max-width: 120px;
+    width: 350px;
     overflow: hidden;
     top: 70px;
-    left: 380px;
+    left: 120px;
     text-align: right;
     font-size: 20px;
     pointer-events: none;
