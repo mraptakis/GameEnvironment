@@ -1,4 +1,5 @@
-import './EnvironmentObject.js'
+import envObj from './EnvironmentObject.js'
+import colObj from './CollisionsObject.js'
 
 import './dom/renderer.js'
 import './454GameEngine/renderer.js'
@@ -8,6 +9,8 @@ import './454GameEngine/renderer.js'
 import bb from '../utils/blackboard.js'
 
 import changeFocus from '../transitionHandlers/focusedObject.js'
+
+bb.fastInstall('state', 'systemObjects', [envObj.name,colObj.name]);
 
 let clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";

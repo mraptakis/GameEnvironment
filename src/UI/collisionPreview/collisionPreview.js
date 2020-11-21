@@ -2,62 +2,6 @@ import bb from '../../utils/blackboard.js'
 
 export default {name:'collisionPreview',link: './src/UI/collisionPreview/collisionPreview.ahtml',cb:onCollisionPreviewLoaded};
 
-// function createPopUp(){
-//     let wrap = document.createElement('div');
-//     wrap.id = 'collisionPreviewCreateWrapper';
-//     document.body.appendChild(wrap);
-
-//     let popUpCloseBack = document.createElement('div');
-//     popUpCloseBack.id = 'collisionPreviewCreate_popup_close_back';
-//     wrap.appendChild(popUpCloseBack);
-
-//     let popUp = document.createElement('div');
-//     popUp.id = 'collisionPreviewCreate_popup';
-//     wrap.appendChild(popUp);
-
-//     let toolbar = document.createElement('div');
-//     toolbar.id = 'collisionPreviewCreate_popup_toolbar';
-//     toolbar.innerHTML = 'Collision Workshop';
-//     popUp.appendChild(toolbar);
-
-//     let popUpClose = document.createElement('div');
-//     popUpClose.id = 'collisionPreviewCreate_popup_close';
-//     popUpClose.innerHTML = 'X';
-//     toolbar.appendChild(popUpClose);
-
-//     let chooseArea1 = document.createElement('div');
-//     chooseArea1.id = 'collisionPreviewCreate_popup_choosearea1';
-//     popUp.appendChild(chooseArea1);
-
-//     let list1Wrapper = document.createElement('ul');
-//     list1Wrapper.classList += 'collisionPreviewCreate_popup_listWrapper';
-//     chooseArea1.appendChild(list1Wrapper);
-
-//     let chooseArea2 = document.createElement('div');
-//     chooseArea2.id = 'collisionPreviewCreate_popup_choosearea2';
-//     popUp.appendChild(chooseArea2);
-
-//     let list2Wrapper = document.createElement('ul');
-//     list2Wrapper.classList += 'collisionPreviewCreate_popup_listWrapper';
-//     chooseArea2.appendChild(list2Wrapper);
-
-//     let combineInfo = document.createElement('div');
-//     combineInfo.id = 'collisionPreviewCreate_popup_combineInfo';
-//     popUp.appendChild(combineInfo);
-
-
-//     let aliveItems = bb.getComponent('liveObjects').itemMap;
-//     console.log(aliveItems);
-
-//     for(let i in aliveItems){
-//         if(i === 'Stage')continue;
-//         list1Wrapper.innerHTML += `<li>${i}</li>`;
-//         list2Wrapper.innerHTML += `<li>${i}</li>`;
-//     }
-
-// }
-
-
 function closeCollisionWindow(){
     let items = document.getElementsByClassName('collisionPreview_itemWrapper');
     for(let i = 0;i < items.length; i++){
@@ -66,8 +10,6 @@ function closeCollisionWindow(){
 }
 
 function showCollisions(){
-    console.log(bb.fastGet('collisions','getAllCollisions')());
-
     let items = bb.fastGet('collisions','getAllCollisions')();
 
     let objWrapper = document.getElementById('collisionPreviewWrapper');
@@ -137,9 +79,10 @@ function showCollisions(){
     body.appendChild(createCollision);
 
     let aliveItems = bb.getComponent('liveObjects').itemMap;
+    let systemObjects = bb.fastGet('state', 'systemObjects');
 
     for(let i in aliveItems){
-        if(i === 'Stage')continue;
+        if(systemObjects.indexOf(i) !== -1)continue;
         list1.innerHTML += `<option value=${i}>${i}</option>`;
         list2.innerHTML += `<option value=${i}>${i}</option>`;
     }

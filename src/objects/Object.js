@@ -1,5 +1,8 @@
 import bb from '../utils/blackboard.js'
 import log from '../utils/logs.js'
+
+import Event from './Event.js'
+
 export default class Object {
     name
     renderer
@@ -13,12 +16,30 @@ export default class Object {
     constructor(_name){
         this.name = _name;
 
-        this.events['onClick'] = localStorage.getItem(this.name+"_onClick");
-        this.events['onRightClick'] = localStorage.getItem(this.name+"_onRightClick");
-        this.events['onGameStart'] = localStorage.getItem(this.name+"_onGameStart");
-        this.events['onRemove'] = localStorage.getItem(this.name+"_onRemove");
-        this.events['onMove'] = localStorage.getItem(this.name+"_onMove");
-        this.events['onEachFrame'] = localStorage.getItem(this.name+"_onEachFrame");
+        this.events['onClick'] = new Event({
+            tag: 'system',
+            value: localStorage.getItem(this.name+"_onClick")
+        });
+        this.events['onRightClick'] = new Event({
+            tag: 'system',
+            value: localStorage.getItem(this.name+"_onRightClick")
+        });
+        this.events['onGameStart'] = new Event({
+            tag: 'system',
+            value: localStorage.getItem(this.name+"_onGameStart")
+        });
+        this.events['onRemove'] = new Event({
+            tag: 'system',
+            value: localStorage.getItem(this.name+"_onRemove")
+        });
+        this.events['onMove'] = new Event({
+            tag: 'system',
+            value: localStorage.getItem(this.name+"_onMove")
+        });
+        this.events['onEachFrame'] = new Event({
+            tag: 'system',
+            value: localStorage.getItem(this.name+"_onEachFrame")
+        });
 
 
         this.options['isMovable'] = true;
@@ -125,21 +146,34 @@ export default class Object {
 
     addEvent(ev){
         let code = localStorage.getItem(this.name+"_"+ev);
-        this.events[ev] = (code)?code:"";
+        this.events[ev] = new Event({
+            tag: 'custom',
+            value: (code)?code:""
+        });
     }
 
     getEvent(ev){
-        return this.events[ev];
+        if(!this.events[ev]){
+            log.logError('Couldn\'t get event '+ev+' because it doesn\'t exists');
+            return;
+        }
+        if(this.events[ev].getValue)return this.events[ev].getValue();
+        return this.events[ev].val;
     }
 
     setEvent(ev,code){
+        if(!this.events[ev]){
+            log.logError('Couldn\'t set event '+ev+' because it doesn\'t exists');
+            return;
+        }
         localStorage.setItem(this.name+"_"+ev,code);
-        this.events[ev] = code;
+        this.events[ev].val = code;
+        if(this.events[ev].onChange)this.events[ev].onChange(code);
     }
 
     triggerEvent(ev){
         if(!this.events[ev])return;
-        this._executer(this.events[ev]);
+        this._executer(this.getEvent(ev));
     }
 
     move(x,y){

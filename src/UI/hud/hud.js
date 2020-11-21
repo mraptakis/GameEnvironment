@@ -83,7 +83,6 @@ function onHudLoaded(){
             bb.installWatch('state','focusedObject',onFocusChange);
             return;
         }
-        tabOpen = "onClick";
         let firstObject = true;
         for(let i in bb.fastGet('liveObjects',objName).getEvents()){
             let elem = document.createElement('div');
