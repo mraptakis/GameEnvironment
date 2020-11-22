@@ -14,8 +14,6 @@ class Box extends Object {
         this.mesh = new THREE.Mesh( this.geometry, this.material );
         this.mesh.name = name;
 
-        this.events['onEachFrame'] = localStorage.getItem(this.name+"_onEachFrame");
-
     }
 
     getCategory(){

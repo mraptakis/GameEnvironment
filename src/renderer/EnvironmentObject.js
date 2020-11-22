@@ -2,6 +2,7 @@ import bb from '../utils/blackboard.js'
 
 import Object from '../objects/Object.js'
 import Value from '../objects/Value.js'
+import Event from '../objects/Event.js'
 import log from '../utils/logs.js'
 
 class EnvironmentObject extends Object {
@@ -20,10 +21,17 @@ class EnvironmentObject extends Object {
         this._x = 0;
         this._y = 0;
 
+        
 
+        this.events["moveStageLeft"] = new Event({
+            tag: 'system',
+            value: localStorage.getItem(this.name+"_moveStageLeft")
+        });
 
-        this.events["moveStageLeft"] = localStorage.getItem(this.name+"_moveStageLeft");
-        this.events["moveStageRight"] = localStorage.getItem(this.name+"_moveStageRight");
+        this.events["moveStageRight"] = new Event({
+            tag: 'system',
+            value: localStorage.getItem(this.name+"_moveStageRight")
+        });
 
         this._windowWidth = window.innerWidth;
         this._windowHeight = window.innerHeight;
@@ -124,4 +132,8 @@ class EnvironmentObject extends Object {
 }
 
 
-bb.fastSet('liveObjects','Stage',new EnvironmentObject());
+const environmentObject = new EnvironmentObject();
+
+bb.fastSet('liveObjects','Stage', environmentObject);
+
+export default environmentObject;

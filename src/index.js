@@ -27,7 +27,7 @@ const assetsToLoad          = bb.fastGet('animation', 'requiredAssets');
 const rend                  = bb.fastGet('renderer', 'render');
 const phUpdate              = bb.fastGet('physics', 'update');
 const collisionCheck        = bb.fastGet('collisions', 'checkAndInvoke');
-// const addCollision          = bb.fastGet('collisions', 'installCollision');
+const addCollision          = bb.fastGet('collisions', 'installCollision');
 
 app.addInitialiseFunction(()=>{
 
@@ -75,8 +75,6 @@ app.addLoadFunction(()=>{
         }
     });
     installWatches();
-    // addCollision('coin1','coin2','console.log("coin1 me coin2")');
-    // addCollision('coin1','coin3','console.log("coin1 me coin3")');
     bb.print();
 });
 
