@@ -13,6 +13,8 @@ IDE:
 
 ENGINE:
 
+    - Change all names to be IDs (objects, events, values, collisions, etc)
+
     - Add tickAnimator (!important)
 
     - invoke functions through blackboard
@@ -58,6 +60,11 @@ Extra:
 
     - Add block for:
         -> distance
+
+    - Starting Page includes
+        -> What animation films to include
+        -> Level of experience and start with different settings
+        -> load saved/import projects
 
 
 PROBABLY DISCARDED:
