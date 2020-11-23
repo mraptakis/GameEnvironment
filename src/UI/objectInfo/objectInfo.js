@@ -4,16 +4,15 @@ import transition from '../../transitionHandlers/focusedObject.js'
 
 export default {name:'objectInfo',link: './src/UI/objectInfo/objectInfo.ahtml',cb:onObjectInfoLoaded};
 
-function updateInfo(object){
+function updateInfo(obj){
     if(!document.getElementById('mainInfoBox'))return;
-    if(object === undefined || bb.fastGet('state','mode') !== 'editing'){
+    if(obj === undefined || bb.fastGet('state','mode') !== 'editing'){
         document.getElementById('mainInfoBox').style.display = "none";
         bb.installWatch('state','focusedObject',updateInfo);
         return;
     }
-    let obj = bb.fastGet('liveObjects',object);
     document.getElementById('mainInfoBox').style.display = "block";
-    document.getElementById('objName').innerHTML = object;
+    document.getElementById('objName').innerHTML = obj.name;
     document.getElementById('categName').innerHTML = "("+obj.getCategory()+")";
 
     let fieldsInfo = document.getElementById('fieldsInfo');
@@ -28,7 +27,7 @@ function updateInfo(object){
     document.getElementById('addFieldButton').addEventListener('click',()=>{
         let textValue = document.getElementById('addFieldText').value;
         if(textValue === "")return;
-        let focusedObj = bb.fastGet('liveObjects',bb.fastGet('state','focusedObject'));
+        let focusedObj = bb.fastGet('state','focusedObject');
         focusedObj.addValue(textValue);
         let item = document.createElement('div');
         item.classList += "InfoBox_item";
@@ -72,7 +71,7 @@ function updateInfo(object){
     document.getElementById('addAttributeButton').addEventListener('click',()=>{
         let textValue = document.getElementById('addAttributeText').value;
         if(textValue === "")return;
-        let focusedObj = bb.fastGet('liveObjects',bb.fastGet('state','focusedObject'));
+        let focusedObj = bb.fastGet('state','focusedObject');
         focusedObj.addOption(textValue);
         let item = document.createElement('div');
         item.innerHTML = textValue + " = " + focusedObj.getOption(textValue);

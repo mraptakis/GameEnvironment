@@ -7,7 +7,8 @@ function AK() {
 }
 
 AK.prototype.getObject = (objName)=>{
-    return bb.fastGet('liveObjects',objName);
+    throw Error('TODO');
+    // return bb.fastGet('liveObjects',objName);
 }
 
 AK.prototype.getField = (obj,fieldName)=>{

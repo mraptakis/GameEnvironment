@@ -1,8 +1,8 @@
 import bb from '../utils/blackboard.js'
 
 import collisionManager from './collisionManager.js'
-
-const collisionObject = bb.fastGet('liveObjects', 'Collisions')
+import collisionObject from '../renderer/CollisionsObject.js' 
+import collisionsObject from '../renderer/CollisionsObject.js';
 
 collisionManager.setCodeExecutioner(bb.fastGet('scripting','executeText'));
 
@@ -22,7 +22,7 @@ bb.fastInstall('collisions', 'setCollision', (obj1, obj2,codeAsText) => {return 
 bb.fastInstall('collisions', 'loadSaved', () => {
     for(let i in localStorage){
         let split = i.split("_");
-        if(split[0] === 'Collisions'){
+        if(split[0] === collisionObject.id){
             bb.fastGet('collisions', 'installCollision')(split[1],split[2],localStorage[i]);
         }
     }

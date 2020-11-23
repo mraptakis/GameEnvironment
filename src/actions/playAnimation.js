@@ -6,7 +6,6 @@ const FRAnimator = bb.fastGet('animation','FrameRangeAnimator');
 function playAnimation({object,anim,onStart,onFinish}){
 
     if(!anim)return;
-
     let obj = (object)?object:bb.fastGet('state','player');
     let animator = new FRAnimator();
     let animation = getAnimation(anim);

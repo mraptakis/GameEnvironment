@@ -20,8 +20,8 @@ export default {
             position: {x:500,y:780}
         },
         {
+            id: "ITG9NaKdTa8C0fN",
             meta:{
-                id: "ITG9NaKdTa8C0fN",
                 name: "coin1",
                 dim: {
                     width: 20,
@@ -34,8 +34,8 @@ export default {
             position: {x:600,y:460}
         },
         {
+            id: "Whu6GiXZlHEwzqF",
             meta:{
-                id: "Whu6GiXZlHEwzqF",
                 name: "coin2",
                 dim: {
                     width: 20,

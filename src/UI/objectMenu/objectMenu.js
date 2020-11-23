@@ -22,13 +22,14 @@ function updateObjectList(){
     let objWrapper = document.getElementById('objectMenuWrapper');
     objWrapper.innerHTML = '';
     for(let i in items){
+        let name = items[i].name;
         let wrap = document.createElement('div');
         wrap.classList += 'objectMenu_itemWrapper';
         objWrapper.appendChild(wrap);
 
         let title = document.createElement('div');
         title.classList += 'objectMenu_objName';
-        title.innerHTML = i;
+        title.innerHTML = name;
         wrap.appendChild(title);
         
 
@@ -51,7 +52,7 @@ function updateObjectList(){
         }
 
         body.onmouseenter = () => {
-            let pos = bb.fastGet('liveObjects',i).getPositional();
+            let pos = bb.fastGet('liveObjects',items[i].id).getPositional();
             let mark = document.createElement('div');
             mark.id = 'objectMenu_focus';
             if(pos.r){
@@ -69,7 +70,7 @@ function updateObjectList(){
             objName.id = 'objectMenu_focus_name';
         
             objName.innerText = `Name: ${i}\n
-                                 Category: ${bb.fastGet('liveObjects',i).getCategory()}\n
+                                 Category: ${bb.fastGet('liveObjects',items[i].id).getCategory()}\n
                                  X: ${pos.x}px\n
                                  Y: ${pos.y}px`;
             objName.style.top = (pos.y - 120)+'px';

@@ -82,9 +82,10 @@ function showCollisions(){
     let systemObjects = bb.fastGet('state', 'systemObjects');
 
     for(let i in aliveItems){
-        if(systemObjects.indexOf(i) !== -1)continue;
-        list1.innerHTML += `<option value=${i}>${i}</option>`;
-        list2.innerHTML += `<option value=${i}>${i}</option>`;
+        let name = aliveItems[i].name;
+        if(systemObjects.indexOf(name) !== -1)continue;
+        list1.innerHTML += `<option value=${name}>${name}</option>`;
+        list2.innerHTML += `<option value=${name}>${name}</option>`;
     }
     
     createCollision.addEventListener('click',()=>{

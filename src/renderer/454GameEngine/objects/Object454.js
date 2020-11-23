@@ -4,6 +4,8 @@ import Object from '../../../objects/Object.js'
 
 import Value from '../../../objects/Value.js'
 
+import stage from '../../EnvironmentObject.js'
+
 import scene from './Scene.js'
 
 export default class Object454 extends Object{
@@ -15,8 +17,8 @@ export default class Object454 extends Object{
     _frame;
     _animator;
 
-    constructor(name){
-        super(name);
+    constructor(name,id){
+        super(name,id);
         this.renderer = '454';
         this._rotation = 0;
 
@@ -44,7 +46,7 @@ export default class Object454 extends Object{
             getValue: () => {return this._color;}
         });
 
-        this._stage = bb.fastGet('liveObjects','Stage');
+        this._stage = stage;
 
     }
 
@@ -115,7 +117,7 @@ export default class Object454 extends Object{
     }
 
     add(){
-        bb.fastSet('liveObjects',this.name,this);
+        bb.fastSet('liveObjects',this.id,this);
         scene.addItem(this);
     }
     
@@ -123,7 +125,7 @@ export default class Object454 extends Object{
         if(this._animator !== undefined)this._animator.stop();
         this._stage = undefined;
         this.clear();
-        bb.fastRemove('liveObjects',this.name);
+        bb.fastRemove('liveObjects',this.id);
         scene.removeItem(this);
     }
 

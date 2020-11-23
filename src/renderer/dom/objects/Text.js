@@ -9,8 +9,8 @@ function pxToNumber(str){
 }
 class Text extends Object {
     
-    constructor({name,texture,dim,defaultText,div}){
-        super(name);
+    constructor({name,texture,dim,defaultText,div},id){
+        super(name,id);
         
         if(div)this.div = div;
         else this.createElement({name,texture,dim,defaultText});

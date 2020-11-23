@@ -9,8 +9,8 @@ class Rectangle extends Object {
     _width;
     _height;
 
-    constructor({name,dim,film}){
-        super(name);
+    constructor({name,dim,film},id){
+        super(name,id);
         
         bb.fastInstall('state','player',this);
 

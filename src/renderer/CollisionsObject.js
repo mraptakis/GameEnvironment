@@ -8,9 +8,7 @@ class CollisionsObject extends Object {
     name = 'Collisions';
 
     constructor(){
-        super('Collisions');
-
-        this.id = 'KciKIiWkUB9QL6q';
+        super('Collisions','KciKIiWkUB9QL6q');
 
         delete this.options['isMovable'];
         delete this.options['isRemovable'];
@@ -40,7 +38,7 @@ class CollisionsObject extends Object {
     }
 
     setEvent(ev,code){
-        localStorage.setItem(this.name+"_"+ev,code);
+        localStorage.setItem(this.id+"_"+ev,code);
         let split = ev.split('_');
         bb.fastGet('collisions', 'setCollision')(split[0],split[1],code);
     }
@@ -51,7 +49,7 @@ class CollisionsObject extends Object {
 
     remove(){
         this.clear();
-        bb.fastRemove('liveObjects',this.name);
+        bb.fastRemove('liveObjects',this.id);
     }
 
     getCategory(){
@@ -62,6 +60,6 @@ class CollisionsObject extends Object {
 
 const collisionsObject = new CollisionsObject();
 
-bb.fastSet('liveObjects','Collisions',collisionsObject);
+bb.fastSet('liveObjects',collisionsObject.id,collisionsObject);
 
 export default collisionsObject;

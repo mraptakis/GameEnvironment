@@ -49,12 +49,12 @@ function onHudLoaded(){
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
         let text = bb.fastGet('scripting','currentScriptAsText')();
-        bb.fastGet('liveObjects',bb.fastGet('state','focusedObject')).setEvent(tabOpen,text);
+        bb.fastGet('state','focusedObject').setEvent(tabOpen,text);
     });
 
     function tabInfo(obj,id){
         return ()=>{
-            let text = bb.fastGet('liveObjects',obj).getEvent(id);
+            let text = obj.getEvent(id);
             bb.fastGet('scripting','clearAndLoadFromText')(text);
             // codeAnalysis(bb.fastGet('scripting','currentScriptAsCode')());
             tabOpen = id;
@@ -74,21 +74,21 @@ function onHudLoaded(){
 
     bb.installWatch('state','lastAction',onActionChange);
 
-    function onFocusChange(objName){
+    function onFocusChange(obj){
         let eventsTab = document.getElementById('eventsTab');
         eventsTab.innerHTML = "";
-        if(objName === undefined){
+        if(obj === undefined){
             document.getElementById('openTab').innerHTML = "";
             bb.fastGet('scripting','clearAndLoadFromText')("");
             bb.installWatch('state','focusedObject',onFocusChange);
             return;
         }
         let firstObject = true;
-        for(let i in bb.fastGet('liveObjects',objName).getEvents()){
+        for(let i in obj.getEvents()){
             let elem = document.createElement('div');
             elem.classList = "eventTab";
             elem.innerHTML = i;
-            elem.addEventListener('click',tabInfo(objName,i));
+            elem.addEventListener('click',tabInfo(obj,i));
             eventsTab.appendChild(elem);
             if(firstObject){
                 elem.click();

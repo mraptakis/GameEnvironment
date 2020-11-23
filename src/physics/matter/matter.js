@@ -60,7 +60,7 @@ class MatterJS {
     update(){
         Matter.Engine.update(this.engine);
         this.engine.world.bodies.forEach((body)=>{
-            let realObj = bb.fastGet('liveObjects',body.name);
+            let realObj = bb.fastGet('liveObjects',body.id);
             if(!realObj){
                 this.removeFromWorld(body.name);
                 return;

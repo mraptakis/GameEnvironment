@@ -27,12 +27,12 @@ class EnvironmentObject extends Object {
 
         this.events["moveStageLeft"] = new Event({
             tag: 'system',
-            value: localStorage.getItem(this.name+"_moveStageLeft")
+            value: localStorage.getItem(this.id+"_moveStageLeft")
         });
 
         this.events["moveStageRight"] = new Event({
             tag: 'system',
-            value: localStorage.getItem(this.name+"_moveStageRight")
+            value: localStorage.getItem(this.id+"_moveStageRight")
         });
 
         this._windowWidth = window.innerWidth;
@@ -124,7 +124,7 @@ class EnvironmentObject extends Object {
 
     remove(){
         this.clear();
-        bb.fastRemove('liveObjects',this.name);
+        bb.fastRemove('liveObjects',this.id);
     }
 
     getCategory(){
@@ -136,6 +136,6 @@ class EnvironmentObject extends Object {
 
 const environmentObject = new EnvironmentObject();
 
-bb.fastSet('liveObjects','Stage', environmentObject);
+bb.fastSet('liveObjects', environmentObject.id, environmentObject);
 
 export default environmentObject;

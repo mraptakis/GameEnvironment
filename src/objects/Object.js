@@ -15,33 +15,33 @@ export default class Object {
 
     options = {}
 
-    constructor(_name){
-        this._name = _name;
-        this._id = rand.generateGameID();
+    constructor(_name,_id){
+        this._name = _name;        
+        this.id = (_id)?_id:rand.generateGameID();
 
         this.events['onClick'] = new Event({
             tag: 'system',
-            value: localStorage.getItem(this.name+"_onClick")
+            value: localStorage.getItem(this.id+"_onClick")
         });
         this.events['onRightClick'] = new Event({
             tag: 'system',
-            value: localStorage.getItem(this.name+"_onRightClick")
+            value: localStorage.getItem(this.id+"_onRightClick")
         });
         this.events['onGameStart'] = new Event({
             tag: 'system',
-            value: localStorage.getItem(this.name+"_onGameStart")
+            value: localStorage.getItem(this.id+"_onGameStart")
         });
         this.events['onRemove'] = new Event({
             tag: 'system',
-            value: localStorage.getItem(this.name+"_onRemove")
+            value: localStorage.getItem(this.id+"_onRemove")
         });
         this.events['onMove'] = new Event({
             tag: 'system',
-            value: localStorage.getItem(this.name+"_onMove")
+            value: localStorage.getItem(this.id+"_onMove")
         });
         this.events['onEachFrame'] = new Event({
             tag: 'system',
-            value: localStorage.getItem(this.name+"_onEachFrame")
+            value: localStorage.getItem(this.id+"_onEachFrame")
         });
 
 
@@ -106,10 +106,7 @@ export default class Object {
     }
 
     setName(newName){
-        bb.fastRemove('liveObjects',this.name);
-        if(bb.fastGet('state','player') === this)bb.fastSet('state','player',this);
         this.name = newName;
-        bb.fastSet('liveObjects',this.name);
     }
 
     getOptions(){
@@ -164,7 +161,7 @@ export default class Object {
     }
 
     addEvent(ev){
-        let code = localStorage.getItem(this.name+"_"+ev);
+        let code = localStorage.getItem(this.id+"_"+ev);
         this.events[ev] = new Event({
             tag: 'custom',
             value: (code)?code:""
@@ -185,7 +182,7 @@ export default class Object {
             log.logError('Couldn\'t set event '+ev+' because it doesn\'t exists');
             return;
         }
-        localStorage.setItem(this.name+"_"+ev,code);
+        localStorage.setItem(this.id+"_"+ev,code);
         this.events[ev].val = code;
         if(this.events[ev].onChange)this.events[ev].onChange(code);
     }

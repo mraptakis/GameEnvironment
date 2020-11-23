@@ -97,19 +97,27 @@ class CollisionManager {
         //     for(let j in aliveItems){
         //         if(this.collided(aliveItems[i],aliveItems[j])){
         //             // aliveItems[i].triggerEvent('onCollision');
-        //             if(this._collisionReactions[`${i}_${j}`]){
-        //                 this._collisionReactions[`${i}_${j}`]();
+        //             console.log(aliveItems[i].name,aliveItems[j].name);
+        //             if(this._collisionReactions[`${aliveItems[i].name}_${aliveItems[j].name}`]){
+        //                 console.log(`${aliveItems[i].name}_${aliveItems[j].name}`)
+        //                 this._codeRunner(this._collisionReactions[`${aliveItems[i].name}_${aliveItems[j].name}`]);
         //             }
         //         }
         //     }
         // }
 
+        let nameTranslator = {}
+
+        for(let i in aliveItems){
+            nameTranslator[aliveItems[i].name] = aliveItems[i]; 
+        }
+
         for(let i in this._collisionReactions){
             let split = i.split('_');
             let obj1Name = split[0];
             let obj2Name = split[1];
-            if(!aliveItems[obj1Name] || !aliveItems[obj2Name])continue;
-            if(this.collided(aliveItems[obj1Name], aliveItems[obj2Name])){
+            if(!nameTranslator[obj1Name] || !nameTranslator[obj2Name])continue;
+            if(this.collided(nameTranslator[obj1Name], nameTranslator[obj2Name])){
                 // aliveItems[obj1Name].triggerEvent('onCollision');
                 if(this._collisionReactions[i]){
                     this._codeRunner(this._collisionReactions[i]);

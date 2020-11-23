@@ -53,8 +53,9 @@ function objectsDropdown(){
 
     function getObjects(){
         let objects = [];
-        for(let object in bb.getComponent('liveObjects').itemMap){
-            objects.push(object);
+        const liveObjects = bb.getComponent('liveObjects').itemMap;
+        for(let object in liveObjects){
+            objects.push(liveObjects[object]);
         }
         return objects;
     }
@@ -68,10 +69,10 @@ function objectsDropdown(){
         document.body.appendChild(dropdown);
         objects.forEach((item)=>{
             let ddItem = document.createElement('div');
-            ddItem.id = 'toolbar_object_'+item;
+            ddItem.id = 'toolbar_object_'+item.id;
             ddItem.classList += 'toolbar_dropdown_item';
-            ddItem.innerHTML = item;
-            ddItem.addEventListener('click',()=>focusedObject(item));
+            ddItem.innerHTML = item.name;
+            ddItem.addEventListener('click',()=>focusedObject(item.id));
             dropdown.appendChild(ddItem);
         });
         bb.installWatch('state','focusedObject',closeDropdown);
@@ -99,7 +100,7 @@ function eventsDropdown(){
         let events = [];
         let focused = bb.fastGet('state','focusedObject');
         if(!focused)return [];
-        for(let event in bb.fastGet('liveObjects',focused).getEvents()){
+        for(let event in focused.getEvents()){
             events.push(event);
         }
         return events;
@@ -117,7 +118,7 @@ function eventsDropdown(){
             ddItem.id = 'toolbar_object_'+item;
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = item;
-            ddItem.addEventListener('click',()=>bb.fastGet('liveObjects',bb.fastGet('state','focusedObject')).triggerEvent(item));
+            ddItem.addEventListener('click',()=>bb.fastGet('state','focusedObject').triggerEvent(item));
             dropdown.appendChild(ddItem);
         });
         bb.installWatch('state','focusedObject',closeDropdown);
