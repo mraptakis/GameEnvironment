@@ -10,7 +10,7 @@ class CollisionManager {
     }
 
     installCollision(first,second,codeAsText){
-        if(this._collisionReactions[`${first}_${second}`])return false;
+        if(this._collisionReactions[`${first}_${second}`] || this._collisionReactions[`${second}_${first}`])return false;
         this._collisionReactions[`${first}_${second}`] = (codeAsText)?codeAsText:"";
         return true;
     }

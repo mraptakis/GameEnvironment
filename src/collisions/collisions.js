@@ -18,3 +18,12 @@ bb.fastInstall('collisions', 'getCollisions', (obj) => {return collisionManager.
 bb.fastInstall('collisions', 'getCollision', (obj1, obj2) => {return collisionManager.getCollision(obj1, obj2)});
 bb.fastInstall('collisions', 'setCollision', (obj1, obj2,codeAsText) => {return collisionManager.setCollision(obj1, obj2, codeAsText)});
 
+
+bb.fastInstall('collisions', 'loadSaved', () => {
+    for(let i in localStorage){
+        let split = i.split("_");
+        if(split[0] === 'Collisions'){
+            bb.fastGet('collisions', 'installCollision')(split[1],split[2],localStorage[i]);
+        }
+    }
+});

@@ -9,7 +9,7 @@ export default class Event {
         }
         this.tag = tag;
         this.val = value;
-        this.onChange = (onChange)?onChange:(val)=>this.val = value;
+        this.onChange = (onChange)?onChange:(val)=>this.val = val;
         this.getValue = getValue;
     }
 }

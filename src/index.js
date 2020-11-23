@@ -15,7 +15,7 @@ const app = new App();
 const game = app.game;
 
 function inpHandler(key) {
-    // if(bb.fastGet('state','mode') === 'editing')return;
+    if(bb.fastGet('state','mode') === 'editing')return;
     if(keyToAction[key])keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
     if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
 };
@@ -26,8 +26,8 @@ const animationLoader       = bb.fastGet('animation', 'load');
 const assetsToLoad          = bb.fastGet('animation', 'requiredAssets');
 const rend                  = bb.fastGet('renderer', 'render');
 const phUpdate              = bb.fastGet('physics', 'update');
+const initialiseColl        = bb.fastGet('collisions', 'loadSaved');
 const collisionCheck        = bb.fastGet('collisions', 'checkAndInvoke');
-const addCollision          = bb.fastGet('collisions', 'installCollision');
 
 app.addInitialiseFunction(()=>{
 
@@ -75,6 +75,7 @@ app.addLoadFunction(()=>{
         }
     });
     installWatches();
+    initialiseColl();
     bb.print();
 });
 

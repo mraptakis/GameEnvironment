@@ -208,6 +208,7 @@ function createPopUp(film){
             reps: Number.parseInt(repsInput.value),
             delay: Number.parseInt(delaySlider.value)
         }),film.id);
+        destroyPopUP();
     }
 
     dxInput.addEventListener('change',restartAnimation);
