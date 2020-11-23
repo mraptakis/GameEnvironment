@@ -6,6 +6,7 @@ export default {
     },
     objects: [
         {
+            id: "U0Aox2uTtKHINKh",
             meta:{
                 name: "player",
                 dim: {
@@ -20,6 +21,7 @@ export default {
         },
         {
             meta:{
+                id: "ITG9NaKdTa8C0fN",
                 name: "coin1",
                 dim: {
                     width: 20,
@@ -33,6 +35,7 @@ export default {
         },
         {
             meta:{
+                id: "Whu6GiXZlHEwzqF",
                 name: "coin2",
                 dim: {
                     width: 20,
@@ -45,6 +48,7 @@ export default {
             position: {x:700,y:460}
         },
         {
+            id: "VhgKmEu8oTQMJqC",
             meta:{
                 name: "coin3",
                 dim: {
@@ -58,6 +62,7 @@ export default {
             position: {x:800,y:460}
         },
         {
+            id: "y1gYI2yyo1QzjmH",
             meta:{
                 name: "score",
             },
@@ -75,6 +80,7 @@ export default {
             position: {x:1150,y:100}
         },
         {
+            id: "E9E6IUVr9Wp9Bba",
             meta:{
                 name: "floor",
                 dim: {

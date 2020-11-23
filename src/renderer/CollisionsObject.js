@@ -1,10 +1,6 @@
 import bb from '../utils/blackboard.js'
 
 import Object from '../objects/Object.js'
-import Value from '../objects/Value.js'
-import Event from '../objects/Event.js'
-import log from '../utils/logs.js'
-import collisionManager from '../collisions/collisionManager.js'
 
 class CollisionsObject extends Object {
 
@@ -14,30 +10,7 @@ class CollisionsObject extends Object {
     constructor(){
         super('Collisions');
 
-        // this.values['x'] = new Value({
-        //     tag: "positional",
-        //     value: 0,
-        //     onChange: (value) => {log.logError(`Can't change x value of ${this.name}`);}
-        // });
-
-        // this.values['y'] = new Value({
-        //     tag: "positional",
-        //     value: 0,
-        //     onChange: (value) => {log.logError(`Can't change y value of ${this.name}`);}
-        // });
-
-        // this.values['width'] = new Value({
-        //     tag: "positional",
-        //     value: 0,
-        //     onChange: (value) => {log.logError(`Can't change width value of ${this.name}`);}
-        // });
-
-        // this.values['height'] = new Value({
-        //     tag: "positional",
-        //     value: 0,
-        //     onChange: (value) => {log.logError(`Can't change height value of ${this.name}`);}
-        // });
-        
+        this.id = 'KciKIiWkUB9QL6q';
 
         delete this.options['isMovable'];
         delete this.options['isRemovable'];

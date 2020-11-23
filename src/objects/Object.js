@@ -1,10 +1,12 @@
 import bb from '../utils/blackboard.js'
 import log from '../utils/logs.js'
+import rand from '../utils/randomGenerator.js'
 
 import Event from './Event.js'
 
 export default class Object {
-    name
+    _id
+    _name
     renderer
 
     values = {}
@@ -14,7 +16,8 @@ export default class Object {
     options = {}
 
     constructor(_name){
-        this.name = _name;
+        this._name = _name;
+        this._id = rand.generateGameID();
 
         this.events['onClick'] = new Event({
             tag: 'system',
@@ -80,6 +83,22 @@ export default class Object {
 
     getCategory(){
         throw Error("getCategory needs to be implemented");
+    }
+
+    get id(){
+        return this._id;
+    }
+
+    set id(newID){
+        this._id = newID;
+    }
+
+    get name(){
+        return this._name;
+    }
+
+    set name(newName){
+        this._name = newName;
     }
 
     getName(){

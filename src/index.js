@@ -37,9 +37,9 @@ app.addInitialiseFunction(()=>{
     init.objects.forEach((item)=>{
         let category = bb.fastGet('objects',item.category);
         if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
-        if(item.meta.name === undefined 
-        || !bb.fastGet('liveObjects',item.meta.name)){
+        if(item.meta.name !== undefined){
             let it = new category(item.meta);
+            if(item.id)it.id = item.id;
             if(item.color)it.setColor(item.color);
             if(item.position)it.setPosition(item.position.x,item.position.y);
             if(item.attributes){
@@ -77,6 +77,9 @@ app.addLoadFunction(()=>{
     installWatches();
     initialiseColl();
     bb.print();
+    for(let it in aliveItems){
+        console.log(aliveItems[it].name,aliveItems[it].id);
+    }
 });
 
 game.render = ()=>{

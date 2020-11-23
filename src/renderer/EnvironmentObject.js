@@ -18,6 +18,8 @@ class EnvironmentObject extends Object {
     constructor(){
         super('Stage');
 
+        this.id = 'BpAoTcBMfklfGm6';
+
         this._x = 0;
         this._y = 0;
 
