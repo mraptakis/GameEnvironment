@@ -14,8 +14,9 @@ import keyToAction from '../assets/json/keyToActions.js' //json
 const app = new App();
 const game = app.game;
 
+// TODO: move this to somewhere better
 function inpHandler(key) {
-    if(bb.fastGet('state','mode') === 'editing')return;
+    // if(bb.fastGet('state','mode') === 'editing')return;
     if(keyToAction[key])keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
     if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
 };

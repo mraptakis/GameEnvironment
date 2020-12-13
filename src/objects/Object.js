@@ -208,6 +208,52 @@ export default class Object {
         throw Error("add needs to be implemented");
     }
 
+    save(){
+        let savedData = {};
+        savedData['id'] = this._id;
+        savedData['name'] = this._name;
+
+        savedData['events'] = {};
+        let events = savedData['events'];
+        for(let i in this.events){
+            events[i] = this.getEvent(i);
+        }
+
+        savedData['options'] = {};
+        let options = savedData['options'];
+        for(let i in this.options){
+            options[i] = this.getOption(i);
+        }
+
+        savedData['values'] = {};
+        let values = savedData['values'];
+        for(let i in this.values){
+            values[i] = this.getValue(i);
+        }
+        savedData['category'] = this.getCategory();
+        return savedData;
+    }
+
+    loadFromSaved(objData){
+        this.id = objData.id;
+        this.name = objData.name;
+
+        let events = objData.events;
+        for(let i in events){
+            this.setEvent(i,events[i]);
+        }
+
+        let options = objData.options;
+        for(let i in options){
+            this.setOption(i,options[i]);
+        }
+
+        let values = objData.values;
+        for(let i in values){
+            this.setValue(i,values[i]);
+        }
+    }
+
     clear(){
         for(let i in this.events){
             delete this.events[i];

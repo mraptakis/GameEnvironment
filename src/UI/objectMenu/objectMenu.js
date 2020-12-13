@@ -22,7 +22,8 @@ function updateObjectList(){
     let objWrapper = document.getElementById('objectMenuWrapper');
     objWrapper.innerHTML = '';
     for(let i in items){
-        let name = items[i].name;
+        let item = items[i];
+        let name = item.name;
         let wrap = document.createElement('div');
         wrap.classList += 'objectMenu_itemWrapper';
         objWrapper.appendChild(wrap);
@@ -35,10 +36,10 @@ function updateObjectList(){
 
         let body = document.createElement('div');
         body.classList += 'objectMenu_body';
-        if(items[i].renderer === 'dom'){
-            let newItem = items[i].getObject().cloneNode(true);
+        if(item.renderer === 'dom'){
+            let newItem = item.getObject().cloneNode(true);
             body.appendChild(newItem);
-            let oldCSS = document.defaultView.getComputedStyle(items[i].getObject(), "");
+            let oldCSS = document.defaultView.getComputedStyle(item.getObject(), "");
             newItem.id = newItem.id+'_objectMenu';
             newItem.style.color = oldCSS.getPropertyValue('color');
             newItem.classList = '';
@@ -47,12 +48,31 @@ function updateObjectList(){
             newItem.style.position = '';
             newItem.style.transform = 'rotate(0)';
 
-        }else{
-            body.innerHTML = 'Copying for '+i+' isn\'t possible at the moment';
+        }else if(item.renderer === '454'){
+            let pos = item.getPositional();
+            if(item._film){
+                let info = item._getFilm(item._film);
+                let box = info.getFrameBox(item._frame);
+                let img = info.bitmap;
+                let canv = document.createElement('canvas');
+                canv.id = item.id+'_objectMenu';
+                body.appendChild(canv);
+                canv.style.width = '100%';
+                canv.style.height = '100%';
+                let ctx = canv.getContext('2d');
+                let x = canv.width/2 - pos.width/2;
+                let y = canv.height/2 - pos.height/2;
+                ctx.drawImage(bb.fastGet('assets',img),
+                box.x,box.y,box.width,box.height,
+                x, y, pos.width, pos.height);
+            }
+        }else {
+            body.innerHTML = 'Copying for '+i+' isn\'t possible';
         }
 
         body.onmouseenter = () => {
-            let pos = bb.fastGet('liveObjects',items[i].id).getPositional();
+            let item = items[i];
+            let pos = bb.fastGet('liveObjects',item.id).getPositional();
             let mark = document.createElement('div');
             mark.id = 'objectMenu_focus';
             if(pos.r){
@@ -69,8 +89,8 @@ function updateObjectList(){
             let objName = document.createElement('div');
             objName.id = 'objectMenu_focus_name';
         
-            objName.innerText = `Name: ${i}\n
-                                 Category: ${bb.fastGet('liveObjects',items[i].id).getCategory()}\n
+            objName.innerText = `Name: ${item.name}\n
+                                 Category: ${bb.fastGet('liveObjects',item.id).getCategory()}\n
                                  X: ${pos.x}px\n
                                  Y: ${pos.y}px`;
             objName.style.top = (pos.y - 120)+'px';

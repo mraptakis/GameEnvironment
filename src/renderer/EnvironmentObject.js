@@ -9,16 +9,14 @@ class EnvironmentObject extends Object {
 
     renderer = 'None';
     name = 'Stage';
-
+    
     _x;
     _y;
     _width;
     _height;
 
     constructor(){
-        super('Stage');
-
-        this.id = 'BpAoTcBMfklfGm6';
+        super('Stage','BpAoTcBMfklfGm6');
 
         this._x = 0;
         this._y = 0;

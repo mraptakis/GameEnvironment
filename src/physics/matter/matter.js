@@ -26,9 +26,9 @@ class MatterJS {
         }
         let options = {
             isStatic: item.getOption('isSolid'),
-            density: 0.01,
-            restitution: 0.2,
-            friction: 0.3
+            // density: 0.01,
+            restitution: 1,
+            // friction: 0.3
         };
         if(objMapItem['rotation'])options['angle'] = objMapItem['rotation'];
         if(pos.r !== undefined){
@@ -40,7 +40,8 @@ class MatterJS {
             let y = objMapItem.y+ objMapItem.height/2;
             objMapItem["phObject"] = Matter.Bodies.rectangle(x, y, objMapItem.width, objMapItem.height, options);
         }
-        objMapItem["phObject"].name = item.getName();
+        objMapItem["phObject"].name = item.name;
+        objMapItem["phObject"].id = item.id;
         Matter.World.add(this.engine.world, objMapItem["phObject"]);
     }
 
@@ -55,6 +56,13 @@ class MatterJS {
         let pos = Matter.Vector.create(position[0],position[1]);
         let f = Matter.Vector.create(force[0],force[1]);
         Matter.Body.applyForce(body, pos, f);
+    }
+
+    moveObject(object,move){
+        let body = this.objMap[object.getName()].phObject;
+        // body.position({x: -(position[0] - move[0]), y: - (position[1] - move[1])});
+        console.log(body)
+        Matter.Body.applyForce(body, body.position, {x: move[0], y: move[1]});
     }
 
     update(){
@@ -80,11 +88,12 @@ class MatterJS {
 
 const matter = new MatterJS();
 
-bb.fastInstall('physics','addToWorld',(item)=>matter.addToWorld(item));
-bb.fastInstall('physics','removeFromWorld',(item)=>matter.removeFromWorld(item));
-bb.fastInstall('physics','force',(rObj,position,force)=>matter.applyForce(rObj,position,force));
-bb.fastInstall('physics','update',()=>matter.update());
+bb.fastInstall('physics', 'addToWorld', (item)=>matter.addToWorld(item));
+bb.fastInstall('physics', 'removeFromWorld', (item)=>matter.removeFromWorld(item));
+bb.fastInstall('physics', 'force', (rObj,position,force)=>matter.applyForce(rObj,position,force));
+bb.fastInstall('physics', 'move', (obj,pos)=>matter.moveObject(obj,pos));
+bb.fastInstall('physics', 'update', ()=>matter.update());
 
 
 
-bb.fastSet('actions','playPhysics',()=>bb.fastGet('physics','update')()); ///
+bb.fastSet('actions', 'playPhysics', ()=>bb.fastGet('physics','update')()); ///

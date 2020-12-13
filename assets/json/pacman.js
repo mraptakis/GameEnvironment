@@ -31,7 +31,7 @@ export default {
             },
             category: "Rectangle",
             color : "#ffffff",
-            position: {x:600,y:460}
+            position: {x:600,y:775}
         },
         {
             id: "Whu6GiXZlHEwzqF",
@@ -45,7 +45,7 @@ export default {
             },
             category: "Rectangle",
             color : "#ffffff",
-            position: {x:700,y:460}
+            position: {x:700,y:775}
         },
         {
             id: "VhgKmEu8oTQMJqC",
@@ -59,7 +59,7 @@ export default {
             },
             category: "Rectangle",
             color : "#ffffff",
-            position: {x:800,y:460}
+            position: {x:800,y:775}
         },
         {
             id: "y1gYI2yyo1QzjmH",

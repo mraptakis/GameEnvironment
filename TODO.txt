@@ -13,7 +13,7 @@ IDE:
 
 ENGINE:
 
-    - Change all names to be IDs (objects, events, values, collisions, etc)
+    - (Done) Change all names to be IDs (objects, events, values, collisions, etc)
 
     - Add tickAnimator (!important)
 
@@ -25,7 +25,7 @@ ENGINE:
 
     - Create ScrollingManager and map coordinates from there.
 
-    - CollisionManager
+    - (Done meh) CollisionManager
         => how am I going to show it? (pop up window for adding, lines between objects edit)
         => who owns the code? (CollisionManager)
         => how am Ι going to handle collision with different objects? (different scripts)
