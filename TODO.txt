@@ -17,6 +17,8 @@ ENGINE:
 
     - Add tickAnimator (!important)
 
+    - Load manager
+
     - invoke functions through blackboard
 
     - Pause/start
@@ -42,7 +44,7 @@ FEATURES:
 
     - Code even more stuff
         -> transitionToState(X,code),transitionOutOfState(X,code)
-           onCollisionWith(X,code), 
+           (dont on collisionmanager) onCollisionWith(X,code), 
            onAttributeChange(X,code),onAttributeRetrieval(X,code)
            onValueChange(X,code),onValueRetrieval(X,code)
 
@@ -54,6 +56,17 @@ FEATURES:
 
     - Logging system
         -> Log all actions done and show it to user in order to understand whats going on easier.
+
+    - Integrated key binding feature (in settings).
+
+    - Integrated menu system for user to END-user.
+        -> pause the game
+        -> change config (w/e coder use)
+            -> key binding
+            -> save
+            -> sound
+            -> etc
+        -> resume game
         
 
 Extra:

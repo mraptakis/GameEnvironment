@@ -57,3 +57,26 @@
 .toolbar_dropdown_item:hover {
     background-color: var(--main-color-hover);
 }
+
+.toolbar_overlay_back {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100vh;
+    background-color: #000000ab;
+    z-index: 3;
+}
+
+.toolbar_options_open {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 80%;
+    height: 80vh;
+    background-color: red;
+    z-index: 4;
+    font-size: xx-large;
+    color: white;
+    text-align: center;
+}

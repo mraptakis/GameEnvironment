@@ -191,6 +191,44 @@ function uisDropdown(){
 }
 
 
+function openSettings(){
+    console.log('s');
+    let back = document.createElement('div');
+    back.id = 'toolbar_overlay_back';
+    back.className = 'toolbar_overlay_back';
+    document.body.appendChild(back);
+
+    let opts = document.createElement('div');
+    opts.id = 'toolbar_options_open';
+    opts.className = 'toolbar_options_open';
+    opts.innerHTML = 'TODO SETTINGS';
+    document.body.appendChild(opts);
+
+    let mainColor = document.createElement('input');
+    mainColor.type = 'color';
+    mainColor.addEventListener('change',()=>{
+        const mainThemeColor = '--main-color';
+        document.documentElement.style.setProperty(mainThemeColor, mainColor.value);
+    });
+    opts.appendChild(mainColor);
+
+    let subColor = document.createElement('input');
+    subColor.type = 'color';
+    subColor.addEventListener('change',()=>{
+        const mainThemeColor = '--main-color-text';
+        document.documentElement.style.setProperty(mainThemeColor, subColor.value);
+    });
+    opts.appendChild(subColor);
+
+
+    back.addEventListener('click',()=>{
+        opts.remove();
+        back.remove();
+    });
+    
+
+}
+
 function onToolbarLoaded(){
     let dropdown = document.getElementById('toolbar_actions_dropdown_button');
     let toggle = actionsDropdown();
@@ -211,5 +249,7 @@ function onToolbarLoaded(){
     toggle = uisDropdown();
     dropdown.addEventListener('click',toggle);
     document.getElementById('toolbar_uis').addEventListener('click',toggle);
+
+    document.getElementById('toolbar_settings').addEventListener('click',openSettings);
 
 }

@@ -20,4 +20,8 @@
         View
     </div>
     <div id="toolbar_uis_dropdown_button" class="toolbar_dropdown_button"></div>
+
+    <div id="toolbar_settings" class="toolbar_item ">
+        Settings
+    </div>
 </div>
