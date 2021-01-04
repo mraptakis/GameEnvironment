@@ -13,6 +13,7 @@ import FrameRangeAnimation from './Animations/AnimationCategories/FrameRangeAnim
 // TODO: check that everything is alright with the arguments
  
 bb.fastInstall('animation', 'progress', (gameTime)=>animatorManager.progress(gameTime));
+bb.fastInstall('animation', 'timeShift', (gameTime)=>animatorManager.timeShift(gameTime));
 bb.fastInstall('animation', 'getAllFilms',()=>animationFilmHolder._films);
 bb.fastInstall('animation', 'getFilm',(film)=>animationFilmHolder.getFilm(film));
 bb.fastInstall('animation', 'requiredAssets',()=>{return animationFilmHolder.getAssetsToLoad();});

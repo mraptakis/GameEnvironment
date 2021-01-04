@@ -11,6 +11,7 @@ import './moveBackward.js'
 import './moveLeft.js'
 import './moveRight.js'
 import './playAnimation.js'
+import './pauseGame.js'
 
 
 

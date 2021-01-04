@@ -23,6 +23,10 @@ export default class Game {
         };
     }
 
+    get gameState(){
+        return this._gameState;
+    }
+
     /**
      * Adds an item to render array
      * @param {Function} render - Item to be rendered
@@ -103,8 +107,8 @@ export default class Game {
             this.invoke(this._actions.physics);
             this.invoke(this._actions.collisions);
             this.invoke(this._actions.userCode);
-            this.invoke(this._actions.extra);
         }
+        this.invoke(this._actions.extra);
     }
     
     /**

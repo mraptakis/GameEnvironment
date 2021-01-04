@@ -100,6 +100,14 @@ class Blackboard {
     return this.componentMap[componentName].getItem(itemName);
   }
 
+  invoke(componentName,itemName,args){
+    if(this.componentMap[componentName] === undefined)return undefined;
+    let func = this.componentMap[componentName].getItem(itemName);
+    if(typeof func === 'function'){
+      return this.componentMap[componentName].getItem(itemName)(args);
+    }
+  }
+
   getComponent(componentName){
     return this.componentMap[componentName];
   }

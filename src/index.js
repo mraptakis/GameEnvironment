@@ -85,6 +85,8 @@ game.render = ()=>{
 };
 
 game.input = ()=>{
+    // if(game.gameState === 3)return; // 3 === PAUSED
+    inputManager.pollKeys();
     inputManager.getPressedKeys().forEach((key)=>inpHandler(key));
 };
 
@@ -127,3 +129,6 @@ game.extra = ()=>{
 // };
 
 app.main();
+
+bb.fastInstall('state','app',app);
+bb.fastInstall('state','game',game);

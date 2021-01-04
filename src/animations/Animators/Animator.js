@@ -35,7 +35,7 @@ export default class Animator {
     }
 
     timeShift(offset){
-        lastTime += offset;
+        this._lastTime += offset;
     }
 
     hasFinished(){

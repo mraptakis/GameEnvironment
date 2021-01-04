@@ -43,19 +43,19 @@ function onHudLoaded(){
 
     let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
-        let code = bb.fastGet('scripting','currentScriptAsCode')();
-        bb.fastGet('scripting','executeCode')(code);
+        let code = bb.invoke('scripting','currentScriptAsCode');
+        bb.invoke('scripting','executeCode',code);
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
-        let text = bb.fastGet('scripting','currentScriptAsText')();
+        let text = bb.invoke('scripting','currentScriptAsText');
         bb.fastGet('state','focusedObject').setEvent(tabOpen,text);
     });
 
     function tabInfo(obj,id){
         return ()=>{
             let text = obj.getEvent(id);
-            bb.fastGet('scripting','clearAndLoadFromText')(text);
+            bb.invoke('scripting','clearAndLoadFromText',text);
             // codeAnalysis(bb.fastGet('scripting','currentScriptAsCode')());
             tabOpen = id;
             document.getElementById('openTab').innerHTML = tabOpen;
@@ -79,7 +79,7 @@ function onHudLoaded(){
         eventsTab.innerHTML = "";
         if(obj === undefined){
             document.getElementById('openTab').innerHTML = "";
-            bb.fastGet('scripting','clearAndLoadFromText')("");
+            bb.invoke('scripting','clearAndLoadFromText','');
             bb.installWatch('state','focusedObject',onFocusChange);
             return;
         }
@@ -109,6 +109,6 @@ function onHudLoaded(){
 
     bb.installWatch('state','FPS',onFPSChange);
 
-    bb.fastGet('scripting','injectInDiv')(document.getElementById('languageDiv'));
+    bb.invoke('scripting','injectInDiv',document.getElementById('languageDiv'));
 
 }
