@@ -1,9 +1,9 @@
-import bb from '../utils/blackboard.js'
+import bb from '../../utils/blackboard.js'
 
-import Object from '../objects/Object.js'
-import Value from '../objects/Value.js'
-import Event from '../objects/Event.js'
-import log from '../utils/logs.js'
+import Object from '../../objects/Object.js'
+import Value from '../../objects/Value.js'
+import Event from '../../objects/Event.js'
+import log from '../../utils/logs.js'
 
 class EnvironmentObject extends Object {
 

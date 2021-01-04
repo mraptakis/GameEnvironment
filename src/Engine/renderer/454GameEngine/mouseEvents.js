@@ -1,9 +1,7 @@
-import bb from '../../utils/blackboard.js'
+import bb from '../../../utils/blackboard.js'
 
-import focusTransition from '../../transitionHandlers/focusedObject.js'
-import dragElement from '../../transitionHandlers/drag.js';
-
-import objManager from '../renderer.js'
+import focusTransition from '../../../transitionHandlers/focusedObject.js'
+import dragElement from '../../../transitionHandlers/drag.js';
 
 var mouse = { x : 0, y : 0 };
 
@@ -11,19 +9,17 @@ function translator(ev){
     return [ev.offsetX,ev.offsetY]
 }
 
-function pxToNumber(str){
-    str.substr(1,str.length-4);
-    return parseInt(str);
-}
+import objManager from '../renderer.js'
 
 function focused(obj,x,y){
-    if(obj.renderer !== 'dom')return false;
+    if(obj.renderer !== '454')return false;
     let boundingBox = obj.getBoundingBox();
+    let [mapX,mapY] = obj.getMapCoords();
     // console.log(obj.name,boundingBox);
-    if(boundingBox.x < x
-    && boundingBox.x + boundingBox.width > x
-    && boundingBox.y < y
-    && boundingBox.y + boundingBox.height > y){
+    if(mapX < x
+    && mapX + boundingBox.width > x
+    && mapY < y
+    && mapY + boundingBox.height > y){
         return true;
     }
     return false;

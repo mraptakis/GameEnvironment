@@ -1,6 +1,6 @@
 import Object from './ObjectDom.js'
 
-import bb from '../../../utils/blackboard.js'
+import bb from '../../../../utils/blackboard.js'
 
 class Scene extends Object {
     constructor(){

@@ -1,4 +1,4 @@
-import bb from '../utils/blackboard.js'
+import bb from '../../utils/blackboard.js'
 
 
 class ObjectManager {
@@ -10,6 +10,23 @@ class ObjectManager {
         this._constructors = {};
         this._objects = {}; 
         this._objectByName = {};
+    }
+
+    addConstructor(name,cons){
+        this._constructors[name] = cons;
+    }
+
+    removeConstructor(name){
+        if(this._constructors[name])
+            delete this._constructors[name];
+    }
+
+    getConstructor(name){
+        return this._constructors[name];
+    }
+
+    get constr(){
+        return this._constructors;
     }
 
     addToWorld(obj) {
@@ -48,8 +65,16 @@ export default objectManager;
 
 import envObj from './EnvironmentObject.js'
 import colObj from './CollisionsObject.js'
-import './dom/renderer.js'
-import './454GameEngine/renderer.js'
+import domConst from './dom/renderer.js'
+import _454Const from './454GameEngine/renderer.js'
+
+for(let i in _454Const){
+    objectManager.addConstructor(i,_454Const[i]);
+}
+
+for(let i in domConst){
+    objectManager.addConstructor(i,domConst[i]);
+}
 
 objectManager.addToWorld(envObj);
 objectManager.addToWorld(colObj);
@@ -58,7 +83,7 @@ bb.fastInstall('state', 'systemObjects', [envObj.name,colObj.name]);
 
 
 
-import changeFocus from '../transitionHandlers/focusedObject.js'
+import changeFocus from '../../transitionHandlers/focusedObject.js'
 let clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";
     clickWrapper.style.width = '100vw';

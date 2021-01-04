@@ -1,4 +1,4 @@
-import bb from '../utils/blackboard.js'
+import bb from '../../utils/blackboard.js'
 
 import animatorManager from './Animators/AnimatorManager.js'
 import MovingAnimator from './Animators/AnimatorCategories/MovingAnimator.js'

@@ -1,6 +1,6 @@
-import bb from '../utils/blackboard.js'
+import bb from '../../utils/blackboard.js'
 
-import Object from '../objects/Object.js'
+import Object from '../../objects/Object.js'
 
 class CollisionsObject extends Object {
 

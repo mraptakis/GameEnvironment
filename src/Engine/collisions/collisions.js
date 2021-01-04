@@ -1,4 +1,4 @@
-import bb from '../utils/blackboard.js'
+import bb from '../../utils/blackboard.js'
 
 import collisionHolder from './collisionHolder.js'
 import collisionObject from '../renderer/CollisionsObject.js'

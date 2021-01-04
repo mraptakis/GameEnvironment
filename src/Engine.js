@@ -5,10 +5,6 @@ import FPSCounter from './utils/fps.js'
 import inputManager from './utils/inputManager.js'
 import installWatches from './utils/watches.js'
 
-import objectManager from './renderer/renderer.js'
-import AnimationManager from './animations/animations.js'
-import CollisionManager from './collisions/collisions.js'
-
 const rend                  = bb.fastGet('renderer',   'render');
 const phUpdate              = bb.fastGet('physics',    'update');
 
@@ -117,7 +113,7 @@ app.addInitialiseFunction(()=>{
     if(init.state.background)document.body.style.backgroundImage = `url('${init.state.background}')`;
 
     init.objects.forEach((item)=>{
-        let category = bb.fastGet('objects',item.category);
+        let category = Engine.ObjectManager.getConstructor(item.category);
         if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
         if(item.meta.name !== undefined){
             let it = new category(item.meta,item.id);
@@ -229,5 +225,9 @@ Engine.resume = ()=>{
     Engine.timePaused = undefined;
 }
 
+
+import objectManager from './Engine/renderer/renderer.js'
+import AnimationManager from './Engine/animations/animations.js'
+import CollisionManager from './Engine/collisions/collisions.js'
 
 export default Engine;

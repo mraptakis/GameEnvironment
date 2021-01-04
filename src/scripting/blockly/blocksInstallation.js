@@ -5,7 +5,7 @@ const colourPalette = {
     object: 190
 }
 
-import objManager from '../../renderer/renderer.js'
+import objManager from '../../Engine/renderer/renderer.js'
 
 Blockly.Blocks['move_object'] = {
     init: function() {
@@ -221,7 +221,7 @@ Blockly.Blocks['dropdown_categ'] = {
       },
 
     getCategories(){
-        let map = bb.getComponent('objects').itemMap;
+        let map = objManager.constr;
         let categs = [];
         for(let i in map){
                 categs.push([i,i]);

@@ -1,11 +1,11 @@
 import Object from './Object454.js'
 
-import Value from '../../../objects/Value.js'
+import Value from '../../../../objects/Value.js'
 
-import bb from '../../../utils/blackboard.js'
+import bb from '../../../../utils/blackboard.js'
 
 
-class Rectangle extends Object {
+export default class Rectangle extends Object {
     _width;
     _height;
 
@@ -57,5 +57,3 @@ class Rectangle extends Object {
         }
     }
 }
-
-bb.fastInstall('objects','Rectangle',Rectangle);

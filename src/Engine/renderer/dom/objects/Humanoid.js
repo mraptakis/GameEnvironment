@@ -1,8 +1,8 @@
 import Object from './ObjectDom.js'
 
-import Value from '../../../objects/Value.js'
+import Value from '../../../../objects/Value.js'
 
-import bb from '../../../utils/blackboard.js'
+import bb from '../../../../utils/blackboard.js'
 
 function fromPercentageToPx(x,y){
     // x = x/100 * window.innerWidth;
@@ -10,7 +10,7 @@ function fromPercentageToPx(x,y){
     return [x,y];
 }
 
-class Humanoid extends Object {
+export default class Humanoid extends Object {
     
     constructor({name,texture,dim},id){
         super(name,id);
@@ -130,6 +130,3 @@ class Humanoid extends Object {
     }
 
 }
-
-
-bb.fastInstall('objects','Humanoid',Humanoid);
