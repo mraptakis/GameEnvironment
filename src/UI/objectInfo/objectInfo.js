@@ -1,6 +1,7 @@
 import bb from '../../utils/blackboard.js'
 
 import transition from '../../transitionHandlers/focusedObject.js'
+import Engine from '../../Engine.js';
 
 export default {name:'objectInfo',link: './src/UI/objectInfo/objectInfo.ahtml',cb:onObjectInfoLoaded};
 
@@ -48,7 +49,7 @@ function updateInfo(obj){
     document.getElementById('addEventButton').addEventListener('click',()=>{
         let textValue = document.getElementById('addEventText').value;
         if(textValue === "")return;
-        let focusedObj = bb.fastGet('liveObjects',bb.fastGet('state','focusedObject'));
+        let focusedObj = Engine.ObjectManager.getObject(bb.fastGet('state','focusedObject'));
         focusedObj.addEvent(textValue);
         let item = document.createElement('div');
         item.innerHTML = textValue;

@@ -121,8 +121,7 @@ class EnvironmentObject extends Object {
     }
 
     remove(){
-        this.clear();
-        bb.fastRemove('liveObjects',this.id);
+        throw Error('Environment Object cannot be removed!');
     }
 
     getCategory(){
@@ -133,7 +132,5 @@ class EnvironmentObject extends Object {
 
 
 const environmentObject = new EnvironmentObject();
-
-bb.fastSet('liveObjects', environmentObject.id, environmentObject);
 
 export default environmentObject;

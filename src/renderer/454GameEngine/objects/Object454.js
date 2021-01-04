@@ -7,6 +7,7 @@ import Value from '../../../objects/Value.js'
 import stage from '../../EnvironmentObject.js'
 
 import scene from './Scene.js'
+import objectManager from '../../renderer.js'
 
 export default class Object454 extends Object{
     _x;
@@ -117,7 +118,7 @@ export default class Object454 extends Object{
     }
 
     add(){
-        bb.fastSet('liveObjects',this.id,this);
+        objectManager.addToWorld(this);
         scene.addItem(this);
     }
     
@@ -125,7 +126,7 @@ export default class Object454 extends Object{
         if(this._animator !== undefined)this._animator.stop();
         this._stage = undefined;
         this.clear();
-        bb.fastRemove('liveObjects',this.id);
+        objectManager.removeFromWorld(this);
         scene.removeItem(this);
     }
 

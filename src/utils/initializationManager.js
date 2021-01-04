@@ -8,7 +8,7 @@ bb.fastSet('state','focusedObject',undefined);
 // <Engine>
 import '../animations/animations.js'
 
-import '../physics/physics.js'
+// import '../physics/physics.js'
 
 import '../renderer/renderer.js'
 

@@ -5,6 +5,7 @@ import Object from '../../../objects/Object.js'
 import Value from '../../../objects/Value.js'
 
 import scene from './Scene.js'
+import objectManager from '../../renderer.js'
 
 function fromPercentageToPx(x,y){
     x = x/100 * window.innerWidth;
@@ -91,13 +92,13 @@ export default class ObjectDom extends Object{
     }
 
     add(){
-        bb.fastSet('liveObjects',this.id,this);
+        objectManager.addToWorld(this);
         scene.addItem(this.div);
     }
 
     remove(){
         this.clear();
-        bb.fastRemove('liveObjects',this.id);
+        objectManager.removeFromWorld(this);
         scene.remove(this.div);
     }
 

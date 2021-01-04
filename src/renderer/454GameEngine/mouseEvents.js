@@ -9,6 +9,7 @@ function translator(ev){
     return [ev.offsetX,ev.offsetY]
 }
 
+import objManager from '../renderer.js'
 
 function focused(obj,x,y){
     if(obj.renderer !== '454')return false;
@@ -27,7 +28,7 @@ function focused(obj,x,y){
 function rightClick(e){
     e.preventDefault();
     [mouse.x,mouse.y] = translator(e);
-    let aliveItems = bb.getComponent('liveObjects').itemMap;
+    let aliveItems = objManager.objects;
     for(var it in aliveItems){
         // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){
@@ -48,7 +49,7 @@ if(!bb.fastGet('renderer','rightClick')){
 function mouseDown(e){
     e.preventDefault();
     [mouse.x,mouse.y] = translator(e);
-    let aliveItems = bb.getComponent('liveObjects').itemMap;
+    let aliveItems = objManager.objects;
     for(var it in aliveItems){
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             if(!aliveItems[it].getOption('isMovable'))return false;
@@ -68,7 +69,7 @@ if(!bb.fastGet('renderer','mouseDown')){
 function leftClick(e){
     e.preventDefault();
     [mouse.x,mouse.y] = translator(e);
-    let aliveItems = bb.getComponent('liveObjects').itemMap;
+    let aliveItems = objManager.objects;
     for(var it in aliveItems){
         // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){

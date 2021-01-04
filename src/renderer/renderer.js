@@ -16,9 +16,34 @@ class ObjectManager {
         this._objects[obj.id] = obj;
         this._objectByName[obj.name] = obj;
     }
+
+    removeFromWorld(obj){
+        //TODO: add checks if it exists
+        delete this._objects[obj.id];
+        delete this._objectByName[obj.name];
+    }
+
+    get objects(){
+        return this._objects;
+    }
+
+    rename(obj,newName){
+        //TODO: 
+    }
+
+    getObject(i){
+        return this._objects[i];
+    }
+
+    getObjectByName(i){
+        return this._objectByName[i];
+    }
 }
 
 const objectManager = new ObjectManager();
+
+bb.fastInstall('state','ObjectManager',objectManager);
+
 export default objectManager;
 
 import envObj from './EnvironmentObject.js'
@@ -26,12 +51,14 @@ import colObj from './CollisionsObject.js'
 import './dom/renderer.js'
 import './454GameEngine/renderer.js'
 
-
-
-import changeFocus from '../transitionHandlers/focusedObject.js'
+objectManager.addToWorld(envObj);
+objectManager.addToWorld(colObj);
 
 bb.fastInstall('state', 'systemObjects', [envObj.name,colObj.name]);
 
+
+
+import changeFocus from '../transitionHandlers/focusedObject.js'
 let clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";
     clickWrapper.style.width = '100vw';

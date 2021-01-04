@@ -79,7 +79,7 @@ function showCollisions(){
     createCollision.innerHTML = 'Create Collision';
     body.appendChild(createCollision);
 
-    let aliveItems = bb.getComponent('liveObjects').itemMap;
+    let aliveItems = Engine.ObjectManager.objects;
     let systemObjects = bb.fastGet('state', 'systemObjects');
 
     for(let i in aliveItems){

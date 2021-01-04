@@ -5,6 +5,8 @@ const colourPalette = {
     object: 190
 }
 
+import objManager from '../../renderer/renderer.js'
+
 Blockly.Blocks['move_object'] = {
     init: function() {
         this.appendValueInput('Obj')
@@ -36,26 +38,6 @@ Blockly.JavaScript['move_object'] = function(block) {
     argument2 = eval(argument2);
     return `bb.fastGet('actions','move')(${argument0},${argument1},${argument2});`;
 };
-
-// Blockly.Blocks['get_object'] = {
-//     init: function() {
-//         this.appendValueInput('Object')
-//             .setCheck('String')
-//             .appendField(Blockly.Msg.AK_GET)
-//             .appendField(Blockly.Msg.AK_OBJECT);
-//         this.setColour(colourPalette.object);
-//         this.setOutput(true, 'Object');
-//         this.setTooltip('Get an object by name.');
-//         this.setHelpUrl('none');
-//         return 0;
-//     }
-// };
-
-// Blockly.JavaScript['get_object'] = function(block) {
-//     var argument0 = Blockly.JavaScript.valueToCode(block, 'Object',
-//     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-//     return `bb.fastGet('liveObjects',${argument0})`;
-// };
 
 Blockly.Blocks['console_log'] = {
     init: function() {
@@ -280,7 +262,7 @@ Blockly.Blocks['object_attr'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('liveObjects',newValue).getOptions();
+        let values = bb.fastGet('state','ObjectManager').getObject(newValue).getOptions();
         let toAdd = [];
         
         for(let i in values){
@@ -301,7 +283,7 @@ Blockly.Blocks['object_attr'] = {
     },
 
     getObjects(){
-        let map = bb.getComponent('liveObjects').itemMap;
+        let map = objManager.objects;
         let categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
@@ -316,7 +298,7 @@ Blockly.JavaScript['object_attr'] = function(block) {
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     console.log(obj_val);
-    return `bb.fastGet('liveObjects','${obj_val}').setOption('${field_val}',${val_val});`;
+    return `bb.fastGet('state','ObjectManager').getObject('${obj_val}').setOption('${field_val}',${val_val});`;
 };
 
 Blockly.Blocks['object_field'] = {
@@ -344,7 +326,7 @@ Blockly.Blocks['object_field'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('liveObjects',newValue).getValues();
+        let values = bb.fastGet('state','ObjectManager').getObject(newValue).getValues();
         let toAdd = [];
         
         for(let i in values){
@@ -363,7 +345,7 @@ Blockly.Blocks['object_field'] = {
     },
 
     getObjects(){
-        let map = bb.getComponent('liveObjects').itemMap;
+        let map = objManager.objects;
         let categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
@@ -377,7 +359,7 @@ Blockly.JavaScript['object_field'] = function(block) {
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return `bb.fastGet('liveObjects','${obj_val}').setValue('${field_val}',${val_val});`;
+    return `bb.fastGet('state','ObjectManager').getObject('${obj_val}').setValue('${field_val}',${val_val});`;
 };
 
 Blockly.Blocks['object_event'] = {
@@ -402,7 +384,7 @@ Blockly.Blocks['object_event'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('liveObjects',newValue).getEvents();
+        let values = bb.fastGet('state','ObjectManager').getObject(newValue).getEvents();
         let toAdd = [];
         
         for(let i in values){
@@ -418,7 +400,7 @@ Blockly.Blocks['object_event'] = {
     },
 
     getObjects(){
-        let map = bb.getComponent('liveObjects').itemMap;
+        let map = objManager.objects;
         let categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
@@ -430,7 +412,7 @@ Blockly.Blocks['object_event'] = {
 Blockly.JavaScript['object_event'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
-    return `bb.fastGet('liveObjects','${obj_val}').triggerEvent('${field_val}');`;
+    return `bb.fastGet('state','ObjectManager').getObject('${obj_val}').triggerEvent('${field_val}');`;
 };
 
 Blockly.Blocks['dropdown_obj'] = {
@@ -445,7 +427,7 @@ Blockly.Blocks['dropdown_obj'] = {
       },
 
     getCategories(){
-        let map = bb.getComponent('liveObjects').itemMap;
+        let map = objManager.objects;
         let categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
@@ -456,7 +438,7 @@ Blockly.Blocks['dropdown_obj'] = {
 
 Blockly.JavaScript['dropdown_obj'] = function(block) {
     let inp_val = block.getFieldValue('TESTF');
-    return `bb.fastGet('liveObjects','${inp_val}')`;
+    return `bb.fastGet('state','ObjectManager').getObject('${inp_val}')`;
 };
 
 //====================================================================================
@@ -482,7 +464,8 @@ Blockly.Blocks['get_object_field'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('liveObjects',newValue).getValues();
+        let values = bb.fastGet('state','ObjectManager').getObject(newValue).getValues();
+        
         let toAdd = [];
         
         for(let i in values){
@@ -498,7 +481,7 @@ Blockly.Blocks['get_object_field'] = {
     },
 
     getObjects(){
-        let map = bb.getComponent('liveObjects').itemMap;
+        let map = objManager.objects;
         let categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
@@ -510,7 +493,7 @@ Blockly.Blocks['get_object_field'] = {
 Blockly.JavaScript['get_object_field'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
-    return [`bb.fastGet('liveObjects','${obj_val}').getValue('${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
+    return [`bb.fastGet('state','ObjectManager').getObject('${obj_val}').getValue('${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Blocks['remove_object'] = {
@@ -550,7 +533,7 @@ Blockly.Blocks['get_animation'] = {
 
     getCategories(){
         let map = bb.fastGet('animation','getAllAnimations')();
-        
+
         let categs = [];
         for(let i in map){
                 categs.push([i,i]);

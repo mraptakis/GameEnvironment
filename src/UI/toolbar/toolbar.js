@@ -2,6 +2,8 @@ import bb from '../../utils/blackboard.js'
 
 import focusedObject from '../../transitionHandlers/focusedObject.js'
 
+import Engine from '../../Engine.js'
+
 export default {name:'toolbar',link: './src/UI/toolbar/toolbar.ahtml',cb:onToolbarLoaded};
 
 function actionsDropdown(){
@@ -53,7 +55,7 @@ function objectsDropdown(){
 
     function getObjects(){
         let objects = [];
-        const liveObjects = bb.getComponent('liveObjects').itemMap;
+        const liveObjects = Engine.ObjectManager.objects;
         for(let object in liveObjects){
             objects.push(liveObjects[object]);
         }

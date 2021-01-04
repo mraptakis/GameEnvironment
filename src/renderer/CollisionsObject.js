@@ -48,8 +48,7 @@ class CollisionsObject extends Object {
     }
 
     remove(){
-        this.clear();
-        bb.fastRemove('liveObjects',this.id);
+        throw Error('Collision Object cannot be removed!');
     }
 
     getCategory(){
@@ -59,7 +58,5 @@ class CollisionsObject extends Object {
 }
 
 const collisionsObject = new CollisionsObject();
-
-bb.fastSet('liveObjects',collisionsObject.id,collisionsObject);
 
 export default collisionsObject;

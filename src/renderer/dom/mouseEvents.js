@@ -3,6 +3,8 @@ import bb from '../../utils/blackboard.js'
 import focusTransition from '../../transitionHandlers/focusedObject.js'
 import dragElement from '../../transitionHandlers/drag.js';
 
+import objManager from '../renderer.js'
+
 var mouse = { x : 0, y : 0 };
 
 function translator(ev){
@@ -30,7 +32,7 @@ function focused(obj,x,y){
 function rightClick(e){
     e.preventDefault();
     [mouse.x,mouse.y] = translator(e);
-    let aliveItems = bb.getComponent('liveObjects').itemMap;
+    let aliveItems = objManager.objects;
     for(var it in aliveItems){
         // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){
@@ -51,7 +53,7 @@ if(!bb.fastGet('renderer','rightClick')){
 function mouseDown(e){
     e.preventDefault();
     [mouse.x,mouse.y] = translator(e);
-    let aliveItems = bb.getComponent('liveObjects').itemMap;
+    let aliveItems = objManager.objects;
     for(var it in aliveItems){
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             if(!aliveItems[it].getOption('isMovable'))return false;
@@ -71,7 +73,7 @@ if(!bb.fastGet('renderer','mouseDown')){
 function leftClick(e){
     e.preventDefault();
     [mouse.x,mouse.y] = translator(e);
-    let aliveItems = bb.getComponent('liveObjects').itemMap;
+    let aliveItems = objManager.objects;
     for(var it in aliveItems){
         // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){

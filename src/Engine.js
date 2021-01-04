@@ -5,10 +5,10 @@ import FPSCounter from './utils/fps.js'
 import inputManager from './utils/inputManager.js'
 import installWatches from './utils/watches.js'
 
+import objectManager from './renderer/renderer.js'
 import AnimationManager from './animations/animations.js'
 import CollisionManager from './collisions/collisions.js'
 
-const aliveItems            = bb.getComponent('liveObjects').itemMap;
 const rend                  = bb.fastGet('renderer',   'render');
 const phUpdate              = bb.fastGet('physics',    'update');
 
@@ -66,8 +66,7 @@ class _Engine {
     }
 
     set AnimationManager(anM){
-        // PB: PERFORMANCE BOOST
-        // if(!(anM instanceof AnimationManager)) throw Error('Set AnimationManager isn\'t Instance of AnimationManager');
+        if(!(anM instanceof AnimationManager)) throw Error('Set AnimationManager isn\'t Instance of AnimationManager');
         this._managers['AnimationManager'] = anM;
     }
 
@@ -78,8 +77,7 @@ class _Engine {
     }
 
     set CollisionManager(anM){
-        // PB: PERFORMANCE BOOST
-        // if(!(anM instanceof CollisionManager)) throw Error('Set CollisionManager isn\'t Instance of CollisionManager');
+        if(!(anM instanceof CollisionManager)) throw Error('Set CollisionManager isn\'t Instance of CollisionManager');
         this._managers['CollisionManager'] = anM;
     }
 
@@ -87,6 +85,16 @@ class _Engine {
         // PB: PERFORMANCE BOOST
         // if(!this._managers['CollisionManager']) throw Error('CollisionManager wasn\'t initialised');
         return this._managers['CollisionManager'];
+    }
+
+    set ObjectManager(anM){
+        this._managers['ObjectManager'] = anM;
+    }
+
+    get ObjectManager(){
+        // PB: PERFORMANCE BOOST
+        // if(!this._managers['ObjectManager']) throw Error('ObjectManager wasn\'t initialised');
+        return this._managers['ObjectManager'];
     }
 
 }
@@ -102,6 +110,7 @@ game.render = ()=>{
 app.addInitialiseFunction(()=>{
     Engine.AnimationManager = new AnimationManager(Engine.preSetAnimations,Engine.animationBundle);
     Engine.CollisionManager = new CollisionManager();
+    Engine.ObjectManager = objectManager;
 
     let init = Engine.initInfo;
     if(init.state.background_color)document.body.style.backgroundColor = init.state.background_color;
@@ -168,10 +177,11 @@ game.physics = ()=>{
 };
 
 game.collisions = ()=>{
-    Engine.CollisionManager.checkAndInvoke(aliveItems);
+    Engine.CollisionManager.checkAndInvoke(Engine.ObjectManager.objects);
 };
 
 game.userCode = ()=>{
+    const aliveItems = Engine.ObjectManager.objects;
     for(let i in aliveItems){
         aliveItems[i].newFrame();
     }
@@ -201,6 +211,7 @@ Engine.start = ()=>{
 
     bb.fastInstall('manager','AnimationManager',Engine.AnimationManager);
     bb.fastInstall('manager','CollisionManager',Engine.CollisionManager);
+    bb.fastInstall('manager','ObjectManager',Engine.ObjectManager);
 
     bb.print();
 }
