@@ -1,12 +1,10 @@
-import json from '../../../assets/json/AnimationManagerJSON.js'
-
 import FrameRangeAnimation from './AnimationCategories/FrameRangeAnimation.js'
 import animationFilmHolder from './AnimationFilmHolder.js'
 
 class AnimationManager {
     _animations = {};
 
-    loadAll(){
+    loadAll(json){
         json.animations.forEach((item)=>{
             if(!item.id || !item.film)throw Error('given animation doesn\'t have id/film');
             item.start = (item.start)?item.start:json.defaultValues.start;

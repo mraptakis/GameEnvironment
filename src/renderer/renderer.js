@@ -1,12 +1,32 @@
+import bb from '../utils/blackboard.js'
+
+
+class ObjectManager {
+    _objects
+    _objectByName
+    _constructors
+
+    constructor() {
+        this._constructors = {};
+        this._objects = {}; 
+        this._objectByName = {};
+    }
+
+    addToWorld(obj) {
+        this._objects[obj.id] = obj;
+        this._objectByName[obj.name] = obj;
+    }
+}
+
+const objectManager = new ObjectManager();
+export default objectManager;
+
 import envObj from './EnvironmentObject.js'
 import colObj from './CollisionsObject.js'
-
 import './dom/renderer.js'
 import './454GameEngine/renderer.js'
-// import './pixi/renderer.js'
-// import './threejs/renderer.js'
 
-import bb from '../utils/blackboard.js'
+
 
 import changeFocus from '../transitionHandlers/focusedObject.js'
 

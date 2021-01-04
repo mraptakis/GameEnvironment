@@ -51,8 +51,6 @@ export default class Object {
         this.options['isSolid'] = false;
         this.options['isCollidable'] = true;
 
-        this._executer = bb.fastGet('scripting','executeText');
-
     }
 
     getPositional(){
@@ -189,7 +187,7 @@ export default class Object {
 
     triggerEvent(ev){
         if(!this.events[ev])return;
-        this._executer(this.getEvent(ev));
+        bb.fastGet('scripting','executeText')(this.getEvent(ev)); //TODO
     }
 
     move(x,y){

@@ -1,12 +1,11 @@
-import json from '../../../assets/json/AnimationFilmHolderJSON.js'
-
 import AnimationFilm from './AnimationFilm.js'
 
 class AnimationFilmHolder {
     _films = {}; // id -> animationFilm
     _assetsToLoad = new Set();
 
-    loadAll(){
+    loadAll(json){
+        if(!json)return;
         for(let i in json.boxes){
             let id = i.split("_");
             id.length = id.length -1;

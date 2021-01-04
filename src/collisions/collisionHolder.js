@@ -1,12 +1,7 @@
-class CollisionManager {
+class CollisionHolder {
     _collisionReactions = {};
-    _codeRunner;
 
     constructor(){
-    }
-
-    setCodeExecutioner(runner){
-        this._codeRunner = runner;
     }
 
     installCollision(first,second,codeAsText){
@@ -91,7 +86,7 @@ class CollisionManager {
         return true;
     }
 
-    checkAndInvoke(aliveItems){
+    checkAndInvoke(aliveItems,exec){
         // THIS IS EXPENSIVE but checks everything
         // for(let i in aliveItems){
         //     for(let j in aliveItems){
@@ -120,13 +115,13 @@ class CollisionManager {
             if(this.collided(nameTranslator[obj1Name], nameTranslator[obj2Name])){
                 // aliveItems[obj1Name].triggerEvent('onCollision');
                 if(this._collisionReactions[i]){
-                    this._codeRunner(this._collisionReactions[i]);
+                    exec(this._collisionReactions[i]);
                 }
             }
         }
     }
 }
 
-const collisionManager = new CollisionManager();
+const collisionHolder = new CollisionHolder();
 
-export default collisionManager;
+export default collisionHolder;

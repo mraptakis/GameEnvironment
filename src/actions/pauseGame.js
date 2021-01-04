@@ -1,20 +1,17 @@
 import bb from '../utils/blackboard.js'
 
-let timePaused = undefined;
+import Engine from '../Engine.js'
 
 function pauseGame(){
-    if(timePaused) throw Error('Pause while paused');
-    timePaused = bb.fastGet('state','gameTime');
-    bb.fastGet('state','game').pause();
+    Engine.pause();
+    //TODO: add pause Window;
 }
 
 bb.fastInstall('actions','pauseGame',pauseGame);
 
 function resumeGame(){
-    if(!timePaused) throw Error('Resume without pause');
-    bb.invoke('animation','timeShift',bb.fastGet('state','gameTime') - timePaused);
-    bb.fastGet('state','game').unpause();
-    timePaused = undefined;
+    //TODO: destroy pause Window;
+    Engine.resume();
 }
 
 bb.fastInstall('actions','resumeGame',resumeGame);

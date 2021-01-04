@@ -1,3 +1,4 @@
+import Engine from '../../Engine.js';
 import bb from '../../utils/blackboard.js'
 
 export default {name:'collisionPreview',link: './src/UI/collisionPreview/collisionPreview.ahtml',cb:onCollisionPreviewLoaded};
@@ -10,7 +11,7 @@ function closeCollisionWindow(){
 }
 
 function showCollisions(){
-    let items = bb.fastGet('collisions','getAllCollisions')();
+    let items = Engine.CollisionManager.getAllCollisions();
 
     let objWrapper = document.getElementById('collisionPreviewWrapper');
     for(let i in items){
@@ -89,7 +90,7 @@ function showCollisions(){
     }
     
     createCollision.addEventListener('click',()=>{
-        bb.fastGet('collisions', 'installCollision')(list1.value,list2.value);
+        Engine.CollisionManager.installCollision(list1.value,list2.value);
     });
 
 }
