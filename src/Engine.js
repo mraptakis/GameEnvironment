@@ -2,11 +2,16 @@ import App from './Engine/app.js'
 import bb from './utils/blackboard.js'
 
 import FPSCounter from './utils/fps.js'
-import inputManager from './utils/inputManager.js'
+import inputManager from './Engine/inputManager.js'
 import installWatches from './utils/watches.js'
 
+import objectManager from './Engine/renderer/renderer.js'
+import AnimationManager from './Engine/animations/animations.js'
+import CollisionManager from './Engine/collisions/collisions.js'
+import PhysicsManager from './Engine/physics/physics.js'
+import SoundManager from './Engine/sound/sound.js'
+
 const rend                  = bb.fastGet('renderer',   'render');
-const phUpdate              = bb.fastGet('physics',    'update');
 
 const app = new App();
 const game = app.game;
@@ -41,7 +46,7 @@ class _Engine {
 
     get animationBundle(){
         if(this._animationBundle)return this._animationBundle;
-        // else throw Error('No Animations provided');
+        else throw Error('No Animations provided');
     }
 
     set preSetAnimations(preSet){
@@ -50,7 +55,7 @@ class _Engine {
 
     get preSetAnimations(){
         if(this._preSetAnimations)return this._preSetAnimations;
-        // else throw Error('No Animations provided');
+        else throw Error('No Animations provided');
     }
 
     set timePaused(tp){
@@ -93,6 +98,36 @@ class _Engine {
         return this._managers['ObjectManager'];
     }
 
+    set InputManager(anM){
+        this._managers['InputManager'] = anM;
+    }
+
+    get InputManager(){
+        // PB: PERFORMANCE BOOST
+        // if(!this._managers['InputManager']) throw Error('InputManager wasn\'t initialised');
+        return this._managers['InputManager'];
+    }
+
+    set SoundManager(anM){
+        this._managers['SoundManager'] = anM;
+    }
+
+    get SoundManager(){
+        // PB: PERFORMANCE BOOST
+        // if(!this._managers['SoundManager']) throw Error('SoundManager wasn\'t initialised');
+        return this._managers['SoundManager'];
+    }
+
+    set PhysicsManager(anM){
+        this._managers['PhysicsManager'] = anM;
+    }
+
+    get PhysicsManager(){
+        // PB: PERFORMANCE BOOST
+        // if(!this._managers['PhysicsManager']) throw Error('PhysicsManager wasn\'t initialised');
+        return this._managers['PhysicsManager'];
+    }
+
 }
 
 const Engine = new _Engine();
@@ -105,8 +140,22 @@ game.render = ()=>{
 
 app.addInitialiseFunction(()=>{
     Engine.AnimationManager = new AnimationManager(Engine.preSetAnimations,Engine.animationBundle);
+    bb.fastInstall('Engine','AnimationManager',Engine.AnimationManager);
+
     Engine.CollisionManager = new CollisionManager();
+    bb.fastInstall('Engine','CollisionManager',Engine.CollisionManager);
+
     Engine.ObjectManager = objectManager;
+    bb.fastInstall('Engine','ObjectManager',Engine.ObjectManager);
+
+    Engine.InputManager = inputManager;
+    bb.fastInstall('Engine','InputManager',Engine.InputManager);
+
+    Engine.SoundManager = new SoundManager();
+    bb.fastInstall('Engine','SoundManager',Engine.SoundManager);
+
+    // Engine.PhysicsManager = new PhysicsManager();
+    // bb.fastInstall('Engine','PhysicsManager',Engine.PhysicsManager);
 
     let init = Engine.initInfo;
     if(init.state.background_color)document.body.style.backgroundColor = init.state.background_color;
@@ -136,7 +185,7 @@ app.addInitialiseFunction(()=>{
                 }
             }
             it.add();
-            if(bb.fastGet('physics','addToWorld'))bb.fastGet('physics','addToWorld')(it);
+            if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
         }
     });
 
@@ -157,8 +206,8 @@ app.addLoadFunction(()=>{
 
 game.input = ()=>{
     // if(game.gameState === 3)return; // 3 === PAUSED
-    inputManager.pollKeys();
-    inputManager.getPressedKeys().forEach((key)=>inpHandler(key));
+    Engine.InputManager.pollKeys();
+    Engine.InputManager.getPressedKeys().forEach((key)=>inpHandler(key));
 };
 
 game.animation = ()=>{
@@ -169,7 +218,7 @@ game.ai = ()=>{
 }
 
 game.physics = ()=>{
-    if(phUpdate)phUpdate();
+    if(Engine.PhysicsManager)Engine.PhysicsManager.update();
 };
 
 game.collisions = ()=>{
@@ -205,9 +254,7 @@ function inpHandler(key) {
 Engine.start = ()=>{
     app.main();
 
-    bb.fastInstall('manager','AnimationManager',Engine.AnimationManager);
-    bb.fastInstall('manager','CollisionManager',Engine.CollisionManager);
-    bb.fastInstall('manager','ObjectManager',Engine.ObjectManager);
+    bb.fastInstall('Engine','Self',Engine);
 
     bb.print();
 }
@@ -225,9 +272,5 @@ Engine.resume = ()=>{
     Engine.timePaused = undefined;
 }
 
-
-import objectManager from './Engine/renderer/renderer.js'
-import AnimationManager from './Engine/animations/animations.js'
-import CollisionManager from './Engine/collisions/collisions.js'
 
 export default Engine;
