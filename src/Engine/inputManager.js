@@ -1,4 +1,4 @@
-import logManager from './logs.js'
+import logManager from '../utils/logs.js'
 
 const InputState = {
     TRIGGERED: 'TRIGGERED',
@@ -49,7 +49,7 @@ class InputManager {
 }
 
 
-let inputManager = new InputManager();
+const inputManager = new InputManager();
 
 
 

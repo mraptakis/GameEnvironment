@@ -1,8 +1,6 @@
 import Object from './ObjectDom.js'
 
-import Value from '../../../../objects/Value.js'
-
-import bb from '../../../../utils/blackboard.js'
+import Value from '../../../objects/Value.js'
 
 function fromPercentageToPx(x,y){
     // x = x/100 * window.innerWidth;

@@ -262,7 +262,7 @@ Blockly.Blocks['object_attr'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('state','ObjectManager').getObject(newValue).getOptions();
+        let values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getOptions();
         let toAdd = [];
         
         for(let i in values){
@@ -298,7 +298,7 @@ Blockly.JavaScript['object_attr'] = function(block) {
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     console.log(obj_val);
-    return `bb.fastGet('state','ObjectManager').getObject('${obj_val}').setOption('${field_val}',${val_val});`;
+    return `bb.fastGet('Engine','ObjectManager').getObject('${obj_val}').setOption('${field_val}',${val_val});`;
 };
 
 Blockly.Blocks['object_field'] = {
@@ -326,7 +326,7 @@ Blockly.Blocks['object_field'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('state','ObjectManager').getObject(newValue).getValues();
+        let values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getValues();
         let toAdd = [];
         
         for(let i in values){
@@ -359,7 +359,7 @@ Blockly.JavaScript['object_field'] = function(block) {
     let field_val = block.getFieldValue('FIELD');
     let val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    return `bb.fastGet('state','ObjectManager').getObject('${obj_val}').setValue('${field_val}',${val_val});`;
+    return `bb.fastGet('Engine','ObjectManager').getObject('${obj_val}').setValue('${field_val}',${val_val});`;
 };
 
 Blockly.Blocks['object_event'] = {
@@ -384,7 +384,7 @@ Blockly.Blocks['object_event'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('state','ObjectManager').getObject(newValue).getEvents();
+        let values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getEvents();
         let toAdd = [];
         
         for(let i in values){
@@ -412,7 +412,7 @@ Blockly.Blocks['object_event'] = {
 Blockly.JavaScript['object_event'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
-    return `bb.fastGet('state','ObjectManager').getObject('${obj_val}').triggerEvent('${field_val}');`;
+    return `bb.fastGet('Engine','ObjectManager').getObject('${obj_val}').triggerEvent('${field_val}');`;
 };
 
 Blockly.Blocks['dropdown_obj'] = {
@@ -438,7 +438,7 @@ Blockly.Blocks['dropdown_obj'] = {
 
 Blockly.JavaScript['dropdown_obj'] = function(block) {
     let inp_val = block.getFieldValue('TESTF');
-    return `bb.fastGet('state','ObjectManager').getObject('${inp_val}')`;
+    return `bb.fastGet('Engine','ObjectManager').getObject('${inp_val}')`;
 };
 
 //====================================================================================
@@ -464,7 +464,7 @@ Blockly.Blocks['get_object_field'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('state','ObjectManager').getObject(newValue).getValues();
+        let values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getValues();
         
         let toAdd = [];
         
@@ -493,7 +493,7 @@ Blockly.Blocks['get_object_field'] = {
 Blockly.JavaScript['get_object_field'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
     let field_val = block.getFieldValue('FIELD');
-    return [`bb.fastGet('state','ObjectManager').getObject('${obj_val}').getValue('${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
+    return [`bb.fastGet('Engine','ObjectManager').getObject('${obj_val}').getValue('${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Blocks['remove_object'] = {
@@ -532,7 +532,7 @@ Blockly.Blocks['get_animation'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('animation','getAllAnimations')();
+        let map = bb.fastGet('Engine','AnimationManager').getAllAnimations();
 
         let categs = [];
         for(let i in map){
@@ -657,7 +657,7 @@ Blockly.Blocks['play_sound'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('sound','getSounds')();
+        let map = bb.fastGet('Engine','SoundManager').getSounds();
         let categs = [];
         for(let i in map){
                 categs.push([i,i]);
@@ -668,7 +668,7 @@ Blockly.Blocks['play_sound'] = {
 
 Blockly.JavaScript['play_sound'] = function(block) {
     let inp_val = block.getFieldValue('SOUND');
-    return `bb.fastGet('sound','playSound')('${inp_val}');`;
+    return `bb.fastGet('Engine','SoundManager').playSound('${inp_val}');`;
 };
 
 Blockly.Blocks['stop_sound'] = {
@@ -684,7 +684,7 @@ Blockly.Blocks['stop_sound'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('sound','getSounds')();
+        let map = bb.fastGet('Engine','SoundManager').getSounds();
         let categs = [];
         for(let i in map){
                 categs.push([i,i]);
@@ -695,7 +695,7 @@ Blockly.Blocks['stop_sound'] = {
 
 Blockly.JavaScript['stop_sound'] = function(block) {
     let inp_val = block.getFieldValue('SOUND');
-    return `bb.fastGet('sound','stopSound')('${inp_val}');`;
+    return `bb.fastGet('Engine','SoundManager').stopSound('${inp_val}');`;
 };
 
 Blockly.Blocks['play_background'] = {
@@ -712,7 +712,7 @@ Blockly.Blocks['play_background'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('sound','getSounds')();
+        let map = bb.fastGet('Engine','SoundManager').getSounds();
         let categs = [];
         for(let i in map){
                 categs.push([i,i]);
@@ -723,7 +723,7 @@ Blockly.Blocks['play_background'] = {
 
 Blockly.JavaScript['play_background'] = function(block) {
     let inp_val = block.getFieldValue('SOUND');
-    return `bb.fastGet('sound','playBackground')('${inp_val}');`;
+    return `bb.fastGet('Engine','SoundManager').playSoundOnRepeat('${inp_val}');`;
 };
 
 Blockly.Blocks['stop_background'] = {
@@ -740,7 +740,7 @@ Blockly.Blocks['stop_background'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('sound','getSounds')();
+        let map = bb.fastGet('Engine','SoundManager').getSounds()
         let categs = [];
         for(let i in map){
                 categs.push([i,i]);
@@ -751,7 +751,7 @@ Blockly.Blocks['stop_background'] = {
 
 Blockly.JavaScript['stop_background'] = function(block) {
     let inp_val = block.getFieldValue('SOUND');
-    return `bb.fastGet('sound','stopBackground')('${inp_val}');`;
+    return `bb.fastGet('Engine','SoundManager').stopSoundOnRepeat('${inp_val}');`;
 };
 
 Blockly.Blocks['stop_every_sound'] = {
@@ -767,5 +767,5 @@ Blockly.Blocks['stop_every_sound'] = {
 };
 
 Blockly.JavaScript['stop_every_sound'] = function(block) {
-    return `bb.fastGet('sound','stopAllSounds')();`;
+    return `bb.fastGet('Engine','SoundManager').stopAllSounds();`;
 };

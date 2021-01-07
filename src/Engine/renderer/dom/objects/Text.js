@@ -1,8 +1,7 @@
 import Object from './ObjectDom.js'
 
-import Value from '../../../../objects/Value.js'
+import Value from '../../../objects/Value.js'
 
-import bb from '../../../../utils/blackboard.js'
 function pxToNumber(str){
     str.substr(1,str.length-4);
     return parseInt(str);

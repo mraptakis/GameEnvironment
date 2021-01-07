@@ -94,17 +94,8 @@ export default class AnimationManager {
 
 }
 
-bb.fastInstall('animation', 'getFilm',(film)=>animationFilmHolder.getFilm(film));
-
-bb.fastInstall('animation', 'getAllAnimations',()=>animationManager._animations);
-
 bb.fastInstall('animation', 'MovingAnimator', MovingAnimator);
 bb.fastInstall('animation', 'FrameRangeAnimator', FrameRangeAnimator);
 
 bb.fastInstall('animation', 'MovingAnimation', MovingAnimation);
 bb.fastInstall('animation', 'FrameRangeAnimation', FrameRangeAnimation);
-
-
-bb.fastInstall('debugForAlex', 'animatorManager', animatorManager);
-bb.fastInstall('debugForAlex', 'animationManager', animationManager);
-bb.fastInstall('debugForAlex', 'animationFilmHolder', animationFilmHolder);

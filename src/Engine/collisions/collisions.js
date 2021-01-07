@@ -44,6 +44,3 @@ export default class CollisionManager {
     }
 
 }
-
-bb.fastInstall('collisions', 'getCollision', (obj1ID, obj2ID) => {return collisionHolder.getCollision(obj1ID, obj2ID)});
-bb.fastInstall('collisions', 'setCollision', (obj1ID, obj2ID, codeAsText) => {return collisionHolder.setCollision(obj1ID, obj2ID, codeAsText)});

@@ -19,7 +19,7 @@ function toggleObjectMenu(){
 }
 
 function updateObjectList(){
-    let items = bb.fastGet('state','ObjectManager').constr;
+    let items = bb.fastGet('Engine','ObjectManager').constr;
     let objWrapper = document.getElementById('createObjectMenuWrapper');
     objWrapper.innerHTML = '';
     for(let i in items){

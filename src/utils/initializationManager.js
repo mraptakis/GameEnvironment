@@ -6,18 +6,7 @@ bb.fastSet('state','mode','editing');
 bb.fastSet('state','focusedObject',undefined);
 
 // <Engine>
-
 import '../Engine.js'
-
-import '../Engine/animations/animations.js'
-
-// import '../physics/physics.js'
-
-import '../Engine/renderer/renderer.js'
-
-import '../Engine/collisions/collisions.js'
-
-import '../sound/sound.js'
 // </Engine>
 
 // <Extra>

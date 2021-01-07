@@ -5,13 +5,13 @@ export default function focusedObjectTransition(toObj){
     if(document.getElementById('focusedObjText').innerText === toObj)return;
 
     if(toObj){
-        let obj = bb.fastGet('state','ObjectManager').getObject(toObj);
+        let obj = bb.fastGet('Engine','ObjectManager').getObject(toObj);
         document.getElementById("focusedObjText").innerText = obj.name;
         bb.fastSet('state','focusedObject',obj);
     }else{
 
         toObj = (toObj)?toObj:"Stage";
-        const liveObj = bb.fastGet('state','ObjectManager').objects;
+        const liveObj = bb.fastGet('Engine','ObjectManager').objects;
         
         for(let i in liveObj){
             if(liveObj[i].name === 'Stage'){

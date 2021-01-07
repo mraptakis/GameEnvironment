@@ -1,10 +1,10 @@
-import bb from '../../utils/blackboard.js'
+import bb from '../../../utils/blackboard.js'
 
 function trimPX(str){
     return Number.parseFloat(str.slice(0, -2));
 }
 
-class MatterJS {
+export default class MatterJS {
     engine
 
     objMap = {};
@@ -68,7 +68,7 @@ class MatterJS {
     update(){
         Matter.Engine.update(this.engine);
         this.engine.world.bodies.forEach((body)=>{
-            let realObj = bb.fastGet('state','ObjectManager').getObject(body.id);
+            let realObj = bb.fastGet('Engine','ObjectManager').getObject(body.id);
             if(!realObj){
                 this.removeFromWorld(body.name);
                 return;
@@ -85,15 +85,3 @@ class MatterJS {
         });
     }
 }
-
-const matter = new MatterJS();
-
-bb.fastInstall('physics', 'addToWorld', (item)=>matter.addToWorld(item));
-bb.fastInstall('physics', 'removeFromWorld', (item)=>matter.removeFromWorld(item));
-bb.fastInstall('physics', 'force', (rObj,position,force)=>matter.applyForce(rObj,position,force));
-bb.fastInstall('physics', 'move', (obj,pos)=>matter.moveObject(obj,pos));
-bb.fastInstall('physics', 'update', ()=>matter.update());
-
-
-
-bb.fastSet('actions', 'playPhysics', ()=>bb.fastGet('physics','update')()); ///

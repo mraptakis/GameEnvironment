@@ -1,6 +1,6 @@
 import bb from '../../utils/blackboard.js'
 
-import Object from '../../objects/Object.js'
+import Object from '../objects/Object.js'
 
 class CollisionsObject extends Object {
 
@@ -34,13 +34,13 @@ class CollisionsObject extends Object {
     
     getEvent(ev){
         let split = ev.split('_');
-        return bb.fastGet('collisions', 'getCollision')(split[0],split[1]);
+        return bb.fastGet('Engine','CollisionManager').getCollision(split[0],split[1]);
     }
 
     setEvent(ev,code){
         localStorage.setItem(this.id+"_"+ev,code);
         let split = ev.split('_');
-        bb.fastGet('collisions', 'setCollision')(split[0],split[1],code);
+        return bb.fastGet('Engine','CollisionManager').setCollision(split[0],split[1],code);
     }
     
     newFrame(){

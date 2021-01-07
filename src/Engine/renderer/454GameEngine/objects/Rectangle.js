@@ -1,6 +1,6 @@
 import Object from './Object454.js'
 
-import Value from '../../../../objects/Value.js'
+import Value from '../../../objects/Value.js'
 
 import bb from '../../../../utils/blackboard.js'
 
@@ -30,7 +30,7 @@ export default class Rectangle extends Object {
             getValue: () => {return this._height;}
         });
 
-        this._getFilm = bb.fastGet('animation','getFilm');
+        this._getFilm = bb.fastGet('Engine','AnimationManager').getFilm;
     }
 
     getCategory(){

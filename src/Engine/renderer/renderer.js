@@ -59,8 +59,6 @@ class ObjectManager {
 
 const objectManager = new ObjectManager();
 
-bb.fastInstall('state','ObjectManager',objectManager);
-
 export default objectManager;
 
 import envObj from './EnvironmentObject.js'

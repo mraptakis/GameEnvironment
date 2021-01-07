@@ -1,6 +1,6 @@
-import bb from '../utils/blackboard.js'
-import log from '../utils/logs.js'
-import rand from '../utils/randomGenerator.js'
+import bb from '../../utils/blackboard.js'
+import log from '../../utils/logs.js'
+import rand from '../../utils/randomGenerator.js'
 
 import Event from './Event.js'
 
