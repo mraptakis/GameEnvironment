@@ -145,14 +145,14 @@ app.addInitialiseFunction(()=>{
     Engine.CollisionManager = new CollisionManager();
     bb.fastInstall('Engine','CollisionManager',Engine.CollisionManager);
 
+    Engine.SoundManager = new SoundManager();
+    bb.fastInstall('Engine','SoundManager',Engine.SoundManager);
+
     Engine.ObjectManager = objectManager;
     bb.fastInstall('Engine','ObjectManager',Engine.ObjectManager);
 
     Engine.InputManager = inputManager;
     bb.fastInstall('Engine','InputManager',Engine.InputManager);
-
-    Engine.SoundManager = new SoundManager();
-    bb.fastInstall('Engine','SoundManager',Engine.SoundManager);
 
     // Engine.PhysicsManager = new PhysicsManager();
     // bb.fastInstall('Engine','PhysicsManager',Engine.PhysicsManager);
@@ -242,11 +242,10 @@ import keyToAction from '../assets/json/keyToActions.js' //json
 // TODO: move this to somewhere better
 function inpHandler(key) {
     // if(bb.fastGet('state','mode') === 'editing')return;
-    if(keyToAction[key]){
-        keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
-        return;
-    }
     if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
+    else if(keyToAction[key]){
+        keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
+    }
 };
 
 //--------------------Engine Object--------------------//

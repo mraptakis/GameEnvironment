@@ -30,12 +30,13 @@ class ObjectManager {
     }
 
     addToWorld(obj) {
+        if(this._objects[obj.id] || this._objectByName[obj.name])return;
         this._objects[obj.id] = obj;
         this._objectByName[obj.name] = obj;
     }
 
     removeFromWorld(obj){
-        //TODO: add checks if it exists
+        if(!this._objects[obj.id])return;
         delete this._objects[obj.id];
         delete this._objectByName[obj.name];
     }
@@ -45,7 +46,9 @@ class ObjectManager {
     }
 
     rename(obj,newName){
-        //TODO: 
+        if(this._objectByName[newName] || !this._objects[obj.id])return;
+        obj.name = newName;
+        this._objectByName[newName] = obj;
     }
 
     getObject(i){
@@ -105,8 +108,6 @@ clickWrapper.addEventListener('click',(ev)=>{
 
 let funcsMD = bb.fastGet('renderer','mouseDown');
 clickWrapper.addEventListener('mousedown',(ev)=>{
-    // TODO: ADD THE FOLLOWING COMMENT AS AN OPTION
-    // if(bb.fastGet('state','mode') !== "editing")return;
     for(var f in funcsMD){
         if(funcsMD[f](ev))break;
     }

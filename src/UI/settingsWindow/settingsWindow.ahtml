@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="./src/UI/settingsWindow/settingsWindow.css">
+<div id='settings-window-background'></div>
+<div id='settings-window'>
+  <settings-item
+    v-for="set in settings"
+    v-bind:setting="set"
+    v-bind:key="set.name"
+  />
+</div>

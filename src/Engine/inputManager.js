@@ -10,14 +10,14 @@ class InputManager {
     currentlyPressed = {}
     
     keyPressed(key,forever){
-        logManager.logAction(`Pressed Key ${key}`);
+        // logManager.logAction(`Pressed Key ${key}`);
         if(forever) this.currentlyPressed[key] = InputState.FOREVER;
         else this.currentlyPressed[key] = InputState.TOTRIGGER;
     }
     
     keyReleased(key){
         delete this.currentlyPressed[key];
-        logManager.logAction(`Released Key ${key}`);
+        // logManager.logAction(`Released Key ${key}`);
     }
     
     getPressedKeys(){
