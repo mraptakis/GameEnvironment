@@ -21,3 +21,9 @@
 .objectItem {
     color: black;
 }
+
+.settings_category_name {
+    padding-top: 20px;
+    font-size: 2em;
+    text-decoration: underline;
+}
