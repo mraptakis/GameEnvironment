@@ -16,6 +16,31 @@ function updateInfo(obj){
     document.getElementById('objName').innerHTML = obj.name;
     document.getElementById('categName').innerHTML = "("+obj.getCategory()+")";
 
+    let statesInfo = document.getElementById('statesInfo');
+    statesInfo.innerHTML = "";
+    let statesTitle = document.getElementById('InfoBox_currentState');
+    statesTitle.innerHTML = '(Current State: '+obj.getCurrentState()+')';
+    for(let i in obj.getStates()){
+        let item = document.createElement('div');
+        item.classList += "InfoBox_item";
+        item.innerHTML = i;
+        statesInfo.appendChild(item);
+    }
+
+    document.getElementById('addStateButton').addEventListener('click',()=>{
+        let textValue = document.getElementById('addStateText').value;
+        if(textValue === "")return;
+        let focusedObj = bb.fastGet('state','focusedObject');
+        focusedObj.addState(textValue);
+        let item = document.createElement('div');
+        item.innerHTML = textValue;
+        item.classList += "InfoBox_item";
+        statesInfo.appendChild(item);
+        document.getElementById('addStateText').value = "";
+        transition(undefined);
+        transition(focusedObj.getName());
+    });
+
     let fieldsInfo = document.getElementById('fieldsInfo');
     fieldsInfo.innerHTML = "";
     for(let i in obj.getValues()){

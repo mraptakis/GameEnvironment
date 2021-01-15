@@ -1,5 +1,3 @@
-import Vue from '../../libs/vue.min.js'
-
 export default class UIFactory {
     _settings
     _defaultSettings

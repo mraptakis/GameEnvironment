@@ -139,7 +139,7 @@ game.render = ()=>{
 };
 
 app.addInitialiseFunction(()=>{
-    Engine.AnimationManager = new AnimationManager(Engine.preSetAnimations,Engine.animationBundle);
+    Engine.AnimationManager = new AnimationManager(Engine.animationBundle,Engine.preSetAnimations);
     bb.fastInstall('Engine','AnimationManager',Engine.AnimationManager);
 
     Engine.CollisionManager = new CollisionManager();
@@ -182,6 +182,11 @@ app.addInitialiseFunction(()=>{
             if(item.events){
                 for(let e in item.events){
                     it.addEvent(item.events[e]);
+                }
+            }
+            if(item.states){
+                for(let e in item.states){
+                    it.addState(item.states[e]);
                 }
             }
             it.add();

@@ -15,6 +15,16 @@ export default {
                 },
                 film: "mario_big_right_idle"
             },
+            states: [
+                'movingLeft',
+                'movingRight'
+            ],
+            events: [
+                "increaseCounterAndShow"
+            ],
+            attributes: {
+                isCollidable: false
+            },
             category: "Rectangle",
             color : "#ffffff",
             position: {x:500,y:780}
@@ -62,6 +72,20 @@ export default {
             position: {x:800,y:775}
         },
         {
+            id: "VhgKmEu8oTQMJqC",
+            meta:{
+                name: "coin4",
+                dim: {
+                    width: 20,
+                    height: 35
+                },
+                film: "coin_spinning"
+            },
+            category: "Rectangle",
+            color : "#ffffff",
+            position: {x:2500,y:775}
+        },
+        {
             id: "y1gYI2yyo1QzjmH",
             meta:{
                 name: "score",
@@ -84,7 +108,7 @@ export default {
             meta:{
                 name: "floor",
                 dim: {
-                    width: 1920,
+                    width: 2500,
                     height: 80
                 }
             },

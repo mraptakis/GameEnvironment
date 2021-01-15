@@ -3,6 +3,7 @@ import log from '../../utils/logs.js'
 import rand from '../../utils/randomGenerator.js'
 
 import Event from './Event.js'
+import State from './State.js'
 
 export default class Object {
     _id
@@ -14,6 +15,9 @@ export default class Object {
     events = {}
 
     options = {}
+
+    currentState;
+    states = {}
 
     constructor(_name,_id){
         this._name = _name;        
@@ -44,6 +48,13 @@ export default class Object {
             value: localStorage.getItem(this.id+"_onEachFrame")
         });
 
+        this.states['idle'] = new State({
+            tag: 'idle',
+            transitionFrom: 'console.log("transitionFrom");',
+            transitionTo: 'console.log("transitionTo");'
+        });
+
+        this.currentState = this.states['idle'];
 
         this.options['isMovable'] = true;
         this.options['isRemovable'] = true;
@@ -107,6 +118,8 @@ export default class Object {
         this.name = newName;
     }
 
+
+
     getOptions(){
         return this.options;
     }
@@ -121,6 +134,38 @@ export default class Object {
 
     setOption(opt,val){
         this.options[opt] = val;
+    }
+
+    getCurrentState(){
+        return this.currentState.tag;
+    }
+
+    setCurrentState(newState){
+        if(this.states[newState]) return; //TODO
+
+        bb.fastGet('scripting','executeText')(this.currentState.transitionFrom); //TODO
+        this.currentState = this.states[newState];
+        bb.fastGet('scripting','executeText')(this.currentState.transitionTo); //TODO
+
+    }
+
+    getStates(){
+        return this.states;
+    }
+
+    addState(state){
+        this.states[state] = new State({
+            tag:state
+        })
+    }
+
+    getState(state){
+        return this.states[state];
+    }
+
+    setState(state,transitionFrom,transitionTo){
+        this.states[state].transitionFrom = transitionFrom;
+        this.states[state].transitionTo = transitionTo;
     }
 
     getValues(){

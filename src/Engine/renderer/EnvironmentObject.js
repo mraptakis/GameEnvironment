@@ -20,6 +20,8 @@ class EnvironmentObject extends Object {
 
         this._x = 0;
         this._y = 0;
+        this._width = 3100;
+        this._height = 1080;
 
         
 
@@ -33,11 +35,14 @@ class EnvironmentObject extends Object {
             value: localStorage.getItem(this.id+"_moveStageRight")
         });
 
+        this.events["cameraFollowPlayer"] = new Event({
+            tag: 'system',
+            value: localStorage.getItem(this.id+"_cameraFollowPlayer")
+        });
+
         this._windowWidth = window.innerWidth;
         this._windowHeight = window.innerHeight;
 
-        this._width = 2100;
-        this._height = 1080;
 
         this.values['x'] = new Value({
             tag: "positional",

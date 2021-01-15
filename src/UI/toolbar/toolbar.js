@@ -195,43 +195,8 @@ function uisDropdown(){
 import setWindow from '../settingsWindow/settingsWindow.js'
 
 function openSettings(){
-    // console.log('s');
-    // let back = document.createElement('div');
-    // back.id = 'toolbar_overlay_back';
-    // back.className = 'toolbar_overlay_back';
-    // document.body.appendChild(back);
-
-    // let opts = document.createElement('div');
-    // opts.id = 'toolbar_options_open';
-    // opts.className = 'toolbar_options_open';
-    // opts.innerHTML = 'TODO SETTINGS';
-    // document.body.appendChild(opts);
-
-    // let mainColor = document.createElement('input');
-    // mainColor.type = 'color';
-    // mainColor.addEventListener('change',()=>{
-    //     const mainThemeColor = '--main-color';
-    //     document.documentElement.style.setProperty(mainThemeColor, mainColor.value);
-    // });
-    // opts.appendChild(mainColor);
-
-    // let subColor = document.createElement('input');
-    // subColor.type = 'color';
-    // subColor.addEventListener('change',()=>{
-    //     const mainThemeColor = '--main-color-text';
-    //     document.documentElement.style.setProperty(mainThemeColor, subColor.value);
-    // });
-    // opts.appendChild(subColor);
-
-
-    // back.addEventListener('click',()=>{
-    //     opts.remove();
-    //     back.remove();
-    // });
     bb.fastGet('UI','installUI')({name:setWindow.name,link:setWindow.link,cb:setWindow.cb});
     bb.fastGet('UI','loadUI')(setWindow.name);
-    
-
 }
 
 function onToolbarLoaded(){

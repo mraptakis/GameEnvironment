@@ -28,6 +28,10 @@ class UIManager {
         }
     }
 
+    getLoaded(){
+        return this._UILoaded;
+    }
+
     installUI({name,link,cb},removable = true){
         if(this._UIInstalled[name])return;
         this._UIInstalled[name] = {link:link,cb:cb};
@@ -108,5 +112,6 @@ bb.fastInstall('UI','removeUI',(name)=>uiManager.removeUI(name));
 bb.fastInstall('UI','loadUI',(name)=>uiManager.loadUI(name));
 bb.fastInstall('UI','loadAll',()=>uiManager.loadAll());
 bb.fastInstall('UI','hideUI',(name)=>uiManager.hideUI(name));
+bb.fastInstall('UI','getLoadedUIs',()=>uiManager.getLoaded());
 
 uiManager.convertHTMLtoObjects();

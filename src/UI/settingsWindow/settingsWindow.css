@@ -14,16 +14,17 @@
     position: absolute;
     left: 10%;
     top: 10%;
-    background-color: #ffffff;
+    background-color: var(--main-color);
     z-index: 5;
 }
 
 .objectItem {
-    color: black;
+    color: var(--main-color-text);
 }
 
 .settings_category_name {
     padding-top: 20px;
     font-size: 2em;
     text-decoration: underline;
+    color: var(--main-color-text);
 }
