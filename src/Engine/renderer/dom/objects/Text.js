@@ -50,6 +50,8 @@ export default class Text extends Object {
             getValue: () => {return this.div.style.fontSize.slice(0,-2);}
         })
 
+        this._category = 'Text';
+
     }
 
     createElement({name,texture,dim,defaultText}){
@@ -59,10 +61,6 @@ export default class Text extends Object {
         this.div.style.position = "absolute";
         this.div.style.fontSize = "16px";
         this.div.style.textShadow = '1px 1px 0 #444';
-    }
-
-    getCategory(){
-        return "Text";
     }
 
     setColor(col){

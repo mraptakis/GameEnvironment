@@ -28,6 +28,8 @@ export default class Square extends Object {
             getValue: () => {return this.div.style.height.slice(0,-2);}
         });
 
+        this._category = 'Square';
+
     }
 
     createElement({name,texture,dim}){
@@ -42,9 +44,5 @@ export default class Square extends Object {
             this.div.style.backgroundSize = 'cover';
             this.div.style.backgroundPosition = 'center';
         }
-    }
-
-    getCategory(){
-        return "Square";
     }
 }

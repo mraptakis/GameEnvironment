@@ -113,13 +113,10 @@ export default class Humanoid extends Object {
 
         this.div.style.transform = 'rotate(45deg)';
 
+        this._category = 'Humanoid';
+
     }
-
-
-    getCategory(){
-        return "Humanoid";
-    }
-
+    
     setColor(col){
         let children = [ ...this.div.children ];
         children.map(child => {

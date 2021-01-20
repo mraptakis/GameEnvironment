@@ -1,6 +1,8 @@
 export default class Event {
     val
     tag
+    onChange
+    getValue
     constructor({tag,value,onChange,getValue}){
         if(typeof tag !== 'string'
         || (typeof onChange !== 'function' && getValue !== undefined)

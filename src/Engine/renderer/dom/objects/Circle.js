@@ -20,6 +20,8 @@ export default class Circle extends Object {
             onChange: (value) => {this.div.style.width = value*2+"px";this.div.style.height = value*2+"px";},
             getValue: () => {return (this.div.style.width.slice(0,-2)/2);}
         });
+
+        this._category = 'Circle';
     }
 
 
@@ -38,9 +40,5 @@ export default class Circle extends Object {
             this.div.style.backgroundSize = 'cover';
             this.div.style.backgroundPosition = 'center';
         }
-    }
-
-    getCategory(){
-        return "Circle";
     }
 }

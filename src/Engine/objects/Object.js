@@ -19,6 +19,8 @@ export default class Object {
     currentState;
     states = {}
 
+    _category;
+
     constructor(_name,_id){
         this._name = _name;        
         this.id = (_id)?_id:rand.generateGameID();
@@ -64,6 +66,10 @@ export default class Object {
 
     }
 
+    getCategory(){
+        return this._category;
+    }
+
     getPositional(){
         let toReturn = {};
         for(let i in this.values){
@@ -88,10 +94,6 @@ export default class Object {
 
     getObject(){
         throw Error("getObject needs to be implemented");
-    }
-
-    getCategory(){
-        throw Error("getCategory needs to be implemented");
     }
 
     get id(){
@@ -173,10 +175,10 @@ export default class Object {
     }
 
     addValue(val,v=""){
-        if(this.values[val]){
-            log.logError('Couldn\'t create value '+val+' because it already exists');
-            return;
-        }
+        // if(this.values[val]){
+        //     log.logError('Couldn\'t create value '+val+' because it already exists');
+        //     return;
+        // }
         this.values[val] = {};
         this.values[val].val = v;
     }
@@ -192,7 +194,7 @@ export default class Object {
     
     getValue(val){
         if(!this.values[val]){
-            log.logError('Couldn\'t get value '+val+' because it doesn\'t exists');
+            // log.logError('Couldn\'t get value '+val+' because it doesn\'t exists');
             return;
         }
         if(this.values[val].getValue)return this.values[val].getValue();
@@ -213,7 +215,7 @@ export default class Object {
 
     getEvent(ev){
         if(!this.events[ev]){
-            log.logError('Couldn\'t get event '+ev+' because it doesn\'t exists');
+            // log.logError('Couldn\'t get event '+ev+' because it doesn\'t exists');
             return;
         }
         if(this.events[ev].getValue)return this.events[ev].getValue();
@@ -273,7 +275,7 @@ export default class Object {
         for(let i in this.values){
             values[i] = this.getValue(i);
         }
-        savedData['category'] = this.getCategory();
+        savedData['category'] = this._category;
         return savedData;
     }
 

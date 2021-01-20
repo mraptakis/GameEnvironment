@@ -15,6 +15,8 @@ class Scene extends Object {
 
         this.options['isMovable'] = false;
 
+        this._category = 'Scene';
+
     }
 
     getScene(){
@@ -27,10 +29,6 @@ class Scene extends Object {
 
     remove(it){
         this.div.removeChild(it);
-    }
-
-    getCategory(){
-        return "Scene";
     }
 
 }

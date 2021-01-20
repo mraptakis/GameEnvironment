@@ -105,6 +105,8 @@ class EnvironmentObject extends Object {
         delete this.events['onRightClick'];
 
         this.options['isCollidable'] = false;
+
+        this._category = 'Stage';
     }
 
     move(x,y){
@@ -127,10 +129,6 @@ class EnvironmentObject extends Object {
 
     remove(){
         throw Error('Environment Object cannot be removed!');
-    }
-
-    getCategory(){
-        return 'Stage';
     }
 
 }

@@ -25,6 +25,8 @@ class CollisionsObject extends Object {
         delete this.events['onClick'];
         delete this.events['onRightClick'];
 
+        this._category = 'Collisions';
+
     }
 
     move(x,y){
@@ -49,10 +51,6 @@ class CollisionsObject extends Object {
 
     remove(){
         throw Error('Collision Object cannot be removed!');
-    }
-
-    getCategory(){
-        return 'Collisions';
     }
 
 }
