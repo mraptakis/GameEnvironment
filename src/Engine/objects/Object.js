@@ -26,34 +26,26 @@ export default class Object {
         this.id = (_id)?_id:rand.generateGameID();
 
         this.events['onClick'] = new Event({
-            tag: 'system',
-            value: localStorage.getItem(this.id+"_onClick")
+            tag: 'system'
         });
         this.events['onRightClick'] = new Event({
-            tag: 'system',
-            value: localStorage.getItem(this.id+"_onRightClick")
+            tag: 'system'
         });
         this.events['onGameStart'] = new Event({
-            tag: 'system',
-            value: localStorage.getItem(this.id+"_onGameStart")
+            tag: 'system'
         });
         this.events['onRemove'] = new Event({
-            tag: 'system',
-            value: localStorage.getItem(this.id+"_onRemove")
+            tag: 'system'
         });
         this.events['onMove'] = new Event({
-            tag: 'system',
-            value: localStorage.getItem(this.id+"_onMove")
+            tag: 'system'
         });
         this.events['onEachFrame'] = new Event({
-            tag: 'system',
-            value: localStorage.getItem(this.id+"_onEachFrame")
+            tag: 'system'
         });
 
         this.states['idle'] = new State({
-            tag: 'idle',
-            transitionFrom: 'console.log("transitionFrom");',
-            transitionTo: 'console.log("transitionTo");'
+            tag: 'idle'
         });
 
         this.currentState = this.states['idle'];
@@ -205,8 +197,7 @@ export default class Object {
         return this.events;
     }
 
-    addEvent(ev){
-        let code = localStorage.getItem(this.id+"_"+ev);
+    addEvent(ev,code){
         this.events[ev] = new Event({
             tag: 'custom',
             value: (code)?code:""
@@ -227,7 +218,6 @@ export default class Object {
             log.logError('Couldn\'t set event '+ev+' because it doesn\'t exists');
             return;
         }
-        localStorage.setItem(this.id+"_"+ev,code);
         this.events[ev].val = code;
         if(this.events[ev].onChange)this.events[ev].onChange(code);
     }

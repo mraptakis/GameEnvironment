@@ -73,8 +73,8 @@ export default class AnimationManager {
         an.onStart = ()=>{
             if(onStart)onStart();
             obj.setAnimator(an);
-            oldFilm = obj.getFilm();
-            obj.setFilm(animation.film.id);
+            oldFilm = obj.getValue('film');
+            obj.setValue('film',animation.film.id);
         }
         an.onAction = (th)=>{
             obj.setFrame(th.currentFrame);
@@ -82,7 +82,7 @@ export default class AnimationManager {
         };
         an.onFinish = ()=>{
             obj.setFrame(0);
-            obj.setFilm(oldFilm);
+            obj.setValue('film',oldFilm);
             if(onFinish)onFinish();
         }
     

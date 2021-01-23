@@ -41,7 +41,6 @@ export default class Rectangle extends Object {
             onChange: (value) => {
                 this._frame = 0;
                 this._film = value;
-                console.log(this._film);
             },
             getValue: () => {return this._film;}
         })

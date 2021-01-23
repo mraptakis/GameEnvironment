@@ -11,7 +11,7 @@ import CollisionManager from './Engine/collisions/collisions.js'
 import PhysicsManager from './Engine/physics/physics.js'
 import SoundManager from './Engine/sound/sound.js'
 
-const rend                  = bb.fastGet('renderer',   'render');
+const rend = bb.fastGet('renderer', 'render');
 
 const app = new App();
 const game = app.game;
@@ -37,7 +37,7 @@ class _Engine {
 
     get initInfo(){
         if(this._initInfo)return this._initInfo;
-        else throw Error('No level Info provided');
+        // else throw Error('No level Info provided');
     }
 
     set animationBundle(an){
@@ -158,42 +158,79 @@ app.addInitialiseFunction(()=>{
     // bb.fastInstall('Engine','PhysicsManager',Engine.PhysicsManager);
 
     let init = Engine.initInfo;
-    if(init.state.background_color)document.body.style.backgroundColor = init.state.background_color;
-    if(init.state.background)document.body.style.backgroundImage = `url('${init.state.background}')`;
+    if(init && init.state.background_color)document.body.style.backgroundColor = init.state.background_color;
+    if(init && init.state.background)document.body.style.backgroundImage = `url('${init.state.background}')`;
 
+    if(init)
     init.objects.forEach((item)=>{
-        let category = Engine.ObjectManager.getConstructor(item.category);
-        if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
-        if(item.meta.name !== undefined){
-            let it = new category(item.meta,item.id);
-            if(item.color)it.setColor(item.color);
-            if(item.position)it.setPosition(item.position.x,item.position.y);
-            if(item.attributes){
-                for(let a in item.attributes){
-                    if(typeof item.attributes[a] !== "boolean")throw Error('Attributes must be boolean');
-                    it.setOption(a,item.attributes[a]);
-                }
-            }
-            if(item.fields){
-                for(let f in item.fields){
-                    it.addValue(f,item.fields[f]);
-                }
-            }
-            if(item.events){
-                for(let e in item.events){
-                    it.addEvent(item.events[e]);
-                }
-            }
-            if(item.states){
-                for(let e in item.states){
-                    it.addState(item.states[e]);
-                }
-            }
-            it.add();
-            if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
-        }
-    });
+    //     let category = Engine.ObjectManager.getConstructor(item.category);
+    //     if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
+    //     if(item.meta.name !== undefined){
+    //         let it = new category(item.meta,item.id);
+    //         if(item.color)it.setColor(item.color);
+    //         if(item.position)it.setPosition(item.position.x,item.position.y);
+    //         if(item.attributes){
+    //             for(let a in item.attributes){
+    //                 if(typeof item.attributes[a] !== "boolean")throw Error('Attributes must be boolean');
+    //                 it.setOption(a,item.attributes[a]);
+    //             }
+    //         }
+    //         if(item.fields){
+    //             for(let f in item.fields){
+    //                 it.addValue(f,item.fields[f]);
+    //             }
+    //         }
+    //         if(item.events){
+    //             for(let e in item.events){
+    //                 it.addEvent(item.events[e]);
+    //             }
+    //         }
+    //         if(item.states){
+    //             for(let e in item.states){
+    //                 it.addState(item.states[e]);
+    //             }
+    //         }
+    //         it.add();
+    //         if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
+    //     }
+    // });
 
+    if(item._category === 'Stage' || item._category === 'Collisions')return;
+    let category = Engine.ObjectManager.getConstructor(item._category);
+    if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
+
+    if(item._name !== undefined){
+        let it = new category({name:item._name},item._id);
+        let values = item.values;
+
+        if(values.colour.val)it.setColor(values.colour.val);
+        it.setPosition(values.x.val,values.y.val);
+        for(let a in item.options){
+            if(typeof item.options[a] !== "boolean")throw Error('Attributes must be boolean');
+            it.setOption(a,item.options[a]);
+        }
+
+        for(let v in values){
+            if(!it.getValue(v) === undefined)it.addValue(v,values[v].val);
+            else it.setValue(v,values[v].val);
+        }
+
+        let events = item.events;
+        for(let f in events){
+            if(!it.getEvent(f) === undefined)it.addEvent(f,events[f].val);
+            else it.setEvent(f,events[f].val);
+        }
+
+        let states = item.states;
+        for(let s in states){
+            it.addState(s);
+        }
+
+        console.log(it);
+
+        it.add();
+        if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
+    }});
 });
 
 app.addLoadFunction(()=>{

@@ -10,7 +10,6 @@ function createObject(item){
     let category = Engine.ObjectManager.getConstructor(item._category);
     if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
 
-    // return;
     if(item._name !== undefined){
         let it = new category({name:item._name+'A'},item._id+'1');
         let values = item.values;
@@ -50,36 +49,42 @@ function saveToDatabase(){
     let tableName = comManager.tableName;
     let objects = Engine.ObjectManager.objects;
     
-    for(let i in objects){
-        let obj = objects[i];
-        for(let i in obj.getValues()){
-            obj.setValue(i,obj.getValue(i));
-        }
-        // for(let i in obj.getOptions()){
-        //     obj.setOption(i,obj.getOption(i));
-        // }
+    console.log(objects);
+    comManager.clearTable(tableName).then( () => {
+        for(let i in objects){
+            let obj = objects[i];
+            for(let i in obj.getValues()){
+                obj.setValue(i,obj.getValue(i));
+            }
+
+            console.log(obj);
+
+            // for(let i in obj.getOptions()){
+            //     obj.setOption(i,obj.getOption(i));
+            // }
 
 
-        let string = JSON.stringify(obj).replaceAll('"',"'") 
-        let rObj = JSON.parse(string.replaceAll("'",'"'));
-        createObject(rObj);
-        // comManager.updateItemToTable(tableName,{
-        //     key: "id",
-        //     value: '"'+i+'"',
-        // },
-        // [
-        //     {
-        //         name: 'id',
-        //         type: 'TEXT',
-        //         value: obj.id
-        //     },
-        //     {
-        //         name: 'objectInfo',
-        //         type: 'TEXT',
-        //         value: JSON.stringify(obj).replaceAll('"',"'")
-        //     }
-        // ])
-    }
+            let string = JSON.stringify(obj).replaceAll('"',"'") 
+            // let rObj = JSON.parse(string.replaceAll("'",'"'));
+            // createObject(rObj);
+            comManager.updateItemToTable(tableName,{
+                key: "id",
+                value: '"'+i+'"',
+            },
+            [
+                {
+                    name: 'id',
+                    type: 'TEXT',
+                    value: obj.id
+                },
+                {
+                    name: 'objectInfo',
+                    type: 'TEXT',
+                    value: string
+                }
+            ])
+        }    
+    })
 }
 
 bb.fastInstall('actions','saveToDatabase',saveToDatabase)
