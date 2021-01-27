@@ -1,6 +1,6 @@
 
 
-// const serverPrefix = 'https://thesis-server.glitch.me/database';
+// const serverPrefix = 'https://thesis-server.glitch.me/database/';
 const serverPrefix = 'http://localhost:3000/database/'
 
 function httpGetAsync(type,url,data,callback) {
@@ -85,7 +85,7 @@ let struc = [
 ];
 
 
-comMan.createTable('superMario2',struc)
+comMan.createTable('superMario',struc)
 
 // comMan.addItemToTable('aaaa',struc);
 // comMan.getTable('superMario');

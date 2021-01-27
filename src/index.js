@@ -19,7 +19,7 @@ serverCommuncator.getTable(serverCommuncator.tableName,(res)=>{
             element.objectInfo = JSON.parse(element.objectInfo);
         })
         res = res.map(item => item.objectInfo);
-        console.log(res);
+        // console.log(res);
         Engine.initInfo = {
             state:{
                 name: 'initial_pac',
@@ -28,7 +28,17 @@ serverCommuncator.getTable(serverCommuncator.tableName,(res)=>{
             },
             objects: res
         };
+    }else{
+        Engine.initInfo = {
+            state:{
+                name: 'initial_pac',
+                background_color: '#000000',
+                background: './assets/textures/sky.jpeg'
+            },
+            objects: []
+        };
     }
+
     
     Engine.preSetAnimations = animationManagement;
     Engine.animationBundle = animationFilms;
@@ -59,3 +69,11 @@ serverCommuncator.getTable(serverCommuncator.tableName,(res)=>{
 //     ])
 //     console.log(JSON.stringify(obj));
 // });
+
+import bb from './utils/blackboard.js'
+function changeState(){
+    console.log(bb.fastGet('state','player'));
+    bb.fastGet('state','player').setCurrentState('movingRight');
+}
+
+bb.fastInstall('actions','changeState',changeState);

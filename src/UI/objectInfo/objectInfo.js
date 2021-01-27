@@ -38,7 +38,7 @@ function updateInfo(obj){
         statesInfo.appendChild(item);
         document.getElementById('addStateText').value = "";
         transition(undefined);
-        transition(focusedObj.getName());
+        transition(focusedObj.id);
     });
 
     let fieldsInfo = document.getElementById('fieldsInfo');
@@ -46,7 +46,18 @@ function updateInfo(obj){
     for(let i in obj.getValues()){
         let item = document.createElement('div');
         item.classList += "InfoBox_item";
-        item.innerHTML = i + " = " + obj.getValue(i);
+        let inp = document.createElement('input');
+        inp.type = 'Text';
+        inp.style.width = '40%';
+        inp.value = obj.getValue(i);
+        inp.onchange = (ev)=>{
+            if(isNaN(inp.value))
+                obj.setValue(i,inp.value);
+            else
+                obj.setValue(i,Number.parseFloat(inp.value));
+        }
+        item.innerHTML = i + " = ";
+        item.appendChild(inp);
         fieldsInfo.appendChild(item);
     }
 
@@ -74,7 +85,7 @@ function updateInfo(obj){
     document.getElementById('addEventButton').addEventListener('click',()=>{
         let textValue = document.getElementById('addEventText').value;
         if(textValue === "")return;
-        let focusedObj = Engine.ObjectManager.getObject(bb.fastGet('state','focusedObject'));
+        let focusedObj = bb.fastGet('state','focusedObject');
         focusedObj.addEvent(textValue);
         let item = document.createElement('div');
         item.innerHTML = textValue;
@@ -82,7 +93,7 @@ function updateInfo(obj){
         eventsInfo.appendChild(item);
         document.getElementById('addEventText').value = "";
         transition(undefined);
-        transition(focusedObj.getName());
+        transition(focusedObj.id);
     });
 
     let attributeInfo = document.getElementById('attributeInfo');

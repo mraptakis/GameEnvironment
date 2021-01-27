@@ -226,7 +226,9 @@ app.addInitialiseFunction(()=>{
             it.addState(s);
         }
 
-        console.log(it);
+        //TODO 
+        if(it.name === 'player')
+            bb.fastInstall('state','player',it);
 
         it.add();
         if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
@@ -283,8 +285,8 @@ game.extra = ()=>{
 import keyToAction from '../assets/json/keyToActions.js' //json
 // TODO: move this to somewhere better
 function inpHandler(key) {
-    // if(bb.fastGet('state','mode') === 'editing')return;
     if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
+    if(bb.fastGet('state','mode') === 'editing')return;
     else if(keyToAction[key]){
         keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
     }

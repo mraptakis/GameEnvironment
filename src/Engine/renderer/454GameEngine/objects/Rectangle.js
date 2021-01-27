@@ -14,8 +14,6 @@ export default class Rectangle extends Object {
     constructor({name,dim,film},id){
         super(name,id);
         this._category = 'Rectangle';
-        
-        bb.fastInstall('state','player',this);
 
         this._width = (dim)?dim.width:100;
         this._height = (dim)?dim.height:100;

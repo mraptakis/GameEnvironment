@@ -135,7 +135,7 @@ export default class Object {
     }
 
     setCurrentState(newState){
-        if(this.states[newState]) return; //TODO
+        if(!this.states[newState]) return; //TODO
 
         bb.fastGet('scripting','executeText')(this.currentState.transitionFrom); //TODO
         this.currentState = this.states[newState];
@@ -177,7 +177,7 @@ export default class Object {
 
     setValue(val,v){
         if(!this.values[val]){
-            log.logError('Couldn\'t set value '+val+' because it doesn\'t exists');
+            this.addValue(val,v);
             return;
         }
         this.values[val].val = v;
@@ -215,7 +215,7 @@ export default class Object {
 
     setEvent(ev,code){
         if(!this.events[ev]){
-            log.logError('Couldn\'t set event '+ev+' because it doesn\'t exists');
+            this.addEvent(ev,code);
             return;
         }
         this.events[ev].val = code;

@@ -7,6 +7,7 @@ export default {
     "KeyP": ["pauseGame"],
     "KeyL": ["resumeGame"],
     "KeyM": ["dummyAction"],
+    "KeyN": ["changeState"],
     "KeyO": ["downloadScript"],
     "KeyI": ["loadScript"],
     "controller14": ["moveLeft"],
