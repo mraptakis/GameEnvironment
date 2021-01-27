@@ -224,6 +224,7 @@ app.addInitialiseFunction(()=>{
         let states = item.states;
         for(let s in states){
             it.addState(s);
+            it.setState(s,states[s].transitionFrom,states[s].transitionTo);
         }
 
         //TODO 

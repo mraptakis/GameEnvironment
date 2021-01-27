@@ -33,7 +33,7 @@
     position: absolute;
     width: 500px;
     height: 500px;
-    top: 60px;
+    top: 80px;
     overflow: hidden;
 }
 
@@ -41,7 +41,7 @@
     /* visibility: hidden; */
     position: absolute;
     width: 500px;
-    height: 20px;
+    height: 40px;
     top: 40px;
     background-color: var(--main-color);
     color: var(--main-text);
@@ -72,7 +72,7 @@
     color:black;
     width: 350px;
     overflow: hidden;
-    top: 70px;
+    top: 90px;
     left: 120px;
     text-align: right;
     font-size: 20px;
@@ -84,7 +84,7 @@
     position: absolute;
     width: 30px;
     height: 30px;
-    top: 40px;
+    top: 80px;
     left: 520px;
     background-image: url(../../../assets/images/play.png); /* play.png from 'www.flaticon.com' from user Pixel Perfect */
     background-position: center;
@@ -96,7 +96,7 @@
     position: absolute;
     width: 30px;
     height: 30px;
-    top: 90px;
+    top: 130px;
     left: 520px;
     background-image: url(../../../assets/images/save.png); /* save.png from 'www.flaticon.com' from user FreePik */
     background-position: center;
@@ -108,7 +108,7 @@
     position: absolute;
     width: 500px;
     height: 200px;
-    top: 540px;
+    top: 580px;
     font-size: 20px;
     color: white;
     background-color: rgba(255,255,255,0.1);

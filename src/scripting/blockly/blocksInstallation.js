@@ -362,6 +362,59 @@ Blockly.JavaScript['object_field'] = function(block) {
     return `bb.fastGet('Engine','ObjectManager').getObject('${obj_val}').setValue('${field_val}',${val_val});`;
 };
 
+Blockly.Blocks['object_state'] = {
+    validate: function(newValue) {
+        this.getSourceBlock().updateConnections(newValue);
+        return newValue;
+    },
+    
+    init: function() {
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AK_SET_OBJECT)
+            .appendField(new Blockly.FieldDropdown(this.getObjects(),this.validate), 'MODE')
+            .appendField(Blockly.Msg.AK_APOSS);
+        this.appendDummyInput('values')
+            .appendField('state to')
+            .appendField(new Blockly.FieldDropdown([['','']]), 'FIELD')
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object field.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    },
+
+    updateConnections: function(newValue) {
+        let values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getStates();
+        let toAdd = [];
+        
+        for(let i in values){
+            toAdd.push([i,i])
+        }
+        
+        if(toAdd.length === 0)toAdd = [['','']];
+        this.removeInput('values', /* no error */ true);
+        this.removeInput('value',true);
+        this.appendDummyInput('values')
+            .appendField(Blockly.Msg.AK_EVENT)
+            .appendField(new Blockly.FieldDropdown(toAdd), 'FIELD')
+    },
+
+    getObjects(){
+        let map = objManager.objects;
+        let categs = [];
+        for(let i in map){
+                categs.push([map[i].name,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['object_state'] = function(block) {
+    let obj_val = block.getFieldValue('MODE');
+    let field_val = block.getFieldValue('FIELD');
+    return `bb.fastGet('Engine','ObjectManager').getObject('${obj_val}').setCurrentState('${field_val}');`;
+};
+
 Blockly.Blocks['object_event'] = {
     validate: function(newValue) {
         this.getSourceBlock().updateConnections(newValue);

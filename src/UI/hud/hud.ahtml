@@ -6,6 +6,7 @@
       <block type="remove_object"></block>
       <block type="get_object_field"></block>
       <block type="object_attr"></block>
+      <block type="object_state"></block>
       <block type="object_event"></block>
       <block type="object_field"></block>
       <block type="dropdown_obj"></block>

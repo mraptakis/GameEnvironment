@@ -40,6 +40,8 @@ function hudState(){
 function onHudLoaded(){
     document.getElementById('hudToggle').addEventListener('click',hudState());
 
+    let codes;
+
 
     let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
@@ -49,7 +51,7 @@ function onHudLoaded(){
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
         let text = bb.invoke('scripting','currentScriptAsText');
-        bb.fastGet('state','focusedObject').setEvent(tabOpen,text);
+        codes[tabOpen].set(text);
     });
 
     function tabInfo(obj,id){
@@ -62,13 +64,21 @@ function onHudLoaded(){
         };
     }
 
-    let logAllActions = "";
+    function tabInfo2(id,cb){
+        return ()=>{
+            let text = cb();
+            bb.invoke('scripting','clearAndLoadFromText',text);
+            // codeAnalysis(bb.fastGet('scripting','currentScriptAsCode')());
+            tabOpen = id;
+            document.getElementById('openTab').innerHTML = tabOpen;
+        };
+    }
 
     let consoleArea = document.getElementById('consoleArea');
     function onActionChange(newMessage){
         consoleArea.value += '\n'+newMessage;
         consoleArea.scrollTop = consoleArea.scrollHeight;
-        logAllActions += newMessage+'\n';
+        // logAllActions += newMessage+'\n';
         bb.installWatch('state','lastAction',onActionChange);
     }
 
@@ -84,11 +94,14 @@ function onHudLoaded(){
             return;
         }
         let firstObject = true;
-        for(let i in obj.getEvents()){
+
+        codes = obj.getCodes();
+
+        for(let i in codes){
             let elem = document.createElement('div');
             elem.classList = "eventTab";
             elem.innerHTML = i;
-            elem.addEventListener('click',tabInfo(obj,i));
+            elem.addEventListener('click',tabInfo2(i,codes[i].get));
             eventsTab.appendChild(elem);
             if(firstObject){
                 elem.click();
