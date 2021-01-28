@@ -2,6 +2,7 @@ import bb from '../utils/blackboard.js'
 
 import keyboard from './keyboard/keyboard.js'
 import objInfo from './objectInfo/objectInfo.js'
+import objFloatingInfo from './objectFloatingInfo/objectFloatingInfo.js'
 import toolbar from './toolbar/toolbar.js'
 import objMenu from'./objectMenu/objectMenu.js'
 import createObjMenu from './createObjectMenu/createObjectMenu.js'
@@ -98,6 +99,7 @@ const uiManager = new UIManager();
 
 uiManager.installUI({name:keyboard.name,link:keyboard.link,cb:keyboard.cb});
 uiManager.installUI({name:objInfo.name,link:objInfo.link,cb:objInfo.cb});
+uiManager.installUI({name:objFloatingInfo.name,link:objFloatingInfo.link,cb:objFloatingInfo.cb});
 uiManager.installUI({name:toolbar.name,link:toolbar.link,cb:toolbar.cb},false);
 uiManager.installUI({name:objMenu.name,link:objMenu.link,cb:objMenu.cb});
 uiManager.installUI({name:createObjMenu.name,link:createObjMenu.link,cb:createObjMenu.cb});
