@@ -100,7 +100,33 @@ function updateInfo(obj){
     attributeInfo.innerHTML = "";
     for(let i in obj.getOptions()){
         let item = document.createElement('div');
-        item.innerHTML = i + " = " + obj.getOption(i);
+        let opt = document.createElement('select');
+        let trueOpt = document.createElement('option');
+        trueOpt.value = 'true';
+        trueOpt.text = 'true';
+        let falseOpt = document.createElement('option');
+        falseOpt.value = 'false';
+        falseOpt.text = 'false';
+
+        if(obj.getOption(i)){
+            trueOpt.selected = 'selected';
+        }else{
+            falseOpt.selected = 'selected';
+        }
+
+        opt.appendChild(trueOpt);
+        opt.appendChild(falseOpt);
+
+        opt.onchange = (ev) => {
+            if(ev.target.value === 'true'){
+                obj.setOption(i,true);
+            }else{
+                obj.setOption(i,false);
+            }
+        }
+
+        item.innerHTML = i + " = ";
+        item.appendChild(opt);
         item.classList += "InfoBox_item";
         attributeInfo.appendChild(item);
     }

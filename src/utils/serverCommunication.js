@@ -85,7 +85,7 @@ let struc = [
 ];
 
 
-comMan.createTable('superMario',struc)
+comMan.createTable('superMario3',struc)
 
 // comMan.addItemToTable('aaaa',struc);
 // comMan.getTable('superMario');

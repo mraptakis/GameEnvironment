@@ -395,7 +395,7 @@ Blockly.Blocks['object_state'] = {
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')
-            .appendField(Blockly.Msg.AK_EVENT)
+            .appendField('state to')
             .appendField(new Blockly.FieldDropdown(toAdd), 'FIELD')
     },
 
