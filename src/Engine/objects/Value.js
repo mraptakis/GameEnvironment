@@ -68,4 +68,9 @@ export default class ValueHandler{
         }
         delete this._regValues[val];
     }
+
+    getValueTag(val){
+        let value = this._regValues[val];
+        return value.tag;
+    }
 }

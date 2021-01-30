@@ -199,6 +199,13 @@ function openSettings(){
     bb.fastGet('UI','loadUI')(setWindow.name);
 }
 
+import invWindow from '../inventoryWindow/inventoryWindow.js'
+
+function openInventory(){
+    bb.fastGet('UI','installUI')({name:invWindow.name,link:invWindow.link,cb:invWindow.cb});
+    bb.fastGet('UI','loadUI')(invWindow.name);
+}
+
 function onToolbarLoaded(){
     let dropdown = document.getElementById('toolbar_actions_dropdown_button');
     let toggle = actionsDropdown();
@@ -221,5 +228,6 @@ function onToolbarLoaded(){
     document.getElementById('toolbar_uis').addEventListener('click',toggle);
 
     document.getElementById('toolbar_settings').addEventListener('click',openSettings);
+    document.getElementById('toolbar_inventory').addEventListener('click',openInventory);
 
 }

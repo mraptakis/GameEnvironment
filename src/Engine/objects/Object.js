@@ -44,10 +44,10 @@ export default class Object {
     }
 
     getPositional() {
+        let handler = this.data.valueHandler;
         let toReturn = {};
-        for (let i in this.data.valueHandler) { // if(this.data.valueHandler[i].tag === "positional")toReturn.push([i,this.getValue(i)]);
-
-            if (this.data.valueHandler[i].tag === "positional") 
+        for (let i in handler.getValues()) { 
+            if (handler.getValueTag(i) === "positional") 
                 toReturn[i] = this.getValue(i);
             
         }
