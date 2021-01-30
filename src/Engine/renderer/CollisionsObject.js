@@ -10,20 +10,20 @@ class CollisionsObject extends Object {
     constructor(){
         super('Collisions','KciKIiWkUB9QL6q');
 
-        delete this.options['isMovable'];
-        delete this.options['isRemovable'];
-        delete this.options['isVisible'];
-        delete this.options['isSolid'];
-        delete this.options['isCollidable'];
+        this.data.optionHandler.removeOption('isMovable');
+        this.data.optionHandler.removeOption('isRemovable');
+        this.data.optionHandler.removeOption('isVisible');
+        this.data.optionHandler.removeOption('isSolid');
+        this.data.optionHandler.removeOption('isCollidable');
 
-        delete this.events['onCollision'];
-        delete this.events['onRemove'];
-        delete this.events['onMove'];
-        delete this.events['onGameStart'];
-        delete this.events['onEachFrame'];
 
-        delete this.events['onClick'];
-        delete this.events['onRightClick'];
+        this.data.eventHandler.removeEvent('onCollision');
+        this.data.eventHandler.removeEvent('onRemove');
+        this.data.eventHandler.removeEvent('onMove');
+        this.data.eventHandler.removeEvent('onGameStart');
+        this.data.eventHandler.removeEvent('onEachFrame');
+        this.data.eventHandler.removeEvent('onClick');
+        this.data.eventHandler.removeEvent('onRightClick');
 
         this._category = 'Collisions';
 

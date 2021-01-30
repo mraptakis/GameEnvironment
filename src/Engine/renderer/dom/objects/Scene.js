@@ -12,8 +12,7 @@ class Scene extends Object {
 
         document.body.appendChild(this.div);
 
-
-        this.options['isMovable'] = false;
+        this.data.optionHandler.removeOption('isMovable');
 
         this._category = 'Scene';
 

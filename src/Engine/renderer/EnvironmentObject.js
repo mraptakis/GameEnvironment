@@ -25,28 +25,27 @@ class EnvironmentObject extends Object {
 
         
 
-        this.events["moveStageLeft"] = new Event({
+        this.data.eventHandler.registerEvent('moveStageLeft',{
             tag: 'system',
-            value: localStorage.getItem(this.id+"_moveStageLeft")
+            code: localStorage.getItem(this.id+"_moveStageLeft")
         });
 
-        this.events["moveStageRight"] = new Event({
+        this.data.eventHandler.registerEvent('moveStageRight',{
             tag: 'system',
-            value: localStorage.getItem(this.id+"_moveStageRight")
+            code: localStorage.getItem(this.id+"_moveStageRight")
         });
 
-        this.events["cameraFollowPlayer"] = new Event({
+        this.data.eventHandler.registerEvent('cameraFollowPlayer',{
             tag: 'system',
-            value: localStorage.getItem(this.id+"_cameraFollowPlayer")
+            code: localStorage.getItem(this.id+"_cameraFollowPlayer")
         });
 
         this._windowWidth = window.innerWidth;
         this._windowHeight = window.innerHeight;
 
 
-        this.values['x'] = new Value({
+        this.data.valueHandler.registerValue('x',{
             tag: "positional",
-            // onChange: (value) => {log.logError('Can\'t change x value of Stage');},
             onChange: (value) => {
                 this._x = value;
                 if(this._x + this._windowWidth > this._width)
@@ -54,9 +53,9 @@ class EnvironmentObject extends Object {
                 if(this._x < 0)this._x = 0;
             },
             getValue: () => {return this._x;}
-        });
+        })
 
-        this.values['y'] = new Value({
+        this.data.valueHandler.registerValue('y',{
             tag: "positional",
             // onChange: (value) => {log.logError('Can\'t change y value of Stage');},
             onChange: (value) => {
@@ -68,43 +67,42 @@ class EnvironmentObject extends Object {
             getValue: () => {return this._y;}
         });
 
-        this.values['width'] = new Value({
+        this.data.valueHandler.registerValue('width',{
             tag: "positional",
             onChange: (value) => {log.logError('Can\'t change width value of Stage');},
             getValue: () => {return this._width;}
         });
 
-        this.values['height'] = new Value({
+        this.data.valueHandler.registerValue('height',{
             tag: "positional",
             onChange: (value) => {log.logError('Can\'t change height value of Stage');},
             getValue: () => {return this._height;}
         });
-        
-        this.values['window width'] = new Value({
+        this.data.valueHandler.registerValue('window',{
             tag: "positional",
             onChange: (value) => {log.logError('Can\'t change width value of Stage');},
             getValue: () => {return this._windowWidth;}
         });
-
-        this.values['window height'] = new Value({
+        this.data.valueHandler.registerValue('height',{
             tag: "positional",
             onChange: (value) => {log.logError('Can\'t change height value of Stage');},
             getValue: () => {return this._windowHeight;}
         });
 
-        delete this.options['isMovable'];
-        delete this.options['isRemovable'];
-        delete this.options['isVisible'];
-        delete this.options['isSolid'];
+        this.data.optionHandler.removeOption('isMovable');
+        this.data.optionHandler.removeOption('isRemovable');
+        this.data.optionHandler.removeOption('isVisible');
+        this.data.optionHandler.removeOption('isSolid');
 
-        delete this.events['onCollision'];
-        delete this.events['onRemove'];
-        delete this.events['onMove'];
+        this.data.optionHandler.setOption('isCollidable',false);
 
-        delete this.events['onClick'];
-        delete this.events['onRightClick'];
 
-        this.options['isCollidable'] = false;
+        this.data.eventHandler.removeEvent('onCollision');
+        this.data.eventHandler.removeEvent('onRemove');
+        this.data.eventHandler.removeEvent('onMove');
+        this.data.eventHandler.removeEvent('onClick');
+        this.data.eventHandler.removeEvent('onRightClick');
+
 
         this._category = 'Stage';
     }

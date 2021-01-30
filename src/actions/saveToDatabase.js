@@ -57,16 +57,6 @@ function saveToDatabase(){
                 obj.setValue(i,obj.getValue(i));
             }
 
-            console.log(obj);
-
-            // for(let i in obj.getOptions()){
-            //     obj.setOption(i,obj.getOption(i));
-            // }
-
-
-            let string = JSON.stringify(obj).replaceAll('"',"'") 
-            // let rObj = JSON.parse(string.replaceAll("'",'"'));
-            // createObject(rObj);
             comManager.updateItemToTable(tableName,{
                 key: "id",
                 value: '"'+i+'"',
@@ -80,7 +70,7 @@ function saveToDatabase(){
                 {
                     name: 'objectInfo',
                     type: 'TEXT',
-                    value: string
+                    value: obj.toString().replaceAll('"',"'")
                 }
             ])
         }    

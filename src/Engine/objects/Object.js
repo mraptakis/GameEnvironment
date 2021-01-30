@@ -1,22 +1,17 @@
-import bb from '../../utils/blackboard.js'
-import log from '../../utils/logs.js'
+
 import rand from '../../utils/randomGenerator.js'
 
-import Event from './Event.js'
-import State from './State.js'
+import EventManager from './Event.js'
+import StateManager from './State.js'
+import OptionManager from './Option.js'
+import ValueHandler from './Value.js'
 
 export default class Object {
     _id 
     _name 
-    renderer 
-    values = {}
+    renderer
 
-    events = {}
-
-    options = {}
-
-    currentState;
-    states = {}
+    data = {};
 
     _category;
 
@@ -24,23 +19,24 @@ export default class Object {
         this._name = _name;
         this.id = (_id) ? _id : rand.generateGameID();
 
-        this.events['onClick'] = new Event({tag: 'system'});
-        this.events['onRightClick'] = new Event({tag: 'system'});
-        this.events['onGameStart'] = new Event({tag: 'system'});
-        this.events['onRemove'] = new Event({tag: 'system'});
-        this.events['onMove'] = new Event({tag: 'system'});
-        this.events['onEachFrame'] = new Event({tag: 'system'});
+        this.data.eventHandler  = new EventManager(true);
+        this.data.stateHandler  = new StateManager();
+        this.data.valueHandler  = new ValueHandler();
+        this.data.optionHandler = new OptionManager(true); 
 
-        this.states['idle'] = new State({tag: 'idle'});
+    }
 
-        this.currentState = this.states['idle'];
-
-        this.options['isMovable'] = true;
-        this.options['isRemovable'] = true;
-        this.options['isVisible'] = true;
-        this.options['isSolid'] = false;
-        this.options['isCollidable'] = true;
-
+    toString(){
+        this.events  = this.getEvents();
+        this.states  = this.getStates();
+        this.options = this.getOptions();
+        this.values  = this.getValues();
+        let string = JSON.stringify(this);
+        delete this.events; 
+        delete this.states;
+        delete this.options;
+        delete this.values;
+        return string;
     }
 
     getCategory() {
@@ -49,9 +45,9 @@ export default class Object {
 
     getPositional() {
         let toReturn = {};
-        for (let i in this.values) { // if(this.values[i].tag === "positional")toReturn.push([i,this.getValue(i)]);
+        for (let i in this.data.valueHandler) { // if(this.data.valueHandler[i].tag === "positional")toReturn.push([i,this.getValue(i)]);
 
-            if (this.values[i].tag === "positional") 
+            if (this.data.valueHandler[i].tag === "positional") 
                 toReturn[i] = this.getValue(i);
             
         }
@@ -134,128 +130,6 @@ export default class Object {
         this.name = newName;
     }
 
-
-    getOptions() {
-        return this.options;
-    }
-
-    addOption(opt) {
-        this.options[opt] = true;
-    }
-
-    getOption(opt) {
-        return this.options[opt];
-    }
-
-    setOption(opt, val) {
-        this.options[opt] = val;
-    }
-
-    getCurrentState() {
-        return this.currentState.tag;
-    }
-
-    setCurrentState(newState) {
-        if (!this.states[newState]) 
-            return;
-         // TODO
-
-        bb.fastGet('scripting', 'executeText')(this.currentState.transitionFrom); // TODO
-        this.currentState = this.states[newState];
-        bb.fastGet('scripting', 'executeText')(this.currentState.transitionTo); // TODO
-
-    }
-
-    getStates() {
-        return this.states;
-    }
-
-    addState(state) {
-        this.states[state] = new State({tag: state})
-    }
-
-    getState(state) {
-        return this.states[state];
-    }
-
-    setState(state, transitionFrom, transitionTo) {
-        if(transitionFrom) this.states[state].transitionFrom = transitionFrom;
-        if(transitionTo) this.states[state].transitionTo = transitionTo;
-    }
-
-    getValues() {
-        return this.values;
-    }
-
-    addValue(val, v = "") {
-        // if(this.values[val]){
-        //     log.logError('Couldn\'t create value '+val+' because it already exists');
-        //     return;
-        // }
-        this.values[val] = {};
-        this.values[val].val = v;
-    }
-
-    setValue(val, v) {
-        if (!this.values[val]) {
-            this.addValue(val, v);
-            return;
-        }
-        this.values[val].val = v;
-        if (this.values[val].onChange) 
-            this.values[val].onChange(v);
-        
-    }
-
-    getValue(val) {
-        if (!this.values[val]) { // log.logError('Couldn\'t get value '+val+' because it doesn\'t exists');
-            return;
-        }
-        if (this.values[val].getValue) 
-            return this.values[val].getValue();
-        
-        return this.values[val].val;
-    }
-
-    getEvents() {
-        return this.events;
-    }
-
-    addEvent(ev, code) {
-        this.events[ev] = new Event({
-            tag: 'custom',
-            value: (code) ? code : ""
-        });
-    }
-
-    getEvent(ev) {
-        if (!this.events[ev]) { // log.logError('Couldn\'t get event '+ev+' because it doesn\'t exists');
-            return;
-        }
-        if (this.events[ev].getValue) 
-            return this.events[ev].getValue();
-        
-        return this.events[ev].val;
-    }
-
-    setEvent(ev, code) {
-        if (!this.events[ev]) {
-            this.addEvent(ev, code);
-            return;
-        }
-        this.events[ev].val = code;
-        if (this.events[ev].onChange) 
-            this.events[ev].onChange(code);
-        
-    }
-
-    triggerEvent(ev) {
-        if (!this.events[ev]) 
-            return;
-        
-        bb.fastGet('scripting', 'executeText')(this.getEvent(ev)); // TODO
-    }
-
     move(x, y) {
         throw Error("move needs to be implemented");
     }
@@ -279,19 +153,19 @@ export default class Object {
 
         savedData['events'] = {};
         let events = savedData['events'];
-        for (let i in this.events) {
+        for (let i in this.getEvents()) {
             events[i] = this.getEvent(i);
         }
 
         savedData['options'] = {};
         let options = savedData['options'];
-        for (let i in this.options) {
+        for (let i in this.data.optionHandler) {
             options[i] = this.getOption(i);
         }
 
         savedData['values'] = {};
         let values = savedData['values'];
-        for (let i in this.values) {
+        for (let i in this.data.valueHandler) {
             values[i] = this.getValue(i);
         }
         savedData['category'] = this._category;
@@ -319,16 +193,14 @@ export default class Object {
     }
 
     clear() {
-        for (let i in this.events) {
-            delete this.events[i];
+        delete this.data.eventHandler;
+
+        for (let i in this.data.optionHandler) {
+            delete this.data.optionHandler[i];
         }
 
-        for (let i in this.options) {
-            delete this.options[i];
-        }
-
-        for (let i in this.values) {
-            delete this.values[i];
+        for (let i in this.data.valueHandler) {
+            delete this.data.valueHandler[i];
         }
 
     }
@@ -337,4 +209,85 @@ export default class Object {
         throw Error("remove needs to be implemented");
     }
 
+}
+
+/////////EVENT FUNCTIONS/////////////////
+Object.prototype.getEvents = function(){
+    return this.data.eventHandler.getEvents();
+}
+
+Object.prototype.addEvent = function(ev, code) {
+    this.data.eventHandler.registerEvent(ev,{code:code})
+}
+
+Object.prototype.getEvent = function(ev) {
+    return this.data.eventHandler.getEvent(ev);
+}
+
+Object.prototype.setEvent = function(ev, code) {
+    this.data.eventHandler.setEvent(ev,code);
+}
+
+Object.prototype.triggerEvent = function(ev) {
+    this.data.eventHandler.triggerEvent(ev);
+}
+
+
+////////STATE FUNCTIONS////////////////////
+Object.prototype.getCurrentState = function() {
+    return this.data.stateHandler.getCurrentState();
+}
+
+Object.prototype.setCurrentState = function(newState) {
+    this.data.stateHandler.setCurrentState(newState);
+}
+
+Object.prototype.getStates = function() {
+    return this.data.stateHandler.getStates();
+}
+
+Object.prototype.addState = function(state) {
+    this.data.stateHandler.registerState(state);
+}
+
+Object.prototype.getState = function(state) {
+    return this.data.stateHandler.getState(state);
+}
+
+Object.prototype.setState = function(state, transitionFrom, transitionTo) {
+    this.data.stateHandler.setState(state,transitionFrom,transitionTo);
+}
+
+//////////OPTION FUNCTIONS ////////////////////
+Object.prototype.getOptions = function() {
+    return this.data.optionHandler.getOptions();
+}
+
+Object.prototype.addOption = function(opt) {
+    this.data.optionHandler.registerOption(opt);
+}
+
+Object.prototype.getOption = function(opt) {
+    return this.data.optionHandler.getOption(opt);
+}
+
+Object.prototype.setOption = function(opt, val) {
+    this.data.optionHandler.setOption(opt,val);
+}
+
+//////////VALUE FUNCTIONS////////////////////
+Object.prototype.getValues = function() {
+    return this.data.valueHandler.getValues();
+}
+
+Object.prototype.addValue = function(val, v = "") {
+    this.data.valueHandler.registerValue(val,{value:v});
+}
+
+Object.prototype.setValue = function(val, v) {
+    this.data.valueHandler.setValue(val, v);
+}
+
+Object.prototype.getValue = function(val) {
+    return this.data.valueHandler.getValue(val);
 }

@@ -17,20 +17,19 @@ export default class ObjectDom extends Object{
     constructor(name,id){
         super(name,id);
         this.renderer = 'dom';
-
-        this.values['x'] = new Value({
+        this.data.valueHandler.registerValue('x',{
             tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this.div.style.left = value+"px"},
             getValue: () => {return this.div.offsetLeft;}
         });
 
-        this.values['y'] = new Value({
+        this.data.valueHandler.registerValue('y',{
             tag: "positional",
             onChange: (value) => {if(this.getOption('isMovable'))this.div.style.top = value+"px"},
             getValue: () => {return this.div.offsetTop;}
         });
 
-        this.values['rotation'] = new Value({
+        this.data.valueHandler.registerValue('rotation',{
             tag: "positional",
             onChange: (value) => {this.div.style.transform = "rotate("+value+"deg)"},
             getValue: () => {
@@ -39,7 +38,7 @@ export default class ObjectDom extends Object{
             }
         });
 
-        this.values['colour'] = new Value({
+        this.data.valueHandler.registerValue('colour',{
             tag: "texture",
             onChange: (value) => this.div.style.backgroundColor = value,
             getValue: () => {return this.div.style.backgroundColor;}
