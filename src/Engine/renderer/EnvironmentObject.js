@@ -78,12 +78,12 @@ class EnvironmentObject extends Object {
             onChange: (value) => {log.logError('Can\'t change height value of Stage');},
             getValue: () => {return this._height;}
         });
-        this.data.valueHandler.registerValue('window',{
+        this.data.valueHandler.registerValue('windowWidth',{
             tag: "positional",
             onChange: (value) => {log.logError('Can\'t change width value of Stage');},
             getValue: () => {return this._windowWidth;}
         });
-        this.data.valueHandler.registerValue('height',{
+        this.data.valueHandler.registerValue('windowHeight',{
             tag: "positional",
             onChange: (value) => {log.logError('Can\'t change height value of Stage');},
             getValue: () => {return this._windowHeight;}

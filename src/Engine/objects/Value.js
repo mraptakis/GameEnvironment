@@ -1,5 +1,7 @@
 import log from '../../utils/logs.js'
 
+import bb from '../../utils/blackboard.js'
+
 class Value {
     val
     tag
@@ -29,7 +31,7 @@ export default class ValueHandler{
         //     return;
         // }
         this._regValues[val] = new Value({
-            tag: tag || 'undefined',
+            tag: tag || 'user',
             value: (value !== undefined)?value : '',
             onChange: (onChange !== undefined)?onChange : undefined,
             getValue: (getValue !== undefined)?getValue : undefined
@@ -42,9 +44,22 @@ export default class ValueHandler{
             return;
         }
         this._regValues[val].val = v;
-        if (this._regValues[val].onChange) 
+        if (typeof this._regValues[val].onChange === 'function') 
             this._regValues[val].onChange(v);
+        if (typeof this._regValues[val].onChange === 'string')
+        bb.fastGet('scripting', 'executeText')(this._regValues[val].onChange); // TODO
         
+    }
+
+    setValueCode(val, code) {
+        if(this._regValues[val])
+            this._regValues[val].onChange = code;
+    }
+
+    getValueCode(val) {
+        let value = this._regValues[val];
+        if(value)
+            return value.onChange;
     }
 
     getValue(val) {
@@ -73,4 +88,9 @@ export default class ValueHandler{
         let value = this._regValues[val];
         return value.tag;
     }
+
+    setUserCode(val, code){
+
+    }
+
 }

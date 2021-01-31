@@ -31,10 +31,11 @@ export default class StateManager{
         if (!this._regStates[newState]) 
             return;
          // TODO
-
-        bb.fastGet('scripting', 'executeText')(this._currState.transitionFrom); // TODO
+        let oldState = this.getState(this.getCurrentState());
+        let nState = this.getState(newState);
+        bb.fastGet('scripting', 'executeText')(oldState.transitionFrom); // TODO
         this._currState = this._regStates[newState];
-        bb.fastGet('scripting', 'executeText')(this._currState.transitionTo); // TODO
+        bb.fastGet('scripting', 'executeText')(nState.transitionTo); // TODO
 
     }
 

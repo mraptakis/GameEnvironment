@@ -52,7 +52,6 @@ function updateObjectList(){
 
         }else if(item.renderer === '454'){
             let pos = item.getPositional();
-            console.log(pos);
             if(item._film){
                 let info = item._getFilm(item._film);
                 let box = info.getFrameBox(item._frame);

@@ -213,6 +213,9 @@ app.addInitialiseFunction(()=>{
         for(let v in values){
             if(!it.getValue(v) === undefined)it.addValue(v,values[v].val);
             else it.setValue(v,values[v].val);
+            if(values[v].onChange){
+                it.setValueCode(v, values[v].onChange);
+            }
         }
 
         let events = item.events;

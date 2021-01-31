@@ -58,35 +58,54 @@ export default class Object {
         let toReturn = {};
 
         let events = this.getEvents();
+        toReturn.events = {};
         for (let i in events) {
-            toReturn[i] = {};
-            toReturn[i].get = () => {
+            toReturn.events[i] = {};
+            toReturn.events[i].get = () => {
                 return this.getEvent(i)
             } 
-            toReturn[i].set = (code) => {
+            toReturn.events[i].set = (code) => {
                 this.setEvent(i, code)
             }
         }
 
         let states = this.getStates();
+        toReturn.states = {};
         for(let i in states){
             let state = this.getState(i);
-            toReturn[i+'_From'] = {};
-            toReturn[i+'_From'].get = () => {
+            toReturn.states[i] = {};
+            toReturn.states[i]['out of '+i] = {};
+            toReturn.states[i]['out of '+i].get = () => {
                 return state.transitionFrom;
             } 
-            toReturn[i+'_From'].set = (code) => {
+            toReturn.states[i]['out of '+i].set = (code) => {
                 this.setState(i,code,undefined);
             }
-            toReturn[i+'_To'] = {};
-            toReturn[i+'_To'].get = () => {
+            toReturn.states[i]['go to '+i] = {};
+            toReturn.states[i]['go to '+i].get = () => {
                 return state.transitionTo;
             } 
-            toReturn[i+'_To'].set = (code) => {
+            toReturn.states[i]['go to '+i].set = (code) => {
                 this.setState(i,undefined,code);
             }
         }
 
+        let values = this.getValues();
+        toReturn.values = {};
+        for(let i in values){
+            let tag = this.getValueTag(i);
+            if(tag === 'user'){
+                toReturn.values['on'+i+'Change'] = {};
+                toReturn.values['on'+i+'Change'].set = (code) => {
+                    this.setValueCode(i, code);
+                };
+                toReturn.values['on'+i+'Change'].get = () => {
+                    return this.getValueCode(i);
+                }
+            }
+        }
+
+        // console.log(toReturn);
         return toReturn;
     }
 
@@ -290,4 +309,16 @@ Object.prototype.setValue = function(val, v) {
 
 Object.prototype.getValue = function(val) {
     return this.data.valueHandler.getValue(val);
+}
+
+Object.prototype.getValueTag = function(val) {
+    return this.data.valueHandler.getValueTag(val);
+}
+
+Object.prototype.setValueCode = function(val, code) {
+    this.data.valueHandler.setValueCode(val, code);
+}
+
+Object.prototype.getValueCode = function(val) {
+    return this.data.valueHandler.getValueCode(val);
 }
