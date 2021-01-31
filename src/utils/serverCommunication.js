@@ -1,7 +1,7 @@
 
 
-// const serverPrefix = 'https://thesis-server.glitch.me/database/';
-const serverPrefix = 'http://localhost:3000/database/'
+const serverPrefix = 'https://thesis-server.glitch.me/database/';
+// const serverPrefix = 'http://localhost:3000/database/'
 
 function httpGetAsync(type,url,data,callback) {
     var xmlHttp = new XMLHttpRequest();

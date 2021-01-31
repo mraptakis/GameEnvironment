@@ -55,9 +55,9 @@ function saveToDatabase(){
     comManager.clearTable(tableName).then( () => {
         for(let i in objects){
             let obj = objects[i];
-            // for(let i in obj.getValues()){
-            //     obj.setValue(i,obj.getValue(i));
-            // }
+            for(let i in obj.getValues()){
+                obj.setValue(i,obj.getValue(i));
+            }
 
             comManager.updateItemToTable(tableName,{
                 key: "id",

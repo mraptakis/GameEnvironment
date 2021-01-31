@@ -220,8 +220,10 @@ app.addInitialiseFunction(()=>{
 
         let events = item.events;
         for(let f in events){
-            if(!it.getEvent(f) === undefined)it.addEvent(f,events[f].val);
-            else it.setEvent(f,events[f].val);
+            if(it.getEvent(f) === undefined)
+                it.addEvent(f,events[f].val);
+            else 
+                it.setEvent(f,events[f].val);
         }
 
         let states = item.states;
