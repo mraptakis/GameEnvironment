@@ -2,13 +2,13 @@ import bb from '../../utils/blackboard.js'
 
 import Object from '../objects/Object.js'
 
-class CollisionsObject extends Object {
+class KeyboardObject extends Object {
 
     renderer = 'None';
-    name = 'Collisions';
+    name = 'Keyboard';
 
     constructor(){
-        super('Collisions','KciKIiWkUB9QL6q');
+        super('Keyboard','KciKIiWkUB9QL6d');
 
         this.data.optionHandler.removeOption('isMovable');
         this.data.optionHandler.removeOption('isRemovable');
@@ -25,24 +25,19 @@ class CollisionsObject extends Object {
         this.data.eventHandler.removeEvent('onClick');
         this.data.eventHandler.removeEvent('onRightClick');
 
-        this._category = 'Collisions';
+        this._category = 'Keyboard';
+
+        // i = 'A'.charCodeAt(0), j = 'Z'.charCodeAt(0); 
+        for (let i = 65; i <= 90; ++i) {
+            this.addEvent('PressedKey'+String.fromCharCode(i));
+        }
+        for (let i = 65; i <= 90; ++i) {
+            this.addEvent('UnpressedKey'+String.fromCharCode(i));
+        }
 
     }
 
     move(x,y){
-        if(!this.options['isMovable'])return;
-
-    }    
-    
-    getEvent(ev){
-        let split = ev.split('_');
-        return bb.fastGet('Engine','CollisionManager').getCollision(split[0],split[1]);
-    }
-
-    setEvent(ev,code){
-        localStorage.setItem(this.id+"_"+ev,code);
-        let split = ev.split('_');
-        return bb.fastGet('Engine','CollisionManager').setCollision(split[0],split[1],code);
     }
     
     newFrame(){
@@ -53,11 +48,11 @@ class CollisionsObject extends Object {
     add(){}
 
     remove(){
-        throw Error('Collision Object cannot be removed!');
+        throw Error('Keyboard Object cannot be removed!');
     }
 
 }
 
-const collisionsObject = new CollisionsObject();
+const keyboardObject = new KeyboardObject();
 
-export default collisionsObject;
+export default keyboardObject;

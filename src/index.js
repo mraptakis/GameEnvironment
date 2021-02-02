@@ -9,7 +9,7 @@ import animationFilms from '../assets/json/AnimationFilmHolderJSON.js' // json
 
 import serverCommuncator from './utils/serverCommunication.js'
 
-serverCommuncator.tableName = 'superMario3';
+serverCommuncator.tableName = 'superMario';
 
 serverCommuncator.getTable(serverCommuncator.tableName,(res)=>{
     if(res !== ''){
@@ -69,11 +69,3 @@ serverCommuncator.getTable(serverCommuncator.tableName,(res)=>{
 //     ])
 //     console.log(JSON.stringify(obj));
 // });
-
-import bb from './utils/blackboard.js'
-function changeState(){
-    console.log(bb.fastGet('state','player'));
-    bb.fastGet('state','player').setCurrentState('movingRight');
-}
-
-bb.fastInstall('actions','changeState',changeState);

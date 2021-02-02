@@ -195,50 +195,54 @@ app.addInitialiseFunction(()=>{
     //     }
     // });
 
-    if(item._category === 'Stage' || item._category === 'Collisions')return;
+    
     let category = Engine.ObjectManager.getConstructor(item._category);
-    if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
 
-    if(item._name !== undefined){
-        let it = new category({name:item._name},item._id);
-        let values = item.values;
+    if(item._name === undefined)return;
+    let it;
+    if(item._category === 'Stage' || item._category === 'Collisions' || item._category === 'Keyboard'){
+        it = Engine.ObjectManager._objectByName[item._category];
+    }else{ 
+        it = new category({name:item._name},item._id);
+    }
+    let values = item.values;
 
-        if(values.colour.val)it.setColor(values.colour.val);
-        it.setPosition(values.x.val,values.y.val);
-        for(let a in item.options){
-            if(typeof item.options[a] !== "boolean")throw Error('Attributes must be boolean');
-            it.setOption(a,item.options[a]);
+    if(values.colour && values.colour.val)it.setColor(values.colour.val);
+    it.setPosition((values.x)?values.x.val: undefined,(values.y)?values.y.val: undefined);
+    for(let a in item.options){
+        if(typeof item.options[a] !== "boolean")throw Error('Attributes must be boolean');
+        it.setOption(a,item.options[a]);
+    }
+
+    for(let v in values){
+        if(!it.getValue(v) === undefined)it.addValue(v,values[v].val);
+        else it.setValue(v,values[v].val);
+        if(values[v].onChange){
+            it.setValueCode(v, values[v].onChange);
         }
+    }
 
-        for(let v in values){
-            if(!it.getValue(v) === undefined)it.addValue(v,values[v].val);
-            else it.setValue(v,values[v].val);
-            if(values[v].onChange){
-                it.setValueCode(v, values[v].onChange);
-            }
-        }
+    let events = item.events;
+    for(let f in events){
+        if(it.getEvent(f) === undefined)
+            it.addEvent(f,events[f].val);
+        else 
+            it.setEvent(f,events[f].val);
+    }
 
-        let events = item.events;
-        for(let f in events){
-            if(it.getEvent(f) === undefined)
-                it.addEvent(f,events[f].val);
-            else 
-                it.setEvent(f,events[f].val);
-        }
+    let states = item.states;
+    for(let s in states){
+        it.addState(s);
+        it.setState(s,states[s].transitionFrom,states[s].transitionTo);
+    }
 
-        let states = item.states;
-        for(let s in states){
-            it.addState(s);
-            it.setState(s,states[s].transitionFrom,states[s].transitionTo);
-        }
+    //TODO 
+    if(it.name === 'player')
+        bb.fastInstall('state','player',it);
 
-        //TODO 
-        if(it.name === 'player')
-            bb.fastInstall('state','player',it);
-
-        it.add();
-        if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
-    }});
+    it.add();
+    if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
+    });
 });
 
 app.addLoadFunction(()=>{
@@ -291,11 +295,12 @@ game.extra = ()=>{
 import keyToAction from '../assets/json/keyToActions.js' //json
 // TODO: move this to somewhere better
 function inpHandler(key) {
-    if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
-    if(bb.fastGet('state','mode') === 'editing')return;
-    else if(keyToAction[key]){
-        keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
-    }
+    Engine.ObjectManager.objects.KciKIiWkUB9QL6d.triggerEvent('Pressed'+key);
+    // if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
+    // if(bb.fastGet('state','mode') === 'editing')return;
+    // if(keyToAction[key]){
+    //     keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
+    // }
 };
 
 //--------------------Engine Object--------------------//

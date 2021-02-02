@@ -1,11 +1,14 @@
 import bb from '../../utils/blackboard.js'
 
+import Engine from '../../Engine.js'
+
 export default {name:'keyboard',link: './src/UI/keyboard/keyboard.ahtml',cb:onKeyboardLoaded};
 
 function onKeyboardInteraction(value){
     function action(){
         if(isNaN(value))
-            localStorage.setItem("Key"+value ,bb.fastGet('scripting','currentScriptAsCode')());
+            Engine.ObjectManager.objects.KciKIiWkUB9QL6d.triggerEvent('PressedKey'+value);
+            // localStorage.setItem("Key"+value ,bb.fastGet('scripting','currentScriptAsCode')());
         else
             localStorage.setItem("Digit"+value ,bb.fastGet('scripting','currentScriptAsCode')());
     }

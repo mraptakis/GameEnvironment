@@ -121,6 +121,13 @@ class EnvironmentObject extends Object {
         // if(this._y < 0)this._y = 0;
     }
 
+    setPosition(x,y){
+        this.setValue('x', x);
+        this.setValue('y', y);
+    }
+
+    add(){}
+
     newFrame(){
         this.triggerEvent('onEachFrame');
     }

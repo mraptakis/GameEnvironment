@@ -66,6 +66,7 @@ export default objectManager;
 
 import envObj from './EnvironmentObject.js'
 import colObj from './CollisionsObject.js'
+import keyObj from './KeyboardObject.js'
 import domConst from './dom/renderer.js'
 import _454Const from './454GameEngine/renderer.js'
 
@@ -79,8 +80,9 @@ for(let i in domConst){
 
 objectManager.addToWorld(envObj);
 objectManager.addToWorld(colObj);
+objectManager.addToWorld(keyObj);
 
-bb.fastInstall('state', 'systemObjects', [envObj.name,colObj.name]);
+bb.fastInstall('state', 'systemObjects', [envObj.name,colObj.name,keyObj.name]);
 
 
 
