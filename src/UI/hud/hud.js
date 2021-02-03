@@ -80,12 +80,14 @@ function onHudLoaded(){
         eventsTab.innerHTML = "";
         if(obj === undefined){
             document.getElementById('openTab').innerHTML = "";
+            document.getElementById('focusedObjText').innerText = 'Stage';
             bb.invoke('scripting','clearAndLoadFromText','');
             bb.installWatch('state','focusedObject',onFocusChange);
             return;
         }
         let firstObject = true;
 
+        document.getElementById("focusedObjText").innerText = obj.name;
         infoBar.innerHTML = 'Currently Focused Object is '+obj.name;
 
         codes = obj.getCodes();

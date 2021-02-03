@@ -1,5 +1,3 @@
-import bb from '../../utils/blackboard.js'
-
 import Object from '../objects/Object.js'
 
 class KeyboardObject extends Object {
@@ -8,7 +6,7 @@ class KeyboardObject extends Object {
     name = 'Keyboard';
 
     constructor(){
-        super('Keyboard','KciKIiWkUB9QL6d');
+        super('Keyboard');
 
         this.data.optionHandler.removeOption('isMovable');
         this.data.optionHandler.removeOption('isRemovable');

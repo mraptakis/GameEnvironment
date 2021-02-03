@@ -31,6 +31,9 @@ export default class Object {
         this.states  = this.getStates();
         this.options = this.getOptions();
         this.values  = this.getValues();
+        for(let i in this.values){
+            this.values[i].val = this.getValue(i);
+        }
         let string = JSON.stringify(this);
         delete this.events; 
         delete this.states;
@@ -163,52 +166,6 @@ export default class Object {
 
     add() { // Add this item on renderer
         throw Error("add needs to be implemented");
-    }
-
-    save() {
-        let savedData = {};
-        savedData['id'] = this._id;
-        savedData['name'] = this._name;
-
-        savedData['events'] = {};
-        let events = savedData['events'];
-        for (let i in this.getEvents()) {
-            events[i] = this.getEvent(i);
-        }
-
-        savedData['options'] = {};
-        let options = savedData['options'];
-        for (let i in this.data.optionHandler) {
-            options[i] = this.getOption(i);
-        }
-
-        savedData['values'] = {};
-        let values = savedData['values'];
-        for (let i in this.data.valueHandler) {
-            values[i] = this.getValue(i);
-        }
-        savedData['category'] = this._category;
-        return savedData;
-    }
-
-    loadFromSaved(objData) {
-        this.id = objData.id;
-        this.name = objData.name;
-
-        let events = objData.events;
-        for (let i in events) {
-            this.setEvent(i, events[i]);
-        }
-
-        let options = objData.options;
-        for (let i in options) {
-            this.setOption(i, options[i]);
-        }
-
-        let values = objData.values;
-        for (let i in values) {
-            this.setValue(i, values[i]);
-        }
     }
 
     clear() {

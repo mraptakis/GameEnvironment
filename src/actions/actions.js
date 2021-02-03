@@ -13,6 +13,7 @@ import './moveRight.js'
 import './playAnimation.js'
 import './pauseGame.js'
 import './saveToDatabase.js'
+import './copyPaste.js'
 
 
 
