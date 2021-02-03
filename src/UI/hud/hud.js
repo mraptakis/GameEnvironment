@@ -144,7 +144,7 @@ function onHudLoaded(){
 
         let valueSplit = document.createElement('div');
         valueSplit.classList = 'tabSplitter';
-        valueSplit.innerHTML = 'Fields';
+        valueSplit.innerHTML = 'Attributes';
         eventsTab.appendChild(valueSplit);
 
         for(let i in values){

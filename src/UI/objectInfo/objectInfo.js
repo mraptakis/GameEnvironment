@@ -41,8 +41,8 @@ function updateInfo(obj){
         transition(focusedObj.id);
     });
 
-    let fieldsInfo = document.getElementById('fieldsInfo');
-    fieldsInfo.innerHTML = "";
+    let attributesInfo = document.getElementById('attributeInfo');
+    attributesInfo.innerHTML = "";
     for(let i in obj.getValues()){
         let item = document.createElement('div');
         item.classList += "InfoBox_item";
@@ -58,19 +58,19 @@ function updateInfo(obj){
         }
         item.innerHTML = i + " = ";
         item.appendChild(inp);
-        fieldsInfo.appendChild(item);
+        attributesInfo.appendChild(item);
     }
 
-    document.getElementById('addFieldButton').addEventListener('click',()=>{
-        let textValue = document.getElementById('addFieldText').value;
+    document.getElementById('addAttributeButton').addEventListener('click',()=>{
+        let textValue = document.getElementById('addAttributeText').value;
         if(textValue === "")return;
         let focusedObj = bb.fastGet('state','focusedObject');
         focusedObj.addValue(textValue);
         let item = document.createElement('div');
         item.classList += "InfoBox_item";
         item.innerHTML = textValue + " = " + focusedObj.getValue(textValue);
-        fieldsInfo.appendChild(item);
-        document.getElementById('addFieldText').value = "";
+        attributesInfo.appendChild(item);
+        document.getElementById('addAttributeText').value = "";
     });
 
     let eventsInfo = document.getElementById('eventsInfo');
@@ -96,8 +96,8 @@ function updateInfo(obj){
         transition(focusedObj.id);
     });
 
-    let attributeInfo = document.getElementById('attributeInfo');
-    attributeInfo.innerHTML = "";
+    let flagsInfo = document.getElementById('flagsInfo');
+    flagsInfo.innerHTML = "";
     for(let i in obj.getOptions()){
         let item = document.createElement('div');
         let opt = document.createElement('select');
@@ -128,19 +128,19 @@ function updateInfo(obj){
         item.innerHTML = i + " = ";
         item.appendChild(opt);
         item.classList += "InfoBox_item";
-        attributeInfo.appendChild(item);
+        flagsInfo.appendChild(item);
     }
 
-    document.getElementById('addAttributeButton').addEventListener('click',()=>{
-        let textValue = document.getElementById('addAttributeText').value;
+    document.getElementById('addFlagButton').addEventListener('click',()=>{
+        let textValue = document.getElementById('addFlagText').value;
         if(textValue === "")return;
         let focusedObj = bb.fastGet('state','focusedObject');
         focusedObj.addOption(textValue);
         let item = document.createElement('div');
         item.innerHTML = textValue + " = " + focusedObj.getOption(textValue);
         item.classList += "InfoBox_item";
-        attributeInfo.appendChild(item);
-        document.getElementById('addAttributeText').value = "";
+        flagsInfo.appendChild(item);
+        document.getElementById('addFlagText').value = "";
     });
 
     bb.installWatch('state','focusedObject',updateInfo);

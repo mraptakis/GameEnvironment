@@ -17,7 +17,7 @@ function createObject(item){
         if(values.colour.val)it.setColor(values.colour.val);
         it.setPosition(values.x.val,values.y.val);
         for(let a in item.options){
-            if(typeof item.options[a] !== "boolean")throw Error('Attributes must be boolean');
+            if(typeof item.options[a] !== "boolean")throw Error('Options must be boolean');
             it.setOption(a,item.options[a]);
         }
 
