@@ -219,8 +219,11 @@ game.extra = ()=>{
 
 Engine.start = ()=>{
     app.main();
-
     bb.fastInstall('Engine','Self',Engine);
+
+    let aliveItems = Engine.ObjectManager.objects;
+    for(let i in aliveItems)
+        aliveItems[i].triggerEvent('onGameStart');
 
     bb.print();
 }

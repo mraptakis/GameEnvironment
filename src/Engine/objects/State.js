@@ -17,10 +17,13 @@ export default class StateManager{
     _currState;
     _regStates = {}
 
-    constructor(){
+    _parent
+
+    constructor(parent){
         this.registerState('idle');
 
         this._currState = this.getState('idle');
+        this._parent = parent;
     }
 
     getCurrentState() {
@@ -33,9 +36,9 @@ export default class StateManager{
          // TODO
         let oldState = this.getState(this.getCurrentState());
         let nState = this.getState(newState);
-        bb.fastGet('scripting', 'executeText')(oldState.transitionFrom); // TODO
+        bb.fastGet('scripting', 'executeText')(oldState.transitionFrom, this._parent); // TODO
         this._currState = this._regStates[newState];
-        bb.fastGet('scripting', 'executeText')(nState.transitionTo); // TODO
+        bb.fastGet('scripting', 'executeText')(nState.transitionTo, this._parent); // TODO
 
     }
 

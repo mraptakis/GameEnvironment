@@ -5,7 +5,6 @@ import './onObject/renameObject.js'
 
 import './createObject.js'
 import './printBlackboard.js'
-import './saveToFile.js'
 import './moveForward.js'
 import './moveBackward.js'
 import './moveLeft.js'

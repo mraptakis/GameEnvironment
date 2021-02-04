@@ -19,10 +19,10 @@ export default class Object {
         this._name = _name;
         this.id = (_id) ? _id : rand.generateGameID();
 
-        this.data.eventHandler  = new EventManager(true);
-        this.data.stateHandler  = new StateManager();
-        this.data.valueHandler  = new ValueHandler();
-        this.data.optionHandler = new OptionManager(true); 
+        this.data.eventHandler  = new EventManager(true, this.id);
+        this.data.stateHandler  = new StateManager(this.id);
+        this.data.valueHandler  = new ValueHandler(this.id);
+        this.data.optionHandler = new OptionManager(true, this.id); 
 
     }
 

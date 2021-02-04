@@ -6,7 +6,7 @@ bb.fastSet('state','mode','editing');
 bb.fastSet('state','focusedObject',undefined);
 
 
-bb.fastSet('settings','noDrag', true);
+bb.fastSet('settings','noDrag', false);
 bb.fastSet('settings','highlightInvisibleObjects',false);
 
 // <Engine>

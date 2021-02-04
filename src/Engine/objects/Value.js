@@ -21,6 +21,12 @@ class Value {
 export default class ValueHandler{
     _regValues = {}
 
+    _parent;
+
+    constructor(parent){
+        this._parent = parent;
+    }
+
     getValues() {
         return this._regValues;
     }
@@ -47,7 +53,7 @@ export default class ValueHandler{
         if (typeof this._regValues[val].onChange === 'function') 
             this._regValues[val].onChange(v);
         if (typeof this._regValues[val].onChange === 'string')
-        bb.fastGet('scripting', 'executeText')(this._regValues[val].onChange); // TODO
+        bb.fastGet('scripting', 'executeText')(this._regValues[val].onChange, this._parent); // TODO
         
     }
 

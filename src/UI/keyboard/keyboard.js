@@ -8,9 +8,8 @@ function onKeyboardInteraction(value){
     function action(){
         if(isNaN(value))
             Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent('PressedKey'+value);
-            // localStorage.setItem("Key"+value ,bb.fastGet('scripting','currentScriptAsCode')());
         else
-            localStorage.setItem("Digit"+value ,bb.fastGet('scripting','currentScriptAsCode')());
+        Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent('PressedDigit'+value);
     }
 
     return action;

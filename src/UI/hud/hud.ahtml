@@ -3,6 +3,7 @@
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="%{BKY_OBJECT_TITLE}" colour="%{BKY_MATH_HUE}">
+      <block type="this_obj"></block>
       <block type="get_object_field"></block>
       <block type="dropdown_obj"></block>
       <block type="object_flags"></block>

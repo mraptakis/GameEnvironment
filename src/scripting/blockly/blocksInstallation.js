@@ -235,6 +235,23 @@ Blockly.JavaScript['dropdown_categ'] = function(block) {
     return '"' + inp_val + '"';
 };
 
+Blockly.Blocks['this_obj'] = {
+    
+    init: function() {
+        this.appendDummyInput()
+            .appendField('this')
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object field.');
+        this.setHelpUrl('none');
+        this.setOutput(true, 'Object');
+    },
+};
+
+Blockly.JavaScript['this_obj'] = function(block) {
+    return `bb.fastGet('Engine','ObjectManager').getObject(currObject)`;
+};
+
+
 Blockly.Blocks['object_flags'] = {
     validate: function(newValue) {
         this.getSourceBlock().updateConnections(newValue);
@@ -333,7 +350,6 @@ Blockly.Blocks['object_field'] = {
             toAdd.push([i,i])
         }
         
-        if(toAdd.length === 0)toAdd = [['','']];
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')

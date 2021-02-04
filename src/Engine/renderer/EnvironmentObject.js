@@ -23,23 +23,6 @@ class EnvironmentObject extends Object {
         this._width = 3100;
         this._height = 1080;
 
-        
-
-        this.data.eventHandler.registerEvent('moveStageLeft',{
-            tag: 'system',
-            code: localStorage.getItem(this.id+"_moveStageLeft")
-        });
-
-        this.data.eventHandler.registerEvent('moveStageRight',{
-            tag: 'system',
-            code: localStorage.getItem(this.id+"_moveStageRight")
-        });
-
-        this.data.eventHandler.registerEvent('cameraFollowPlayer',{
-            tag: 'system',
-            code: localStorage.getItem(this.id+"_cameraFollowPlayer")
-        });
-
         this._windowWidth = window.innerWidth;
         this._windowHeight = window.innerHeight;
 

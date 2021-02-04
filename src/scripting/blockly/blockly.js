@@ -22,15 +22,18 @@ let test = Blockly.inject('blocklyDiv2',{toolbox: document.getElementById('toolb
 bb.fastInstall('scripting','executeCode',(text) => {
     eval(text);
 });
-
-bb.fastInstall('scripting','executeText',(text) => {
+let currObject;
+bb.fastInstall('scripting','executeText',function(text,currentObject) {
     if(text === undefined 
     || text === ""
     || text === null)
         return;
     text = Blockly.Xml.textToDom(text);
     Blockly.Xml.clearWorkspaceAndLoadFromXml(text,test);
+    let prevObject = currObject;
+    currObject = currentObject;
     eval(Blockly.JavaScript.workspaceToCode(test));
+    currObject = prevObject;
 });
 
 bb.fastInstall('scripting','clearAndLoadFromText',(text)=>{

@@ -21,7 +21,9 @@ class Event {
 export default class EventsFunctionality {
     _regEvents = {}
 
-    constructor(def){
+    _parent
+
+    constructor(def, parent){
         if(def){
             this.registerEvent('onClick',{tag: 'system'});
             this.registerEvent('onRightClick',{tag: 'system'});
@@ -30,6 +32,7 @@ export default class EventsFunctionality {
             this.registerEvent('onMove',{tag: 'system'});
             this.registerEvent('onEachFrame',{tag: 'system'});
         }
+        this._parent = parent;
     }
 
     registerEvent(name,{tag,code}){
@@ -74,7 +77,7 @@ export default class EventsFunctionality {
         if (!this._regEvents[ev]) 
             return;
         
-        bb.fastGet('scripting', 'executeText')(this.getEvent(ev)); // TODO
+        bb.fastGet('scripting', 'executeText')(this.getEvent(ev),this._parent); // TODO
     }
 
 }

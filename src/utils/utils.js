@@ -64,7 +64,6 @@ function inputHandler(key) {
     }else {
         Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent(key);
     }
-    // if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
     // if(bb.fastGet('state','mode') === 'editing')return;
     // if(keyToAction[key]){
     //     keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
