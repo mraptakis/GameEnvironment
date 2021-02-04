@@ -186,7 +186,8 @@ app.addLoadFunction(()=>{
 game.input = ()=>{
     // if(game.gameState === 3)return; // 3 === PAUSED
     Engine.InputManager.pollKeys();
-    Engine.InputManager.getPressedKeys().forEach((key)=>utils.inputHandler(key));
+    Engine.InputManager.getReleasedKeys().forEach((key)=>utils.inputHandler('Unpressed'+key));
+    Engine.InputManager.getPressedKeys().forEach((key)=>utils.inputHandler('Pressed'+key));
 };
 
 game.animation = ()=>{

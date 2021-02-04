@@ -7,11 +7,12 @@ const InputState = {
 }
 
 class InputManager {
-    currentlyPressed = {}
+    currentlyPressed = {};
+    releasedKeys = [];
 
     keyCombos = {
-        'Copy': ['ControlLeft','KeyC'],
-        'Paste': ['ControlLeft','KeyV']
+        // 'Copy': ['ControlLeft','KeyC'],
+        // 'Paste': ['ControlLeft','KeyV']
     }
     
     keyPressed(key,forever){
@@ -33,16 +34,23 @@ class InputManager {
     
     keyReleased(key){
         delete this.currentlyPressed[key];
+        this.releasedKeys.push(key);
         // logManager.logAction(`Released Key ${key}`);
     }
     
+    getReleasedKeys(){
+        let toReturn = this.releasedKeys;
+        this.releasedKeys = [];
+        return toReturn;
+    }
+
     getPressedKeys(){
         let keysPressed = [];
         for(let i in this.currentlyPressed){
             let currP = this.currentlyPressed[i];
             if(currP === InputState.TOTRIGGER 
             || currP === InputState.FOREVER){
-                logManager.logAction(`Action for input ${i}`);
+                // logManager.logAction(`Action for input ${i}`);
                 keysPressed.push(i);
             }
 

@@ -17,7 +17,7 @@ function paste(){
     
     let newObj = JSON.parse(clipboard+'');
     delete newObj._id;
-    newObj._name = newObj._name+'_copy';
+    newObj._name = newObj._name+'_'+Math.floor(Math.random() * 100);
     console.log(newObj);
     utils.createObject(newObj);
 

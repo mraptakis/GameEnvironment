@@ -5,15 +5,21 @@ import bb from './blackboard.js'
 bb.fastSet('state','mode','editing');
 bb.fastSet('state','focusedObject',undefined);
 
+
+bb.fastSet('settings','noDrag', true);
+bb.fastSet('settings','highlightInvisibleObjects',false);
+
 // <Engine>
 import '../Engine.js'
 // </Engine>
 
-// <Extra>
+// <Required>
 import '../scripting/scripting.js'
 
 import '../actions/actions.js'
+// </Required>
 
+// <Extra>
 import '../UI/UI.js'
 // </Extra>
 

@@ -61,7 +61,7 @@ function inputHandler(key) {
         console.log(key);
         bb.fastGet('actions',key)();
     }else {
-        Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent('Pressed'+key);
+        Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent(key);
     }
     // if(localStorage.getItem(key))bb.fastGet('scripting','executeCode')(localStorage.getItem(key));
     // if(bb.fastGet('state','mode') === 'editing')return;

@@ -8,7 +8,7 @@ class CollisionsObject extends Object {
     name = 'Collisions';
 
     constructor(){
-        super('Collisions','KciKIiWkUB9QL6q');
+        super('Collisions');
 
         this.data.optionHandler.removeOption('isMovable');
         this.data.optionHandler.removeOption('isRemovable');
