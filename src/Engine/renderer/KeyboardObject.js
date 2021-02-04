@@ -6,7 +6,7 @@ class KeyboardObject extends Object {
     name = 'Keyboard';
 
     constructor(){
-        super('Keyboard');
+        super('Keyboard','vxz19AN3VqipnPH');
 
         this.data.optionHandler.removeOption('isMovable');
         this.data.optionHandler.removeOption('isRemovable');

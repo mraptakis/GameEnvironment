@@ -19,10 +19,13 @@ function createObject(item){
             it = new category({name:item._name},item._id);
         }
         let values = item.values;
+        let options = item.options;
+        let events = item.events;
+        let states = item.states;
 
-        for(let a in item.options){
-            if(typeof item.options[a] !== "boolean")throw Error('Attributes must be boolean');
-            it.setOption(a,item.options[a]);
+        for(let a in options){
+            if(typeof options[a] !== "boolean")throw Error('Attributes must be boolean');
+            it.setOption(a,options[a]);
         }
 
         for(let v in values){
@@ -33,7 +36,6 @@ function createObject(item){
             }
         }
 
-        let events = item.events;
         for(let f in events){
             if(it.getEvent(f) === undefined)
                 it.addEvent(f,events[f].val);
@@ -41,7 +43,6 @@ function createObject(item){
                 it.setEvent(f,events[f].val);
         }
 
-        let states = item.states;
         for(let s in states){
             it.addState(s);
             it.setState(s,states[s].transitionFrom,states[s].transitionTo);

@@ -180,7 +180,6 @@ app.addLoadFunction(()=>{
         }
     });
     installWatches();
-    Engine.CollisionManager.loadSaved();
 });
 
 game.input = ()=>{

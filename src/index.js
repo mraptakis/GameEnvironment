@@ -9,7 +9,7 @@ import animationFilms from '../assets/json/AnimationFilmHolderJSON.js' // json
 
 import serverCommuncator from './utils/serverCommunication.js'
 
-serverCommuncator.tableName = 'superMarioReal';
+serverCommuncator.tableName = 'superMarioReal2';
 
 serverCommuncator.getTable(serverCommuncator.tableName,(res)=>{
     if(res !== ''){

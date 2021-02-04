@@ -8,7 +8,7 @@ class CollisionsObject extends Object {
     name = 'Collisions';
 
     constructor(){
-        super('Collisions');
+        super('Collisions','KciKIiWkUB9QL6q');
 
         this.data.optionHandler.removeOption('isMovable');
         this.data.optionHandler.removeOption('isRemovable');
@@ -32,15 +32,16 @@ class CollisionsObject extends Object {
     move(x,y){
         if(!this.options['isMovable'])return;
 
-    }    
-    
-    getEvent(ev){
+    }
+
+    addEvent(ev,code){
+        this.data.eventHandler.registerEvent(ev,{code:code});
         let split = ev.split('_');
-        return bb.fastGet('Engine','CollisionManager').getCollision(split[0],split[1]);
+        return bb.fastGet('Engine','CollisionManager').setCollision(split[0],split[1],code);
     }
 
     setEvent(ev,code){
-        localStorage.setItem(this.id+"_"+ev,code);
+        this.data.eventHandler.setEvent(ev,code);
         let split = ev.split('_');
         return bb.fastGet('Engine','CollisionManager').setCollision(split[0],split[1],code);
     }
