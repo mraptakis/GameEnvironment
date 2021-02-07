@@ -15,9 +15,13 @@ export default class Object {
 
     _category;
 
+    _isPrototype;
+
     constructor(_name, _id) {
         this._name = _name;
         this.id = (_id) ? _id : rand.generateGameID();
+
+        this._isPrototype = false;
 
         this.data.eventHandler  = new EventManager(true, this.id);
         this.data.stateHandler  = new StateManager(this.id);

@@ -1,5 +1,6 @@
 import bb from '../../utils/blackboard.js'
 
+const rend = bb.fastGet('renderer', 'render');
 
 class ObjectManager {
     _objects
@@ -57,6 +58,11 @@ class ObjectManager {
 
     getObjectByName(i){
         return this._objectByName[i];
+    }
+
+    renderAll(){
+        if(rend)
+            rend.forEach((it)=>it());
     }
 }
 

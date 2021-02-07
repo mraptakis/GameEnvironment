@@ -13,9 +13,6 @@ import SoundManager from './Engine/sound/sound.js'
 
 import utils from './utils/utils.js'
 
-
-const rend = bb.fastGet('renderer', 'render');
-
 const app = new App();
 const game = app.game;
 
@@ -137,8 +134,7 @@ const Engine = new _Engine();
 
 
 game.render = ()=>{
-    if(rend)
-        rend.forEach((it)=>it());
+    Engine.ObjectManager.renderAll();
 };
 
 app.addInitialiseFunction(()=>{

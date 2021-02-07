@@ -93,3 +93,10 @@ PROBABLY DISCARDED:
         
     - add unique IDs to everything instead of just names
         => this doesn't help on reload / sharing
+
+
+
+
+KNOWN BUGS:
+    - A DOM render object position is wrong with relative position
+    - 
