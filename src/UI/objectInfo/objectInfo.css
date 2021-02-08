@@ -34,6 +34,23 @@
     width: calc(100% - 45px);
 }
 
+.mainInfoBox-shard-text {
+    padding: 0;
+    border: 0;
+    width: 0;
+    transition: linear 0.3s;
+}
+
+.mainInfoBox-shard-close {
+    display: none;
+    width: 15px;
+    float: right;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: monospace;
+    color: red;
+}
+
 .mainInfoBox-shard-add {
     float: right;
     font-size: 20px;
@@ -41,9 +58,18 @@
     cursor: pointer;
 }
 
+.mainInfoBox-shard-add2 {
+    display: none;
+    float: right;
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: green;
+}
+
 .mainInfoBox-shard-main {
     margin-top: 10px;
-    margin-left: 45px;
+    margin-left: 20px;
 }
 
 
@@ -66,6 +92,8 @@
 .mainInfoBox-shard-main-text {
     font-size: 14px;
     line-height: 16px;
+    width: 60%;
+    overflow: hidden;
 }
 
 .mainInfoBox-shard-main-edit {
@@ -80,25 +108,28 @@
 }
 .mainInfoBox-shard-main-remove {
     float: right;
-    fill: var(--main-color-text);
+    fill: grey;
     height: 15px;
     width: 15px;
     padding-right: 5px;
     padding-left: 5px;
     margin-right: 5px;
-    cursor: pointer;
 }
 
 
 
+.mainInfoBox-shard-input-text {
+    /* padding: 0; */
+    border: 0;
+    width: 60px;
+}
 
-
-
-
-
-
-
-
+.mainInfoBox-shard-input-dropdown {
+    /* padding: 0; */
+    border: 0;
+    height: 15px;
+    width: 48px;
+}
 
 #mainInfoBox-head-preview {
     width: 30px;
@@ -112,6 +143,7 @@
 #mainInfoBox-head-name {
     font-style: normal;
     font-weight: normal;
+    margin-left: 20px;
     font-size: 18px;
     line-height: 20px;
 }
@@ -120,6 +152,7 @@
     margin-top: 10px;
     font-style: normal;
     font-weight: normal;
+    margin-left: 20px;
     font-size: 18px;
     line-height: 21px;
 }

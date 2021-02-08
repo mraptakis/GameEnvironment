@@ -283,3 +283,7 @@ Object.prototype.setValueCode = function(val, code) {
 Object.prototype.getValueCode = function(val) {
     return this.data.valueHandler.getValueCode(val);
 }
+
+Object.prototype.removeValue = function(val) {
+    this.data.valueHandler.removeValue(val);
+}
