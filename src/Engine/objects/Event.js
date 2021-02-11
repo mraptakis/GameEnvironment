@@ -18,7 +18,7 @@ class Event {
     }
 }
 
-export default class EventsFunctionality {
+export default class EventsManager {
     _regEvents = {}
 
     _parent

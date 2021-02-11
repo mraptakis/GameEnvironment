@@ -4,7 +4,7 @@ import rand from '../../utils/randomGenerator.js'
 import EventManager from './Event.js'
 import StateManager from './State.js'
 import OptionManager from './Option.js'
-import ValueHandler from './Value.js'
+import ValueManager from './Value.js'
 
 export default class Object {
     _id 
@@ -25,7 +25,7 @@ export default class Object {
 
         this.data.eventHandler  = new EventManager(true, this.id);
         this.data.stateHandler  = new StateManager(this.id);
-        this.data.valueHandler  = new ValueHandler(this.id);
+        this.data.valueHandler  = new ValueManager(this.id);
         this.data.optionHandler = new OptionManager(true, this.id); 
 
     }
@@ -102,11 +102,11 @@ export default class Object {
         for(let i in values){
             let tag = this.getValueTag(i);
             if(tag === 'user'){
-                toReturn.values['on'+i+'Change'] = {};
-                toReturn.values['on'+i+'Change'].set = (code) => {
+                toReturn.values['on '+i+' Change'] = {};
+                toReturn.values['on '+i+' Change'].set = (code) => {
                     this.setValueCode(i, code);
                 };
-                toReturn.values['on'+i+'Change'].get = () => {
+                toReturn.values['on '+i+' Change'].get = () => {
                     return this.getValueCode(i);
                 }
             }

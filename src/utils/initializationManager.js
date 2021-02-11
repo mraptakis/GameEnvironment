@@ -11,6 +11,9 @@ bb.fastSet('settings','highlightInvisibleObjects',false);
 
 // <Engine>
 import '../Engine.js'
+    // <EngineExtra>
+    import '../EngineExtensions/EngineExtensions.js'
+    // </EngineExtra>
 // </Engine>
 
 // <Required>

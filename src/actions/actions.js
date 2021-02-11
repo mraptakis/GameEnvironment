@@ -13,7 +13,7 @@ import './playAnimation.js'
 import './pauseGame.js'
 import './saveToDatabase.js'
 import './copyPaste.js'
-
+import './objectSnapshot.js'
 
 
 import './dummyAction.js'

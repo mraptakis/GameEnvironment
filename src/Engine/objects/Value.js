@@ -18,7 +18,7 @@ class Value {
     }
 }
 
-export default class ValueHandler{
+export default class ValueManager{
     _regValues = {}
 
     _parent;

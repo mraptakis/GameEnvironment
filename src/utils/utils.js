@@ -2,58 +2,94 @@ import Engine from '../Engine.js'
 
 import bb from './blackboard.js'
 
+
 function Utils(){
     return {
         createObject,
+        resetObject,
         inputHandler
     }
 }
 
 function createObject(item){
     if(item._name === undefined)return;
-        let it;
-        if(Engine.ObjectManager.getObjectByName(item._category)){
-            it = Engine.ObjectManager.getObjectByName(item._category);
-        }else{ 
-            let category = Engine.ObjectManager.getConstructor(item._category);
-            it = new category({name:item._name},item._id);
+    let it;
+    if(Engine.ObjectManager.getObjectByName(item._category)){
+        it = Engine.ObjectManager.getObjectByName(item._category);
+    }else{ 
+        let category = Engine.ObjectManager.getConstructor(item._category);
+        it = new category({name:item._name},item._id);
+    }
+    let values = item.values;
+    let options = item.options;
+    let events = item.events;
+    let states = item.states;
+
+    for(let a in options){
+        if(typeof options[a] !== "boolean")throw Error('Attributes must be boolean');
+        it.setOption(a,options[a]);
+    }
+
+    for(let v in values){
+        if(!it.getValue(v) === undefined)it.addValue(v,values[v].val);
+        else it.setValue(v,values[v].val);
+        if(values[v].onChange){
+            it.setValueCode(v, values[v].onChange);
         }
-        let values = item.values;
-        let options = item.options;
-        let events = item.events;
-        let states = item.states;
+    }
 
-        for(let a in options){
-            if(typeof options[a] !== "boolean")throw Error('Attributes must be boolean');
-            it.setOption(a,options[a]);
+    for(let f in events){
+        if(it.getEvent(f) === undefined)
+            it.addEvent(f,events[f].val);
+        else 
+            it.setEvent(f,events[f].val);
+    }
+
+    for(let s in states){
+        it.addState(s);
+        it.setState(s,states[s].transitionFrom,states[s].transitionTo);
+    }
+
+    //TODO 
+    if(it.name === 'player')
+        bb.fastInstall('state','player',it);
+
+    it.add();
+    if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
+}
+
+function resetObject(item){
+    let it = Engine.ObjectManager.objects[item._id];
+    let values = item.values;
+    let options = item.options;
+    let events = item.events;
+    let states = item.states;
+
+    for(let a in options){
+        if(typeof options[a] !== "boolean")throw Error('Attributes must be boolean');
+        it.setOption(a,options[a]);
+    }
+
+    for(let v in values){
+        if(!it.getValue(v) === undefined)it.addValue(v,values[v].val);
+        else it.setValue(v,values[v].val);
+        if(values[v].onChange){
+            it.setValueCode(v, values[v].onChange);
         }
+    }
 
-        for(let v in values){
-            if(!it.getValue(v) === undefined)it.addValue(v,values[v].val);
-            else it.setValue(v,values[v].val);
-            if(values[v].onChange){
-                it.setValueCode(v, values[v].onChange);
-            }
-        }
+    for(let f in events){
+        if(it.getEvent(f) === undefined)
+            it.addEvent(f,events[f].val);
+        else 
+            it.setEvent(f,events[f].val);
+    }
 
-        for(let f in events){
-            if(it.getEvent(f) === undefined)
-                it.addEvent(f,events[f].val);
-            else 
-                it.setEvent(f,events[f].val);
-        }
+    for(let s in states){
+        it.addState(s);
+        it.setState(s,states[s].transitionFrom,states[s].transitionTo);
+    }
 
-        for(let s in states){
-            it.addState(s);
-            it.setState(s,states[s].transitionFrom,states[s].transitionTo);
-        }
-
-        //TODO 
-        if(it.name === 'player')
-            bb.fastInstall('state','player',it);
-
-        it.add();
-        if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
 }
 
 // import keyToAction from '../assets/json/keyToActions.js' //json

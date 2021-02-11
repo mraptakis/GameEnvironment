@@ -23,6 +23,18 @@ class _Engine {
         this._managers = {};
     }
 
+    installManager(name, manager){
+        if(this._managers[name])return false;
+        this._managers[name] = manager;
+        this[name] = manager;
+        bb.fastInstall('Engine',name,manager);
+        return true;
+    }
+
+    hasManager(name){
+        return name in this._managers;
+    }
+
     get app(){
         return app;
     }
@@ -58,76 +70,6 @@ class _Engine {
         else throw Error('No Animations provided');
     }
 
-    set timePaused(tp){
-        this._timePaused = tp;
-    }
-
-    get timePaused(){
-        return this._timePaused;
-    }
-
-    set AnimationManager(anM){
-        if(!(anM instanceof AnimationManager)) throw Error('Set AnimationManager isn\'t Instance of AnimationManager');
-        this._managers['AnimationManager'] = anM;
-    }
-
-    get AnimationManager(){
-        // PB: PERFORMANCE BOOST
-        // if(!this._managers['AnimationManager']) throw Error('AnimationManager wasn\'t initialised');
-        return this._managers['AnimationManager'];
-    }
-
-    set CollisionManager(anM){
-        if(!(anM instanceof CollisionManager)) throw Error('Set CollisionManager isn\'t Instance of CollisionManager');
-        this._managers['CollisionManager'] = anM;
-    }
-
-    get CollisionManager(){
-        // PB: PERFORMANCE BOOST
-        // if(!this._managers['CollisionManager']) throw Error('CollisionManager wasn\'t initialised');
-        return this._managers['CollisionManager'];
-    }
-
-    set ObjectManager(anM){
-        this._managers['ObjectManager'] = anM;
-    }
-
-    get ObjectManager(){
-        // PB: PERFORMANCE BOOST
-        // if(!this._managers['ObjectManager']) throw Error('ObjectManager wasn\'t initialised');
-        return this._managers['ObjectManager'];
-    }
-
-    set InputManager(anM){
-        this._managers['InputManager'] = anM;
-    }
-
-    get InputManager(){
-        // PB: PERFORMANCE BOOST
-        // if(!this._managers['InputManager']) throw Error('InputManager wasn\'t initialised');
-        return this._managers['InputManager'];
-    }
-
-    set SoundManager(anM){
-        this._managers['SoundManager'] = anM;
-    }
-
-    get SoundManager(){
-        // PB: PERFORMANCE BOOST
-        // if(!this._managers['SoundManager']) throw Error('SoundManager wasn\'t initialised');
-        return this._managers['SoundManager'];
-    }
-
-    set PhysicsManager(anM){
-        this._managers['PhysicsManager'] = anM;
-    }
-
-    get PhysicsManager(){
-        // PB: PERFORMANCE BOOST
-        // if(!this._managers['PhysicsManager']) throw Error('PhysicsManager wasn\'t initialised');
-        return this._managers['PhysicsManager'];
-    }
-
 }
 
 const Engine = new _Engine();
@@ -138,23 +80,17 @@ game.render = ()=>{
 };
 
 app.addInitialiseFunction(()=>{
-    Engine.AnimationManager = new AnimationManager(Engine.animationBundle,Engine.preSetAnimations);
-    bb.fastInstall('Engine','AnimationManager',Engine.AnimationManager);
+    Engine.installManager('AnimationManager', new AnimationManager(Engine.animationBundle,Engine.preSetAnimations))
 
-    Engine.CollisionManager = new CollisionManager();
-    bb.fastInstall('Engine','CollisionManager',Engine.CollisionManager);
+    Engine.installManager('CollisionManager', new CollisionManager());
 
-    Engine.SoundManager = new SoundManager();
-    bb.fastInstall('Engine','SoundManager',Engine.SoundManager);
+    Engine.installManager('SoundManager', new SoundManager());
 
-    Engine.ObjectManager = objectManager;
-    bb.fastInstall('Engine','ObjectManager',Engine.ObjectManager);
+    Engine.installManager('ObjectManager', objectManager);
 
-    Engine.InputManager = inputManager;
-    bb.fastInstall('Engine','InputManager',Engine.InputManager);
+    Engine.installManager('InputManager', inputManager);
 
-    // Engine.PhysicsManager = new PhysicsManager();
-    // bb.fastInstall('Engine','PhysicsManager',Engine.PhysicsManager);
+    // Engine.installManager('PhysicsManager', new PhysicsManager());
 
     let init = Engine.initInfo;
     if(init && init.state.background_color)document.body.style.backgroundColor = init.state.background_color;
@@ -222,19 +158,6 @@ Engine.start = ()=>{
         aliveItems[i].triggerEvent('onGameStart');
 
     bb.print();
-}
-
-Engine.pause = ()=>{
-    if(Engine.timePaused) throw Error('Pause while paused');
-    Engine.timePaused = bb.fastGet('state','gameTime');
-    Engine.game.pause();
-}
-
-Engine.resume = ()=>{
-    if(!Engine.timePaused) throw Error('Resume without pause');
-    Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - Engine.timePaused);
-    Engine.game.unpause();
-    Engine.timePaused = undefined;
 }
 
 
