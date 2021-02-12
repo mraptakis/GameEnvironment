@@ -10,14 +10,14 @@ function saveToDatabase(){
     let objects = Engine.ObjectManager.objects;
     
     console.log(objects);
-
+    
     comManager.clearTable(tableName).then( () => {
         for(let i in objects){
             let obj = objects[i];
             for(let i in obj.getValues()){
                 obj.setValue(i,obj.getValue(i));
             }
-
+            
             comManager.updateItemToTable(tableName,{
                 key: "id",
                 value: '"'+i+'"',
@@ -31,7 +31,7 @@ function saveToDatabase(){
                 {
                     name: 'objectInfo',
                     type: 'TEXT',
-                    value: obj.toString().replaceAll('"',"'")
+                    value: obj.toString().replaceAll("'","~").replaceAll('"',"'")
                 }
             ])
         }    

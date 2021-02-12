@@ -15,7 +15,7 @@ serverCommuncator.getTable(serverCommuncator.tableName,(res)=>{
     if(res !== ''){
         res = JSON.parse(res);
         res.forEach( element => {
-            element.objectInfo = element.objectInfo.replaceAll("'",'"');
+            element.objectInfo = element.objectInfo.replaceAll("'",'"').replaceAll("~","'");
             element.objectInfo = JSON.parse(element.objectInfo);
         })
         res = res.map(item => item.objectInfo);

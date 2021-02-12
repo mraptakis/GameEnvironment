@@ -8,8 +8,8 @@ class State {
             throw Error('Error creating State')
 
         this.tag = tag;
-        this.transitionFrom = transitionFrom || "";
-        this.transitionTo = transitionTo || "";
+        this.transitionFrom = transitionFrom || {};
+        this.transitionTo = transitionTo || {};
     }
 }
 
@@ -36,9 +36,9 @@ export default class StateManager{
          // TODO
         let oldState = this.getState(this.getCurrentState());
         let nState = this.getState(newState);
-        bb.fastGet('scripting', 'executeText')(oldState.transitionFrom, this._parent); // TODO
+        bb.fastGet('scripting', 'executeCode')(oldState.transitionFrom.code, this._parent); // TODO
         this._currState = this._regStates[newState];
-        bb.fastGet('scripting', 'executeText')(nState.transitionTo, this._parent); // TODO
+        bb.fastGet('scripting', 'executeCode')(nState.transitionTo.code, this._parent); // TODO
 
     }
 

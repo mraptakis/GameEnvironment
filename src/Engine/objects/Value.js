@@ -6,11 +6,11 @@ class Value {
     val
     tag
     constructor({tag,value,onChange,getValue}){
-        if(typeof tag !== 'string'
-        || (typeof onChange !== 'function' && onChange !== undefined)
-        || (typeof getValue !== 'function' && getValue !== undefined)){
-            throw Error("Error creating value")
-        }
+        // if(typeof tag !== 'string'
+        // || (typeof onChange !== 'function' && onChange !== undefined)
+        // || (typeof getValue !== 'function' && getValue !== undefined)){
+        //     throw Error("Error creating value")
+        // }
         this.tag = tag;
         this.val = value;
         this.onChange = onChange;
@@ -39,7 +39,7 @@ export default class ValueManager{
         this._regValues[val] = new Value({
             tag: tag || 'user',
             value: (value !== undefined)?value : '',
-            onChange: (onChange !== undefined)?onChange : undefined,
+            onChange: (onChange !== undefined)?onChange : {text: "", code: ""},
             getValue: (getValue !== undefined)?getValue : undefined
         });
     }
@@ -52,8 +52,8 @@ export default class ValueManager{
         this._regValues[val].val = v;
         if (typeof this._regValues[val].onChange === 'function') 
             this._regValues[val].onChange(v);
-        if (typeof this._regValues[val].onChange === 'string')
-        bb.fastGet('scripting', 'executeText')(this._regValues[val].onChange, this._parent); // TODO
+        if (typeof this._regValues[val].onChange === 'object')
+        bb.fastGet('scripting', 'executeCode')(this._regValues[val].onChange.code, this._parent); // TODO
         
     }
 
@@ -64,8 +64,10 @@ export default class ValueManager{
 
     getValueCode(val) {
         let value = this._regValues[val];
+        console.log(value);
         if(value)
             return value.onChange;
+        return {text: "", code: ""}
     }
 
     getValue(val) {

@@ -172,6 +172,7 @@ function addEventsButtonHandler(){
 function createEventsView(events){
     let eventsInfo = document.getElementById('mainInfoBox-body-events-main');
     eventsInfo.innerHTML = "";
+    let focusedObj = bb.fastGet('state', 'focusedObject');
     for(let i in events){
         let item = document.createElement('div');
         item.classList += "mainInfoBox-body-events-main-wrap";
@@ -184,6 +185,16 @@ function createEventsView(events){
         item.appendChild(text);
 
         eventsInfo.appendChild(item);
+
+        if(events[i].tag === 'user'){
+            let rmBut = document.getElementById(`mainInfoBox-body-events-main-remove-${i}`);
+            rmBut.style.fill = 'red';
+            rmBut.style.cursor = 'pointer';
+            rmBut.onclick = () => {
+                focusedObj.removeEvent(i);
+                refreshInfoBox(focusedObj.id);
+            }
+        }
     }
 }
 

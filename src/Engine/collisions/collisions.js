@@ -15,7 +15,7 @@ export default class CollisionManager {
     }
 
     checkAndInvoke(arrOfObj){
-        collisionHolder.checkAndInvoke(arrOfObj,bb.fastGet('scripting','executeText')); //TODO: remove it from here
+        collisionHolder.checkAndInvoke(arrOfObj,bb.fastGet('scripting','executeCode')); //TODO: remove it from here
     }
 
     getAllCollisions(){

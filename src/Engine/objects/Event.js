@@ -37,8 +37,8 @@ export default class EventsManager {
 
     registerEvent(name,{tag,code}){
         this._regEvents[name] = new Event({
-            tag: (tag)?tag: 'system',
-            value: (code) ? code : ""
+            tag: (tag)?tag: 'user',
+            value: (code) ? code : {}
         });
     }
 
@@ -74,10 +74,10 @@ export default class EventsManager {
     }
 
     triggerEvent(ev) {
-        if (!this._regEvents[ev]) 
+        if (!this._regEvents[ev] || !this._regEvents[ev].val) 
             return;
-        
-        bb.fastGet('scripting', 'executeText')(this.getEvent(ev),this._parent); // TODO
+
+        bb.fastGet('scripting', 'executeCode')(this.getEvent(ev).code,this._parent); // TODO
     }
 
 }

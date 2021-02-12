@@ -50,8 +50,9 @@ function onHudLoaded(){
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
-        let text = bb.invoke('scripting','currentScriptAsText');
-        codes.stripped[tabOpen].set(text);
+        let text = bb.invoke('scripting', 'currentScriptAsText');
+        let code = bb.invoke('scripting', 'currentScriptAsCode');
+        codes.stripped[tabOpen].set({text:text,code:code});
     });
 
     function tabInfo(id,cb){
