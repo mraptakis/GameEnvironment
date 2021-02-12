@@ -3,22 +3,22 @@ import bb from '../utils/blackboard.js'
 import Engine from '../Engine.js'
 
 export default class PauseManager {
-    timePaused
+    _timePaused
 
     constructor(){
-        this.timePaused = undefined;
+        this._timePaused = undefined;
     }
 
     pause(){
         if(Engine.timePaused) throw Error('Pause while paused');
-        this.timePaused = bb.fastGet('state','gameTime');
+        this._timePaused = bb.fastGet('state','gameTime');
         Engine.game.pause();
     }
 
     resume(){
-        if(!this.timePaused) throw Error('Resume without pause');
-        Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - this.timePaused);
+        if(!this._timePaused) throw Error('Resume without pause');
+        Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - this._timePaused);
         Engine.game.unpause();
-        this.timePaused = undefined;
+        this._timePaused = undefined;
     }
 }

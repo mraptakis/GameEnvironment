@@ -22,8 +22,6 @@ export default class ObjectSnapshotManager {
     }
     
     getAllSnapshots(){
-        console.log(this._collection);
-        this.resetObjectToSnapshot('vmdh0vsINr6xdl7',0)
         return this._collection;
     }
 
