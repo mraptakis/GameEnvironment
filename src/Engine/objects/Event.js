@@ -81,4 +81,9 @@ export default class EventsManager {
         bb.fastGet('scripting', 'executeCode')(this.getEvent(ev).code,this._parent); // TODO
     }
 
+    getEventTag(ev){
+        if(!this._regEvents[ev]) throw Error('get tag from a not registered event');
+        return this._regEvents[ev].tag;
+    }
+
 }

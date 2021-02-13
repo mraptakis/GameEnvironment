@@ -94,9 +94,10 @@ function onHudLoaded(){
         codes = obj.getCodes();
         codes.stripped = {};
 
-        let events = codes.events;
-        let states = codes.states;
-        let values = codes.values;
+        let events  = codes.events;
+        let states  = codes.states;
+        let values  = codes.values;
+        let options = codes.options;
 
         let eventSplit = document.createElement('div');
         eventSplit.classList = 'tabSplitter';
@@ -155,6 +156,25 @@ function onHudLoaded(){
             elem.innerHTML = i;
             elem.style.marginLeft = '10%';
             elem.addEventListener('click',tabInfo(i,values[i].get));
+            eventsTab.appendChild(elem);
+            if(firstObject){
+                elem.click();
+                firstObject = false;
+            }
+        }
+
+        let optionSplit = document.createElement('div');
+        optionSplit.classList = 'tabSplitter';
+        optionSplit.innerHTML = 'Flags';
+        eventsTab.appendChild(optionSplit);
+
+        for(let i in options){
+            codes.stripped[i] = options[i];
+            let elem = document.createElement('div');
+            elem.classList = "eventTab";
+            elem.innerHTML = i;
+            elem.style.marginLeft = '10%';
+            elem.addEventListener('click',tabInfo(i,options[i].get));
             eventsTab.appendChild(elem);
             if(firstObject){
                 elem.click();

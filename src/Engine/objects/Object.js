@@ -100,14 +100,27 @@ export default class Object {
         let values = this.getValues();
         toReturn.values = {};
         for(let i in values){
-            let tag = this.getValueTag(i);
-            if(tag === 'user'){
+            if(this.getValueTag(i) === 'user'){
                 toReturn.values['on '+i+' Change'] = {};
                 toReturn.values['on '+i+' Change'].set = (code) => {
                     this.setValueCode(i, code);
                 };
                 toReturn.values['on '+i+' Change'].get = () => {
                     return this.getValueCode(i).text;
+                }
+            }
+        }
+
+        let options = this.getOptions();
+        toReturn.options = {};
+        for(let i in options){
+            if(this.getOptionTag(i) === 'user'){
+                toReturn.options['on '+i+' Change'] = {};
+                toReturn.options['on '+i+' Change'].set = (code) => {
+                    this.setOptionCode(i, code);
+                };
+                toReturn.options['on '+i+' Change'].get = () => {
+                    return this.getOptionCode(i).text;
                 }
             }
         }
@@ -216,6 +229,10 @@ Object.prototype.removeEvent = function(ev) {
     this.data.eventHandler.removeEvent(ev);
 }
 
+Object.prototype.getEventTag = function(ev) {
+    this.data.eventHandler.getEventTag(ev);
+}
+
 
 ////////STATE FUNCTIONS////////////////////
 Object.prototype.getCurrentState = function() {
@@ -257,6 +274,26 @@ Object.prototype.getOption = function(opt) {
 
 Object.prototype.setOption = function(opt, val) {
     this.data.optionHandler.setOption(opt,val);
+}
+
+Object.prototype.getOptionTag = function(opt) {
+    return this.data.optionHandler.getOptionTag(opt);
+}
+
+Object.prototype.removeOption = function(opt) {
+    return this.data.optionHandler.removeOption(opt);
+}
+
+Object.prototype.setOptionCode = function(opt, code) {
+    this.data.optionHandler.setOptionCode(opt, code);
+}
+
+Object.prototype.getOptionCode = function(opt) {
+    return this.data.optionHandler.getOptionCode(opt);
+}
+
+Object.prototype.hasOption = function(opt) {
+    return this.data.optionHandler.hasOption(opt);
 }
 
 //////////VALUE FUNCTIONS////////////////////

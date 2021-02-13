@@ -94,6 +94,7 @@ export default class ValueManager{
 
     getValueTag(val){
         let value = this._regValues[val];
+        if(!value) throw Error('Tried to get value tag from unregistered');
         return value.tag;
     }
 }
