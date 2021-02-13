@@ -12,7 +12,7 @@ function Utils(){
 }
 
 function createObject(item){
-    if(item._name === undefined)return;
+    if(!item._name)return;
     let it;
     if(Engine.ObjectManager.getObjectByName(item._category)){
         it = Engine.ObjectManager.getObjectByName(item._category);

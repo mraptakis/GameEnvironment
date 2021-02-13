@@ -3,7 +3,7 @@ import bb from '../../utils/blackboard.js'
 export default {name:'hud',link: './src/UI/hud/hud.ahtml',cb:onHudLoaded};
 
 function hudState(){
-    let isVisible = (bb.fastGet('state','mode') === "editing")?true:false;
+    let isVisible = (bb.fastGet('state','mode') === "editing");
     toggleVisibility();
     toggleVisibility();
     function toggleVisibility(){

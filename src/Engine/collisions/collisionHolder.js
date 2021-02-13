@@ -6,7 +6,7 @@ class CollisionHolder {
 
     installCollision(first,second,code){
         if(this._collisionReactions[`${first}_${second}`] || this._collisionReactions[`${second}_${first}`])return false;
-        this._collisionReactions[`${first}_${second}`] = (code)?code:{text: "",code: ""};
+        this._collisionReactions[`${first}_${second}`] = code || {text: "",code: ""};
         return true;
     }
 

@@ -25,8 +25,8 @@ export default class ObjectSnapshotManager {
         return this._collection;
     }
 
-    resetObjectToSnapshot(obj,snapID){
-        utils.resetObject(this._collection[obj][snapID]);
+    resetObjectToSnapshot(objID,snapID){
+        utils.resetObject(this._collection[objID][snapID]);
     }
 
 }

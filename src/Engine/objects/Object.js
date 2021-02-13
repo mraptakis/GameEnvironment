@@ -19,7 +19,7 @@ export default class Object {
 
     constructor(_name, _id) {
         this._name = _name;
-        this.id = (_id) ? _id : rand.generateGameID();
+        this.id = _id || rand.generateGameID();
 
         this._isPrototype = false;
 

@@ -31,16 +31,16 @@ export default class ValueManager{
         return this._regValues;
     }
 
-    registerValue(val, {tag,value,onChange,getValue}) {
+    registerValue(val, {tag,value = '',onChange = {text: "", code: ""},getValue}) {
         // if(this._regValues[val]){
         //     log.logError('Couldn\'t create value '+val+' because it already exists');
         //     return;
         // }
         this._regValues[val] = new Value({
             tag: tag || 'user',
-            value: (value !== undefined)?value : '',
-            onChange: (onChange !== undefined)?onChange : {text: "", code: ""},
-            getValue: (getValue !== undefined)?getValue : undefined
+            value: value,
+            onChange: onChange,
+            getValue: getValue
         });
     }
 
@@ -53,7 +53,7 @@ export default class ValueManager{
         if (typeof this._regValues[val].onChange === 'function') 
             this._regValues[val].onChange(v);
         if (typeof this._regValues[val].onChange === 'object')
-        bb.fastGet('scripting', 'executeCode')(this._regValues[val].onChange.code, this._parent); // TODO
+            bb.fastGet('scripting', 'executeCode')(this._regValues[val].onChange.code, this._parent); // TODO
         
     }
 
@@ -96,9 +96,4 @@ export default class ValueManager{
         let value = this._regValues[val];
         return value.tag;
     }
-
-    setUserCode(val, code){
-
-    }
-
 }

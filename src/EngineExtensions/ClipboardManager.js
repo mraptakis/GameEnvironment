@@ -34,6 +34,7 @@ export default class ClipboardManager {
 
     paste(){
         let obj = this.top();
+        if(!obj)return;
         obj._name = obj._name+'_'+Math.floor(Math.random() * 1000);
         utils.createObject(obj);
     }

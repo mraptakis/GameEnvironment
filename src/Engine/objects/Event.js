@@ -7,13 +7,13 @@ class Event {
     getValue
     constructor({tag,value,onChange,getValue}){
         if(typeof tag !== 'string'
-        || (typeof onChange !== 'function' && getValue !== undefined)
+        || (typeof onChange !== 'function' && onChange !== undefined)
         || (typeof getValue !== 'function' && getValue !== undefined)){
             throw Error("Error creating value")
         }
         this.tag = tag;
         this.val = value;
-        this.onChange = (onChange)?onChange:(val)=>this.val = val;
+        this.onChange = onChange || ((val)=>{this.val = val});
         this.getValue = getValue;
     }
 }
@@ -35,10 +35,10 @@ export default class EventsManager {
         this._parent = parent;
     }
 
-    registerEvent(name,{tag,code}){
+    registerEvent(name,{tag = 'user',code = {}}){
         this._regEvents[name] = new Event({
-            tag: (tag)?tag: 'user',
-            value: (code) ? code : {}
+            tag: tag,
+            value: code
         });
     }
 
@@ -65,11 +65,12 @@ export default class EventsManager {
         }
         event.val = code;
         if (event.onChange) 
-        event.onChange(code);
+            event.onChange(code);
         
     }
 
     removeEvent(ev){
+        if(!this._regEvents[ev])return;
         delete this._regEvents[ev];
     }
 

@@ -19,10 +19,17 @@ elem.id = 'blocklyDiv2';
 document.body.appendChild(elem);
 let test = Blockly.inject('blocklyDiv2',{toolbox: document.getElementById('toolbox')});
 
-bb.fastInstall('scripting','executeCode',(text) => {
-    eval(text);
-});
 let currObject;
+bb.fastInstall('scripting','executeCode',(text,currentObject) => {
+    if(text === undefined 
+        || text === ""
+        || text === null)
+            return;
+    let prevObject = currObject;
+    currObject = currentObject;
+    eval(text);
+    currObject = prevObject;
+});
 bb.fastInstall('scripting','executeText',function(text,currentObject) {
     if(text === undefined 
     || text === ""
