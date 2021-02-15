@@ -55,7 +55,7 @@ export default class OptionManager{
         if(!this._regOptions[opt]) throw Error('set an option that doesn\'t exist');
         this._regOptions[opt].val = val;
         if(this._regOptions[opt].onChange.code !== "")
-            bb.fastGet('scripting', 'executeCode')(this._regOptions[opt].onChange.code, this._parent); // TODO
+            bb.fastGet('scripting', 'executeCode')(this._regOptions[opt].onChange, this._parent); // TODO
     }
 
     setOptionCode(opt, code) {

@@ -46,7 +46,7 @@ function onHudLoaded(){
     let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
         let code = bb.invoke('scripting','currentScriptAsCode');
-        bb.invoke('scripting','executeCode',code);
+        bb.invoke('scripting','executeCode',{text: code, code: code});
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
@@ -57,8 +57,8 @@ function onHudLoaded(){
 
     function tabInfo(id,cb){
         return ()=>{
-            let text = cb();
-            bb.invoke('scripting','clearAndLoadFromText',text);
+            let codes = cb();
+            bb.invoke('scripting','clearAndLoadFromText',codes);
             // codeAnalysis(bb.fastGet('scripting','currentScriptAsCode')());
             tabOpen = id;
             document.getElementById('openTab').innerHTML = tabOpen;
@@ -79,16 +79,15 @@ function onHudLoaded(){
         let eventsTab = document.getElementById('eventsTab');
         let infoBar = document.getElementById('infoBar');
         eventsTab.innerHTML = "";
+        infoBar.innerHTML = "";
         if(obj === undefined){
             document.getElementById('openTab').innerHTML = "";
-            document.getElementById('focusedObjText').innerText = 'Stage';
             bb.invoke('scripting','clearAndLoadFromText','');
             bb.installWatch('state','focusedObject',onFocusChange);
             return;
         }
         let firstObject = true;
 
-        document.getElementById("focusedObjText").innerText = obj.name;
         infoBar.innerHTML = 'Currently Focused Object is '+obj.name;
 
         codes = obj.getCodes();

@@ -78,7 +78,7 @@ export default class EventsManager {
         if (!this._regEvents[ev] || !this._regEvents[ev].val) 
             return;
 
-        bb.fastGet('scripting', 'executeCode')(this.getEvent(ev).code,this._parent); // TODO
+        bb.fastGet('scripting', 'executeCode')(this.getEvent(ev),this._parent); // TODO
     }
 
     getEventTag(ev){

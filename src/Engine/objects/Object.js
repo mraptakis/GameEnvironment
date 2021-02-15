@@ -69,7 +69,7 @@ export default class Object {
         for (let i in events) {
             toReturn.events[i] = {};
             toReturn.events[i].get = () => {
-                return this.getEvent(i).text
+                return this.getEvent(i)
             } 
             toReturn.events[i].set = (code) => {
                 this.setEvent(i, code)
@@ -83,14 +83,14 @@ export default class Object {
             toReturn.states[i] = {};
             toReturn.states[i]['out of '+i] = {};
             toReturn.states[i]['out of '+i].get = () => {
-                return state.transitionFrom.text;
+                return state.transitionFrom;
             } 
             toReturn.states[i]['out of '+i].set = (code) => {
                 this.setState(i,code,undefined);
             }
             toReturn.states[i]['go to '+i] = {};
             toReturn.states[i]['go to '+i].get = () => {
-                return state.transitionTo.text;
+                return state.transitionTo;
             } 
             toReturn.states[i]['go to '+i].set = (code) => {
                 this.setState(i,undefined,code);
@@ -102,12 +102,12 @@ export default class Object {
         for(let i in values){
             if(this.getValueTag(i) === 'user'){
                 toReturn.values['on '+i+' Change'] = {};
+                toReturn.values['on '+i+' Change'].get = () => {
+                    return this.getValueCode(i);
+                }
                 toReturn.values['on '+i+' Change'].set = (code) => {
                     this.setValueCode(i, code);
                 };
-                toReturn.values['on '+i+' Change'].get = () => {
-                    return this.getValueCode(i).text;
-                }
             }
         }
 

@@ -42,8 +42,8 @@ function onSettingsInventoryLoaded(){
     
     item = document.createElement('div');
     item.classList = 'inventory-window-tabs-item';
-    item.innerHTML = 'Animations'
-    item.onclick = ()=>{focusTab('Animations');showAnimations(body)}
+    item.innerHTML = 'Films'
+    item.onclick = ()=>{focusTab('Films');showFilms(body)}
     tabDiv.appendChild(item);
 
     item = document.createElement('div');
@@ -135,7 +135,7 @@ function removeAllAnimators(){
     animatorsForPreview.forEach((an)=>an());
 }
 
-function showAnimations(objWrapper){
+function showFilms(objWrapper){
     let items = Engine.AnimationManager.getAllFilms();
     objWrapper.innerHTML = '';
     for(let i in items){

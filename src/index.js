@@ -10,7 +10,7 @@ import animationFilms from '../assets/json/AnimationFilmHolderJSON.js' // json
 import serverCommuncator from './utils/serverCommunication.js'
 
 
-const LOADFROMSERVER = false;
+const LOADFROMSERVER = true;
 
 if(!LOADFROMSERVER){
     const loadJSON = (callback) => {
@@ -55,7 +55,7 @@ if(LOADFROMSERVER){
         if(res !== ''){
             res = JSON.parse(res);
             res.forEach( element => {
-                element.objectInfo = element.objectInfo.replaceAll("'",'"').replaceAll("~","'");
+                element.objectInfo = element.objectInfo.replace(/'/g,'"').replace(/~/g,"'");
                 element.objectInfo = JSON.parse(element.objectInfo);
             })
             res = res.map(item => item.objectInfo);

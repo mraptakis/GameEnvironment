@@ -25,28 +25,41 @@ bb.fastInstall('scripting','fromTextToCode',(text) => {
     return text;
 });
 
-bb.fastInstall('scripting','executeText',(text,currObject) => {
+let currObject;
+bb.fastInstall('scripting','executeText',(codes,currentObject) => {
+    if(!codes || !codes.text)
+        return;
+    let prevObject = currObject;
+    currObject = currentObject;
     try{
-        eval(text);
+        eval(codes.code);
     }catch(e){
         logManager.logError(e);
         console.log(e);
     }
+    currObject = prevObject;
     // eval(text);
 });
 
-bb.fastInstall('scripting','executeCode',(text) => {
+bb.fastInstall('scripting','executeCode',(codes,currentObject) => {
+    if(!codes || !codes.code)
+        return;
+    let prevObject = currObject;
+    currObject = currentObject;
     try{
-        eval(text);
+        eval(codes.code);
     }catch(e){
         logManager.logError(e);
         console.log(e);
     }
+    currObject = prevObject;
     // eval(text);
 });
 
-bb.fastInstall('scripting','clearAndLoadFromText',(text)=>{
-    inputArea.value = text;
+bb.fastInstall('scripting','clearAndLoadFromText',(codes)=>{
+    if(!codes || !codes.code)
+        inputArea.value = '';
+    inputArea.value = codes.code;
 });
 
 bb.fastInstall('scripting','injectInDiv',(div)=>{

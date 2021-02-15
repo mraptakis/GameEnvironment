@@ -31,11 +31,15 @@ function saveToDatabase(){
                 {
                     name: 'objectInfo',
                     type: 'TEXT',
-                    value: obj.toString().replaceAll("'","~").replaceAll('"',"'")
+                    value: obj.toString().replace(/'/g,"~").replace(/"/g,"'")
                 }
             ])
         }    
     })
 }
+
+// function saveToDatabase(){
+//     alert('you are running a static page at the moment save is disabled');
+// }
 
 bb.fastInstall('actions','saveToDatabase',saveToDatabase)
