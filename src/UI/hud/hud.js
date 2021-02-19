@@ -65,15 +65,15 @@ function onHudLoaded(){
         };
     }
 
-    let consoleArea = document.getElementById('consoleArea');
-    function onActionChange(newMessage){
-        consoleArea.value += '\n'+newMessage;
-        consoleArea.scrollTop = consoleArea.scrollHeight;
-        // logAllActions += newMessage+'\n';
-        bb.installWatch('state','lastAction',onActionChange);
-    }
+    // let consoleArea = document.getElementById('consoleArea');
+    // function onActionChange(newMessage){
+    //     consoleArea.value += '\n'+newMessage;
+    //     consoleArea.scrollTop = consoleArea.scrollHeight;
+    //     // logAllActions += newMessage+'\n';
+    //     bb.installWatch('state','lastAction',onActionChange);
+    // }
 
-    bb.installWatch('state','lastAction',onActionChange);
+    // bb.installWatch('state','lastAction',onActionChange);
     
     function onFocusChange(obj){
         let eventsTab = document.getElementById('eventsTab');

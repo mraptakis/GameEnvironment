@@ -350,13 +350,7 @@
 <div id="openTab" class="hudChild"></div>
 <div id="playScriptButton" class="hudChild button"></div>
 <div id="saveScriptButton" class="hudChild button"></div>
-<textarea readOnly=true id="consoleArea" class="hudChild"></textarea>
-
-<!-- <div id="vid" category="Box" style="width: 500px; height: 1000px; position: absolute; left:700px; top:500px;">
-  <video width=100%  preload="auto" autoplay loop muted="muted" volume="0"> 
-      <source src="assets/test.mp4" type="video/mp4"> 
-  </video>
-</div> -->
+<!-- <textarea readOnly=true id="consoleArea" class="hudChild"></textarea> -->
 
 <!-- Top Right Side -->
 <!-- <div id="fpsCounter" category="Text" class="hudChild"></div> -->
