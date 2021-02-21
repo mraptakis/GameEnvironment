@@ -2,7 +2,13 @@ import bb from '../../utils/blackboard.js'
 
 import Engine from '../../Engine.js'
 
-export default {name:'inventoryWindow',link: './src/UI/inventoryWindow/inventoryWindow.ahtml',cb:onSettingsInventoryLoaded};
+export default {
+    name:'inventoryWindow',
+    link: './src/UI/inventoryWindow/inventoryWindow.ahtml',
+    cb:onSettingsInventoryLoaded,
+    removable: true, 
+    loadOnInstall: true
+};
 
 
 const FRAnimator = bb.fastGet('animation','FrameRangeAnimator');

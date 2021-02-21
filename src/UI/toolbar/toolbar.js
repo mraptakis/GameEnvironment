@@ -4,7 +4,13 @@ import focusedObject from '../../transitionHandlers/focusedObject.js'
 
 import Engine from '../../Engine.js'
 
-export default {name:'toolbar',link: './src/UI/toolbar/toolbar.ahtml',cb:onToolbarLoaded};
+export default {
+    name:'toolbar',
+    link: './src/UI/toolbar/toolbar.ahtml',
+    cb:onToolbarLoaded,
+    removable: false, 
+    loadOnInstall: true
+};
 
 function actionsDropdown(){
     let isVisible = false;

@@ -8,6 +8,3 @@ Engine.installManager('ClipboardManager', new ClipboardManager());
 
 import PauseManager from './PauseManager.js'
 Engine.installManager('PauseManager', new PauseManager());
-
-import SaveManager from './SaveManager.js'
-Engine.installManager('SaveManager', new SaveManager());

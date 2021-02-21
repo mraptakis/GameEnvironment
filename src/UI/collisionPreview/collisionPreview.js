@@ -1,6 +1,12 @@
 import Engine from '../../Engine.js';
 
-export default {name:'collisionPreview',link: './src/UI/collisionPreview/collisionPreview.ahtml',cb:onCollisionPreviewLoaded};
+export default {
+    name:'collisionPreview',
+    link: './src/UI/collisionPreview/collisionPreview.ahtml',
+    cb:onCollisionPreviewLoaded,
+    removable: true, 
+    loadOnInstall: true
+};
 
 function closeCollisionWindow(){
     let items = document.getElementsByClassName('collisionPreview_itemWrapper');

@@ -1,6 +1,12 @@
 import bb from '../../utils/blackboard.js'
 
-export default {name:'createObjectMenu',link: './src/UI/createObjectMenu/createObjectMenu.ahtml',cb:onCreateObjectMenuLoaded};
+export default {
+    name:'createObjectMenu',
+    link: './src/UI/createObjectMenu/createObjectMenu.ahtml',
+    cb:onCreateObjectMenuLoaded,
+    removable: true, 
+    loadOnInstall: true
+};
 
 
 function toggleObjectMenu(){

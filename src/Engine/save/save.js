@@ -1,7 +1,7 @@
-import serverCommuncator from '../utils/serverCommunication.js'
-import httpRequest from '../utils/httpRequest.js'
+import serverCommuncator from '../../utils/serverCommunication.js'
+import httpRequest from '../../utils/httpRequest.js'
 
-import Engine from '../Engine.js'
+import Engine from '../../Engine.js'
 
 export default class SaveManager {
     _DBName = 'myPersonalPage';

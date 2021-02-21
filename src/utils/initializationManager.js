@@ -21,5 +21,5 @@ import '../actions/actions.js'
 // </Required>
 
 // <Extra>
-import '../UI/UI.js'
+import('../UI/UI.js');
 // </Extra>

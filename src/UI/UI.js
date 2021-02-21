@@ -1,13 +1,21 @@
 import bb from '../utils/blackboard.js'
 
-import keyboard from './keyboard/keyboard.js'
-import objInfo from './objectInfo/objectInfo.js'
-import toolbar from './toolbar/toolbar.js'
-import objMenu from'./objectMenu/objectMenu.js'
-import createObjMenu from './createObjectMenu/createObjectMenu.js'
-import aninPrev from './animationPreview/animationPreview.js'
-import colPrev from './collisionPreview/collisionPreview.js'
-import hud from './hud/hud.js'
+const UIs = [
+    'keyboard',
+    'objectInfo',
+    'objectMenu',
+    'createObjectMenu',
+    'animationPreview',
+    'collisionPreview',
+    'hud',
+    'toolbar'
+]
+
+function getFile(id,cb){
+    import(`./${id}/${id}.js`).then((res)=>{
+        cb(res.default);
+    });
+}
 
 class UIManager {
     _UILoaded = [];
@@ -15,7 +23,9 @@ class UIManager {
     _UIInstalled = {};
 
     constructor(){
-        this.installUI({name:hud.name,link:hud.link,cb:hud.cb},false);
+        UIs.forEach((item)=>{
+            getFile(item,(val) => uiManager.installUI(val));
+        })
     }
 
     getUIs(){
@@ -32,10 +42,11 @@ class UIManager {
         return this._UILoaded;
     }
 
-    installUI({name,link,cb},removable = true){
+    installUI({name,link,cb,removable,loadOnInstall}){
         if(this._UIInstalled[name])return;
         this._UIInstalled[name] = {link:link,cb:cb};
         if(removable)this._removable[name] = true;
+        if(loadOnInstall)this.loadUI(name);
     }
 
     removeUI(name){
@@ -95,16 +106,6 @@ class UIManager {
 }
 
 const uiManager = new UIManager();
-
-uiManager.installUI({name:objInfo.name,link:objInfo.link,cb:objInfo.cb});
-uiManager.installUI({name:toolbar.name,link:toolbar.link,cb:toolbar.cb},false);
-uiManager.installUI({name:objMenu.name,link:objMenu.link,cb:objMenu.cb});
-uiManager.installUI({name:createObjMenu.name,link:createObjMenu.link,cb:createObjMenu.cb});
-uiManager.installUI({name:aninPrev.name,link:aninPrev.link,cb:aninPrev.cb});
-uiManager.installUI({name:colPrev.name,link:colPrev.link,cb:colPrev.cb});
-
-uiManager.loadAll();
-uiManager.installUI({name:keyboard.name,link:keyboard.link,cb:keyboard.cb});
 
 bb.fastInstall('UI','getUIs',()=>{return uiManager.getUIs()});
 bb.fastInstall('UI','installUI',({name,link,cb})=>uiManager.installUI({name,link,cb}));

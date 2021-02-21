@@ -3,7 +3,13 @@ import bb from '../../utils/blackboard.js'
 import transition from '../../transitionHandlers/focusedObject.js'
 import Engine from '../../Engine.js';
 
-export default {name:'objectInfo',link: './src/UI/objectInfo/objectInfo.ahtml',cb:onObjectInfoLoaded};
+export default {
+    name:'objectInfo',
+    link: './src/UI/objectInfo/objectInfo.ahtml',
+    cb:onObjectInfoLoaded,
+    removable: true, 
+    loadOnInstall: true
+};
 
 function refreshInfoBox(id){
     transition(undefined);

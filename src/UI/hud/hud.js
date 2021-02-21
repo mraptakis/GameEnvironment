@@ -2,7 +2,13 @@ import bb from '../../utils/blackboard.js'
 
 import Engine from '../../Engine.js'
 
-export default {name:'hud',link: './src/UI/hud/hud.ahtml',cb:onHudLoaded};
+export default {
+    name:'hud',
+    link: './src/UI/hud/hud.ahtml',
+    cb:onHudLoaded, 
+    removable: false, 
+    loadOnInstall: true
+};
 
 function hudState(){
     let isVisible = (bb.fastGet('state','mode') === "editing");
@@ -50,6 +56,11 @@ function onHudLoaded(){
         let code = Engine.ScriptingManager.currentScriptAsCode();
         let currObj = bb.fastGet('state','focusedObject');
         Engine.ScriptingManager.executeCode({text: code, code: code},currObj.id);
+    });
+    
+    document.getElementById('showScriptButton').addEventListener('click',()=>{
+        let code = Engine.ScriptingManager.currentScriptAsCode();
+        console.log(code);
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{

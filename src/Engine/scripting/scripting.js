@@ -9,7 +9,9 @@ export default class ScriptingManager {
     constructor(){
         this._installedMechanisms = {};
         this._installedMechanisms[blScr.id] = blScr;
+        this._installedMechanisms[pureJS.id] = pureJS;
         this._currentEditor = blScr;
+        console.log(this._installedMechanisms);
     }
 
     currentScriptAsText(){

@@ -14,6 +14,7 @@ import PhysicsManager from './Engine/physics/physics.js'
 import SoundManager from './Engine/sound/sound.js'
 import ClockManager from './Engine/clock/ClockManager.js'
 import ScriptingManager from './Engine/scripting/scripting.js'
+import SaveManager from './Engine/save/save.js'
 
 
 class _Engine {
@@ -34,6 +35,8 @@ class _Engine {
         this.installManager('ClockManager', new ClockManager());
     
         this.installManager('ScriptingManager', new ScriptingManager());
+
+        this.installManager('SaveManager', new SaveManager());
     
         // this.installManager('PhysicsManager', new PhysicsManager());
     }
@@ -47,6 +50,17 @@ class _Engine {
 
     hasManager(name){
         return name in this._managers;
+    }
+
+    start(){
+        Engine.app.main();
+        bb.fastInstall('Engine','Self',Engine);
+    
+        let aliveItems = Engine.ObjectManager.objects;
+        for(let i in aliveItems)
+            aliveItems[i].triggerEvent('onGameStart');
+    
+        bb.print();
     }
 
     get app(){
@@ -151,17 +165,5 @@ game.userCode = ()=>{
 game.extra = ()=>{
     Engine.ClockManager.update();
 };
-
-Engine.start = ()=>{
-    Engine.app.main();
-    bb.fastInstall('Engine','Self',Engine);
-
-    let aliveItems = Engine.ObjectManager.objects;
-    for(let i in aliveItems)
-        aliveItems[i].triggerEvent('onGameStart');
-
-    bb.print();
-}
-
 
 export default Engine;

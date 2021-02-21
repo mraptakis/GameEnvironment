@@ -1,7 +1,13 @@
 import Engine from '../../Engine.js';
 import bb from '../../utils/blackboard.js'
 
-export default {name:'animationPreview',link: './src/UI/animationPreview/animationPreview.ahtml',cb:onAnimationPreviewLoaded};
+export default {
+    name: 'animationPreview',
+    link: './src/UI/animationPreview/animationPreview.ahtml',
+    cb: onAnimationPreviewLoaded, 
+    removable: true, 
+    loadOnInstall: true
+};
 
 
 
