@@ -1,5 +1,4 @@
 import Engine from '../../Engine.js';
-import bb from '../../utils/blackboard.js'
 
 export default {name:'collisionPreview',link: './src/UI/collisionPreview/collisionPreview.ahtml',cb:onCollisionPreviewLoaded};
 

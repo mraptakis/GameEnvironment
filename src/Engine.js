@@ -13,6 +13,7 @@ import CollisionManager from './Engine/collisions/collisions.js'
 import PhysicsManager from './Engine/physics/physics.js'
 import SoundManager from './Engine/sound/sound.js'
 import ClockManager from './Engine/clock/ClockManager.js'
+import ScriptingManager from './Engine/scripting/scripting.js'
 
 
 class _Engine {
@@ -22,6 +23,19 @@ class _Engine {
     constructor(){
         this._managers = {};
         this._app = new App();
+        this.installManager('CollisionManager', new CollisionManager());
+    
+        this.installManager('SoundManager', new SoundManager());
+    
+        this.installManager('ObjectManager', objectManager);
+    
+        this.installManager('InputManager', inputManager);
+    
+        this.installManager('ClockManager', new ClockManager());
+    
+        this.installManager('ScriptingManager', new ScriptingManager());
+    
+        // this.installManager('PhysicsManager', new PhysicsManager());
     }
 
     installManager(name, manager){
@@ -79,18 +93,6 @@ const game = app.game;
 
 app.addInitialiseFunction(()=>{
     Engine.installManager('AnimationManager', new AnimationManager(Engine.animationBundle,Engine.preSetAnimations))
-
-    Engine.installManager('CollisionManager', new CollisionManager());
-
-    Engine.installManager('SoundManager', new SoundManager());
-
-    Engine.installManager('ObjectManager', objectManager);
-
-    Engine.installManager('InputManager', inputManager);
-
-    Engine.installManager('ClockManager', new ClockManager());
-
-    // Engine.installManager('PhysicsManager', new PhysicsManager());
 
     let init = Engine.initInfo;
     if(init.state.background_color)document.body.style.backgroundColor = init.state.background_color;

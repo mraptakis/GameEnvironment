@@ -30,7 +30,6 @@ export default class SaveManager {
         });
     }
 
-
     getObjects(){
         if(this._loadRemote) return this.getObjectsDB();
         return this.getObjectsLocal();

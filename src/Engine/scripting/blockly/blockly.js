@@ -1,53 +1,46 @@
 import './blocksInstallation.js'
 
-import bb from '../../utils/blackboard.js'
+import bb from '../../../utils/blackboard.js'
 
-bb.fastInstall('scripting','currentScriptAsText',()=>{
-    return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace));
-});
-
-bb.fastInstall('scripting','currentScriptAsCode',()=>{
-    return Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
-});
-
-bb.fastInstall('scripting','clear',()=>{
-    Blockly.mainWorkspace.clear();
-});
 
 let elem = document.createElement('div');
 elem.id = 'blocklyDiv2';
 document.body.appendChild(elem);
 let test = Blockly.inject('blocklyDiv2',{toolbox: document.getElementById('toolbox')});
 
+
 let currObject;
-bb.fastInstall('scripting','executeCode',(codes,currentObject) => {
+
+function currentScriptAsText() {
+    return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace));
+};
+
+function currentScriptAsCode() {
+    return Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
+}
+
+function clear() {
+    Blockly.mainWorkspace.clear();
+}
+
+function executeCode(codes,currentObject) {
     if(!codes)
         return;
     let prevObject = currObject;
     currObject = currentObject;
     eval(codes.code);
     currObject = prevObject;
-});
-bb.fastInstall('scripting','executeText',function(codes,currentObject) {
-    if(!codes)
-        return;
-    text = Blockly.Xml.textToDom(codes.text);
-    Blockly.Xml.clearWorkspaceAndLoadFromXml(text,test);
-    let prevObject = currObject;
-    currObject = currentObject;
-    eval(Blockly.JavaScript.workspaceToCode(test));
-    currObject = prevObject;
-});
+}
 
-bb.fastInstall('scripting','clearAndLoadFromText',(codes)=>{
+function clearAndLoadFromText(codes) {
     if(!codes || !codes.text){
             Blockly.mainWorkspace.clear();
             return;
         }
     Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(codes.text),Blockly.mainWorkspace);
-});
+}
 
-bb.fastInstall('scripting','injectInDiv',(div)=>{
+function injectInDiv(div) {
     div.style.height = "500px";
     div.style.width = "500px";
     
@@ -63,4 +56,13 @@ bb.fastInstall('scripting','injectInDiv',(div)=>{
         scaleSpeed: 1.2,
         pinch: true}
     });
-});
+}
+
+export default {
+    id: 'Blockly',
+    currentScriptAsText,
+    currentScriptAsCode,
+    executeCode,
+    clearAndLoadFromText,
+    injectInDiv
+}

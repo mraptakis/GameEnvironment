@@ -1,4 +1,4 @@
-import bb from '../../utils/blackboard.js'
+import Engine from '../../Engine.js'
 
 class Option {
     val
@@ -55,7 +55,7 @@ export default class OptionManager{
         if(!this._regOptions[opt]) throw Error('set an option that doesn\'t exist');
         this._regOptions[opt].val = val;
         if(this._regOptions[opt].onChange.code !== "")
-            bb.fastGet('scripting', 'executeCode')(this._regOptions[opt].onChange, this._parent); // TODO
+            Engine.ScriptingManager.executeCode(this._regOptions[opt].onChange, this._parent); // TODO
     }
 
     setOptionCode(opt, code) {

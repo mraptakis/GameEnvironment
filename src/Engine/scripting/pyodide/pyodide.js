@@ -1,4 +1,4 @@
-import bb from '../../utils/blackboard.js'
+import bb from '../../../utils/blackboard.js'
 /*
 <script type="text/javascript">
     // set the pyodide files URL (packages.json, pyodide.asm.data etc)

@@ -1,8 +1,5 @@
 import Engine from '../Engine.js'
 
-// import utils from '../utils/utils.js'
-// import bb from '../utils/blackboard.js'
-
 import ObjectSnapshotManager from './ObjectSnapshotManager.js'
 Engine.installManager('ObjectSnapshotManager', new ObjectSnapshotManager());
 

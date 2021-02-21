@@ -1,7 +1,5 @@
 import bb from '../../utils/blackboard.js'
 
-import Engine from '../../Engine.js'
-
 export default {name:'createObjectMenu',link: './src/UI/createObjectMenu/createObjectMenu.ahtml',cb:onCreateObjectMenuLoaded};
 
 

@@ -1,5 +1,7 @@
 import bb from '../../utils/blackboard.js'
 
+import Engine from '../../Engine.js'
+
 export default {name:'hud',link: './src/UI/hud/hud.ahtml',cb:onHudLoaded};
 
 function hudState(){
@@ -45,21 +47,21 @@ function onHudLoaded(){
 
     let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
-        let code = bb.invoke('scripting','currentScriptAsCode');
-        bb.invoke('scripting','executeCode',{text: code, code: code});
+        let code = Engine.ScriptingManager.currentScriptAsCode();
+        let currObj = bb.fastGet('state','focusedObject');
+        Engine.ScriptingManager.executeCode({text: code, code: code},currObj.id);
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
-        let text = bb.invoke('scripting', 'currentScriptAsText');
-        let code = bb.invoke('scripting', 'currentScriptAsCode');
+        let text = Engine.ScriptingManager.currentScriptAsText();
+        let code = Engine.ScriptingManager.currentScriptAsCode();
         codes.stripped[tabOpen].set({text:text,code:code});
     });
 
     function tabInfo(id,cb){
         return ()=>{
             let codes = cb();
-            bb.invoke('scripting','clearAndLoadFromText',codes);
-            // codeAnalysis(bb.fastGet('scripting','currentScriptAsCode')());
+            Engine.ScriptingManager.clearAndLoadFromText(codes);
             tabOpen = id;
             document.getElementById('openTab').innerHTML = tabOpen;
         };
@@ -82,7 +84,7 @@ function onHudLoaded(){
         infoBar.innerHTML = "";
         if(obj === undefined){
             document.getElementById('openTab').innerHTML = "";
-            bb.invoke('scripting','clearAndLoadFromText','');
+            Engine.ScriptingManager.clearAndLoadFromText({text: '',code: ''});
             bb.installWatch('state','focusedObject',onFocusChange);
             return;
         }
@@ -195,6 +197,5 @@ function onHudLoaded(){
 
     bb.installWatch('state','FPS',onFPSChange);
 
-    bb.invoke('scripting','injectInDiv',document.getElementById('languageDiv'));
-
+    Engine.ScriptingManager.injectInDiv(document.getElementById('languageDiv'));
 }

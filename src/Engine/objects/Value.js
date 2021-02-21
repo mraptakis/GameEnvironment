@@ -1,6 +1,6 @@
 import log from '../../utils/logs.js'
 
-import bb from '../../utils/blackboard.js'
+import Engine from '../../Engine.js'
 
 class Value {
     val
@@ -53,7 +53,7 @@ export default class ValueManager{
         if (typeof this._regValues[val].onChange === 'function') 
             this._regValues[val].onChange(v);
         if (typeof this._regValues[val].onChange === 'object')
-            bb.fastGet('scripting', 'executeCode')(this._regValues[val].onChange, this._parent); // TODO
+            Engine.ScriptingManager.executeCode(this._regValues[val].onChange, this._parent); // TODO
         
     }
 
