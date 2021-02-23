@@ -47,7 +47,7 @@ export default class OptionManager{
     }
 
     getOption(opt) {
-        if(!this._regOptions[opt]) return true;
+        if(!this._regOptions[opt]) return undefined;
         return this._regOptions[opt].val;
     }
 

@@ -8,7 +8,8 @@ const UIs = [
     'animationPreview',
     'collisionPreview',
     'hud',
-    'toolbar'
+    'toolbar',
+    'gridView'
 ]
 
 function getFile(id,cb){
