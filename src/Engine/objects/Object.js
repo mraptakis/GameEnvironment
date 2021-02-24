@@ -1,46 +1,55 @@
-import bb from '../../utils/blackboard.js'
-import log from '../../utils/logs.js'
+
 import rand from '../../utils/randomGenerator.js'
 
-import Event from './Event.js'
-import State from './State.js'
+import EventManager from './Event.js'
+import StateManager from './State.js'
+import OptionManager from './Option.js'
+import ValueManager from './Value.js'
+
+const ObjectState = {
+    ENABLED: 'enabled',
+    DISABLED: 'disabled'
+} //TODO when the window aura comes near then the item triggers an event to activate
 
 export default class Object {
     _id 
     _name 
-    renderer 
-    values = {}
+    renderer
+    _state
 
-    events = {}
-
-    options = {}
-
-    currentState;
-    states = {}
+    data = {};
 
     _category;
 
+    _isPrototype;
+
     constructor(_name, _id) {
         this._name = _name;
-        this.id = (_id) ? _id : rand.generateGameID();
+        this.id = _id || rand.generateGameID();
 
-        this.events['onClick'] = new Event({tag: 'system'});
-        this.events['onRightClick'] = new Event({tag: 'system'});
-        this.events['onGameStart'] = new Event({tag: 'system'});
-        this.events['onRemove'] = new Event({tag: 'system'});
-        this.events['onMove'] = new Event({tag: 'system'});
-        this.events['onEachFrame'] = new Event({tag: 'system'});
+        this._isPrototype = false;
 
-        this.states['idle'] = new State({tag: 'idle'});
+        this.data.eventHandler  = new EventManager(true, this.id);
+        this.data.stateHandler  = new StateManager(this.id);
+        this.data.valueHandler  = new ValueManager(this.id);
+        this.data.optionHandler = new OptionManager(true, this.id); 
 
-        this.currentState = this.states['idle'];
+    }
 
-        this.options['isMovable'] = true;
-        this.options['isRemovable'] = true;
-        this.options['isVisible'] = true;
-        this.options['isSolid'] = false;
-        this.options['isCollidable'] = true;
-
+    toString(){
+        this.events  = this.getEvents();
+        this.states  = this.getStates();
+        this.options = this.getOptions();
+        this.values  = this.getValues();
+        for(let i in this.values){
+            this.values[i].val = this.getValue(i);
+        }
+        let string = JSON.stringify(this);
+        delete this.events; 
+        delete this.states;
+        delete this.options;
+        delete this.values;
+        return string;
     }
 
     getCategory() {
@@ -48,10 +57,10 @@ export default class Object {
     }
 
     getPositional() {
+        let handler = this.data.valueHandler;
         let toReturn = {};
-        for (let i in this.values) { // if(this.values[i].tag === "positional")toReturn.push([i,this.getValue(i)]);
-
-            if (this.values[i].tag === "positional") 
+        for (let i in handler.getValues()) { 
+            if (handler.getValueTag(i) === "positional") 
                 toReturn[i] = this.getValue(i);
             
         }
@@ -62,35 +71,67 @@ export default class Object {
         let toReturn = {};
 
         let events = this.getEvents();
+        toReturn.events = {};
         for (let i in events) {
-            toReturn[i] = {};
-            toReturn[i].get = () => {
+            toReturn.events[i] = {};
+            toReturn.events[i].get = () => {
                 return this.getEvent(i)
             } 
-            toReturn[i].set = (code) => {
+            toReturn.events[i].set = (code) => {
                 this.setEvent(i, code)
             }
         }
 
         let states = this.getStates();
+        toReturn.states = {};
         for(let i in states){
             let state = this.getState(i);
-            toReturn[i+'_From'] = {};
-            toReturn[i+'_From'].get = () => {
+            toReturn.states[i] = {};
+            toReturn.states[i]['out of '+i] = {};
+            toReturn.states[i]['out of '+i].get = () => {
                 return state.transitionFrom;
             } 
-            toReturn[i+'_From'].set = (code) => {
+            toReturn.states[i]['out of '+i].set = (code) => {
                 this.setState(i,code,undefined);
             }
-            toReturn[i+'_To'] = {};
-            toReturn[i+'_To'].get = () => {
+            toReturn.states[i]['go to '+i] = {};
+            toReturn.states[i]['go to '+i].get = () => {
                 return state.transitionTo;
             } 
-            toReturn[i+'_To'].set = (code) => {
+            toReturn.states[i]['go to '+i].set = (code) => {
                 this.setState(i,undefined,code);
             }
         }
 
+        let values = this.getValues();
+        toReturn.values = {};
+        for(let i in values){
+            if(this.getValueTag(i) === 'user'){
+                toReturn.values['on '+i+' Change'] = {};
+                toReturn.values['on '+i+' Change'].get = () => {
+                    return this.getValueCode(i);
+                }
+                toReturn.values['on '+i+' Change'].set = (code) => {
+                    this.setValueCode(i, code);
+                };
+            }
+        }
+
+        let options = this.getOptions();
+        toReturn.options = {};
+        for(let i in options){
+            if(this.getOptionTag(i) === 'user'){
+                toReturn.options['on '+i+' Change'] = {};
+                toReturn.options['on '+i+' Change'].set = (code) => {
+                    this.setOptionCode(i, code);
+                };
+                toReturn.options['on '+i+' Change'].get = () => {
+                    return this.getOptionCode(i).text;
+                }
+            }
+        }
+
+        // console.log(toReturn);
         return toReturn;
     }
 
@@ -134,128 +175,6 @@ export default class Object {
         this.name = newName;
     }
 
-
-    getOptions() {
-        return this.options;
-    }
-
-    addOption(opt) {
-        this.options[opt] = true;
-    }
-
-    getOption(opt) {
-        return this.options[opt];
-    }
-
-    setOption(opt, val) {
-        this.options[opt] = val;
-    }
-
-    getCurrentState() {
-        return this.currentState.tag;
-    }
-
-    setCurrentState(newState) {
-        if (!this.states[newState]) 
-            return;
-         // TODO
-
-        bb.fastGet('scripting', 'executeText')(this.currentState.transitionFrom); // TODO
-        this.currentState = this.states[newState];
-        bb.fastGet('scripting', 'executeText')(this.currentState.transitionTo); // TODO
-
-    }
-
-    getStates() {
-        return this.states;
-    }
-
-    addState(state) {
-        this.states[state] = new State({tag: state})
-    }
-
-    getState(state) {
-        return this.states[state];
-    }
-
-    setState(state, transitionFrom, transitionTo) {
-        if(transitionFrom) this.states[state].transitionFrom = transitionFrom;
-        if(transitionTo) this.states[state].transitionTo = transitionTo;
-    }
-
-    getValues() {
-        return this.values;
-    }
-
-    addValue(val, v = "") {
-        // if(this.values[val]){
-        //     log.logError('Couldn\'t create value '+val+' because it already exists');
-        //     return;
-        // }
-        this.values[val] = {};
-        this.values[val].val = v;
-    }
-
-    setValue(val, v) {
-        if (!this.values[val]) {
-            this.addValue(val, v);
-            return;
-        }
-        this.values[val].val = v;
-        if (this.values[val].onChange) 
-            this.values[val].onChange(v);
-        
-    }
-
-    getValue(val) {
-        if (!this.values[val]) { // log.logError('Couldn\'t get value '+val+' because it doesn\'t exists');
-            return;
-        }
-        if (this.values[val].getValue) 
-            return this.values[val].getValue();
-        
-        return this.values[val].val;
-    }
-
-    getEvents() {
-        return this.events;
-    }
-
-    addEvent(ev, code) {
-        this.events[ev] = new Event({
-            tag: 'custom',
-            value: (code) ? code : ""
-        });
-    }
-
-    getEvent(ev) {
-        if (!this.events[ev]) { // log.logError('Couldn\'t get event '+ev+' because it doesn\'t exists');
-            return;
-        }
-        if (this.events[ev].getValue) 
-            return this.events[ev].getValue();
-        
-        return this.events[ev].val;
-    }
-
-    setEvent(ev, code) {
-        if (!this.events[ev]) {
-            this.addEvent(ev, code);
-            return;
-        }
-        this.events[ev].val = code;
-        if (this.events[ev].onChange) 
-            this.events[ev].onChange(code);
-        
-    }
-
-    triggerEvent(ev) {
-        if (!this.events[ev]) 
-            return;
-        
-        bb.fastGet('scripting', 'executeText')(this.getEvent(ev)); // TODO
-    }
-
     move(x, y) {
         throw Error("move needs to be implemented");
     }
@@ -272,63 +191,15 @@ export default class Object {
         throw Error("add needs to be implemented");
     }
 
-    save() {
-        let savedData = {};
-        savedData['id'] = this._id;
-        savedData['name'] = this._name;
-
-        savedData['events'] = {};
-        let events = savedData['events'];
-        for (let i in this.events) {
-            events[i] = this.getEvent(i);
-        }
-
-        savedData['options'] = {};
-        let options = savedData['options'];
-        for (let i in this.options) {
-            options[i] = this.getOption(i);
-        }
-
-        savedData['values'] = {};
-        let values = savedData['values'];
-        for (let i in this.values) {
-            values[i] = this.getValue(i);
-        }
-        savedData['category'] = this._category;
-        return savedData;
-    }
-
-    loadFromSaved(objData) {
-        this.id = objData.id;
-        this.name = objData.name;
-
-        let events = objData.events;
-        for (let i in events) {
-            this.setEvent(i, events[i]);
-        }
-
-        let options = objData.options;
-        for (let i in options) {
-            this.setOption(i, options[i]);
-        }
-
-        let values = objData.values;
-        for (let i in values) {
-            this.setValue(i, values[i]);
-        }
-    }
-
     clear() {
-        for (let i in this.events) {
-            delete this.events[i];
+        delete this.data.eventHandler;
+
+        for (let i in this.data.optionHandler) {
+            delete this.data.optionHandler[i];
         }
 
-        for (let i in this.options) {
-            delete this.options[i];
-        }
-
-        for (let i in this.values) {
-            delete this.values[i];
+        for (let i in this.data.valueHandler) {
+            delete this.data.valueHandler[i];
         }
 
     }
@@ -337,4 +208,129 @@ export default class Object {
         throw Error("remove needs to be implemented");
     }
 
+}
+
+/////////EVENT FUNCTIONS/////////////////
+Object.prototype.getEvents = function(){
+    return this.data.eventHandler.getEvents();
+}
+
+Object.prototype.addEvent = function(ev, code) {
+    this.data.eventHandler.registerEvent(ev,{code:code})
+}
+
+Object.prototype.getEvent = function(ev) {
+    return this.data.eventHandler.getEvent(ev);
+}
+
+Object.prototype.setEvent = function(ev, code) {
+    this.data.eventHandler.setEvent(ev,code);
+}
+
+Object.prototype.triggerEvent = function(ev) {
+    this.data.eventHandler.triggerEvent(ev);
+}
+
+Object.prototype.removeEvent = function(ev) {
+    this.data.eventHandler.removeEvent(ev);
+}
+
+Object.prototype.getEventTag = function(ev) {
+    this.data.eventHandler.getEventTag(ev);
+}
+
+
+////////STATE FUNCTIONS////////////////////
+Object.prototype.getCurrentState = function() {
+    return this.data.stateHandler.getCurrentState();
+}
+
+Object.prototype.setCurrentState = function(newState) {
+    this.data.stateHandler.setCurrentState(newState);
+}
+
+Object.prototype.getStates = function() {
+    return this.data.stateHandler.getStates();
+}
+
+Object.prototype.addState = function(state) {
+    this.data.stateHandler.registerState(state);
+}
+
+Object.prototype.getState = function(state) {
+    return this.data.stateHandler.getState(state);
+}
+
+Object.prototype.setState = function(state, transitionFrom, transitionTo) {
+    this.data.stateHandler.setState(state,transitionFrom,transitionTo);
+}
+
+//////////OPTION FUNCTIONS ////////////////////
+Object.prototype.getOptions = function() {
+    return this.data.optionHandler.getOptions();
+}
+
+Object.prototype.addOption = function(opt) {
+    this.data.optionHandler.registerOption(opt);
+}
+
+Object.prototype.getOption = function(opt) {
+    return this.data.optionHandler.getOption(opt);
+}
+
+Object.prototype.setOption = function(opt, val) {
+    this.data.optionHandler.setOption(opt,val);
+}
+
+Object.prototype.getOptionTag = function(opt) {
+    return this.data.optionHandler.getOptionTag(opt);
+}
+
+Object.prototype.removeOption = function(opt) {
+    return this.data.optionHandler.removeOption(opt);
+}
+
+Object.prototype.setOptionCode = function(opt, code) {
+    this.data.optionHandler.setOptionCode(opt, code);
+}
+
+Object.prototype.getOptionCode = function(opt) {
+    return this.data.optionHandler.getOptionCode(opt);
+}
+
+Object.prototype.hasOption = function(opt) {
+    return this.data.optionHandler.hasOption(opt);
+}
+
+//////////VALUE FUNCTIONS////////////////////
+Object.prototype.getValues = function() {
+    return this.data.valueHandler.getValues();
+}
+
+Object.prototype.addValue = function(val, v = "") {
+    this.data.valueHandler.registerValue(val,{value:v});
+}
+
+Object.prototype.setValue = function(val, v) {
+    this.data.valueHandler.setValue(val, v);
+}
+
+Object.prototype.getValue = function(val) {
+    return this.data.valueHandler.getValue(val);
+}
+
+Object.prototype.getValueTag = function(val) {
+    return this.data.valueHandler.getValueTag(val);
+}
+
+Object.prototype.setValueCode = function(val, code) {
+    this.data.valueHandler.setValueCode(val, code);
+}
+
+Object.prototype.getValueCode = function(val) {
+    return this.data.valueHandler.getValueCode(val);
+}
+
+Object.prototype.removeValue = function(val) {
+    this.data.valueHandler.removeValue(val);
 }

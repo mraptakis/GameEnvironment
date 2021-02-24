@@ -15,7 +15,7 @@ export default class Circle extends Object {
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
 
-        this.values['r'] = new Value({
+        this.data.valueHandler.registerValue('r',{
             tag: "positional",
             onChange: (value) => {this.div.style.width = value*2+"px";this.div.style.height = value*2+"px";},
             getValue: () => {return (this.div.style.width.slice(0,-2)/2);}

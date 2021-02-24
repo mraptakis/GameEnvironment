@@ -92,19 +92,19 @@ export default class Humanoid extends Object {
         }
 
 
-        this.values['colour'] = new Value({
+        this.data.valueHandler.registerValue('colour',{
             tag: "texture",
             onChange: (value) => this.setColor(value),
             getValue: () => {return this.div.children[0].style.backgroundColor;}
         });
 
-        this.values['width'] = new Value({
+        this.data.valueHandler.registerValue('width',{
             tag: "positional",
             onChange: (value) => {this.div.style.width = value+"px";},
             getValue: () => {return this.div.style.width.slice(0,-2);}
         });
 
-        this.values['height'] = new Value({
+        this.data.valueHandler.registerValue('height',{
             tag: "positional",
             onChange: (value) => {this.div.style.height = value+"px";},
             getValue: () => {return this.div.style.height.slice(0,-2);}

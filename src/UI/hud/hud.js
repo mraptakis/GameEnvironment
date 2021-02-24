@@ -1,9 +1,17 @@
 import bb from '../../utils/blackboard.js'
 
-export default {name:'hud',link: './src/UI/hud/hud.ahtml',cb:onHudLoaded};
+import Engine from '../../Engine.js'
+
+export default {
+    name:'hud',
+    link: './src/UI/hud/hud.ahtml',
+    cb:onHudLoaded, 
+    removable: false, 
+    loadOnInstall: true
+};
 
 function hudState(){
-    let isVisible = (bb.fastGet('state','mode') === "editing")?true:false;
+    let isVisible = (bb.fastGet('state','mode') === "editing");
     toggleVisibility();
     toggleVisibility();
     function toggleVisibility(){
@@ -45,72 +53,150 @@ function onHudLoaded(){
 
     let tabOpen = "onClick";
     document.getElementById('playScriptButton').addEventListener('click',()=>{
-        let code = bb.invoke('scripting','currentScriptAsCode');
-        bb.invoke('scripting','executeCode',code);
+        let code = Engine.ScriptingManager.currentScriptAsCode();
+        let currObj = bb.fastGet('state','focusedObject');
+        Engine.ScriptingManager.executeCode({text: code, code: code},currObj.id);
+    });
+    
+    document.getElementById('showScriptButton').addEventListener('click',()=>{
+        let code = Engine.ScriptingManager.currentScriptAsCode();
+        console.log(code);
     });
 
     document.getElementById('saveScriptButton').addEventListener('click',()=>{
-        let text = bb.invoke('scripting','currentScriptAsText');
-        codes[tabOpen].set(text);
+        let text = Engine.ScriptingManager.currentScriptAsText();
+        let code = Engine.ScriptingManager.currentScriptAsCode();
+        codes.stripped[tabOpen].set({text:text,code:code});
     });
 
-    function tabInfo(obj,id){
+    function tabInfo(id,cb){
         return ()=>{
-            let text = obj.getEvent(id);
-            bb.invoke('scripting','clearAndLoadFromText',text);
-            // codeAnalysis(bb.fastGet('scripting','currentScriptAsCode')());
+            let codes = cb();
+            Engine.ScriptingManager.clearAndLoadFromText(codes);
             tabOpen = id;
             document.getElementById('openTab').innerHTML = tabOpen;
         };
     }
 
-    function tabInfo2(id,cb){
-        return ()=>{
-            let text = cb();
-            bb.invoke('scripting','clearAndLoadFromText',text);
-            // codeAnalysis(bb.fastGet('scripting','currentScriptAsCode')());
-            tabOpen = id;
-            document.getElementById('openTab').innerHTML = tabOpen;
-        };
-    }
+    // let consoleArea = document.getElementById('consoleArea');
+    // function onActionChange(newMessage){
+    //     consoleArea.value += '\n'+newMessage;
+    //     consoleArea.scrollTop = consoleArea.scrollHeight;
+    //     // logAllActions += newMessage+'\n';
+    //     bb.installWatch('state','lastAction',onActionChange);
+    // }
 
-    let consoleArea = document.getElementById('consoleArea');
-    function onActionChange(newMessage){
-        consoleArea.value += '\n'+newMessage;
-        consoleArea.scrollTop = consoleArea.scrollHeight;
-        // logAllActions += newMessage+'\n';
-        bb.installWatch('state','lastAction',onActionChange);
-    }
-
-    bb.installWatch('state','lastAction',onActionChange);
-
+    // bb.installWatch('state','lastAction',onActionChange);
+    
     function onFocusChange(obj){
         let eventsTab = document.getElementById('eventsTab');
+        let infoBar = document.getElementById('infoBar');
         eventsTab.innerHTML = "";
+        infoBar.innerHTML = "";
         if(obj === undefined){
             document.getElementById('openTab').innerHTML = "";
-            bb.invoke('scripting','clearAndLoadFromText','');
+            Engine.ScriptingManager.clearAndLoadFromText({text: '',code: ''});
             bb.installWatch('state','focusedObject',onFocusChange);
             return;
         }
         let firstObject = true;
 
-        codes = obj.getCodes();
+        infoBar.innerHTML = 'Currently Focused Object is '+obj.name;
 
-        for(let i in codes){
+        codes = obj.getCodes();
+        codes.stripped = {};
+
+        let events  = codes.events;
+        let states  = codes.states;
+        let values  = codes.values;
+        let options = codes.options;
+
+        let eventSplit = document.createElement('div');
+        eventSplit.classList = 'tabSplitter';
+        eventSplit.innerHTML = 'Events';
+        eventsTab.appendChild(eventSplit);
+
+        for(let i in events){
+            codes.stripped[i] = events[i];
             let elem = document.createElement('div');
             elem.classList = "eventTab";
             elem.innerHTML = i;
-            elem.addEventListener('click',tabInfo2(i,codes[i].get));
+            elem.style.marginLeft = '10%';
+            elem.addEventListener('click',tabInfo(i,events[i].get));
             eventsTab.appendChild(elem);
             if(firstObject){
                 elem.click();
                 firstObject = false;
             }
         }
+
+        let stateSplit = document.createElement('div');
+        stateSplit.classList = 'tabSplitter';
+        stateSplit.innerHTML = 'States';
+        eventsTab.appendChild(stateSplit);
+
+        for(let i in states){
+            stateSplit = document.createElement('div');
+            stateSplit.classList = 'tabSplitter';
+            stateSplit.innerHTML = i;
+            stateSplit.style.marginLeft = '10%';
+            eventsTab.appendChild(stateSplit);
+            for(let st in states[i]){
+                codes.stripped[st] = states[i][st];
+                let elem = document.createElement('div');
+                elem.classList = "eventTab";
+                elem.innerHTML = st;
+                elem.style.marginLeft = '20%';
+                elem.addEventListener('click',tabInfo(st,states[i][st].get));
+                eventsTab.appendChild(elem);
+                if(firstObject){
+                    elem.click();
+                    firstObject = false;
+                }
+            }
+        }
+
+        let valueSplit = document.createElement('div');
+        valueSplit.classList = 'tabSplitter';
+        valueSplit.innerHTML = 'Attributes';
+        eventsTab.appendChild(valueSplit);
+
+        for(let i in values){
+            codes.stripped[i] = values[i];
+            let elem = document.createElement('div');
+            elem.classList = "eventTab";
+            elem.innerHTML = i;
+            elem.style.marginLeft = '10%';
+            elem.addEventListener('click',tabInfo(i,values[i].get));
+            eventsTab.appendChild(elem);
+            if(firstObject){
+                elem.click();
+                firstObject = false;
+            }
+        }
+
+        let optionSplit = document.createElement('div');
+        optionSplit.classList = 'tabSplitter';
+        optionSplit.innerHTML = 'Flags';
+        eventsTab.appendChild(optionSplit);
+
+        for(let i in options){
+            codes.stripped[i] = options[i];
+            let elem = document.createElement('div');
+            elem.classList = "eventTab";
+            elem.innerHTML = i;
+            elem.style.marginLeft = '10%';
+            elem.addEventListener('click',tabInfo(i,options[i].get));
+            eventsTab.appendChild(elem);
+            if(firstObject){
+                elem.click();
+                firstObject = false;
+            }
+        }
+
         bb.installWatch('state','focusedObject',onFocusChange);
     }
-    
+
     bb.installWatch('state','focusedObject',onFocusChange);
 
     let fpsCounter = document.getElementById('fpsCounter');
@@ -122,6 +208,5 @@ function onHudLoaded(){
 
     bb.installWatch('state','FPS',onFPSChange);
 
-    bb.invoke('scripting','injectInDiv',document.getElementById('languageDiv'));
-
+    Engine.ScriptingManager.injectInDiv(document.getElementById('languageDiv'));
 }

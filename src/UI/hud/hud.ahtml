@@ -3,13 +3,14 @@
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="%{BKY_OBJECT_TITLE}" colour="%{BKY_MATH_HUE}">
-      <block type="remove_object"></block>
+      <block type="this_obj"></block>
       <block type="get_object_field"></block>
-      <block type="object_attr"></block>
+      <block type="dropdown_obj"></block>
+      <block type="object_flags"></block>
       <block type="object_state"></block>
       <block type="object_event"></block>
       <block type="object_field"></block>
-      <block type="dropdown_obj"></block>
+      <block type="remove_object"></block>
       <block type="dropdown_categ"></block>
       <block type="create_object"></block>
       <block type="move_object"></block>
@@ -343,16 +344,14 @@
     <category name="%{BKY_VARIABLES_TITLE}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
     <category name="%{BKY_FUNCTIONS_TITLE}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
 </xml>
+<div id="infoBar" class="hudChild"></div>
 <div id="eventsTab" class="hudChild"></div>
 <div id="languageDiv" class="hudChild"></div>
 <div id="openTab" class="hudChild"></div>
 <div id="playScriptButton" class="hudChild button"></div>
+<div id="showScriptButton" class="hudChild button"></div>
 <div id="saveScriptButton" class="hudChild button"></div>
-<textarea readOnly=true id="consoleArea" class="hudChild"></textarea>
-
-<!-- Top Middle Side -->
-<!-- <div id="focusedObjText" category="Text" class="hudChild"></div> -->
-<div id="focusedObjText" class="hudChild"></div>
+<!-- <textarea readOnly=true id="consoleArea" class="hudChild"></textarea> -->
 
 <!-- <div id="vid" category="Box" style="width: 500px; height: 1000px; position: absolute; left:700px; top:500px;">
   <video width=100%  preload="auto" autoplay loop muted="muted" volume="0"> 

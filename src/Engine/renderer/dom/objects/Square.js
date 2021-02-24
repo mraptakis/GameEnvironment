@@ -16,13 +16,13 @@ export default class Square extends Object {
         if(div)this.div = div;
         else this.createElement({name,texture,dim});
 
-        this.values['width'] = new Value({
+        this.data.valueHandler.registerValue('width',{
             tag: "positional",
             onChange: (value) => {this.div.style.width = value+"px";},
             getValue: () => {return this.div.style.width.slice(0,-2);}
         });
 
-        this.values['height'] = new Value({
+        this.data.valueHandler.registerValue('height',{
             tag: "positional",
             onChange: (value) => {this.div.style.height = value+"px";},
             getValue: () => {return this.div.style.height.slice(0,-2);}

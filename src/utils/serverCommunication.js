@@ -45,7 +45,6 @@ class CommunicationManager {
 
     createTable(name, structure){
         structure = JSON.stringify(structure);
-        // console.log(structure)
         requestToServer('POST',serverPrefix+'create/'+name,structure).then( (res) => console.log(res))
     }
 
@@ -56,10 +55,6 @@ class CommunicationManager {
     }
 
     updateItemToTable(name,ident,value){
-        // value = JSON.stringify(value);
-        // ident = JSON.stringify(ident);
-        console.log(ident);
-        console.log(value);
         requestToServer('POST',serverPrefix+'updateItem/'+name,JSON.stringify({value:value,ident:ident})).then( (res) => console.log(res))
     }
 
@@ -73,19 +68,19 @@ let comMan = new CommunicationManager();
 
 export default comMan;
 
-let struc = [
-    {
-        name: 'id',
-        type: 'TEXT PRIMARY KEY',
-    },
-    {
-        name: 'objectInfo',
-        type: 'TEXT',
-    }
-];
+// let struc = [
+//     {
+//         name: 'id',
+//         type: 'TEXT PRIMARY KEY',
+//     },
+//     {
+//         name: 'objectInfo',
+//         type: 'TEXT',
+//     }
+// ];
 
 
-comMan.createTable('superMario3',struc)
+// comMan.createTable('superMarioReal',struc)
 
 // comMan.addItemToTable('aaaa',struc);
 // comMan.getTable('superMario');

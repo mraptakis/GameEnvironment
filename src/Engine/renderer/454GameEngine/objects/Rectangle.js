@@ -21,19 +21,19 @@ export default class Rectangle extends Object {
         this._frame = 0;
         this._film = film;
 
-        this.values['width'] = new Value({
+        this.data.valueHandler.registerValue('width',{
             tag: "positional",
             onChange: (value) => {this._width = value;},
             getValue: () => {return this._width;}
         });
 
-        this.values['height'] = new Value({
+        this.data.valueHandler.registerValue('height',{
             tag: "positional",
             onChange: (value) => {this._height = value;},
             getValue: () => {return this._height;}
         });
 
-        this.values['film'] = new Value({
+        this.data.valueHandler.registerValue('film',{
             tag: 'render',
             value: film,
             onChange: (value) => {
@@ -51,7 +51,10 @@ export default class Rectangle extends Object {
         if(!this.getOption('isVisible'))return;
         
         let [drawX,drawY] = this.getMapCoords();
-
+        if(drawX + this.getValue('width') <= 0
+        || drawX > this._stage.getValue('windowWidth')
+        || drawY + this.getValue('height') <= 0
+        || drawY > this._stage.getValue('windowHeight')) return;
         if(!film){
             ctx.fillStyle = this._color;
             ctx.fillRect(drawX, drawY, this._width, this._height);

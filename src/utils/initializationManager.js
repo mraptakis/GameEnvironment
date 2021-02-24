@@ -5,26 +5,21 @@ import bb from './blackboard.js'
 bb.fastSet('state','mode','editing');
 bb.fastSet('state','focusedObject',undefined);
 
+
+bb.fastSet('settings','noDrag', false);
+bb.fastSet('settings','highlightInvisibleObjects',false);
+
 // <Engine>
 import '../Engine.js'
+    // <EngineExtra>
+    import '../EngineExtensions/EngineExtensions.js'
+    // </EngineExtra>
 // </Engine>
 
-// <Extra>
-import '../scripting/scripting.js'
-
+// <Required>
 import '../actions/actions.js'
+// </Required>
 
-import '../UI/UI.js'
+// <Extra>
+import('../UI/UI.js');
 // </Extra>
-
-
-// <SanityChecks>
-import requirements from '../../assets/json/strictRequirementsAfterLoad.js' // json
-
-for(let i in requirements){
-    if(!bb.getComponent(i))throw Error("Missing Component "+i);
-    requirements[i].forEach(element => {
-        if(!bb.fastGet(i,element))throw Error("Missing Component Element " + i + "->" + element);
-    });
-}
-// </SanityChecks>

@@ -1,8 +1,4 @@
-import bb from '../../../../utils/blackboard.js'
-
 import Object from '../../../objects/Object.js'
-
-import Value from '../../../objects/Value.js'
 
 import stage from '../../EnvironmentObject.js'
 
@@ -23,25 +19,19 @@ export default class Object454 extends Object{
         this.renderer = '454';
         this._rotation = 0;
 
-        this.values['x'] = new Value({
+        this.data.valueHandler.registerValue('x',{
             tag: "positional",
             onChange: (value) => {this._x = value;},
             getValue: () => {return this._x;}
         });
 
-        this.values['y'] = new Value({
+        this.data.valueHandler.registerValue('y',{
             tag: "positional",
             onChange: (value) => {this._y = value;},
             getValue: () => {return this._y;}
         });
 
-        this.values['rotation'] = new Value({
-            tag: "positional",
-            onChange: (value) => {this._rotation = value;},
-            getValue: () => {return this._rotation;}
-        });
-
-        this.values['colour'] = new Value({
+        this.data.valueHandler.registerValue('colour',{
             tag: "texture",
             onChange: (value) => this._color = value,
             getValue: () => {return this._color;}
