@@ -61,6 +61,7 @@ export default class StateManager{
     }
 
     removeState(state) {
+        if(!this._regStates[state])throw Error('Tried to delete a state that isn\'t registered');
         delete this._regStates[state]
     }
 

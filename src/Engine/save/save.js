@@ -152,9 +152,20 @@ export default class SaveManager {
     }
 
     async setEngine(callback){
-        let objects = await this.getObjects();
-        let preSetAnimations = await this.getPreSettedAnim();
-        let animationBundle = await this.getAnimationFilms();
+
+        let promise1 = this.getObjects();
+        let promise2 = this.getAnimationFilms();
+        let promise3 = this.getPreSettedAnim();
+
+        let preSetAnimations = await promise3;
+        let animationBundle = await promise2;
+        let objects = await promise1;
+
+        //We do the above technique to start loading all at the same time
+        // ------ wait        instead of -------wait
+        // ----------- wait                         ---------wait
+        // ----------------- wait                                -----------wait
+        // 
 
         Engine.initInfo = {
             state:{

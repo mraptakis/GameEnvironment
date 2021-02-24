@@ -5,7 +5,7 @@ const colourPalette = {
     object: 190
 }
 
-import objManager from '../../renderer/renderer.js'
+import objManager from '../../renderer/ObjectManager.js'
 
 Blockly.Blocks['move_object'] = {
     init: function() {

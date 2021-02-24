@@ -31,13 +31,13 @@ export default class ValueManager{
         return this._regValues;
     }
 
-    registerValue(val, {tag,value = '',onChange = {text: "", code: ""},getValue}) {
+    registerValue(val, {tag = 'user',value = '',onChange = {text: "", code: ""},getValue}) {
         // if(this._regValues[val]){
         //     log.logError('Couldn\'t create value '+val+' because it already exists');
         //     return;
         // }
         this._regValues[val] = new Value({
-            tag: tag || 'user',
+            tag: tag,
             value: value,
             onChange: onChange,
             getValue: getValue

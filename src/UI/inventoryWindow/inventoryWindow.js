@@ -11,8 +11,8 @@ export default {
 };
 
 
-const FRAnimator = bb.fastGet('animation','FrameRangeAnimator');
-const FRAnimation = bb.fastGet('animation','FrameRangeAnimation');
+const FRAnimator = Engine.AnimationManager.getAnimatorCategory('FrameRangeAnimator');
+const FRAnimation = Engine.AnimationManager.getAnimationCategory('FrameRangeAnimation');
 
 function closeInventoryWindow(){
     removeAllAnimators();

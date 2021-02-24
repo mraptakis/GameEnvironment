@@ -11,7 +11,6 @@ export default class ScriptingManager {
         this._installedMechanisms[blScr.id] = blScr;
         this._installedMechanisms[pureJS.id] = pureJS;
         this._currentEditor = blScr;
-        console.log(this._installedMechanisms);
     }
 
     currentScriptAsText(){
@@ -23,7 +22,6 @@ export default class ScriptingManager {
     }
 
     executeCode(codes,currentObject) {
-        if(this === undefined)debugger;
         this._currentEditor.executeCode(codes, currentObject);
     }
 

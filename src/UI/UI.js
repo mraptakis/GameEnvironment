@@ -16,6 +16,8 @@ const UIs = [
 function getFile(id,cb){
     import(`./${id}/${id}.js`).then((res)=>{
         cb(res.default);
+    }).catch(err =>{
+        throw Error(err + ' Loading File on UIs');
     });
 }
 
@@ -45,21 +47,21 @@ class UIManager {
     }
 
     installUI({name,link,cb,removable,loadOnInstall}){
-        if(this._UIInstalled[name])return;
+        if(this._UIInstalled[name]) throw Error('Installing an already installed UI');
         this._UIInstalled[name] = {link:link,cb:cb};
         if(removable)this._removable[name] = true;
         if(loadOnInstall)this.loadUI(name);
     }
 
     removeUI(name){
-        if(!this._UIInstalled[name])return;
+        if(!this._UIInstalled[name]) throw Error('Removing a UI that doesn\'t exist');
         delete this._UIInstalled[name];
         if(this._removable[name])delete this._removable[name];
     }
 
     loadUI(name) {
         let index = this._UILoaded.findIndex(item => item === name);
-        if(!this._UIInstalled[name] || index !== -1)return;
+        if(!this._UIInstalled[name] || index !== -1) throw Error('Trying to load a UI that isn\'t installed');
         let info = this._UIInstalled[name];
         this._UILoaded.push(name);
         this.readTextFile(name,info.link,info.cb);
@@ -67,7 +69,7 @@ class UIManager {
 
     hideUI(name) {
         let index = this._UILoaded.findIndex(item => item === name);
-        if(!this._UIInstalled[name] || index === -1)return;
+        if(!this._UIInstalled[name] || index === -1) throw Error('Trying to hide a UI that isn\'t installed');
         document.getElementById('_UIWRAPPER_'+name).remove();
         this._UILoaded.splice(index,1);
     }
@@ -94,6 +96,7 @@ class UIManager {
     }
 
     convertHTMLtoObjects(){
+        //TODO: UPDATE THIS FUNCTION
         let children = [ ...document.body.children ];
         children.map(child => {
             if(child.attributes.getNamedItem("category")){
@@ -116,5 +119,3 @@ bb.fastInstall('UI','loadUI',(name)=>uiManager.loadUI(name));
 bb.fastInstall('UI','loadAll',()=>uiManager.loadAll());
 bb.fastInstall('UI','hideUI',(name)=>uiManager.hideUI(name));
 bb.fastInstall('UI','getLoadedUIs',()=>uiManager.getLoaded());
-
-uiManager.convertHTMLtoObjects();

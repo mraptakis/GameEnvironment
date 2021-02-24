@@ -75,7 +75,7 @@ class EnvironmentObject extends Object {
             getValue: () => {return this._windowHeight;}
         });
 
-        this.data.optionHandler.removeOption('isMovable');
+        // this.data.optionHandler.removeOption('isMovable');
         this.data.optionHandler.removeOption('isRemovable');
         this.data.optionHandler.removeOption('isVisible');
         this.data.optionHandler.removeOption('isSolid');
@@ -94,17 +94,9 @@ class EnvironmentObject extends Object {
     }
 
     move(x,y){
-        if(!this.options['isMovable'])return;
+        if(!this.getOption('isMovable'))return;
         this.setValue('x',this._x + x);
         this.setValue('y',this._y + y);
-        // this._x += x;
-        // if(this._x + this._windowWidth > this._width)
-        //     this._x = this._width - this._windowWidth;
-        // if(this._x < 0)this._x = 0;
-        // this._y += y;
-        // if(this._y + this._windowHeight > this._height)
-        //     this._y = this._height - this._windowHeight;
-        // if(this._y < 0)this._y = 0;
     }
 
     setPosition(x,y){

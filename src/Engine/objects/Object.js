@@ -179,10 +179,6 @@ export default class Object {
         throw Error("move needs to be implemented");
     }
 
-    animate() {
-        throw Error("animate needs to be implemented");
-    }
-
     newFrame() {
         throw Error("newFrame needs to be implemented");
     }

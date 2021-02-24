@@ -21,8 +21,6 @@ export default class GridManager {
                 this._gridRectangles.push(obj.getPositional());
             }
         }
-
-        console.log(this._gridRectangles);
     }
 
     getGrid(){

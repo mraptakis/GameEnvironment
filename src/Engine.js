@@ -7,7 +7,7 @@ import utils from './utils/utils.js'
 
 
 import inputManager from './Engine/inputManager.js'
-import objectManager from './Engine/renderer/renderer.js'
+import objectManager from './Engine/renderer/ObjectManager.js'
 import AnimationManager from './Engine/animations/animations.js'
 import CollisionManager from './Engine/collisions/collisions.js'
 import PhysicsManager from './Engine/physics/physics.js'

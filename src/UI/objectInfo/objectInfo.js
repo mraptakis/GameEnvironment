@@ -1,6 +1,6 @@
 import bb from '../../utils/blackboard.js'
 
-import transition from '../../transitionHandlers/focusedObject.js'
+import transition from '../../utils/focusedObject.js'
 import Engine from '../../Engine.js';
 
 export default {
