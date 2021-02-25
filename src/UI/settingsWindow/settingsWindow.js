@@ -12,6 +12,7 @@ export default {
 
 function closeSettingsWindow(){
     bb.fastGet('UI','hideUI')('settingsWindow');
+    bb.fastGet('UI','removeUI')('settingsWindow');
 }
 
 const computedStyle = getComputedStyle(document.documentElement);

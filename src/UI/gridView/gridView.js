@@ -5,11 +5,10 @@ export default {
     link: './src/UI/gridView/gridView.ahtml',
     cb:onGridViewLoaded,
     removable: true, 
-    loadOnInstall: true
+    loadOnInstall: false
 };
 
 function onGridViewLoaded(){
-    return;
     let wrapper = document.getElementById('gridView-wrap');
     let stage = Engine.ObjectManager.getObjectByName('Stage');
     let offsetX = stage.getValue('x');

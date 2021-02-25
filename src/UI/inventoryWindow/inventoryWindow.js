@@ -17,6 +17,7 @@ const FRAnimation = Engine.AnimationManager.getAnimationCategory('FrameRangeAnim
 function closeInventoryWindow(){
     removeAllAnimators();
     bb.fastGet('UI','hideUI')('inventoryWindow');
+    bb.fastGet('UI','removeUI')('inventoryWindow');
 }
 
 function focusTab(tabName){

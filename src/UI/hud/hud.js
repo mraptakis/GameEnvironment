@@ -44,6 +44,20 @@ function hudState(){
 //     console.log(res);
 // }
 
+function showHideCodeUI(show = 'block'){
+    let eventsTab = document.getElementById('eventsTab');
+    let infoBar = document.getElementById('infoBar');
+    let languageDiv = document.getElementById('languageDiv');
+    let playScriptButton = document.getElementById('playScriptButton');
+    let showScriptButton = document.getElementById('showScriptButton');
+    let saveScriptButton = document.getElementById('saveScriptButton');
+    languageDiv.style.display = show;
+    eventsTab.style.display = show;
+    infoBar.style.display = show;
+    playScriptButton.style.display = show;
+    saveScriptButton.style.display = show;
+    showScriptButton.style.display = show;
+}
 
 function onHudLoaded(){
     document.getElementById('hudToggle').addEventListener('click',hudState());
@@ -87,13 +101,14 @@ function onHudLoaded(){
     // }
 
     // bb.installWatch('state','lastAction',onActionChange);
-    
     function onFocusChange(obj){
         let eventsTab = document.getElementById('eventsTab');
         let infoBar = document.getElementById('infoBar');
+        showHideCodeUI('block');
         eventsTab.innerHTML = "";
         infoBar.innerHTML = "";
         if(obj === undefined){
+            showHideCodeUI('none');
             document.getElementById('openTab').innerHTML = "";
             Engine.ScriptingManager.clearAndLoadFromText({text: '',code: ''});
             bb.installWatch('state','focusedObject',onFocusChange);
@@ -209,4 +224,5 @@ function onHudLoaded(){
     bb.installWatch('state','FPS',onFPSChange);
 
     Engine.ScriptingManager.injectInDiv(document.getElementById('languageDiv'));
+    showHideCodeUI('none');
 }
