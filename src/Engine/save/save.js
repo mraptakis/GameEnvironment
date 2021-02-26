@@ -4,8 +4,8 @@ import httpRequest from '../../utils/httpRequest.js'
 import Engine from '../../Engine.js'
 
 export default class SaveManager {
-    _DBName = 'myPersonalPage';
-    _loadRemote = false;
+    _DBName = 'superMarioReal';
+    _loadRemote = true;
 
     _localState = './assets/json/savedState.json'; 
     _localPreSettedAnim = './assets/json/AnimationManager.json';
