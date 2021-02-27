@@ -109,8 +109,6 @@ app.addInitialiseFunction(()=>{
     Engine.installManager('AnimationManager', new AnimationManager(Engine.animationBundle,Engine.preSetAnimations))
 
     let init = Engine.initInfo;
-    if(init.state.background_color)document.body.style.backgroundColor = init.state.background_color;
-    if(init.state.background)document.body.style.backgroundImage = `url('${init.state.background}')`;
 
     init.objects.forEach((item)=>{
         utils.createObject(item);

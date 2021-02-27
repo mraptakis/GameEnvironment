@@ -21,7 +21,6 @@ class EnvironmentObject extends Object {
         this._windowWidth = window.innerWidth;
         this._windowHeight = window.innerHeight;
 
-
         this.data.valueHandler.registerValue('x',{
             tag: "positional",
             onChange: (value) => {
@@ -74,6 +73,25 @@ class EnvironmentObject extends Object {
             },
             getValue: () => {return this._windowHeight;}
         });
+
+        this.data.valueHandler.registerValue('color',{
+            tag: "texture",
+            value: '#ffffff',
+            onChange: (value) => {
+                document.body.style.backgroundColor = value;
+            }
+        });
+
+        this.data.valueHandler.registerValue('background',{
+            tag: "texture",
+            onChange: (value) => {
+                if(value === '')
+                    document.body.style.backgroundImage = '';    
+                else
+                    document.body.style.backgroundImage = `url('../assets/textures/${value}')`;
+            }
+        });
+
 
         // this.data.optionHandler.removeOption('isMovable');
         this.data.optionHandler.removeOption('isRemovable');

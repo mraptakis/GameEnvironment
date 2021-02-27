@@ -4,8 +4,9 @@ import httpRequest from '../../utils/httpRequest.js'
 import Engine from '../../Engine.js'
 
 export default class SaveManager {
-    _DBName = 'superMarioReal';
-    _loadRemote = true;
+    // _DBName = 'superMarioReal';
+    _DBName = 'myPersonalPage';
+    _loadRemote = false;
 
     _localState = './assets/json/savedState.json'; 
     _localPreSettedAnim = './assets/json/AnimationManager.json';
@@ -168,11 +169,6 @@ export default class SaveManager {
         // 
 
         Engine.initInfo = {
-            state:{
-                name: 'initial_pac',
-                background_color: '#000000',
-                background: './assets/textures/sky.jpeg'
-            },
             objects: objects
         };
 

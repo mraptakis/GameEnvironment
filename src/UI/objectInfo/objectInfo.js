@@ -134,7 +134,7 @@ function createAttributesView(attrs){
             inp.value = focusedObj.getValue(i);
             inp.onchange = (ev) => {
                 let val = ev.target.value;
-                if(isNaN(val))
+                if(isNaN(val) || val === '')
                     focusedObj.setValue(i, val);
                 else
                     focusedObj.setValue(i, Number.parseFloat(val))
