@@ -3,6 +3,7 @@ import bb from './blackboard.js'
 import logManager from './logs.js'
 
 import Engine from '../Engine.js'
+import objectManager from '../Engine/renderer/ObjectManager.js';
 
 function AK() {
     
@@ -75,6 +76,16 @@ AK.prototype.createObject = ({category, name, x, y})=>{
             'y': y
         } 
     });
+}
+
+AK.prototype.playAnimation = ({object, anim, onStart, onFinish})=>{
+    bb.fastGet('actions','playAnimation')(
+        {
+           object: object,
+           anim: anim,
+           onStart: onStart,
+           onFinish: onFinish 
+        });
 }
 
 AK.prototype.moveObject = (obj,x,y)=>{

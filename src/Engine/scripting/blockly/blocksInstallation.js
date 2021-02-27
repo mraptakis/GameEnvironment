@@ -562,7 +562,7 @@ Blockly.JavaScript['play_animation'] = function(block) {
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     argument0 = argument0.trim();
     argument1 = argument1.trim();
-    return `bb.fastGet('actions','playAnimation')(
+    return `AK.playAnimation(
         {
            object: ${argument1},
            anim: '${argument0}' 
@@ -613,7 +613,7 @@ Blockly.JavaScript['play_animation_extended'] = function(block) {
     //        onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
     //     })`);
 
-    return `bb.fastGet('actions','playAnimation')(
+    return `AK.playAnimation(
         {
            object: ${argument1},
            anim: '${argument0}',
