@@ -10,8 +10,13 @@ const tableOfContent ={
         'general/Future Work',
         'general/Goals',
         'general/Related Work',
+        'general/External Libraries',
         'Architecture/Macro-Architecture',
-        'Architecture/Engine Architecture'
+        'Architecture/Engine Architecture',
+        'engine/Clock Manager',
+        'engine/Save Manager',
+        'engine/Sound Manager',
+        'engine/Scripting Manager'
     ]
 }
 
