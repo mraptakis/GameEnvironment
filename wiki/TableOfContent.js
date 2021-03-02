@@ -17,7 +17,13 @@ const tableOfContent ={
         'engine/Save Manager',
         'engine/Sound Manager',
         'engine/Scripting Manager',
-        'engine/Object Manager'
+        'Scripting/Blockly',
+        'Scripting/Javascript',
+        'engine/Object Manager',
+        'renderer/Document Elements',
+        'renderer/Custom Canvas',
+        'engine/Collision Manager',
+        'engine/Animation Manager'
     ]
 }
 
