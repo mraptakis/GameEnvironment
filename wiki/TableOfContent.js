@@ -16,7 +16,8 @@ const tableOfContent ={
         'engine/Clock Manager',
         'engine/Save Manager',
         'engine/Sound Manager',
-        'engine/Scripting Manager'
+        'engine/Scripting Manager',
+        'engine/Object Manager'
     ]
 }
 

@@ -13,7 +13,7 @@ class ContentPageManager {
     constructor(){
         bb.installWatch('Page','currentlyShowing',(newP)=>this.swapPage(newP));
         // this.swapPage('Architecture/Engine Architecture');        
-        this.swapPage('Engine/Scripting Manager');        
+        this.swapPage('Engine/Object Manager');        
     }
     
     readTextFile(file,onFinish){
