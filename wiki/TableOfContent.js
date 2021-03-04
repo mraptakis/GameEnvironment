@@ -13,7 +13,9 @@ const tableOfContent ={
         'general/External Libraries',
         'Architecture/Macro-Architecture',
         'Architecture/Engine Architecture',
+        'Architecture/UI Manager Architecture',
         'engine/Clock Manager',
+        'engine/Input Manager',
         'Engine Extension/Clipboard Manager',
         'Engine Extension/Pause Manager',
         'Engine Extension/Object Snapshot Manager',
@@ -27,6 +29,18 @@ const tableOfContent ={
         'renderer/Custom Canvas',
         'engine/Collision Manager',
         'engine/Animation Manager',
+        'engine/Physics Manager',
+        'UIs/Animation Workshop',
+        'UIs/Collision Registry',
+        'UIs/Object Creation',
+        'UIs/Hud',
+        'UIs/Inventory Window',
+        'UIs/Keyboard',
+        'UIs/Object Floating Information',
+        'UIs/Object Information',
+        'UIs/Object Preview',
+        'UIs/Settings Window',
+        'UIs/Toolbar'
     ]
 }
 

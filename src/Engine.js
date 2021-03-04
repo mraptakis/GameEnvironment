@@ -6,7 +6,7 @@ import installWatches from './utils/watches.js'
 import utils from './utils/utils.js'
 
 
-import inputManager from './Engine/inputManager.js'
+import inputManager from './Engine/input/inputManager.js'
 import objectManager from './Engine/renderer/ObjectManager.js'
 import AnimationManager from './Engine/animations/animations.js'
 import CollisionManager from './Engine/collisions/collisions.js'

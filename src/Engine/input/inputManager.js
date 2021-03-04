@@ -1,4 +1,4 @@
-import logManager from '../utils/logs.js'
+import logManager from '../../utils/logs.js'
 
 const InputState = {
     TRIGGERED: 'TRIGGERED',
@@ -43,8 +43,9 @@ class InputManager {
         this.releasedKeys = [];
         return toReturn;
     }
-
+    
     getPressedKeys(){
+        this.pollKeys();
         let keysPressed = [];
         for(let i in this.currentlyPressed){
             let currP = this.currentlyPressed[i];
@@ -59,6 +60,15 @@ class InputManager {
             }
         }
         return keysPressed;
+    }
+
+    addCombo(id, keys){
+        this.keyCombos[id] = keys;
+    }
+
+    removeCombo(id){
+        if(!this.keyCombos[id]) throw Error('Tried to remove a combo that doesn\'t exists');
+        delete this.keyCombos[id];
     }
 
     isPressed(key){
