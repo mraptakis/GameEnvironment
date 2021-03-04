@@ -14,6 +14,9 @@ const tableOfContent ={
         'Architecture/Macro-Architecture',
         'Architecture/Engine Architecture',
         'engine/Clock Manager',
+        'Engine Extension/Clipboard Manager',
+        'Engine Extension/Pause Manager',
+        'Engine Extension/Object Snapshot Manager',
         'engine/Save Manager',
         'engine/Sound Manager',
         'engine/Scripting Manager',
@@ -23,7 +26,7 @@ const tableOfContent ={
         'renderer/Document Elements',
         'renderer/Custom Canvas',
         'engine/Collision Manager',
-        'engine/Animation Manager'
+        'engine/Animation Manager',
     ]
 }
 
