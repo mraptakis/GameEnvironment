@@ -5,7 +5,7 @@ const UIs = [
     'objectInfo',
     'objectMenu',
     'createObjectMenu',
-    'animationPreview',
+    'animationWorkshop',
     'collisionPreview',
     'hud',
     'toolbar',
