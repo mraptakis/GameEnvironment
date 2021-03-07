@@ -1,5 +1,7 @@
 import bb from '../utils/blackboard.js'
 
+import utils from '../utils/utils.js'
+
 const UIs = [
     'keyboard',
     'objectInfo',
@@ -102,11 +104,13 @@ class UIManager {
             if(child.attributes.getNamedItem("category")){
                 let objCat = child.attributes["category"].nodeValue;
                 child.remove();
-                utils.createObject({
+                let obj = utils.createObject({
                     _name: child.id,
                     _category: objCat,
                     _div: child
-                })
+                });
+                obj._x = child.offsetLeft;
+                obj._y = child.offsetTop;
             }
         })
     }
