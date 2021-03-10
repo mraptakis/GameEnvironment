@@ -95,9 +95,9 @@ function resetObject(item){
 
 // import keyToAction from '../assets/json/keyToActions.js' //json
 function inputHandler(key) {
-    if(key === 'Copy' || key === 'Paste'){
+    if(key === 'PressedCopy' || key === 'PressedPaste' || key === 'PresseddummyAction'){
         console.log(key);
-        bb.fastGet('actions',key)();
+        bb.fastGet('actions',key.substring(7))();
     }else {
         Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent(key);
     }

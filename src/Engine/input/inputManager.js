@@ -12,7 +12,8 @@ class InputManager {
 
     keyCombos = {
         'Copy': ['ControlLeft', 'KeyC'],
-        'Paste': ['ControlLeft', 'KeyV']
+        'Paste': ['ControlLeft', 'KeyV'],
+        'dummyAction': ['ControlLeft', 'KeyB']
     }
     
     keyPressed(key,forever){

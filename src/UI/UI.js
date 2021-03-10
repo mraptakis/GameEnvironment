@@ -119,7 +119,7 @@ class UIManager {
 const uiManager = new UIManager();
 
 bb.fastInstall('UI','getUIs',()=>{return uiManager.getUIs()});
-bb.fastInstall('UI','installUI',({name,link,cb})=>uiManager.installUI({name,link,cb}));
+bb.fastInstall('UI','installUI',(args)=>uiManager.installUI(args));
 bb.fastInstall('UI','removeUI',(name)=>uiManager.removeUI(name));
 bb.fastInstall('UI','loadUI',(name)=>uiManager.loadUI(name));
 bb.fastInstall('UI','loadAll',()=>uiManager.loadAll());
