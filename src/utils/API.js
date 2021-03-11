@@ -126,12 +126,46 @@ AK.prototype.stopAllSounds = ()=>{
 }
 
 
+/////////////MOVE///////////////
+AK.prototype.moveBy = (obj, x, y) => {
+    obj.setValue('x', obj.getValue('x')+ x);
+    obj.setValue('y', obj.getValue('y')+ y);
+}
+
+AK.prototype.moveTo = (obj, x, y) => {
+    obj.setValue('x', x);
+    obj.setValue('y', y);
+}
+
+AK.prototype.moveByInMSeconds = (obj, x, y, delay) => {
+    Engine.QuantizerManager.move(obj, x, y, delay);
+}
+
+AK.prototype.moveToInMSeconds = (obj, x, y, delay) => {
+    Engine.QuantizerManager.moveTo(obj, x, y, delay);
+}
+
+/////////////CLONES/////////////
+
+
+
+///////////RANDOM///////////////
+
+
+
+//////////TIMER////////////////
+
+// AK.runAfterOnce(code, delay)
+// AK.runAfterRepeat(code, delay)
+// AK.stopRepeat(code, delay)
+
+
 //////////////////////////////////////////////
 // AK.prototype.consoleLog = (t)=>{
 //     console.log(t);
 // }
 
-
 const ak = new AK();
+console.log(ak);
 
 export default ak;

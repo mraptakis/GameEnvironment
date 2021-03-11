@@ -2,6 +2,12 @@
 
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+  <category name="Move" colour="%{BKY_COLOUR_HUE}">
+    <block type="moveBy_object"></block>
+    <block type="moveTo_object"></block>
+    <block type="moveByMS_object"></block>
+    <block type="moveToMS_object"></block>
+  </category> 
   <category name="Current Object" colour="%{BKY_COLOUR_HUE}">
     <block type="this_obj"></block>
     <block type="this_object_state"></block>
@@ -360,11 +366,11 @@
 <div id="saveScriptButton" class="hudChild button"></div>
 <!-- <textarea readOnly=true id="consoleArea" class="hudChild"></textarea> -->
 
-<div id="vid" category="Square" style="width: 500px; height: 300px; position: absolute; left:700px; top:500px;">
+<!-- <div id="vid" category="Square" style="width: 500px; height: 300px; position: absolute; left:700px; top:500px;">
   <video style="object-fit: fill;" width=100%  height=100% preload="auto" autoplay loop muted="muted" volume="0"> 
       <source src="https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4" type="video/mp4"> 
   </video>
-</div>
+</div> -->
 
 <!-- Top Right Side -->
 <!-- <div id="fpsCounter" category="Text" class="hudChild"></div> -->

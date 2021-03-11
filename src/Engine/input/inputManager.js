@@ -11,8 +11,8 @@ class InputManager {
     releasedKeys = [];
 
     keyCombos = {
-        'Copy': ['ControlLeft', 'KeyC'],
-        'Paste': ['ControlLeft', 'KeyV'],
+        // 'Copy': ['ControlLeft', 'KeyC'],
+        // 'Paste': ['ControlLeft', 'KeyV'],
         'dummyAction': ['ControlLeft', 'KeyB']
     }
     
