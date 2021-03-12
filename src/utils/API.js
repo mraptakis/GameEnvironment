@@ -144,6 +144,18 @@ AK.prototype.moveByInMSeconds = (obj, x, y, delay) => {
 AK.prototype.moveToInMSeconds = (obj, x, y, delay) => {
     Engine.QuantizerManager.moveTo(obj, x, y, delay);
 }
+////////////DISTANCE////////////
+AK.prototype.distanceObjects = (obj1, obj2) => {
+    Engine.CalculatorManager.distanceObject(obj1, obj2);
+}
+
+AK.prototype.distanceTwoPoints = (p1, p2) => {
+    Engine.CalculatorManager.distanceTwoPoints(p1, p2);
+}
+
+AK.prototype.getObjectCenter = (obj1) => {
+    Engine.CalculatorManager.getObjectCenter(obj1);
+}
 
 /////////////CLONES/////////////
 
@@ -166,6 +178,5 @@ AK.prototype.moveToInMSeconds = (obj, x, y, delay) => {
 // }
 
 const ak = new AK();
-console.log(ak);
 
 export default ak;

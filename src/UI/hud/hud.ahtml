@@ -2,12 +2,6 @@
 
 <!-- Top Left Side -->
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-  <category name="Move" colour="%{BKY_COLOUR_HUE}">
-    <block type="moveBy_object"></block>
-    <block type="moveTo_object"></block>
-    <block type="moveByMS_object"></block>
-    <block type="moveToMS_object"></block>
-  </category> 
   <category name="Current Object" colour="%{BKY_COLOUR_HUE}">
     <block type="this_obj"></block>
     <block type="this_object_state"></block>
@@ -37,6 +31,17 @@
       <block type="play_animation"></block>
       <block type="play_animation_extended"></block>
     </category>
+    <category name="Calculations" colour="%{BKY_COLOUR_HUE}">
+      <block type="calc_distance_obj"></block>
+      <block type="calc_obj_center"></block>
+      <block type="calc_point_dist"></block>
+    </category> 
+    <category name="Move" colour="%{BKY_COLOUR_HUE}">
+      <block type="moveBy_object"></block>
+      <block type="moveTo_object"></block>
+      <block type="moveByMS_object"></block>
+      <block type="moveToMS_object"></block>
+    </category> 
     <category name="Sounds" colour="%{BKY_LOOPS_HUE}">
       <block type="play_sound"></block>
       <block type="stop_sound"></block>

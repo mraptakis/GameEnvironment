@@ -1,7 +1,6 @@
 import bb from '../utils/blackboard.js'
 
 import Engine from '../Engine.js'
-import objectManager from '../Engine/renderer/ObjectManager.js';
 
 export default class QuantizerManager {
     _QuantizeMS
