@@ -15,6 +15,13 @@ class InputManager {
         // 'Paste': ['ControlLeft', 'KeyV'],
         'dummyAction': ['ControlLeft', 'KeyB']
     }
+
+    isCurrentlyPressed(key){
+        if(this.currentlyPressed[key]){
+            return true;
+        }
+        return false;
+    }
     
     keyPressed(key,forever){
         // logManager.logAction(`Pressed Key ${key}`);
