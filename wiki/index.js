@@ -4,7 +4,7 @@ bb.fastInstall('Page','currentlyShowing', 'Architecture/Engine Architecture');
 
 import TableOfContentManager from './TableOfContent.js'
 
-new TableOfContentManager('dev');
+new TableOfContentManager('user');
 
 class ContentPageManager {
     _currentlyShowing
@@ -12,8 +12,7 @@ class ContentPageManager {
 
     constructor(){
         bb.installWatch('Page','currentlyShowing',(newP)=>this.swapPage(newP));
-        this.swapPage('Architecture/Macro-Architecture');        
-        // this.swapPage('Architecture/UI Manager Architecture');        
+        this.swapPage('Quick Start/Adding Objects');       
     }
     
     readTextFile(file,onFinish){
