@@ -3,7 +3,9 @@ import bb from './blackboard.js'
 const tableOfContent ={
     'user': [
         'general/Welcome',
-        'Quick Start/intro',
+        'Quick Start/Intro',
+        'Quick Start/Adding Objects',
+        'Quick Start/Coding',
     ],
     'dev': [
         'general/Welcome',

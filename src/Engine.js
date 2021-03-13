@@ -24,6 +24,9 @@ class _Engine {
     constructor(){
         this._managers = {};
         this._app = new App();
+
+        this.installManager('AnimationManager', new AnimationManager())
+
         this.installManager('CollisionManager', new CollisionManager());
     
         this.installManager('SoundManager', new SoundManager());
@@ -106,8 +109,6 @@ const app = Engine.app;
 const game = app.game;
 
 app.addInitialiseFunction(()=>{
-    Engine.installManager('AnimationManager', new AnimationManager(Engine.animationBundle,Engine.preSetAnimations))
-
     let init = Engine.initInfo;
 
     init.objects.forEach((item)=>{
