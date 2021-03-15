@@ -60,7 +60,7 @@ function updateObjectList(){
         createBut.onclick = () => {
             if(inpName.value === '')return;
             bb.fastGet('actions','createObject')({category:i,name:inpName.value,colour:'#ff00ff',position:{x:500,y:500}});
-        }
+        };
         createBut.innerHTML = 'Create';
         body.appendChild(createBut);
 

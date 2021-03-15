@@ -11,11 +11,6 @@ function translator(ev){
     return [ev.offsetX,ev.offsetY]
 }
 
-function pxToNumber(str){
-    str.substr(1,str.length-4);
-    return parseInt(str);
-}
-
 function focused(obj,x,y){
     if(obj.renderer !== 'dom')return false;
     let boundingBox = obj.getBoundingBox();

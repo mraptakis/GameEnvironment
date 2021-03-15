@@ -8,7 +8,7 @@ export default class SaveManager {
     // _DBName = 'myPersonalPage';
     _loadRemote = false;
 
-    _localState = './assets/json/savedState1.json'; 
+    _localState = './assets/json/savedState.json'; 
     _localPreSettedAnim = './assets/json/AnimationManager.json';
     _localAnimationFilms = './assets/json/AnimationFilmHolder.json';
 

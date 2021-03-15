@@ -34,8 +34,7 @@ function createObject(item){
     }
 
     for(let v in values){
-        if(!it.getValue(v) === undefined)it.addValue(v,values[v].val);
-        else it.setValue(v,values[v].val);
+        it.setValue(v,values[v].val);
         if(values[v].onChange){
             it.setValueCode(v, values[v].onChange);
         }
@@ -72,8 +71,7 @@ function resetObject(item){
     }
 
     for(let v in values){
-        if(!it.getValue(v) === undefined)it.addValue(v,values[v].val);
-        else it.setValue(v,values[v].val);
+        it.setValue(v,values[v].val);
         if(values[v].onChange){
             it.setValueCode(v, values[v].onChange);
         }
@@ -107,7 +105,7 @@ function inputHandler(key) {
     // }
 }
 
-function createObjectSmall(item){
+// function createObjectSmall(item){
         //     let category = Engine.ObjectManager.getConstructor(item.category);
     //     if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
     //     if(item.meta.name !== undefined){
@@ -139,7 +137,7 @@ function createObjectSmall(item){
     //         if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
     //     }
     // });
-}
+// }
 
 const utils = new Utils();
 
