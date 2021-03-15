@@ -14,7 +14,7 @@ function toggleObjectMenu(){
     let toggleBut = document.getElementById('createObjectMenu_makeBig');
     if(wrapper.style.height === '200px'){
         wrapper.style.height = 0;
-        toggleBut.style.bottom = '20px';
+        toggleBut.style.bottom = '30px';
     }else{
         wrapper.style.height = '200px';
         toggleBut.style.bottom = '200px';
