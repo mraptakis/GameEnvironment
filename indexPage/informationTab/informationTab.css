@@ -1,6 +1,7 @@
 #informationTabWrapper {
-	left: 20px;
-	width: calc(100% - 20px);
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
 }
 
 #informationTabBG {
@@ -24,6 +25,7 @@
 	background-color: var(--main-buttons-background-color);
 	color: var(--main-color-text);
 	cursor: pointer;
+	margin-left: 2%;
 }
 
 .informationButton:hover {

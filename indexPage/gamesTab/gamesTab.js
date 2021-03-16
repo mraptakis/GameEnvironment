@@ -25,7 +25,7 @@ const games = [
 uiFactory.addHTMLfromString({
     str: `<link rel="stylesheet" href="./indexPage/gamesTab/gamesTab.css">`,
     parent: document.body
-})
+});
 
 let gameListWrapper = uiFactory.createElement({
     parent: document.getElementById('main-body'),

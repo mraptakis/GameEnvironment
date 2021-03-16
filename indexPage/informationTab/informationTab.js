@@ -3,7 +3,7 @@ import uiFactory from '../utils/UIFactory.js'
 uiFactory.addHTMLfromString({
     str: `<link rel="stylesheet" href="./indexPage/informationTab/informationTab.css">`,
     parent: document.body
-})
+});
 
 let wrapper = uiFactory.createElement({
     id: "informationTabWrapper",

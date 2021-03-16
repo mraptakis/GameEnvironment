@@ -105,40 +105,6 @@ function inputHandler(key) {
     // }
 }
 
-// function createObjectSmall(item){
-        //     let category = Engine.ObjectManager.getConstructor(item.category);
-    //     if(!category || typeof category !== "function"){console.log("There is no category "+item.category)}
-    //     if(item.meta.name !== undefined){
-    //         let it = new category(item.meta,item.id);
-    //         if(item.color)it.setColor(item.color);
-    //         if(item.position)it.setPosition(item.position.x,item.position.y);
-    //         if(item.attributes){
-    //             for(let a in item.attributes){
-    //                 if(typeof item.attributes[a] !== "boolean")throw Error('Attributes must be boolean');
-    //                 it.setOption(a,item.attributes[a]);
-    //             }
-    //         }
-    //         if(item.fields){
-    //             for(let f in item.fields){
-    //                 it.addValue(f,item.fields[f]);
-    //             }
-    //         }
-    //         if(item.events){
-    //             for(let e in item.events){
-    //                 it.addEvent(item.events[e]);
-    //             }
-    //         }
-    //         if(item.states){
-    //             for(let e in item.states){
-    //                 it.addState(item.states[e]);
-    //             }
-    //         }
-    //         it.add();
-    //         if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
-    //     }
-    // });
-// }
-
 const utils = new Utils();
 
 export default utils;

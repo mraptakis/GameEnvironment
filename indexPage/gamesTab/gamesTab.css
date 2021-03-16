@@ -1,7 +1,7 @@
 #gameListWrapper {
-	top: 100px;
-	left: 20px;
-	width: calc(100% - 20px);
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
 }
 
 #gameListBG {
@@ -16,6 +16,7 @@
 
 #gamesList {
 	flex-direction: column;
+	margin-left: 2%;
 }
 
 #gameListHeader {
@@ -27,9 +28,9 @@
 	color: var(--main-buttons-text-color);
 	border: 0;
 	cursor: pointer;
-	width: 100px;
+	width: auto;
 	height: 100px;
-	margin: 10px;
+	margin-right: 10px;
 }
 
 .goToEditorBut:hover {

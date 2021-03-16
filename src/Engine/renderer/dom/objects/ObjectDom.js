@@ -43,16 +43,6 @@ export default class ObjectDom extends Object{
         this._stage = stage;
     }
 
-    toString(){
-        this.extra = {
-            div: this.div.outerHTML
-        }
-        console.log(this.div.outerHTML);
-        let str = super.toString();
-        delete this.extra;
-        return str;
-    }
-
     setPosition(x,y){
         // [x,y] = fromPercentageToPx(x,y);
         this.div.style.left = x +"px";
