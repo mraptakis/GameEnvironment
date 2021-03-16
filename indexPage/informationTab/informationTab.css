@@ -1,0 +1,31 @@
+#informationTabWrapper {
+	left: 20px;
+	width: calc(100% - 20px);
+}
+
+#informationTabBG {
+	position: relative;
+	background-image: url('./SuperMarioBG.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	opacity: 0.5;
+	width: 100%;
+	height: 150px;
+}
+
+#informationTabHeader {
+	color: var(--main-color);
+}
+
+.informationButton {
+	width: max-content;
+	padding: 10px;
+	margin: 10px;
+	background-color: var(--main-buttons-background-color);
+	color: var(--main-color-text);
+	cursor: pointer;
+}
+
+.informationButton:hover {
+	background-color: var(--main-buttons-background-color-hover);
+}

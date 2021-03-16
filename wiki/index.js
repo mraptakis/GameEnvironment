@@ -4,7 +4,18 @@ bb.fastInstall('Page','currentlyShowing', 'Architecture/Engine Architecture');
 
 import TableOfContentManager from './TableOfContent.js'
 
-new TableOfContentManager('dev');
+
+document.getElementById('navbar-logo').onclick = ()=>{
+    window.location = `/`;
+}
+document.getElementById('navbar-logo-text').onclick = ()=>{
+    window.location = `/`;
+}
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const mode = urlParams.get('mode');
+new TableOfContentManager(mode || 'dev');
 
 class ContentPageManager {
     _currentlyShowing
@@ -12,7 +23,7 @@ class ContentPageManager {
 
     constructor(){
         bb.installWatch('Page','currentlyShowing',(newP)=>this.swapPage(newP));
-        this.swapPage('General/Goals');       
+        this.swapPage('General/Welcome');       
     }
     
     readTextFile(file,onFinish){
