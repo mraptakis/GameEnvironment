@@ -60,6 +60,7 @@ function leftClick(e){
         // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){
             focusTransition(it);
+            aliveItems[it].div.click(e);
             aliveItems[it].triggerEvent('onClick');
             return true;
         }

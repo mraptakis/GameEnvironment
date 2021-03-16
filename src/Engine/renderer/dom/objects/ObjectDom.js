@@ -43,8 +43,14 @@ export default class ObjectDom extends Object{
         this._stage = stage;
     }
 
-    setColor(col){
-        this.div.style.backgroundColor = col;
+    toString(){
+        this.extra = {
+            div: this.div.outerHTML
+        }
+        console.log(this.div.outerHTML);
+        let str = super.toString();
+        delete this.extra;
+        return str;
     }
 
     setPosition(x,y){
