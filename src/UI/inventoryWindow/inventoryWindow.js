@@ -10,10 +10,6 @@ export default {
     loadOnInstall: true
 };
 
-
-const FRAnimator = Engine.AnimationManager.getAnimatorCategory('FrameRangeAnimator');
-const FRAnimation = Engine.AnimationManager.getAnimationCategory('FrameRangeAnimation');
-
 function closeInventoryWindow(){
     removeAllAnimators();
     bb.fastGet('UI','hideUI')('inventoryWindow');
@@ -38,25 +34,19 @@ function onSettingsInventoryLoaded(){
     let tabDiv = document.getElementById('inventory-window-tabs');
 
     let body = document.getElementById('inventory-window-body');
-    body.innerHTML = 'test'
+    body.innerHTML = '';
 
     let item = document.createElement('div');
     item.classList = 'inventory-window-tabs-item';
     item.classList += ' inventory-window-tabs-item-selected';
-    item.innerHTML = 'TEEEEE'
-    item.onclick = ()=>{focusTab('TEEEEE');showNothing(body)}
-    tabDiv.appendChild(item);
-    
-    item = document.createElement('div');
-    item.classList = 'inventory-window-tabs-item';
     item.innerHTML = 'Films'
-    item.onclick = ()=>{focusTab('Films');showFilms(body)}
+    item.onclick = ()=>{focusTab('Films');showFilms(body);}
     tabDiv.appendChild(item);
 
     item = document.createElement('div');
     item.classList = 'inventory-window-tabs-item';
     item.innerHTML = 'Objects'
-    item.onclick = ()=>{focusTab('Objects');showObjects(body)}
+    item.onclick = ()=>{focusTab('Objects');showObjects(body);}
     tabDiv.appendChild(item);
 
     if(Engine.hasManager('ObjectSnapshotManager')){
@@ -66,6 +56,9 @@ function onSettingsInventoryLoaded(){
         // item.onclick = ()=>{focusTab('Snapshots');showSnapshots(body)}
         // tabDiv.appendChild(item);
     }
+
+    focusTab('Films');
+    showFilms(body);
 
 }
 
@@ -122,17 +115,13 @@ function showObjects(objWrapper){
                 x, y, pos.width, pos.height);
             }
         }else {
-            body.innerHTML = 'Preview for '+i+' isn\'t possible';
+            body.innerHTML = 'Preview for '+item.name+' isn\'t possible';
         }
 
         wrap.appendChild(body);
 
     }
 
-}
-
-function showNothing(objWrapper){
-    objWrapper.innerHTML = 'LOL';
 }
 
 
@@ -143,6 +132,8 @@ function removeAllAnimators(){
 }
 
 function showFilms(objWrapper){
+    const FRAnimator = Engine.AnimationManager.getAnimatorCategory('FrameRangeAnimator');
+    const FRAnimation = Engine.AnimationManager.getAnimationCategory('FrameRangeAnimation');
     let items = Engine.AnimationManager.getAllFilms();
     objWrapper.innerHTML = '';
     for(let i in items){

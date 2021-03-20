@@ -626,27 +626,15 @@ Blockly.JavaScript['play_animation_extended'] = function(block) {
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
     argument0 = argument0.trim();
     argument1 = argument1.trim();
-    var statements_onstart = Blockly.JavaScript.statementToCode(block, 'onStart');
-    var statements_onend = Blockly.JavaScript.statementToCode(block, 'onEnd');
-    
-    // const reg = /;/gi;
-    // statements_onstart = statements_onstart.replace(reg,'');
-    // statements_onend = statements_onend.replace(reg,'');
-    
-    // console.log(`bb.fastGet('actions','playAnimation')(
-    //     {
-    //        object: ${argument1},
-    //        anim: '${argument0}',
-    //        onStart: ()=>{eval(${(statements_onstart)?("\""+statements_onstart+"\""):"\'\'"})},
-    //        onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
-    //     })`);
+    var statements_onstart = JSON.stringify(Blockly.JavaScript.statementToCode(block, 'onStart'));
+    var statements_onend = JSON.stringify(Blockly.JavaScript.statementToCode(block, 'onEnd'));
 
     return `AK.playAnimation(
         {
            object: ${argument1},
            anim: '${argument0}',
-           onStart: ()=>{eval(${(statements_onstart)?("\""+statements_onstart+"\""):"\'\'"})},
-           onFinish: ()=>{eval(${(statements_onend)?("\""+statements_onend+"\""):"\'\'"})}
+           onStart: ()=>{eval(${statements_onstart || ''})},
+           onFinish: ()=>{eval(${statements_onend || ''})}
         })`;
 };
 

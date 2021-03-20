@@ -125,6 +125,7 @@ body {
 }
 
 #navbar-logo-text {
+    float: left;
     color: #ffffff;
 	vertical-align: middle;
 	line-height: 5vh;
