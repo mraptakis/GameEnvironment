@@ -8,9 +8,14 @@ export default class SaveManager {
     // _DBName = 'myPersonalPage';
     _loadRemote = false;
 
-    _localState = './assets/json/savedState1.json'; 
+    _localState = './assets/json/savedState.json'; 
     _localPreSettedAnim = './assets/json/AnimationManager.json';
     _localAnimationFilms = './assets/json/AnimationFilmHolder.json';
+
+    // _localAnimationFilms2 = './assets/json/scorpion_left_json_translated.json';
+    // _localAnimationFilms3 = './assets/json/scorpion_right_json_translated.json';
+    // _localAnimationFilms4 = './assets/json/subzero_left_json_translated.json';
+    // _localAnimationFilms5 = './assets/json/subzero_right_json_translated.json';
 
     constructor(){
         const queryString = window.location.search;
@@ -30,9 +35,9 @@ export default class SaveManager {
         });
     }
 
-    getAnimationFilms(){
+    getAnimationFilms(url){
         return new Promise((resolve, reject) => {
-            httpRequest('GET',this._localAnimationFilms,null).then((resp)=>{
+            httpRequest('GET',url,null).then((resp)=>{
                 resolve(JSON.parse(resp));
             });
         });
@@ -166,11 +171,19 @@ export default class SaveManager {
     async setEngine(callback){
 
         let promise1 = this.getObjects();
-        let promise2 = this.getAnimationFilms();
+        let promise2 = this.getAnimationFilms(this._localAnimationFilms);
+        // let promise4 = this.getAnimationFilms(this._localAnimationFilms2);
+        // let promise6 = this.getAnimationFilms(this._localAnimationFilms3);
+        // let promise7 = this.getAnimationFilms(this._localAnimationFilms4);
+        // let promise8 = this.getAnimationFilms(this._localAnimationFilms5);
         let promise3 = this.getPreSettedAnim();
 
         let preSetAnimations = await promise3;
         let animationBundle = await promise2;
+        // let animationBundle2 = await promise4;
+        // let animationBundle3 = await promise6;
+        // let animationBundle4 = await promise7;
+        // let animationBundle5 = await promise8;
         let objects = await promise1;
 
         //We do the above technique to start loading all at the same time
@@ -183,8 +196,10 @@ export default class SaveManager {
             objects: objects
         };
 
-        Engine.preSetAnimations = preSetAnimations;
-        Engine.animationBundle = animationBundle;
+        // Engine.AnimationManager.setAnimationFilms(animationBundle2);
+        // Engine.AnimationManager.setAnimationFilms(animationBundle3);
+        // Engine.AnimationManager.setAnimationFilms(animationBundle4);
+        // Engine.AnimationManager.setAnimationFilms(animationBundle5);
         Engine.AnimationManager.setAnimationFilms(animationBundle);
         Engine.AnimationManager.setAnimationManagement(preSetAnimations);
         callback();

@@ -74,33 +74,6 @@ class _Engine {
         return this._app.game;
     }
 
-    set initInfo(info){
-        this._initInfo = info;
-    }
-
-    get initInfo(){
-        assert.check(this._initInfo,'There is no info provided on Engine');
-        return this._initInfo;
-    }
-
-    set animationBundle(an){
-        this._animationBundle = an;
-    }
-
-    get animationBundle(){
-        assert.check(this._animationBundle,'There is no animationBundle provided on Engine');
-        return this._animationBundle;
-    }
-
-    set preSetAnimations(preSet){
-        this._preSetAnimations = preSet;
-    }
-
-    get preSetAnimations(){
-        assert.check(this._preSetAnimations,'There is no preSetAnimations provided on Engine');
-        return this._preSetAnimations;
-    }
-
 }
 
 const Engine = new _Engine();

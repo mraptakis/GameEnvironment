@@ -168,7 +168,7 @@ function showFilms(objWrapper){
             ctx.clearRect(0,0,anim.width,anim.height);
             ctx.drawImage(bb.fastGet('assets',items[i].bitmap),
                 firstBox.x,firstBox.y,firstBox.width,firstBox.height,
-                (anim.width/2) - (firstBox.width*5/2),(anim.height/2) - (firstBox.height*5/2),firstBox.width*5,firstBox.height*5)
+                0,0,anim.height*(firstBox.width/firstBox.height), anim.height);
         };
 
         

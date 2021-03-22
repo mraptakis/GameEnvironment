@@ -331,12 +331,12 @@ function fillObjectActions(obj){
 
 function updateInfo(obj){
     if(!document.getElementById('mainInfoBox'))return;
-    if(obj === undefined || bb.fastGet('state','mode') !== 'editing'){
-        document.getElementById('mainInfoBox').style.display = "none";
+    if(obj === undefined){
+        document.getElementById('mainInfoBox').style.display = 'none';
         bb.installWatch('state','focusedObject',updateInfo);
         return;
     }
-    document.getElementById('mainInfoBox').style.display = "block";
+    document.getElementById('mainInfoBox').style.display = 'block';
     document.getElementById('mainInfoBox-head-name').innerHTML = 'Name: '+obj.name;
     document.getElementById('mainInfoBox-head-categ').innerHTML = 'Category: '+obj.getCategory();
 
