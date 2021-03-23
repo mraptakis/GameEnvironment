@@ -48,6 +48,11 @@ export default class ClockManager {
         this._callbacks = {};
     }
 
+    getTime(){
+        let d = new Date();
+        return `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${d.getDate()}/${d.getMonth()}`;
+    }
+
     update() {
         let currTime = new Date().getTime();
         if(currTime > this._lastTime + 1000){
