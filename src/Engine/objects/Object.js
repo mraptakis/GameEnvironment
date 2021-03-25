@@ -139,8 +139,18 @@ export default class Object {
         throw Error("setColor needs to be implemented");
     }
 
-    setPosition(x, y) {
-        throw Error("setPosition needs to be implemented");
+    setPosition(x,y){
+        if(!this.getOption('isMovable'))return;
+        this.setValue('x', x);
+        this.setValue('y', y);
+    }
+
+    move(x,y){
+        if(!this.getOption('isMovable'))return;
+        if(x !== 0) this.setValue('x', this._x + x);
+        if(y !== 0) this.setValue('y', this._y + y);
+        if(x !== 0 || y !== 0)
+            this.triggerEvent('onMove');
     }
 
     getPosition() {
@@ -173,10 +183,6 @@ export default class Object {
 
     setName(newName) {
         this.name = newName;
-    }
-
-    move(x, y) {
-        throw Error("move needs to be implemented");
     }
 
     newFrame() {
