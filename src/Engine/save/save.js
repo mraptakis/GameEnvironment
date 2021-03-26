@@ -12,10 +12,6 @@ export default class SaveManager {
     _localPreSettedAnim = './assets/json/AnimationManager.json';
     _localAnimationFilms = './assets/json/AnimationFilmHolder.json';
 
-    // _localAnimationFilms2 = './assets/json/scorpion_left_json_translated.json';
-    // _localAnimationFilms3 = './assets/json/scorpion_right_json_translated.json';
-    // _localAnimationFilms4 = './assets/json/subzero_left_json_translated.json';
-    // _localAnimationFilms5 = './assets/json/subzero_right_json_translated.json';
 
     constructor(){
         const queryString = window.location.search;
@@ -27,9 +23,9 @@ export default class SaveManager {
         }
     }
 
-    getPreSettedAnim(){
+    getPreSettedAnim(url){
         return new Promise((resolve, reject) => {
-            httpRequest('GET',this._localPreSettedAnim,null).then((resp)=>{
+            httpRequest('GET',url,null).then((resp)=>{
                 resolve(JSON.parse(resp));
             });
         });
@@ -57,12 +53,7 @@ export default class SaveManager {
                     }catch(err){
                         res = [];
                     }
-                    let arr = [];
-            
-                    for(let i in res){
-                        arr.push(res[i]);
-                    }
-                    resolve(arr);
+                    resolve(res);
                 });
         });
     }
@@ -127,26 +118,7 @@ export default class SaveManager {
         }
     
         console.log(toSave);
-        var textFileAsBlob = new Blob([JSON.stringify(toSave)], {type:'application/json'}); 
-        var downloadLink = document.createElement("a");
-        downloadLink.download = "savedState.json";
-        if (window.webkitURL != null)
-        {
-            // Chrome allows the link to be clicked
-            // without actually adding it to the DOM.
-            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-        }
-        else
-        {
-            // Firefox requires the link to be added to the DOM
-            // before it can be clicked.
-            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-            downloadLink.onclick = destroyClickedElement;
-            downloadLink.style.display = "none";
-            document.body.appendChild(downloadLink);
-        }
-    
-        downloadLink.click();
+        return toSave;
     }
 
     saveObjects(){
@@ -168,40 +140,90 @@ export default class SaveManager {
         });
     }
 
+    async getGame(){
+        let gameInfo = await this.getObjects();
+
+        let all = {
+            objects: gameInfo.objects,
+            films: [],
+            preSet: []
+        };
+        
+        let films = gameInfo.info.films;
+        for(let i in films){
+            let f = await this.getAnimationFilms(films[i]);
+            all.films.push(f);
+        }
+
+        let preSet = gameInfo.info.preSet;
+        for(let i in preSet){
+            let f = await this.getPreSettedAnim(preSet[i]);
+            all.preSet.push(f);
+        }
+
+        console.log(all);
+        return all;
+    }
+
+    saveGame(){
+        let toSave = {};
+        toSave.objects = this.saveObjects();
+        toSave.info = {
+            name: this._DBName,
+            preSet: [
+                this._localPreSettedAnim
+            ],
+            films: [
+                this._localAnimationFilms
+            ]
+        }
+
+        console.log(toSave);
+
+        var textFileAsBlob = new Blob([JSON.stringify(toSave)], {type:'application/json'}); 
+        var downloadLink = document.createElement("a");
+        downloadLink.download = "savedState.json";
+        if (window.webkitURL != null){
+            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        } else {
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+        }
+    
+        downloadLink.click();
+    }
+
     async setEngine(callback){
 
-        let promise1 = this.getObjects();
-        let promise2 = this.getAnimationFilms(this._localAnimationFilms);
-        // let promise4 = this.getAnimationFilms(this._localAnimationFilms2);
-        // let promise6 = this.getAnimationFilms(this._localAnimationFilms3);
-        // let promise7 = this.getAnimationFilms(this._localAnimationFilms4);
-        // let promise8 = this.getAnimationFilms(this._localAnimationFilms5);
-        let promise3 = this.getPreSettedAnim();
-
-        let preSetAnimations = await promise3;
-        let animationBundle = await promise2;
-        // let animationBundle2 = await promise4;
-        // let animationBundle3 = await promise6;
-        // let animationBundle4 = await promise7;
-        // let animationBundle5 = await promise8;
-        let objects = await promise1;
-
+        let game = await this.getGame();
+        
         //We do the above technique to start loading all at the same time
         // ------ wait        instead of -------wait
         // ----------- wait                         ---------wait
         // ----------------- wait                                -----------wait
         // 
-
+        
+        console.log(game);
         Engine.initInfo = {
-            objects: objects
+            objects: game.objects
         };
 
-        // Engine.AnimationManager.setAnimationFilms(animationBundle2);
-        // Engine.AnimationManager.setAnimationFilms(animationBundle3);
-        // Engine.AnimationManager.setAnimationFilms(animationBundle4);
-        // Engine.AnimationManager.setAnimationFilms(animationBundle5);
-        Engine.AnimationManager.setAnimationFilms(animationBundle);
-        Engine.AnimationManager.setAnimationManagement(preSetAnimations);
+        game.films.forEach((film)=>{
+            Engine.AnimationManager.setAnimationFilms(film);
+        });
+
+        game.preSet.forEach((preSet)=>{
+            Engine.AnimationManager.setAnimationManagement(preSet);
+        });
+        
+
+        if(game.films.length === 0){
+            Engine.AnimationManager.setAnimationFilms(this._localAnimationFilms);
+            Engine.AnimationManager.setAnimationManagement(this._localPreSettedAnim);
+        }
+
         callback();
     }
 

@@ -84,9 +84,9 @@ const game = app.game;
 app.addInitialiseFunction(()=>{
     let init = Engine.initInfo;
 
-    init.objects.forEach((item)=>{
-        utils.createObject(item);
-    });
+    for(let i in init.objects){
+        utils.createObject(init.objects[i]);
+    }
 });
 
 app.addLoadFunction(()=>{

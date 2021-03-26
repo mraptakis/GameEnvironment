@@ -556,6 +556,11 @@ Blockly.Blocks['get_animation'] = {
         for(let i in map){
                 categs.push([i,i]);
         }
+
+        if(categs.length === 0){
+            categs.push(["",""]);
+        }
+
         return categs;
     }
 };
