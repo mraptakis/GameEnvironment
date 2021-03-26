@@ -101,7 +101,7 @@ Blockly.JavaScript['after_seconds_do'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument1 = Blockly.JavaScript.statementToCode(block, 'Value',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return 'setTimeout(()=>{'+argument1+'},'+argument0+');';
+    return 'AK.callIn(()=>{'+argument1+'},[],'+argument0+');';
 };
 
 Blockly.Blocks['create_object'] = {

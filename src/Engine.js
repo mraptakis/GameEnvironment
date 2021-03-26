@@ -98,6 +98,9 @@ app.addLoadFunction(()=>{
             bb.fastInstall('assets',asset,img);
         }
     });
+
+    Engine.ClockManager.onLoad();
+
     installWatches();
 });
 

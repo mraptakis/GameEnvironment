@@ -7,7 +7,6 @@ export default class GridManager {
 
     constructor(){
         this._gridRectangles = [];
-        // this.calculateGrid();
     }
 
     onLoad(){
@@ -30,17 +29,6 @@ export default class GridManager {
         return [...this._gridRectangles];
     }
 
-    /*
-    *   e: {
-    *       type: string,
-    *       objectID: string
-    *       information: {
-    *           type: string,
-    *           value: all
-    *       }   
-    *   }
-    */
-
     objectsOnPlatform(platFormObj){
         const objManager = Engine.ObjectManager;
         let objs = objManager.objects;
@@ -48,9 +36,6 @@ export default class GridManager {
         
         let isAttached = [];
         
-        //TODO LATER: now it returns the objects that are 
-        //currently COLLIDED with the object but I want 
-        //the objects that are on top
         for(let i in objs){
             let obj = objs[i];
             if(objManager.isSystemObject(obj.id) || obj === platFormObj)
@@ -62,7 +47,7 @@ export default class GridManager {
                 continue;
             }
         
-            if(pos1.y > pos2.y + pos2.height || pos2.y > pos1.y + (pos1.height/2)){
+            if(pos1.y > pos2.y + pos2.height || pos2.y > pos1.y + (pos1.height/4)){
                 continue;
             }
         
@@ -72,6 +57,16 @@ export default class GridManager {
         return isAttached;
     }
 
+    /*
+    *   e: {
+    *       type: string,
+    *       objectID: string
+    *       information: {
+    *           type: string,
+    *           value: all
+    *       }   
+    *   }
+    */
     onEvent(e){
        if(!Engine.ObjectManager.isSystemObject(e.objectID)){
            if(e.type === 'setValue'){
