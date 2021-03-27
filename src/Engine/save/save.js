@@ -117,7 +117,6 @@ export default class SaveManager {
             toSave[i] = JSON.parse(liveObj[i].toString());
         }
     
-        console.log(toSave);
         return toSave;
     }
 
@@ -161,7 +160,6 @@ export default class SaveManager {
             all.preSet.push(f);
         }
 
-        console.log(all);
         return all;
     }
 
@@ -177,8 +175,6 @@ export default class SaveManager {
                 this._localAnimationFilms
             ]
         }
-
-        console.log(toSave);
 
         var textFileAsBlob = new Blob([JSON.stringify(toSave)], {type:'application/json'}); 
         var downloadLink = document.createElement("a");
@@ -205,7 +201,6 @@ export default class SaveManager {
         // ----------------- wait                                -----------wait
         // 
         
-        console.log(game);
         Engine.initInfo = {
             objects: game.objects
         };

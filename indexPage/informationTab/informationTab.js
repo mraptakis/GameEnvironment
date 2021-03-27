@@ -42,14 +42,4 @@ devWikiBut.onclick = ()=>{
     window.location = `/wiki.html?mode=dev`;
 }
 
-let myCVBut = uiFactory.createElement({
-    parent: buttonWrapper,
-    classList: 'informationButton',
-    innerHtml: 'About Me'
-});
-
-myCVBut.onclick = ()=>{
-    window.open('https://alexkatsarakis.github.io/katsarakis-personal-page/');
-}
-
 export default {};
