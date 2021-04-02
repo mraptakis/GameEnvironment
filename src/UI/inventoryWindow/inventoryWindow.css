@@ -76,13 +76,20 @@
     top: 50px;
     width: 100%;
     height: calc(100% - 50px);
-    overflow-y: scroll;    
+    overflow-y: scroll;
+}
+
+.inventory-window-body-grid {
+    width: 100%;
     display: grid;
     grid-template-columns: auto auto auto auto;
 }
 
-
-
+.inventory-window-body-page-swap {
+    width: 100%;
+    height: 50px;
+    background-color: red;
+}
 
 
 /* for Animations */
