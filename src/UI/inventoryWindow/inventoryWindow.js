@@ -212,33 +212,41 @@ function showFilms(objWrapper){
         classList: 'inventory-window-body-page-swap'
     });
 
-    let leftPage = uiFactory.createElement({
-        parent: pageSwapWrap,
-        innerHTML: 'left'
-    });
-
-    let rightPage = uiFactory.createElement({
-        parent: pageSwapWrap,
-        innerHTML: 'right'
-    });
-
     objWrapper = uiFactory.createElement({
         classList: 'inventory-window-body-grid',
         parent: objWrapper
     });
 
-    const itemsPerPage = 16;
+    const itemsPerPage = 24;
 
     let keys = Object.keys(items);
     let pages = Math.ceil((keys.length-1) / itemsPerPage);
     let currPage = 1;
+
     
-    let starting = (currPage - 1) * itemsPerPage;
-    let ending = (currPage) * itemsPerPage;
-    if(ending > (keys.length)) ending = keys.length;
-    
-    function currFilmsShowing(start,end){
-        for(let j = start; j < end; ++j){
+    function currFilmsShowing(){
+        
+        let starting = (currPage - 1) * itemsPerPage;
+        let ending = (currPage) * itemsPerPage;
+        if(ending > (keys.length)) ending = keys.length;
+        pageSwapWrap.innerHTML = '';
+        for(let i = 1; i <= pages; ++i){
+            uiFactory.createElement({
+                parent: pageSwapWrap,
+                classList: 'inventory-window-body-page-item' + 
+                ((Number.parseInt(currPage) === i)?
+                    ' inventory-window-body-page-item-current':
+                    ''),
+                innerHTML: i
+            }).onclick = (ev) => {
+                objWrapper.innerHTML = '';
+                currPage = ev.target.innerHTML;
+                removeAllAnimators();
+                currFilmsShowing();
+            };
+        }
+
+        for(let j = starting; j < ending; ++j){
             let i = keys[j];
             let wrap = uiFactory.createElement({
                 classList: 'inventory-window-animationPreview_itemWrapper',
@@ -294,27 +302,5 @@ function showFilms(objWrapper){
         }
     }
 
-    currFilmsShowing(starting,ending);
-
-    leftPage.onclick = () => {
-        removeAllAnimators();
-        objWrapper.innerHTML = '';
-        currPage--;
-        if(currPage < 1) currPage = 1;
-        let starting = (currPage - 1) * itemsPerPage;
-        let ending = (currPage) * itemsPerPage;
-        if(ending > (keys.length)) ending = keys.length;
-        currFilmsShowing(starting,ending);
-    }
-
-    rightPage.onclick = () => {
-        removeAllAnimators();
-        objWrapper.innerHTML = '';
-        currPage++;
-        if(currPage > pages) currPage = pages;
-        let starting = (currPage - 1) * itemsPerPage;
-        let ending = (currPage) * itemsPerPage;
-        if(ending > (keys.length)) ending = keys.length;
-        currFilmsShowing(starting,ending);
-    }
+    currFilmsShowing();
 }
