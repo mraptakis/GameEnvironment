@@ -1,6 +1,9 @@
-export default class CalculatorManager {
+import Manager from '../Engine/Manager.js'
+
+export default class CalculatorManager extends Manager{
 
     constructor() {
+        super();
     }
 
     getObjectCenter(obj){

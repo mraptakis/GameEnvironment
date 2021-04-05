@@ -60,14 +60,18 @@ function createObject(item){
 
 function resetObject(item){
     let it = Engine.ObjectManager.objects[item._id];
+
     let values = item.values;
     let options = item.options;
     let events = item.events;
     let states = item.states;
 
     for(let a in options){
-        if(typeof options[a] !== "boolean")throw Error('Attributes must be boolean');
-        it.setOption(a,options[a]);
+        if(!it.hasOption(a))it.addOption(a);
+        it.setOption(a,options[a].val);
+        if(options[a].onChange){
+            it.setOptionCode(a, options[a].onChange);
+        }
     }
 
     for(let v in values){

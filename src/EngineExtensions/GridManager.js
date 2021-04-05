@@ -2,14 +2,18 @@ import Engine from '../Engine.js'
 
 import bb from '../utils/blackboard.js'
 
-export default class GridManager {
+import Manager from '../Engine/Manager.js'
+
+export default class GridManager extends Manager{
     _gridRectangles;
 
     constructor(){
+        super();
         this._gridRectangles = [];
     }
 
     onLoad(){
+        this.calculateGrid();
         bb.installWatch('events', 'last', (e)=>this.onEvent(e));
     }
 

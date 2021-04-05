@@ -10,12 +10,7 @@ import PauseManager from './PauseManager.js'
 Engine.installManager('PauseManager', new PauseManager());
 
 import GridManager from './GridManager.js'
-const gridManager = new GridManager();
-Engine.installManager('GridManager', gridManager);
-Engine.app.addLoadFunction(()=>{
-    gridManager.calculateGrid();
-    gridManager.onLoad();
-});
+Engine.installManager('GridManager', new GridManager());
 
 import CalculatorManager from './CalculatorManager.js'
 Engine.installManager('CalculatorManager', new CalculatorManager());
@@ -23,3 +18,6 @@ Engine.installManager('CalculatorManager', new CalculatorManager());
 
 import QuantizerManager from './QuantizerManager.js'
 Engine.installManager('QuantizerManager', new QuantizerManager());
+
+import TimewarpManager from './TimewarpManager.js'
+Engine.installManager('TimewarpManager', new TimewarpManager());

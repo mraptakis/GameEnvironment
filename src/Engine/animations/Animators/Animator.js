@@ -19,10 +19,14 @@ export default class Animator {
         }
     }
 
-    constructor(){
-        this._lastTime = 0;
-        this._state = this.animatorStates.FINISHED;
-        animatorManager.register(this);
+    constructor(copy){
+        if(!copy){
+            this._lastTime = 0;
+            this._state = this.animatorStates.FINISHED;
+            animatorManager.register(this);
+        }else{
+            console.log(copy)
+        }
     }
 
     destroy(){

@@ -40,6 +40,14 @@ class AnimatorManager{
         this._suspended = [];
     }
 
+    getAnimators(){
+        return [...this._running];
+    }
+
+    restoreAnimators(newAnimators){
+        this._running = newAnimators;
+    }
+
 }
 
 const animatorManager = new AnimatorManager();

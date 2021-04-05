@@ -6,7 +6,9 @@ import O454Manager from './454GameEngine/renderer.js'
 
 import changeFocus from '../../utils/focusedObject.js'
 
-class ObjectManager {
+import Manager from '../Manager.js'
+
+class ObjectManager extends Manager{
     _objects
     _objectByName
     _constructors
@@ -14,6 +16,7 @@ class ObjectManager {
     _renderManagers
 
     constructor() {
+        super();
         this._constructors = {};
         this._objects = {}; 
         this._objectByName = {};

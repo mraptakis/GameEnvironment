@@ -1,11 +1,13 @@
 import bb from '../utils/blackboard.js'
 
 import Engine from '../Engine.js'
+import Manager from '../Engine/Manager.js'
 
-export default class QuantizerManager {
+export default class QuantizerManager extends Manager{
     _QuantizeMS
 
     constructor(){
+        super();
         this._QuantizeMS = 16;
     }
 

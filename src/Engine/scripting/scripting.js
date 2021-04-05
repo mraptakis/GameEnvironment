@@ -2,11 +2,14 @@ import blScr from './blockly/blockly.js'
 import pureJS from './pureJS/pureJS.js'
 // import './pyodide/pyodide.js'
 
-export default class ScriptingManager {
+import Manager from '../Manager.js'
+
+export default class ScriptingManager extends Manager{
     _installedMechanisms
     _currentEditor
 
     constructor(){
+        super();
         this._installedMechanisms = {};
         this._installedMechanisms[blScr.id] = blScr;
         this._installedMechanisms[pureJS.id] = pureJS;

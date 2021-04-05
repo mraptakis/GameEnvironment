@@ -10,13 +10,16 @@ import MovingAnimation from './Animations/AnimationCategories/MovingAnimation.js
 import FrameRangeAnimation from './Animations/AnimationCategories/FrameRangeAnimation.js'
 
  
-export default class AnimationManager {
+import Manager from '../Manager.js'
+
+export default class AnimationManager extends Manager{
     _animationFilms
     _animationManagement
     _animationCategories
     _animatorCategories
 
     constructor(){
+        super();
         this._animationFilms = [];
         this._animationManagement = [];
         this._animationCategories = {
@@ -45,7 +48,15 @@ export default class AnimationManager {
         return this._animatorCategories[cat];
     }
 
-    load(){
+    getAnimators(){
+        return animatorManager.getAnimators();
+    }
+
+    restoreAnimators(newAnimators){
+        animatorManager.restoreAnimators(newAnimators);
+    }
+
+    onLoad(){
         this._animationFilms.forEach((films)=>{
             animationFilmHolder.loadAll(films);
         });

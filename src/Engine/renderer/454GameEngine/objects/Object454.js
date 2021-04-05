@@ -96,6 +96,12 @@ export default class Object454 extends Object{
         return this._animator;
     }
 
+    destroyAnimator(){
+        console.log('test');
+        if(this._animator !== undefined)this._animator.destroy();
+        this._animator = undefined;
+    }
+
     add(){
         objectManager.addToWorld(this);
         scene.addItem(this);

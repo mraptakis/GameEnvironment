@@ -1,10 +1,12 @@
+import Manager from '../Manager.js'
+
 const InputState = {
     TRIGGERED: 'TRIGGERED',
     TOTRIGGER: 'TOTRIGGER',
     FOREVER: 'FOREVER'
 };
 
-class InputManager {
+class InputManager extends Manager{
     currentlyPressed = {};
     releasedKeys = [];
 
@@ -14,6 +16,10 @@ class InputManager {
         'pauseGame': ['ControlLeft', 'ShiftLeft', 'Digit1'],
         'resumeGame': ['ControlLeft', 'ShiftLeft', 'Digit2'],
         'dummyAction': ['ControlLeft', 'KeyB']
+    }
+
+    constructor(){
+        super();
     }
 
     isCurrentlyPressed(key){

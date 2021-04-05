@@ -1,10 +1,13 @@
 import bb from '../utils/blackboard.js'
 import utils from '../utils/utils.js'
 
-export default class ObjectSnapshotManager {
+import Manager from '../Engine/Manager.js'
+
+export default class ObjectSnapshotManager extends Manager{
     _collection;
 
     constructor(){
+        super();
         this._collection = {};
     }
 

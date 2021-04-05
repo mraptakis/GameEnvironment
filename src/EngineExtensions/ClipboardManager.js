@@ -2,11 +2,13 @@ import utils from '../utils/utils.js'
 import bb from '../utils/blackboard.js'
 import Engine from '../Engine.js';
 
-export default class ClipboardManager {
+import Manager from '../Engine/Manager.js'
+export default class ClipboardManager extends Manager{
     _clipboard;
     _collection;
 
     constructor(){
+        super();
         this._collection = [];
     }
 

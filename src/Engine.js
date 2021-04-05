@@ -90,7 +90,10 @@ app.addInitialiseFunction(()=>{
 });
 
 app.addLoadFunction(()=>{
-    Engine.AnimationManager.load();
+    for(let i in Engine._managers){
+        Engine._managers[i].onLoad();
+    }
+
     Engine.AnimationManager.requiredAssets().forEach((asset)=>{
         if(!bb.fastGet('assets',asset)){
             let img = new Image();
@@ -98,8 +101,6 @@ app.addLoadFunction(()=>{
             bb.fastInstall('assets',asset,img);
         }
     });
-
-    Engine.ClockManager.onLoad();
 
     installWatches();
 });
