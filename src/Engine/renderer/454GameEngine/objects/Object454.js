@@ -41,6 +41,13 @@ export default class Object454 extends Object{
 
     }
 
+    toString(){
+        let toSave = JSON.parse(super.toString());
+        toSave._film = this._film;
+        toSave._frame = this._frame;
+        return JSON.stringify(toSave);
+    }
+
     setColor(col){
         this._color = col;
     }
@@ -97,7 +104,6 @@ export default class Object454 extends Object{
     }
 
     destroyAnimator(){
-        console.log('test');
         if(this._animator !== undefined)this._animator.destroy();
         this._animator = undefined;
     }

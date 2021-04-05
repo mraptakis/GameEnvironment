@@ -93,6 +93,13 @@ function resetObject(item){
         it.setState(s,states[s].transitionFrom,states[s].transitionTo);
     }
 
+    if(item._film){
+        it.setFilm(item._film);
+    }
+    if(item._frame){
+        it.setFrame(item._frame);
+    }
+
 }
 
 function inputHandler(key) {

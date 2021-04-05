@@ -1,0 +1,40 @@
+#timewarp-wrapper {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: 25px;
+    background-color: var(--main-color);
+}
+
+#timewarp-record {
+    background-color: red;
+    width: 15px;
+    height: 15px;
+    margin: 5px;
+    border-radius: 50px;
+}
+
+#timewarp-showRecords {
+    width: 50%;
+    float:right;
+}
+
+#timewarp-showBackward {
+    background-color: blue;
+}
+
+#timewarp-showForward {
+    background-color: green;
+}
+
+
+.timewarp-button {
+    height: 25px;
+    width: 25px;
+    margin-right: 5px;
+    margin-left: 5px;
+    background-color: black;
+    cursor: pointer;
+}

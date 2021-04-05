@@ -51,9 +51,32 @@ export default class TimewarpManager extends Manager{
         Engine.PauseManager.pause();
     }
 
+    playForward(fromTimestamp,speedFactor = 1){
+        console.log('Will play forward from timestamp ' + fromTimestamp + ' with speed factor ' +speedFactor);
+    }
+
+    playBackward(fromTimestamp,speedFactor = 1){
+        console.log('Will play backward from timestamp ' + fromTimestamp + ' with speed factor ' +speedFactor);
+    }
+
     showSnapshot(timeStamp){
+        let timeWarp = this._timeWarping[timeStamp];
+        if(!timeWarp)throw Error('Tried to resume a time that was not recorded');
+        
+        console.log(timeWarp);
+        
+        let objs = timeWarp.objects;
+        for(let i in objs){
+            let obj = objs[i];
+            utils.resetObject(obj);
+        }
+
         // clear all objects;
         // load all objects from the said timestamp;
+    }
+
+    getRecordedTimestamps(){
+        return Object.keys(this._timeWarping);
     }
 
     resumeFromRecording(timeStamp){
@@ -62,6 +85,13 @@ export default class TimewarpManager extends Manager{
         let timeWarp = this._timeWarping[timeStamp];
         if(!timeWarp)throw Error('Tried to resume a time that was not recorded');
         
+        let objs = timeWarp.objects;
+        for(let i in objs){
+            let obj = objs[i];
+            utils.resetObject(obj);
+        }
+        Engine.PauseManager.resume();
+
         console.log('Stopping All Animations...');
         let animators = Engine.AnimationManager.getAnimators();
         animators.forEach((animator)=>animator.destroy());
@@ -72,8 +102,8 @@ export default class TimewarpManager extends Manager{
     }
 
     onLoad(){
-        this.startRecording(0);
-        Engine.ClockManager.callIn(this.stopRecording.bind(this),[],5000);
+        // this.startRecording(0);
+        // Engine.ClockManager.callIn(this.stopRecording.bind(this),[],5000);
         // Engine.ClockManager.callIn(this.resumeFromRecording.bind(this),[],2700);
     }
 }
