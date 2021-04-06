@@ -60,7 +60,10 @@ function createObject(item){
 
 function resetObject(item){
     let it = Engine.ObjectManager.objects[item._id];
-
+    if(!it){
+        createObject(item);
+        return;
+    }
     let values = item.values;
     let options = item.options;
     let events = item.events;

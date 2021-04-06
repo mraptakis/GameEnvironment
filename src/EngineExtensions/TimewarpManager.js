@@ -3,13 +3,12 @@ import bb from '../utils/blackboard.js'
 import Engine from '../Engine.js';
 
 import Manager from '../Engine/Manager.js'
-import Animator from '../Engine/animations/Animators/Animator.js';
 
 export default class TimewarpManager extends Manager{
     _timeWarping;
-    _last;
 
     _inter;
+    _playBackInter;
 
     constructor(){
         super();
@@ -25,14 +24,11 @@ export default class TimewarpManager extends Manager{
             animators.push(JSON.stringify(an));
         });
 
-        if(!this._last)
-            this._last = gameTime;
         this._timeWarping[gameTime] = {
             timeStamp: gameTime,
             objects: objects,
             animators: animators
         }
-        console.log(this._timeWarping);
     }
     
     // setBack(){
@@ -51,28 +47,71 @@ export default class TimewarpManager extends Manager{
         Engine.PauseManager.pause();
     }
 
+    stopPlayback(){
+        for(let i in this._playBackInter){
+            Engine.ClockManager.cancelCallBack(this._playBackInter[i]);
+        }
+        this._playBackInter = {};
+    }
+
     playForward(fromTimestamp,speedFactor = 1){
-        console.log('Will play forward from timestamp ' + fromTimestamp + ' with speed factor ' +speedFactor);
+        this.stopPlayback();
+        let ts = Object.keys(this._timeWarping);
+
+        let index = ts.indexOf(fromTimestamp+'');
+
+        if(index === -1) throw Error('Tried to play forward from a timestamp that doesn\'t exist');
+        if(speedFactor === 0) throw Error('');
+
+        const factor = 1/speedFactor;
+
+        for(let i = index; i < ts.length; i++){
+            let realTS = Number.parseInt(ts[i]);
+            let dt = realTS - fromTimestamp;
+            dt = dt * factor;
+            this._playBackInter[realTS] = Engine.ClockManager.callIn(()=>this.showSnapshot(realTS),[],dt);
+        }
     }
 
     playBackward(fromTimestamp,speedFactor = 1){
-        console.log('Will play backward from timestamp ' + fromTimestamp + ' with speed factor ' +speedFactor);
+        this.stopPlayback();
+        let ts = Object.keys(this._timeWarping);
+
+        let index = ts.indexOf(fromTimestamp+'');
+
+        if(index === -1) throw Error('Tried to play forward from a timestamp that doesn\'t exist');
+        if(speedFactor === 0) throw Error('');
+
+        const factor = 1/speedFactor;
+        for(let i = index; i !== 0; --i){
+            let realTS = Number.parseInt(ts[i]);
+            let dt = fromTimestamp - realTS;
+            dt = dt * factor;
+            this._playBackInter[realTS] = Engine.ClockManager.callIn(()=>this.showSnapshot(realTS),[],dt);
+        }
+    
     }
 
     showSnapshot(timeStamp){
         let timeWarp = this._timeWarping[timeStamp];
         if(!timeWarp)throw Error('Tried to resume a time that was not recorded');
         
-        console.log(timeWarp);
-        
         let objs = timeWarp.objects;
+        // TODO:find if an object has been deleted; and if it has then delete if from map;
+        let liveObjs = Engine.ObjectManager.objects;
+        for(let i in liveObjs){
+            if(!objs[i])liveObjs[i].remove();
+        }
+
         for(let i in objs){
             let obj = objs[i];
             utils.resetObject(obj);
         }
+        
+        if(this._playBackInter[timeStamp])delete this._playBackInter[timeStamp];
 
-        // clear all objects;
-        // load all objects from the said timestamp;
+        let first = Object.keys(this._timeWarping)[0];
+        document.getElementById('timewarp-showRecords').value = timeStamp - first;
     }
 
     getRecordedTimestamps(){
@@ -80,30 +119,19 @@ export default class TimewarpManager extends Manager{
     }
 
     resumeFromRecording(timeStamp){
-        timeStamp = this._last;
-        console.log(timeStamp);
+
         let timeWarp = this._timeWarping[timeStamp];
         if(!timeWarp)throw Error('Tried to resume a time that was not recorded');
-        
-        let objs = timeWarp.objects;
-        for(let i in objs){
-            let obj = objs[i];
-            utils.resetObject(obj);
-        }
+
+        this.showSnapshot(timeStamp);
         Engine.PauseManager.resume();
 
-        console.log('Stopping All Animations...');
-        let animators = Engine.AnimationManager.getAnimators();
-        animators.forEach((animator)=>animator.destroy());
+        // console.log('Stopping All Animations...');
+        // let animators = Engine.AnimationManager.getAnimators();
+        // animators.forEach((animator)=>animator.destroy());
 
         // debugger;
         // Engine.AnimationManager.restoreAnimators(timeWarp.animators);
         // Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - timeWarp.timeStamp);
-    }
-
-    onLoad(){
-        // this.startRecording(0);
-        // Engine.ClockManager.callIn(this.stopRecording.bind(this),[],5000);
-        // Engine.ClockManager.callIn(this.resumeFromRecording.bind(this),[],2700);
     }
 }

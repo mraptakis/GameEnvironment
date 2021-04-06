@@ -22,11 +22,17 @@
 }
 
 #timewarp-showBackward {
-    background-color: blue;
+    background-color: var(--main-color);
+    background-size: contain;
+    background-image: url(../../../assets/images/dropdown_toggle.png);
+    transform: rotate(90deg);
 }
 
 #timewarp-showForward {
-    background-color: green;
+    background-color: var(--main-color);
+    background-size: contain;
+    background-image: url(../../../assets/images/dropdown_toggle.png);
+    transform: rotate(-90deg);
 }
 
 

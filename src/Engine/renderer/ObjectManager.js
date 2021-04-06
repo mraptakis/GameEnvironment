@@ -138,8 +138,10 @@ let managers = objectManager.getRenderManagers();
 clickWrapper.addEventListener('click',(ev)=>{
     for(let i in managers){
         if(managers[i].mouseEvents.leftClick){
-            if(managers[i].mouseEvents.leftClick(ev))
+            let obj = managers[i].mouseEvents.leftClick(ev);
+            if(obj){
                 return;
+            }
         }
     }
     changeFocus(undefined);
@@ -148,8 +150,10 @@ clickWrapper.addEventListener('click',(ev)=>{
 clickWrapper.addEventListener('mousedown',(ev)=>{
     for(let i in managers){
         if(managers[i].mouseEvents.mouseDown){
-            if(managers[i].mouseEvents.mouseDown(ev))
+            let obj = managers[i].mouseEvents.mouseDown(ev);
+            if(obj){
                 return;
+            }
         }
     }
 });
@@ -157,8 +161,11 @@ clickWrapper.addEventListener('mousedown',(ev)=>{
 clickWrapper.addEventListener('contextmenu',(ev) => {
     for(let i in managers){
         if(managers[i].mouseEvents.rightClick){
-            if(managers[i].mouseEvents.rightClick(ev))
+            let obj = managers[i].mouseEvents.rightClick(ev);
+            if(obj){
+                console.log(obj);
                 return;
+            }
         }
     }
     changeFocus(undefined);

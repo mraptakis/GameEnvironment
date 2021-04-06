@@ -78,16 +78,16 @@ export default class ClockManager extends Manager{
     onLoad(){
         this.update();
 
-        Engine.PauseManager.addOnPause(()=>{
-            this._checkForCB = false;
-        });
+        // Engine.PauseManager.addOnPause(()=>{
+        //     this._checkForCB = false;
+        // });
 
-        Engine.PauseManager.addOnResume((time)=>{
-            for(let i in this._callbacks){
-                this._callbacks[i].timeShift(time);
-            }
-            this._checkForCB = true;
-        });
+        // Engine.PauseManager.addOnResume((time)=>{
+        //     for(let i in this._callbacks){
+        //         this._callbacks[i].timeShift(time);
+        //     }
+        //     this._checkForCB = true;
+        // });
     }
 
     getTime(){
