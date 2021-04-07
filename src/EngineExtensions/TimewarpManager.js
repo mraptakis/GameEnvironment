@@ -12,16 +12,27 @@ export default class TimewarpManager extends Manager{
 
     constructor(){
         super();
+        this._playBackInter = {};
         this._timeWarping = {};
     }
 
-    async saveTimeFrame(args){
+    async saveTimeFrame(){
         let gameTime = bb.fastGet('state','gameTime');
         let objects = Engine.SaveManager.saveObjectsLocal();
         
         let animators = [];
         Engine.AnimationManager.getAnimators().forEach((an)=>{
-            animators.push(JSON.stringify(an));
+            // animators.push(JSON.stringify(an));
+            // animators.push(an);
+            animators.push({
+                _onAction: an._onAction,
+                _onFinish: an._onFinish,
+                _onStart: an._onStart,
+                _lastTime: an._lastTime,
+                _currentRep: an._currentRep,
+                _name: an._name,
+                _anim: an._anim
+            });
         });
 
         this._timeWarping[gameTime] = {
@@ -30,12 +41,6 @@ export default class TimewarpManager extends Manager{
             animators: animators
         }
     }
-    
-    // setBack(){
-    //     let timeWarp = this._timeWarping[this._last];
-    //     Engine.AnimationManager.restoreAnimators(timeWarp.animators);
-    //     Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - timeWarp.timeStamp);
-    // }
 
     startRecording(interval) {
         this._timeWarping = {};
@@ -126,12 +131,36 @@ export default class TimewarpManager extends Manager{
         this.showSnapshot(timeStamp);
         Engine.PauseManager.resume();
 
-        // console.log('Stopping All Animations...');
         // let animators = Engine.AnimationManager.getAnimators();
         // animators.forEach((animator)=>animator.destroy());
+
+        // timeWarp.animators.forEach((an)=>{
+        //     let Animator = Engine.AnimationManager.getAnimatorCategory(an._name);
+        //     if(!Animator)return;
+        
+        //     let animator = new Animator();
+
+        //     animator.onStart = an._onStart;
+        //     animator.onAction = an._onAction;
+        //     animator.onFinish = an._onFinish;
+        
+        //     animator.start({
+        //         animation: an._anim,
+        //         timestamp: bb.fastGet('state','gameTime'),
+        //     })
+        // });
 
         // debugger;
         // Engine.AnimationManager.restoreAnimators(timeWarp.animators);
         // Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - timeWarp.timeStamp);
     }
+
+    // test(arg) {
+    //     // console.log(arg);
+    //     bb.installWatch('events','last',Engine.TimewarpManager.test);
+    // }
+
+    // onLoad(){
+    //     bb.installWatch('events','last',Engine.TimewarpManager.test);
+    // }
 }

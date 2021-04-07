@@ -19,10 +19,10 @@ class AnimatorManager{
         let index = this._running.indexOf(anim);
         if(index > -1){
             this._running.splice(this._running.indexOf(anim),1);
+            this._suspended.push(anim);
         }else{
-            throw Error('Error while marking animation as suspended',anim);
+            // throw Error('Error while marking animation as suspended',anim);
         }
-        this._suspended.push(anim);
     }
 
     progress(currTime) {

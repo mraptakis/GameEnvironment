@@ -13,6 +13,8 @@ export default class Animator {
     _lastTime;
     _state;
 
+    _name;
+
     _finish(){
         if (!this.hasFinished()) {
             this.notifyStopped();
@@ -20,6 +22,7 @@ export default class Animator {
     }
 
     constructor(copy){
+        this._name = 'Animator';
         if(!copy){
             this._lastTime = 0;
             this._state = this.animatorStates.FINISHED;

@@ -7,6 +7,7 @@ export default class MovingAnimator extends Animator {
 
     constructor(){
         super();
+        this._name = 'MovingAnimator';
         this._currentRep = 0;
     }
 

@@ -48,7 +48,6 @@ function onTimewarpLoad(){
 
             let firstTime = Number.parseInt(recordedTimes[0]);
             recordedTimes = recordedTimes.map((time)=>time - firstTime);
-            console.log(recordedTimes);
 
             let range = uiFactory.createElement({
                 parent: timeWrapper,
@@ -93,9 +92,9 @@ function onTimewarpLoad(){
 
             let pausePlayBut = uiFactory.createElement({
                 parent: timeWrapper,
-                classList: 'timewarp-button'
+                classList: 'timewarp-text',
+                innerHTML: 'Pause'
             });
-            pausePlayBut.style.backgroundColor = 'cyan';
             pausePlayBut.onclick = ()=>{
                 Engine.TimewarpManager.stopPlayback();
             }          
@@ -115,13 +114,21 @@ function onTimewarpLoad(){
             let resumeBut = uiFactory.createElement({
                 parent: timeWrapper,
                 id: 'timewarp-resume', 
-                classList: 'timewarp-button'
+                classList: 'timewarp-text',
+                innerHTML: 'Continue'
             });
 
-            resumeBut.onclick = ()=>{                
+            resumeBut.onclick = ()=>{
+                recBut.style.backgroundColor = 'red';                
                 let number = Number.parseInt(range.value);
                 let realNumber = getLowerNumber(recordedTimes,number);
                 Engine.TimewarpManager.resumeFromRecording(firstTime+realNumber);
+                range.remove();
+                factor.remove();
+                showBackward.remove();
+                pausePlayBut.remove();
+                showForward.remove();
+                resumeBut.remove();
             }
 
         }

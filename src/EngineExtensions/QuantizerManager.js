@@ -27,17 +27,17 @@ export default class QuantizerManager extends Manager{
                 dx: dx,
                 dy: dy,
                 delay: this._QuantizeMS
-            }) 
+            }); 
             
         an.onStart = ()=>{
             object.setAnimator(an);
-        }
+        };
         an.onAction = (th)=>{
             object.move(th.animation.dx,th.animation.dy);
         };
         an.onFinish = ()=>{
             
-        }
+        };
     
         an.start({
             animation: animation,

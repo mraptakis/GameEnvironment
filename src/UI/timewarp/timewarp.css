@@ -44,3 +44,14 @@
     background-color: black;
     cursor: pointer;
 }
+
+
+.timewarp-text {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    margin-right: 5px;
+    margin-left: 5px;
+    color: var(--main-color-text);
+    cursor: pointer;
+}
