@@ -96,6 +96,14 @@ function resetObject(item){
         it.setState(s,states[s].transitionFrom,states[s].transitionTo);
     }
 
+    if(item.values['film']){
+        item._film = item.values['film'].val; 
+    }
+
+    if(item.values['frame']){
+        item._frame = item.values['frame'].val; 
+    }
+
     if(item._film){
         it.setFilm(item._film);
     }

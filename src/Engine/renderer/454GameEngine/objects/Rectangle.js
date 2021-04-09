@@ -31,16 +31,6 @@ export default class Rectangle extends Object {
             getValue: () => {return this._height;}
         });
 
-        this.data.valueHandler.registerValue('film',{
-            tag: 'render',
-            value: film,
-            onChange: (value) => {
-                this._frame = 0;
-                this._film = value;
-            },
-            getValue: () => {return this._film;}
-        });
-
         this._getFilm = bb.fastGet('Engine','AnimationManager').getFilm;
     }
 
@@ -59,7 +49,7 @@ export default class Rectangle extends Object {
             ctx.fillStyle = "#ffffff";
         }else{
             let info = this._getFilm(film);
-            let box = info.getFrameBox(this._frame);
+            let box = info.getFrameBox(this.getValue('frame'));
             let img = info.bitmap;
             ctx.drawImage(bb.fastGet('assets',img),
             box.x,box.y,box.width,box.height,

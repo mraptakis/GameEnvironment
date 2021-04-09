@@ -37,6 +37,24 @@ export default class Object454 extends Object{
             getValue: () => {return this._color;}
         });
 
+
+        this.data.valueHandler.registerValue('film',{
+            tag: 'render',
+            onChange: (value) => {
+                this._frame = 0;
+                this._film = value;
+            },
+            getValue: () => {return this._film;}
+        });
+
+        this.data.valueHandler.registerValue('frame',{
+            tag: 'render',
+            onChange: (value) => {
+                this._frame = value;
+            },
+            getValue: () => {return this._frame;}
+        });
+
         this._stage = stage;
 
     }
@@ -83,7 +101,7 @@ export default class Object454 extends Object{
     }
 
     setFrame(newFrame){
-        this._frame = newFrame;
+        this.setValue('frame',newFrame);
     }
 
     getFilm(){
@@ -91,7 +109,7 @@ export default class Object454 extends Object{
     }
 
     setFilm(film){
-        this._film = film;
+        this.setValue('film',film);
     }
 
     setAnimator(animator){

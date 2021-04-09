@@ -6,6 +6,11 @@ import Manager from '../Engine/Manager.js'
 
 export default class TimewarpManager extends Manager{
     _timeWarping;
+    _currDiff;
+
+    _objectState;
+
+    _isRecording;
 
     _inter;
     _playBackInter;
@@ -14,40 +19,41 @@ export default class TimewarpManager extends Manager{
         super();
         this._playBackInter = {};
         this._timeWarping = {};
+        this._currDiff = [];
+        this._isRecording = false;
+        this._objectState = {};
     }
 
     async saveTimeFrame(){
         let gameTime = bb.fastGet('state','gameTime');
-        let objects = Engine.SaveManager.saveObjectsLocal();
         
         let animators = [];
         Engine.AnimationManager.getAnimators().forEach((an)=>{
-            animators.push({
-                _onAction: an._onAction,
-                _onFinish: an._onFinish,
-                _onStart: an._onStart,
-                _lastTime: an._lastTime,
-                _currentRep: an._currentRep,
-                _name: an._name,
-                _anim: an._anim
-            });
+            animators.push(JSON.stringify(an));
         });
 
         this._timeWarping[gameTime] = {
             timeStamp: gameTime,
-            objects: objects,
+            diff: this._currDiff,
             animators: animators
         }
+        this._currDiff = [];
     }
 
     startRecording(interval) {
+        if(this._isRecording)return;
+        this._isRecording = true;
         this._timeWarping = {};
+        this._objectState['onStart'] = Engine.SaveManager.saveObjectsLocal(); 
+        bb.installWatch('events','last',this.log.bind(this));
         this._inter = Engine.ClockManager.callIn(this.saveTimeFrame.bind(this),[],interval,true);
     }
 
     stopRecording(){
+        this._objectState['onEnd'] = Engine.SaveManager.saveObjectsLocal(); 
         Engine.ClockManager.cancelCallBack(this._inter);
         Engine.PauseManager.pause();
+        this._isRecording = false;
     }
 
     stopPlayback(){
@@ -98,24 +104,39 @@ export default class TimewarpManager extends Manager{
     showSnapshot(timeStamp,frame){
         let timeWarp = this._timeWarping[timeStamp];
         if(!timeWarp)throw Error('Tried to resume a time that was not recorded');
-        
-        let objs = timeWarp.objects;
-        // find if an object has been deleted; and if it has then delete if from map;
-        let liveObjs = Engine.ObjectManager.objects;
-        for(let i in liveObjs){
-            if(!objs[i])liveObjs[i].remove();
-        }
 
-        for(let i in objs){
-            let obj = objs[i];
+        let objState = JSON.parse(JSON.stringify(this._objectState['onStart']));
+
+        let ts = Object.keys(this._timeWarping);
+
+        let index = ts.indexOf(timeStamp+'');
+
+        for(let i = 0; i !== index; ++i){
+            let diff = this._timeWarping[ts[i]].diff;
+            diff.forEach(ev=>{
+                if(ev.type === 'setValue'){
+                    let info = ev.information;
+                    objState[ev.objectID].values[info.type].val = info.value;
+                }
+            });
+        }
+        
+        for(let i in objState){
+            let obj = objState[i];
             utils.resetObject(obj);
         }
+        // let objs = timeWarp.objects;
+        // TODO:find if an object has been deleted; and if it has then delete if from map;
+        // let liveObjs = Engine.ObjectManager.objects;
+        // for(let i in liveObjs){
+        //     if(!objs[i])liveObjs[i].remove();
+        // }
         
-        if(this._playBackInter[timeStamp])delete this._playBackInter[timeStamp];
+        // if(this._playBackInter[timeStamp])delete this._playBackInter[timeStamp];
 
         let first = Object.keys(this._timeWarping)[0];
         document.getElementById('timewarp-showRecords').value = timeStamp - first;
-        
+    
         document.getElementById('timewarp-currFrame').innerHTML = `Frame: ${frame}`;
     
     }
@@ -156,4 +177,9 @@ export default class TimewarpManager extends Manager{
         // Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - timeWarp.timeStamp);
     }
 
+    log(arg) {
+        if(!this._isRecording)return;
+        this._currDiff.push(arg);
+        bb.installWatch('events','last',this.log.bind(this));
+    }
 }

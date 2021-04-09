@@ -44,6 +44,13 @@ class _Engine {
         // this.installManager('PhysicsManager', new PhysicsManager());
     }
 
+    removeManager(name){
+        assert.check(this._managers[name],'Removing a manager that doesn\'t exist');
+        delete this._managers[name]
+        delete this[name];
+        bb.fastRemove('Engine',name);
+    }
+
     installManager(name, manager){
         assert.check(!this._managers[name],'Installing a manager that already exists');
         this._managers[name] = manager;

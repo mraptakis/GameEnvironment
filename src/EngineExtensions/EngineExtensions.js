@@ -19,5 +19,5 @@ Engine.installManager('CalculatorManager', new CalculatorManager());
 import QuantizerManager from './QuantizerManager.js'
 Engine.installManager('QuantizerManager', new QuantizerManager());
 
-import TimewarpManager from './TimewarpManager.js'
+import TimewarpManager from './TimewarpManagerDS.js'
 Engine.installManager('TimewarpManager', new TimewarpManager());

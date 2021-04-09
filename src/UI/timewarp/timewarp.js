@@ -2,6 +2,9 @@ import Engine from '../../Engine.js'
 
 import uiFactory from '../../utils/UIFactory.js'
 
+import TimewarpManagerDS from '../../EngineExtensions/TimewarpManagerDS.js'
+import TimewarpManager from '../../EngineExtensions/TimewarpManager.js'
+
 export default {
     name:'timewarp',
     link: './src/UI/timewarp/timewarp.ahtml',
@@ -26,8 +29,21 @@ function onTimewarpLoad(){
 
     let recBut = document.getElementById('timewarp-record');
 
+    let recBut2 = uiFactory.createElement({
+        parent: timeWrapper,
+        id: 'timewarp-record',
+        classList: 'timewarp-button'
+    });
+
+    recBut2.onclick = ()=> {
+        Engine.removeManager('TimewarpManager');
+        Engine.installManager('TimewarpManager',new TimewarpManager());
+    
+        recBut.click();
+    }
+
     recBut.onclick = ()=> {
-            recBut.style.backgroundColor = 'grey';
+        recBut.style.backgroundColor = 'grey';
         Engine.TimewarpManager.startRecording(0);
 
         let stopRecBut = uiFactory.createElement({
@@ -37,7 +53,6 @@ function onTimewarpLoad(){
 
         recBut.style.backgroundColor = 'grey';
         stopRecBut.style.backgroundColor = 'red';
-    
         stopRecBut.onclick = ()=> {
             stopRecBut.remove();
 
@@ -45,6 +60,14 @@ function onTimewarpLoad(){
             
             let recordedTimes = Engine.TimewarpManager.getRecordedTimestamps();
             if(!recordedTimes) throw Error('No recorded times on stop');
+
+            let currFrame = uiFactory.createElement({
+                parent: timeWrapper,
+                id: 'timewarp-currFrame', 
+                classList: 'timewarp-text',
+                innerHTML: `Frame: ${recordedTimes.length - 1}`
+            });
+
 
             let firstTime = Number.parseInt(recordedTimes[0]);
             recordedTimes = recordedTimes.map((time)=>time - firstTime);
@@ -63,7 +86,9 @@ function onTimewarpLoad(){
             range.onchange = (ev) => {
                 let number = Number.parseInt(ev.target.value);
                 let realNumber = getLowerNumber(recordedTimes,number);
-                Engine.TimewarpManager.showSnapshot(firstTime+realNumber);
+                let frameIndex = recordedTimes.indexOf(realNumber);
+                if(frameIndex === -1) throw Error('Error translating range to frame');
+                Engine.TimewarpManager.showSnapshot(firstTime+realNumber, frameIndex);
             }
 
             let factor = uiFactory.createElement({
@@ -129,6 +154,7 @@ function onTimewarpLoad(){
                 pausePlayBut.remove();
                 showForward.remove();
                 resumeBut.remove();
+                currFrame.remove();
             }
 
         }
