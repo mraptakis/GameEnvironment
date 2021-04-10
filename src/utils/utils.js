@@ -7,7 +7,8 @@ function Utils(){
     return {
         createObject,
         resetObject,
-        inputHandler
+        inputHandler,
+        msToString
     }
 }
 
@@ -128,6 +129,13 @@ function inputHandler(key) {
     // if(keyToAction[key]){
     //     keyToAction[key].forEach((action)=>bb.fastGet('actions',action)());
     // }
+}
+
+function msToString(ms1,ms2){
+    let diff = Math.abs(ms1 - ms2);
+    let secs = Number.parseInt(diff / 1000);
+    diff = diff - secs*1000;
+    return `${secs},${diff}s`;
 }
 
 const utils = new Utils();

@@ -14,6 +14,7 @@ export default class TimewarpManager extends Manager{
 
     _inter;
     _playBackInter;
+    _startedRecordedTime;
 
     constructor(){
         super();
@@ -22,6 +23,7 @@ export default class TimewarpManager extends Manager{
         this._currDiff = [];
         this._isRecording = false;
         this._objectState = {};
+        this._startedRecordedTime = undefined;
     }
 
     async saveTimeFrame(){
@@ -29,7 +31,15 @@ export default class TimewarpManager extends Manager{
         
         let animators = [];
         Engine.AnimationManager.getAnimators().forEach((an)=>{
-            animators.push(JSON.stringify(an));
+            animators.push({
+                _onAction: an._onAction,
+                _onFinish: an._onFinish,
+                _onStart: an._onStart,
+                _lastTime: an._lastTime,
+                _currentRep: an._currentRep,
+                _name: an._name,
+                _anim: an._anim
+            });
         });
 
         this._timeWarping[gameTime] = {
@@ -47,6 +57,7 @@ export default class TimewarpManager extends Manager{
         this._objectState['onStart'] = Engine.SaveManager.saveObjectsLocal(); 
         bb.installWatch('events','last',this.log.bind(this));
         this._inter = Engine.ClockManager.callIn(this.saveTimeFrame.bind(this),[],interval,true);
+        this._startedRecordedTime = bb.fastGet('state','gameTime');
     }
 
     stopRecording(){
@@ -134,10 +145,11 @@ export default class TimewarpManager extends Manager{
         
         // if(this._playBackInter[timeStamp])delete this._playBackInter[timeStamp];
 
-        let first = Object.keys(this._timeWarping)[0];
-        document.getElementById('timewarp-showRecords').value = timeStamp - first;
+        document.getElementById('timewarp-showRecords').value = timeStamp - this._startedRecordedTime;
     
         document.getElementById('timewarp-currFrame').innerHTML = `Frame: ${frame}`;
+
+        document.getElementById('timewarp-currFrameTime').innerHTML = `Time: ${utils.msToString(this._startedRecordedTime,timeStamp)}`;
     
     }
 
@@ -153,28 +165,30 @@ export default class TimewarpManager extends Manager{
         this.showSnapshot(timeStamp);
         Engine.PauseManager.resume();
 
-        // let animators = Engine.AnimationManager.getAnimators();
-        // animators.forEach((animator)=>animator.destroy());
+        let animators = Engine.AnimationManager.getAnimators();
+        animators.forEach((animator)=>animator.destroy());
 
-        // timeWarp.animators.forEach((an)=>{
-        //     let Animator = Engine.AnimationManager.getAnimatorCategory(an._name);
-        //     if(!Animator)return;
+        timeWarp.animators.forEach((an)=>{
+            let Animator = Engine.AnimationManager.getAnimatorCategory(an._name);
+            if(!Animator)return;
         
-        //     let animator = new Animator();
+            let animator = new Animator();
 
-        //     animator.onStart = an._onStart;
-        //     animator.onAction = an._onAction;
-        //     animator.onFinish = an._onFinish;
+
+            animator.onStart = an._onStart;
+            animator.onAction = an._onAction;
+            animator.onFinish = an._onFinish;
         
-        //     animator.start({
-        //         animation: an._anim,
-        //         timestamp: bb.fastGet('state','gameTime'),
-        //     })
-        // });
+            animator.start({
+                animation: an._anim,
+                timestamp: timeWarp.timeStamp,
+            });
 
-        // debugger;
-        // Engine.AnimationManager.restoreAnimators(timeWarp.animators);
-        // Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - timeWarp.timeStamp);
+            animator._lastTime = an._lastTime;
+            animator._currentRep = an._currentRep;
+
+        });
+        Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - timeWarp.timeStamp);
     }
 
     log(arg) {

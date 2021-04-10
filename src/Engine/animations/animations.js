@@ -12,6 +12,8 @@ import FrameRangeAnimation from './Animations/AnimationCategories/FrameRangeAnim
  
 import Manager from '../Manager.js'
 
+import Engine from '../../Engine.js'
+
 export default class AnimationManager extends Manager{
     _animationFilms
     _animationManagement
@@ -111,6 +113,8 @@ export default class AnimationManager extends Manager{
         let oldFilm;
     
         an.onStart = ()=>{
+            if(!object.isAlive)
+                object = Engine.ObjectManager.objects[object.id];
             if(onStart)onStart();
             object.setAnimator(an);
             oldFilm = object.getValue('film');

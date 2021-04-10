@@ -2,7 +2,6 @@ import Engine from '../../Engine.js'
 
 import uiFactory from '../../utils/UIFactory.js'
 
-import TimewarpManagerDS from '../../EngineExtensions/TimewarpManagerDS.js'
 import TimewarpManager from '../../EngineExtensions/TimewarpManager.js'
 
 export default {
@@ -66,6 +65,12 @@ function onTimewarpLoad(){
                 id: 'timewarp-currFrame', 
                 classList: 'timewarp-text',
                 innerHTML: `Frame: ${recordedTimes.length - 1}`
+            });
+
+            let currFrameTime = uiFactory.createElement({
+                parent: timeWrapper,
+                id: 'timewarp-currFrameTime', 
+                classList: 'timewarp-text'
             });
 
 
@@ -155,6 +160,7 @@ function onTimewarpLoad(){
                 showForward.remove();
                 resumeBut.remove();
                 currFrame.remove();
+                currFrameTime.remove();
             }
 
         }

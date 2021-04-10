@@ -11,6 +11,12 @@ import ValueManager from './Value.js'
 //     DISABLED: 'disabled'
 // } //TODO when the window aura comes near then the item triggers an event to activate
 
+const ObjectState = {
+    LOADED: 'loaded',
+    ALIVE: 'alive',
+    REMOVED: 'removed'
+}
+
 export default class Object {
     _id 
     _name 
@@ -24,6 +30,8 @@ export default class Object {
     constructor(_name, _id) {
         this._name = _name;
         this.id = _id || rand.generateGameID();
+
+        this._state = ObjectState.ALIVE;
 
         this._isPrototype = false;
 
@@ -205,8 +213,13 @@ export default class Object {
 
     }
 
-    remove() { // Remove this item from blackboard and from renderer to.
-        throw Error("remove needs to be implemented");
+    get isAlive(){
+        return this._state !== ObjectState.REMOVED;
+    }
+
+    remove() { 
+        this._state = ObjectState.REMOVED;
+        this.clear();
     }
 
 }

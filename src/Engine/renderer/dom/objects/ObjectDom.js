@@ -83,7 +83,7 @@ export default class ObjectDom extends Object{
     }
 
     remove(){
-        this.clear();
+        super.remove();
         objectManager.removeFromWorld(this);
         scene.remove(this);
     }

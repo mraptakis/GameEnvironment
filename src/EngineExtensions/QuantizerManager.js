@@ -30,6 +30,8 @@ export default class QuantizerManager extends Manager{
             }); 
             
         an.onStart = ()=>{
+            if(!object.isAlive)
+                object = Engine.ObjectManager.objects[object.id];
             object.setAnimator(an);
         };
         an.onAction = (th)=>{
@@ -42,7 +44,7 @@ export default class QuantizerManager extends Manager{
         an.start({
             animation: animation,
             timestamp: bb.fastGet('state','gameTime'),
-        })
+        });
     }
 
     moveTo(object, goalX, goalY, delay){

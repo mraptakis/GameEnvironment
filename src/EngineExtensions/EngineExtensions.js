@@ -12,8 +12,8 @@ Engine.installManager('PauseManager', new PauseManager());
 import GridManager from './GridManager.js'
 Engine.installManager('GridManager', new GridManager());
 
-import CalculatorManager from './CalculatorManager.js'
-Engine.installManager('CalculatorManager', new CalculatorManager());
+import DistanceManager from './DistanceManager.js'
+Engine.installManager('DistanceManager', new DistanceManager());
 
 
 import QuantizerManager from './QuantizerManager.js'

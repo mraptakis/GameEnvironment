@@ -1,6 +1,6 @@
 import Manager from '../Engine/Manager.js'
 
-export default class CalculatorManager extends Manager{
+export default class DistanceManager extends Manager{
 
     constructor() {
         super();
@@ -22,18 +22,6 @@ export default class CalculatorManager extends Manager{
     }
 
     distanceObject(obj1, obj2){
-        // let pos1 = obj1.getPositional();
-        // let pos2 = obj2.getPositional();
-
-        // let center1 = {
-        //     x: pos1.x + (pos1.width/2),
-        //     y: pos1.y + (pos1.height/2)
-        // }
-        // let center2 = {
-        //     x: pos2.x + (pos2.width/2),
-        //     y: pos2.y + (pos2.height/2)
-        // }
-
         let center1 = this.getObjectCenter(obj1);
         let center2 = this.getObjectCenter(obj2);
         

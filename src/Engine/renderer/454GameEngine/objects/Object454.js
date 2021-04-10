@@ -132,9 +132,8 @@ export default class Object454 extends Object{
     }
     
     remove(){
-        if(this._animator !== undefined)this._animator.stop();
-        this._stage = undefined;
-        this.clear();
+        super.remove();
+        this.destroyAnimator();
         objectManager.removeFromWorld(this);
         scene.removeItem(this);
     }
