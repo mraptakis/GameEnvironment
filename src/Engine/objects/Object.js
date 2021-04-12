@@ -140,7 +140,6 @@ export default class Object {
             }
         }
 
-        // console.log(toReturn);
         return toReturn;
     }
 
@@ -209,8 +208,8 @@ export default class Object {
         this.name = newName;
     }
 
-    newFrame() {
-        throw Error("newFrame needs to be implemented");
+    newFrame(){
+        this.triggerEvent('onEachFrame');
     }
 
     add() { // Add this item on renderer

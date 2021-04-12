@@ -17,6 +17,15 @@ export default class PauseManager extends Manager{
         this._timePaused = undefined;
         this._onPauseCB = [];
         this._onResumeCB = [];
+
+        // window.onfocus = ()=>{
+        //     this.resume();
+        // }
+        
+        // window.onblur = ()=>{
+        //     this.pause();
+        // }
+
     }
 
 

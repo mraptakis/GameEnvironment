@@ -61,11 +61,71 @@ export default class GridManager extends Manager{
         return isAttached;
     }
 
+    isPointInGrid(x,y){
+        for(let i in this._gridRectangles){
+            let rect = this._gridRectangles[i];
+            if(rect.x < x 
+            && rect.x + rect.width > x
+            && rect.y < y
+            && rect.y + rect.height > y)
+                return true;
+        }
+        return false;
+    }
+
+    canMove(objID,action){
+        if(action.type === 'x'){
+            let obj = Engine.ObjectManager.objects[objID];
+            let boundingBox = obj.getPositional();
+            if(action.oldVal > action.value){
+                let h = boundingBox.y + boundingBox.height;
+                let w = boundingBox.x + boundingBox.width;
+                for(let i = boundingBox.y; i < h; ++i){
+                    if(this.isPointInGrid(boundingBox.x+2,i)){
+                        obj.setValue('x',action.oldVal);
+                        return;
+                    }
+                }
+            }else{
+                let h = boundingBox.y + boundingBox.height;
+                let w = boundingBox.x + boundingBox.width;
+                for(let i = boundingBox.y; i < h; ++i){
+                    if(this.isPointInGrid(w-2,i)){
+                        obj.setValue('x',action.oldVal);
+                        return;
+                    }
+                }
+            }
+        }else if(action.type === 'y'){
+            let obj = Engine.ObjectManager.objects[objID];
+            let boundingBox = obj.getPositional();
+            if(action.oldVal > action.value){
+                let w = boundingBox.x + boundingBox.width;
+                for(let i = boundingBox.x; i < w; ++i){
+                    if(this.isPointInGrid(i,boundingBox.y)){
+                        obj.setValue('y',action.oldVal);
+                        return;
+                    }
+                }
+            }else{
+                let h = boundingBox.y + boundingBox.height;
+                let w = boundingBox.x + boundingBox.width;
+                for(let i = boundingBox.x; i < w; ++i){
+                    if(this.isPointInGrid(i,h)){
+                        obj.setValue('y',action.oldVal);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
     /*
     *   e: {
     *       type: string,
     *       objectID: string
     *       information: {
+    *           oldVal: all
     *           type: string,
     *           value: all
     *       }   
@@ -74,21 +134,21 @@ export default class GridManager extends Manager{
     onEvent(e){
        if(!Engine.ObjectManager.isSystemObject(e.objectID)){
            if(e.type === 'setValue'){
+                this.canMove(e.objectID,e.information);
                 let obj = Engine.ObjectManager.getObject(e.objectID);
                 if(obj && obj.getOption('isPlatform')){
                     if(e.information.type === 'x'){
-                        let diff = e.information.value - obj.getValue('x');
+                        let diff = e.information.value - e.information.oldVal;
                         this.objectsOnPlatform(obj).forEach((objOnP)=>{
                             objOnP.move(diff,0);
                         })
                     } else if(e.information.type === 'y'){
-                        let diff = e.information.value - obj.getValue('y');
+                        let diff = e.information.value - e.information.oldVal;
                         this.objectsOnPlatform(obj).forEach((objOnP)=>{
                             objOnP.move(0,diff);
                         })
                     }
                 }
-
             }
         }
 

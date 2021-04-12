@@ -14,7 +14,7 @@ class KeyboardObject extends Object {
         this.data.optionHandler.removeOption('isVisible');
         this.data.optionHandler.removeOption('isSolid');
         this.data.optionHandler.removeOption('isCollidable');
-
+        this.data.optionHandler.removeOption('moveWithScroll');
 
         this.data.eventHandler.removeEvent('onCollision');
         this.data.eventHandler.removeEvent('onRemove');

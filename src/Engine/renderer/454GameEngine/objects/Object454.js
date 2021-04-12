@@ -30,6 +30,18 @@ export default class Object454 extends Object{
             getValue: () => {return this._y;}
         });
 
+        this.data.valueHandler.registerValue('width',{
+            tag: "positional",
+            onChange: (value) => {this._width = value;},
+            getValue: () => {return this._width;}
+        });
+
+        this.data.valueHandler.registerValue('height',{
+            tag: "positional",
+            onChange: (value) => {this._height = value;},
+            getValue: () => {return this._height;}
+        });
+
         this.data.valueHandler.registerValue('colour',{
             tag: "texture",
             onChange: (value) => this._color = value,
@@ -62,11 +74,12 @@ export default class Object454 extends Object{
         let toSave = JSON.parse(super.toString());
         toSave._film = this._film;
         toSave._frame = this._frame;
+        if(this.name === 'f')debugger;
         return JSON.stringify(toSave);
     }
 
     setColor(col){
-        this._color = col;
+        this.setValue('colour',col);
     }
 
     getPosition(){
@@ -78,7 +91,6 @@ export default class Object454 extends Object{
     }
     
     getMapCoords(){
-        // return [this._x,this._y];
         if(!this.getOption('moveWithScroll'))
             return [this._x, this._y];
         return [this._x - this._stage.getValue('x'),this._y - this._stage.getValue('y')];
@@ -94,10 +106,6 @@ export default class Object454 extends Object{
     }
 
     animate(){}
-
-    newFrame(){
-        this.triggerEvent('onEachFrame');
-    }
 
     setFrame(newFrame){
         this.setValue('frame',newFrame);

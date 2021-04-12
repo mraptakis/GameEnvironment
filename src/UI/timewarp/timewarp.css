@@ -52,6 +52,7 @@
     text-align: center;
     margin-right: 5px;
     margin-left: 5px;
+    width: 100px;
     color: var(--main-color-text);
     cursor: pointer;
 }
