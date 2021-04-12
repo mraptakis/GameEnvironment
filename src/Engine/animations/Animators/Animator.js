@@ -14,6 +14,7 @@ export default class Animator {
     _state;
 
     _name;
+    _anim;
 
     _finish(){
         if (!this.hasFinished()) {
@@ -21,19 +22,16 @@ export default class Animator {
         }
     }
 
-    constructor(copy){
+    constructor(){
         this._name = 'Animator';
-        if(!copy){
-            this._lastTime = 0;
-            this._state = this.animatorStates.FINISHED;
-            animatorManager.register(this);
-        }else{
-            console.log(copy)
-        }
+        this._lastTime = 0;
+        this._state = this.animatorStates.FINISHED;
+        animatorManager.register(this);
     }
 
     destroy(){
         animatorManager.markAsSuspended(this);
+        this._state = this.animatorStates.STOPPED;
     }
 
     stop(){
@@ -61,18 +59,22 @@ export default class Animator {
         this._onAction = f;
     }
 
+    get animation(){
+        return this._anim;
+    }
+
     notifyAction(){
-        if(this._onAction)this._onAction(this);
+        if(this._onAction)this._onAction(this, this._anim);
     }
 
     notifyStopped(){
         animatorManager.markAsSuspended(this);
-        if(this._onFinish)this._onFinish();
+        if(this._onFinish)this._onFinish(this, this._anim);
     }
 
     notifyStarted(){
         animatorManager.markAsRunning(this);
-        if(this._onStart)this._onStart();
+        if(this._onStart)this._onStart(this, this._anim);
     }
 
 }

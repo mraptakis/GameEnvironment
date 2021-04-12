@@ -185,7 +185,7 @@ export default class TimewarpManager extends Manager{
             });
 
             animator._lastTime = an._lastTime;
-            animator._currentRep = an._currentRep;
+            animator._currentRep = an._currentRep+1;
 
         });
         Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - timeWarp.timeStamp);

@@ -53,6 +53,10 @@ function createObject(item){
         it.setState(s,states[s].transitionFrom,states[s].transitionTo);
     }
 
+    if(item._currState){
+        it.setCurrentState(item._currState)
+    }
+
     it.add();
     if(Engine.PhysicsManager && !Engine.ObjectManager.isSystemObject(it.id))Engine.PhysicsManager.addToWorld(it);
 
@@ -108,8 +112,13 @@ function resetObject(item){
     if(item._film){
         it.setFilm(item._film);
     }
+
     if(item._frame){
         it.setFrame(item._frame);
+    }
+
+    if(item._currState){
+        it.setCurrentState(item._currState)
     }
 
 }

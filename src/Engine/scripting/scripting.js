@@ -2,6 +2,8 @@ import blScr from './blockly/blockly.js'
 import pureJS from './pureJS/pureJS.js'
 // import './pyodide/pyodide.js'
 
+import bb from '../../utils/blackboard.js'
+
 import Manager from '../Manager.js'
 
 export default class ScriptingManager extends Manager{
@@ -25,6 +27,7 @@ export default class ScriptingManager extends Manager{
     }
 
     executeCode(codes,currentObject) {
+        if(bb.fastGet('state','mode') === 'paused')return;
         this._currentEditor.executeCode(codes, currentObject);
     }
 

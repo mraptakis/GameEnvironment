@@ -26,6 +26,7 @@ export default class Object {
     data = {};
 
     _category;
+    _animator;
 
     constructor(_name, _id) {
         this._name = _name;
@@ -50,7 +51,8 @@ export default class Object {
             values:     this.getValues(),
             _name:      this.name,
             _category:  this._category,
-            _id:        this.id
+            _id:        this.id,
+            _currState: this.getCurrentState()
         }
 
         for(let i in this.values){
@@ -166,6 +168,21 @@ export default class Object {
 
     getObject() {
         throw Error("getObject needs to be implemented");
+    }
+
+
+    setAnimator(animator){
+        if(this._animator !== undefined)this._animator.stop();
+        this._animator = animator;
+    }
+
+    getAnimator(){
+        return this._animator;
+    }
+
+    destroyAnimator(){
+        if(this._animator !== undefined)this._animator.destroy();
+        this._animator = undefined;
     }
 
     get id() {

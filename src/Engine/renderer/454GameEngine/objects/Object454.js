@@ -12,7 +12,6 @@ export default class Object454 extends Object{
     _rotation;
     _film;
     _frame;
-    _animator;
 
     constructor(name,id){
         super(name,id);
@@ -110,20 +109,6 @@ export default class Object454 extends Object{
 
     setFilm(film){
         this.setValue('film',film);
-    }
-
-    setAnimator(animator){
-        if(this._animator !== undefined)this._animator.stop();
-        this._animator = animator;
-    }
-
-    getAnimator(){
-        return this._animator;
-    }
-
-    destroyAnimator(){
-        if(this._animator !== undefined)this._animator.destroy();
-        this._animator = undefined;
     }
 
     add(){

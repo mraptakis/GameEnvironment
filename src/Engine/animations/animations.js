@@ -111,18 +111,19 @@ export default class AnimationManager extends Manager{
         let animation = this.getAnimation(anim);
     
         let oldFilm;
-    
-        an.onStart = ()=>{
-            if(!object.isAlive)
+        an.onStart = (animator,an)=>{
+            if(!object.isAlive){
                 object = Engine.ObjectManager.objects[object.id];
+            }
             if(onStart)onStart();
-            object.setAnimator(an);
+            object.setAnimator(animator);
             oldFilm = object.getValue('film');
-            object.setValue('film',animation.film.id);
+            let anim = Engine.AnimationManager.getAnimation(an.id);
+            object.setValue('film',anim.film.id);
         }
-        an.onAction = (th)=>{
-            object.setFrame(th.currentFrame);
-            object.move(th.animation.dx,th.animation.dy);
+        an.onAction = (animator)=>{
+            object.setFrame(animator.currentFrame);
+            object.move(animator.animation.dx,animator.animation.dy);
         };
         an.onFinish = ()=>{
             object.setFrame(0);

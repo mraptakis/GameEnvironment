@@ -65,7 +65,8 @@ class ObjectManager extends Manager{
         return this._objects;
     }
 
-    rename(obj,newName){ //TODO: move it from here
+    rename(obj,newName){
+        // TODO: implement this
         if(this._objectByName[newName] || !this._objects[obj.id])return;
         obj.name = newName;
         this._objectByName[newName] = obj;
