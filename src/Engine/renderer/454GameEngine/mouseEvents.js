@@ -30,12 +30,8 @@ function rightClick(e){
     [mouse.x,mouse.y] = translator(e);
     let aliveItems = objManager.objects;
     for(var it in aliveItems){
-        // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){
-            // aliveItems[it].getObject().click();
-            focusTransition(it);
-            aliveItems[it].triggerEvent('onRightClick');
-            return true;
+            return aliveItems[it];
         }
     }
 }
@@ -58,11 +54,8 @@ function leftClick(e){
     [mouse.x,mouse.y] = translator(e);
     let aliveItems = objManager.objects;
     for(var it in aliveItems){
-        // console.log(aliveItems[it].getPosition());
         if(focused(aliveItems[it],mouse.x,mouse.y)){
-            focusTransition(it);
-            aliveItems[it].triggerEvent('onClick');
-            return true;
+            return aliveItems[it];
         }
     }
     return false;

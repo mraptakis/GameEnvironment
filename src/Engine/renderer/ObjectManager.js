@@ -6,6 +6,8 @@ import O454Manager from './454GameEngine/renderer.js'
 
 import changeFocus from '../../utils/focusedObject.js'
 
+import bb from '../../utils/blackboard.js'
+
 import Manager from '../Manager.js'
 
 class ObjectManager extends Manager{
@@ -141,6 +143,8 @@ clickWrapper.addEventListener('click',(ev)=>{
         if(managers[i].mouseEvents.leftClick){
             let obj = managers[i].mouseEvents.leftClick(ev);
             if(obj){
+                changeFocus(obj.id);
+                obj.triggerEvent('onClick');
                 return;
             }
         }
@@ -164,10 +168,13 @@ clickWrapper.addEventListener('contextmenu',(ev) => {
         if(managers[i].mouseEvents.rightClick){
             let obj = managers[i].mouseEvents.rightClick(ev);
             if(obj){
-                console.log(obj);
+                changeFocus(obj.id);
+                obj.triggerEvent('onRightClick');
+                bb.fastSet('events','contextMenu',{objID: obj.id,event: ev});
                 return;
             }
         }
     }
+    bb.fastSet('events','contextMenu',{objID: envObj.id,event: ev});
     changeFocus(undefined);
 });

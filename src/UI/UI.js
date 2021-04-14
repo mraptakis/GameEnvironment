@@ -13,7 +13,8 @@ const UIs = [
     'toolbar',
     'gridView',
     'objectFloatingInfo',
-    'timewarp'
+    'timewarp',
+    'contextMenu'
 ]
 
 function getFile(id,cb){
