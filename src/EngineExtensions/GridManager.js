@@ -68,21 +68,26 @@ export default class GridManager extends Manager{
             && rect.x + rect.width > x
             && rect.y < y
             && rect.y + rect.height > y)
-                return true;
+                return rect;
         }
         return false;
     }
 
     canMove(objID,action){
+        let obj = Engine.ObjectManager.objects[objID];
+        if(!obj)return;
+
+        if(obj.getOption('moveThroughGrid') === true)return; // === true on purpose
+
+        let collisionRect;
         if(action.type === 'x'){
-            let obj = Engine.ObjectManager.objects[objID];
             let boundingBox = obj.getPositional();
             if(action.oldVal > action.value){
                 let h = boundingBox.y + boundingBox.height;
-                let w = boundingBox.x + boundingBox.width;
                 for(let i = boundingBox.y; i < h; ++i){
-                    if(this.isPointInGrid(boundingBox.x+2,i)){
-                        obj.setValue('x',action.oldVal);
+                    if((collisionRect = this.isPointInGrid(boundingBox.x+1,i))){
+                        //LEFT
+                        obj.setValue('x',collisionRect.x + collisionRect.width-1);
                         return;
                     }
                 }
@@ -90,20 +95,21 @@ export default class GridManager extends Manager{
                 let h = boundingBox.y + boundingBox.height;
                 let w = boundingBox.x + boundingBox.width;
                 for(let i = boundingBox.y; i < h; ++i){
-                    if(this.isPointInGrid(w-2,i)){
-                        obj.setValue('x',action.oldVal);
+                    if((collisionRect = this.isPointInGrid(w-1,i))){
+                        //RIGHT
+                        obj.setValue('x',collisionRect.x - boundingBox.width+1);
                         return;
                     }
                 }
             }
         }else if(action.type === 'y'){
-            let obj = Engine.ObjectManager.objects[objID];
             let boundingBox = obj.getPositional();
             if(action.oldVal > action.value){
                 let w = boundingBox.x + boundingBox.width;
                 for(let i = boundingBox.x; i < w; ++i){
-                    if(this.isPointInGrid(i,boundingBox.y)){
-                        obj.setValue('y',action.oldVal);
+                    if((collisionRect = this.isPointInGrid(i,boundingBox.y))){
+                        //UP
+                        obj.setValue('y',collisionRect.y + collisionRect.height);
                         return;
                     }
                 }
@@ -111,8 +117,9 @@ export default class GridManager extends Manager{
                 let h = boundingBox.y + boundingBox.height;
                 let w = boundingBox.x + boundingBox.width;
                 for(let i = boundingBox.x; i < w; ++i){
-                    if(this.isPointInGrid(i,h)){
-                        obj.setValue('y',action.oldVal);
+                    if((collisionRect = this.isPointInGrid(i,h))){
+                        //DOWN
+                        obj.setValue('y',collisionRect.y - boundingBox.height);
                         return;
                     }
                 }
@@ -134,7 +141,6 @@ export default class GridManager extends Manager{
     onEvent(e){
        if(!Engine.ObjectManager.isSystemObject(e.objectID)){
            if(e.type === 'setValue'){
-                this.canMove(e.objectID,e.information);
                 let obj = Engine.ObjectManager.getObject(e.objectID);
                 if(obj && obj.getOption('isPlatform')){
                     if(e.information.type === 'x'){
@@ -148,6 +154,11 @@ export default class GridManager extends Manager{
                             objOnP.move(0,diff);
                         })
                     }
+                }
+                if(obj && obj.getOption('isSolid')){
+                    this.calculateGrid();
+                }else{
+                    this.canMove(e.objectID,e.information);
                 }
             }
         }

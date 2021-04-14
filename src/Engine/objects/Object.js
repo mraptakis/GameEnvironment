@@ -142,11 +142,7 @@ export default class Object {
 
         return toReturn;
     }
-
-    setColor(col) {
-        throw Error("setColor needs to be implemented");
-    }
-
+    
     setPosition(x,y){
         if(!this.getOption('isMovable'))return;
         this.setValue('x', x);

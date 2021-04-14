@@ -54,7 +54,7 @@ function createObject(item){
     }
 
     if(item._currState){
-        it.setCurrentState(item._currState)
+        it.setCurrentState(item._currState);
     }
 
     it.add();
@@ -118,7 +118,7 @@ function resetObject(item){
     }
 
     if(item._currState){
-        it.setCurrentState(item._currState)
+        it.setCurrentState(item._currState);
     }
 
 }
