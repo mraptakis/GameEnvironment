@@ -168,7 +168,6 @@ clickWrapper.addEventListener('contextmenu',(ev) => {
         if(managers[i].mouseEvents.rightClick){
             let obj = managers[i].mouseEvents.rightClick(ev);
             if(obj){
-                changeFocus(obj.id);
                 obj.triggerEvent('onRightClick');
                 bb.fastSet('events','contextMenu',{objID: obj.id,event: ev});
                 return;
@@ -176,5 +175,4 @@ clickWrapper.addEventListener('contextmenu',(ev) => {
         }
     }
     bb.fastSet('events','contextMenu',{objID: envObj.id,event: ev});
-    changeFocus(undefined);
 });

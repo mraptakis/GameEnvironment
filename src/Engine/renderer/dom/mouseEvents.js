@@ -1,6 +1,5 @@
 import bb from '../../../utils/blackboard.js'
 
-import focusTransition from '../../../utils/focusedObject.js'
 import dragElement from '../../../utils/drag.js';
 
 import objManager from '../ObjectManager.js'

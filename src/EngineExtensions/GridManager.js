@@ -78,16 +78,16 @@ export default class GridManager extends Manager{
         if(!obj)return;
 
         if(obj.getOption('moveThroughGrid') === true)return; // === true on purpose
+        let boundingBox = obj.getPositional();
 
         let collisionRect;
         if(action.type === 'x'){
-            let boundingBox = obj.getPositional();
             if(action.oldVal > action.value){
                 let h = boundingBox.y + boundingBox.height;
                 for(let i = boundingBox.y; i < h; ++i){
-                    if((collisionRect = this.isPointInGrid(boundingBox.x+1,i))){
+                    if((collisionRect = this.isPointInGrid(boundingBox.x + 1,i))){
                         //LEFT
-                        obj.setValue('x',collisionRect.x + collisionRect.width-1);
+                        obj.setValue('x',(collisionRect.x + collisionRect.width) - 1);
                         return;
                     }
                 }
@@ -95,15 +95,14 @@ export default class GridManager extends Manager{
                 let h = boundingBox.y + boundingBox.height;
                 let w = boundingBox.x + boundingBox.width;
                 for(let i = boundingBox.y; i < h; ++i){
-                    if((collisionRect = this.isPointInGrid(w-1,i))){
+                    if((collisionRect = this.isPointInGrid(w - 1,i))){
                         //RIGHT
-                        obj.setValue('x',collisionRect.x - boundingBox.width+1);
+                        obj.setValue('x',(collisionRect.x - boundingBox.width) + 1);
                         return;
                     }
                 }
             }
         }else if(action.type === 'y'){
-            let boundingBox = obj.getPositional();
             if(action.oldVal > action.value){
                 let w = boundingBox.x + boundingBox.width;
                 for(let i = boundingBox.x; i < w; ++i){
