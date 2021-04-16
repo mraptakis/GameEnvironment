@@ -50,7 +50,7 @@ function createObject(item){
 
     for(let s in states){
         it.addState(s);
-        it.setState(s,states[s].transitionFrom,states[s].transitionTo);
+        it.setState(s,states[s].transitionFrom,states[s].transitionTo,states[s].whileInState);
     }
 
     if(item._currState){
@@ -98,7 +98,7 @@ function resetObject(item){
 
     for(let s in states){
         it.addState(s);
-        it.setState(s,states[s].transitionFrom,states[s].transitionTo);
+        it.setState(s,states[s].transitionFrom,states[s].transitionTo,states[s].whileInState);
     }
 
     if(item.values['film']){

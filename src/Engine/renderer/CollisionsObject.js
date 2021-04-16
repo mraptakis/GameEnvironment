@@ -40,10 +40,6 @@ class CollisionsObject extends Object {
         let split = ev.split('_');
         return bb.fastGet('Engine','CollisionManager').setCollision(split[0],split[1],code);
     }
-    
-    newFrame(){
-        this.triggerEvent('onEachFrame');
-    }
 
     setPosition(){}
     add(){}

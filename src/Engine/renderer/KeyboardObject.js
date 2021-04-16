@@ -43,10 +43,7 @@ class KeyboardObject extends Object {
             this.addEvent('UnpressedDigit'+i);
         }
     }
-    
-    newFrame(){
-        this.triggerEvent('onEachFrame');
-    }
+
     add(){}
 
     triggerEvent(ev){

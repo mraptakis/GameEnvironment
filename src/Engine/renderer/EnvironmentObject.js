@@ -124,10 +124,6 @@ class EnvironmentObject extends Object {
 
     add(){}
 
-    newFrame(){
-        this.triggerEvent('onEachFrame');
-    }
-
     remove(){
         throw Error('Environment Object cannot be removed!');
     }

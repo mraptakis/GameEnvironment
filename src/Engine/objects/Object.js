@@ -103,6 +103,13 @@ export default class Object {
             toReturn.states[i]['out of '+i].set = (code) => {
                 this.setState(i,code,undefined);
             }
+            toReturn.states[i]['while in '+i] = {};
+            toReturn.states[i]['while in '+i].get = () => {
+                return state.transitionTo;
+            } 
+            toReturn.states[i]['while in '+i].set = (code) => {
+                this.setState(i,undefined,undefined,code);
+            }
             toReturn.states[i]['go to '+i] = {};
             toReturn.states[i]['go to '+i].get = () => {
                 return state.transitionTo;
@@ -206,6 +213,7 @@ export default class Object {
 
     newFrame(){
         this.triggerEvent('onEachFrame');
+        this.executeInState();
     }
 
     add() { // Add this item on renderer
@@ -287,8 +295,12 @@ Object.prototype.getState = function(state) {
     return this.data.stateHandler.getState(state);
 }
 
-Object.prototype.setState = function(state, transitionFrom, transitionTo) {
-    this.data.stateHandler.setState(state,transitionFrom,transitionTo);
+Object.prototype.executeInState = function () {
+    this.data.stateHandler.executeInState();
+}
+
+Object.prototype.setState = function(state, transitionFrom, transitionTo, whileInState) {
+    this.data.stateHandler.setState({state,transitionFrom,transitionTo, whileInState});
 }
 
 //////////OPTION FUNCTIONS ////////////////////
