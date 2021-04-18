@@ -115,7 +115,7 @@ export default class GridManager extends Manager{
             }else{
                 let h = boundingBox.y + boundingBox.height;
                 let w = boundingBox.x + boundingBox.width;
-                for(let i = boundingBox.x; i < w; ++i){
+                for(let i = boundingBox.x + 1; i < w; ++i){
                     if((collisionRect = this.isPointInGrid(i,h))){
                         //DOWN
                         obj.setValue('y',collisionRect.y - boundingBox.height);
