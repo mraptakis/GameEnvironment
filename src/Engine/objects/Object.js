@@ -105,7 +105,7 @@ export default class Object {
             }
             toReturn.states[i]['while in '+i] = {};
             toReturn.states[i]['while in '+i].get = () => {
-                return state.transitionTo;
+                return state.whileInState;
             } 
             toReturn.states[i]['while in '+i].set = (code) => {
                 this.setState(i,undefined,undefined,code);

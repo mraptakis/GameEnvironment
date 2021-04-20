@@ -27,7 +27,6 @@ function createObject(item){
     let states = item.states;
 
     for(let a in options){
-        if(!it.hasOption(a))it.addOption(a);
         it.setOption(a,options[a].val);
         if(options[a].onChange){
             it.setOptionCode(a, options[a].onChange);
@@ -75,7 +74,6 @@ function resetObject(item){
     let states = item.states;
 
     for(let a in options){
-        if(!it.hasOption(a))it.addOption(a);
         it.setOption(a,options[a].val);
         if(options[a].onChange){
             it.setOptionCode(a, options[a].onChange);
