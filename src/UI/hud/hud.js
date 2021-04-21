@@ -114,7 +114,8 @@ function onHudLoaded(){
         let states  = codes.states;
         let values  = codes.values;
         let options = codes.options;
-
+        let collisi = codes.collisions;
+        
         let eventSplit = document.createElement('div');
         eventSplit.classList = 'tabSplitter';
         eventSplit.innerHTML = 'Events';
@@ -191,6 +192,25 @@ function onHudLoaded(){
             elem.innerHTML = i;
             elem.style.marginLeft = '10%';
             elem.addEventListener('click',tabInfo(i,options[i].get));
+            eventsTab.appendChild(elem);
+            if(firstObject){
+                elem.click();
+                firstObject = false;
+            }
+        }
+
+        let collSplit = document.createElement('div');
+        collSplit.classList = 'tabSplitter';
+        collSplit.innerHTML = 'Collisions';
+        eventsTab.appendChild(collSplit);
+
+        for(let i in collisi){
+            codes.stripped[i] = collisi[i];
+            let elem = document.createElement('div');
+            elem.classList = "eventTab";
+            elem.innerHTML = i;
+            elem.style.marginLeft = '10%';
+            elem.addEventListener('click',tabInfo(i,collisi[i].get));
             eventsTab.appendChild(elem);
             if(firstObject){
                 elem.click();

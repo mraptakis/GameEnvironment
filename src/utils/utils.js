@@ -25,7 +25,8 @@ function createObject(item){
     let options = item.options;
     let events = item.events;
     let states = item.states;
-
+    let colls  = item.collisions;
+    
     for(let a in options){
         it.setOption(a,options[a].val);
         if(options[a].onChange){
@@ -50,6 +51,11 @@ function createObject(item){
     for(let s in states){
         it.addState(s);
         it.setState(s,states[s].transitionFrom,states[s].transitionTo,states[s].whileInState);
+    }
+
+    for(let c in colls){
+        it.addCollision(c);
+        it.setCollision(c,colls[c].code);
     }
 
     if(item._currState){
@@ -72,6 +78,7 @@ function resetObject(item){
     let options = item.options;
     let events = item.events;
     let states = item.states;
+    let colls  = item.collisions;
 
     for(let a in options){
         it.setOption(a,options[a].val);
@@ -97,6 +104,10 @@ function resetObject(item){
     for(let s in states){
         it.addState(s);
         it.setState(s,states[s].transitionFrom,states[s].transitionTo,states[s].whileInState);
+    }
+
+    for(let c in colls){
+        it.setCollision(c,colls[c].code);
     }
 
     if(item.values['film']){
