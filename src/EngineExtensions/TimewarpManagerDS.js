@@ -158,7 +158,7 @@ export default class TimewarpManager extends Manager{
     }
 
     resumeFromRecording(timeStamp){
-
+        this.stopPlayback();
         let timeWarp = this._timeWarping[timeStamp];
         if(!timeWarp)throw Error('Tried to resume a time that was not recorded');
 

@@ -1,5 +1,3 @@
-import Engine from '../../Engine.js'
-
 import collisionHolder from '../../Engine/collisions/collisionHolder.js'
 
 class Collision {

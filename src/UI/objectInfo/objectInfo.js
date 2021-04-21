@@ -350,10 +350,10 @@ function createCollisionsView(cols){
         let rmBut = document.getElementById(`mainInfoBox-body-collisions-main-remove-${name}`);
         rmBut.style.fill = 'red';
         rmBut.style.cursor = 'pointer';
-        rmBut.onclick = () => {
+        rmBut.onclick = (() => {
             obj.removeCollision(name)
             refreshInfoBox(obj.id);
-        }
+        });
 
     };
 }
