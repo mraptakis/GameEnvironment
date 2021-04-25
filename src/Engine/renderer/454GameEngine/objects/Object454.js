@@ -74,16 +74,11 @@ export default class Object454 extends Object{
         let toSave = JSON.parse(super.toString());
         toSave._film = this._film;
         toSave._frame = this._frame;
-        if(this.name === 'f')debugger;
         return JSON.stringify(toSave);
     }
 
     setColor(col){
         this.setValue('colour',col);
-    }
-
-    getPosition(){
-        return [x,y];
     }
 
     getObject(){
@@ -94,15 +89,6 @@ export default class Object454 extends Object{
         if(!this.getOption('moveWithScroll'))
             return [this._x, this._y];
         return [this._x - this._stage.getValue('x'),this._y - this._stage.getValue('y')];
-    }
-
-    getBoundingBox(){
-        return {
-            x: this._x,
-            y: this._y,
-            width: this._width,
-            height: this._height
-        }
     }
 
     animate(){}

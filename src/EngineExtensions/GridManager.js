@@ -23,7 +23,8 @@ export default class GridManager extends Manager{
         this._gridRectangles = [];
         for(let i in objs){
             let obj = objs[i];
-            if(obj.getOption('isSolid') === true){ // === true on purpose to prevent auto conversions
+            if(obj.getOption('isSolid') === true 
+            && obj.getOption('moveWithScroll') === true){ // === true on purpose to prevent auto conversions
                 this._gridRectangles.push(obj.getPositional());
             }
         }
