@@ -20,25 +20,25 @@ export default class Object454 extends Object{
 
         this.data.valueHandler.registerValue('x',{
             tag: "positional",
-            onChange: (value) => {this._x = value;},
+            onChange: (value) => {this._x = Number.parseInt(value);},
             getValue: () => {return this._x;}
         });
 
         this.data.valueHandler.registerValue('y',{
             tag: "positional",
-            onChange: (value) => {this._y = value;},
+            onChange: (value) => {this._y = Number.parseInt(value);},
             getValue: () => {return this._y;}
         });
 
         this.data.valueHandler.registerValue('width',{
             tag: "positional",
-            onChange: (value) => {this._width = value;},
+            onChange: (value) => {this._width = Number.parseInt(value);},
             getValue: () => {return this._width;}
         });
 
         this.data.valueHandler.registerValue('height',{
             tag: "positional",
-            onChange: (value) => {this._height = value;},
+            onChange: (value) => {this._height = Number.parseInt(value);},
             getValue: () => {return this._height;}
         });
 

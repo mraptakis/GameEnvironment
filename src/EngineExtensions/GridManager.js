@@ -114,7 +114,7 @@ export default class GridManager extends Manager{
         }else if(action.type === 'y'){
             if(action.oldVal > action.value){
                 let w = boundingBox.x + boundingBox.width;
-                for(let i = boundingBox.x; i < w; ++i){
+                for(let i = boundingBox.x + 1; i < w; ++i){
                     if((collisionRect = this.isPointInGrid(i,boundingBox.y))){
                         //UP
                         if(this.sameArea(collisionRect,boundingBox))continue;
