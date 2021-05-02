@@ -579,7 +579,7 @@ function showFilms(objWrapper){
             });
             const popuplistener = wrap.addEventListener('click',()=>{
                 createPopUp(items[i]);
-            })
+            });
     
             uiFactory.createElement({
                 classList: 'inventory-window-animationPreview_objName',

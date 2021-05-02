@@ -104,6 +104,33 @@ Blockly.JavaScript['after_seconds_do'] = function(block) {
     return 'AK.callIn(()=>{'+argument1+'},[],'+argument0+');';
 };
 
+Blockly.Blocks['copy_object'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.AK_SET_OBJECT)
+            .appendField(new Blockly.FieldDropdown(this.getObjects()), 'MODE')
+            .appendField(Blockly.Msg.AK_APOSS);
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object field.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    },
+    getObjects(){
+        let map = objManager.objects;
+        let categs = [];
+        for(let i in map){
+                categs.push([map[i].name,i]);
+        }
+        return categs;
+    }
+};
+
+Blockly.JavaScript['copy_object'] = function(block) {
+    let obj_val = block.getFieldValue('MODE');
+    return `AK.copyObject(AK.getObjectByID('${obj_val}');`;
+};
+
 Blockly.Blocks['create_object'] = {
     init: function() {
         this.appendValueInput('Categ')

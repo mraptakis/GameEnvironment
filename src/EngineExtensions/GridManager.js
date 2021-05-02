@@ -142,7 +142,7 @@ export default class GridManager extends Manager{
     *   e: {
     *       type: string,
     *       objectID: string
-    *       information: {
+    *       data: {
     *           oldVal: all
     *           type: string,
     *           value: all
@@ -154,13 +154,13 @@ export default class GridManager extends Manager{
            if(e.type === 'setValue'){
                 let obj = Engine.ObjectManager.getObject(e.objectID);
                 if(obj && obj.getOption('isPlatform')){
-                    if(e.information.type === 'x'){
-                        let diff = e.information.value - e.information.oldVal;
+                    if(e.data.type === 'x'){
+                        let diff = e.data.value - e.data.oldVal;
                         this.objectsOnPlatform(obj).forEach((objOnP)=>{
                             objOnP.move(diff,0);
                         })
-                    } else if(e.information.type === 'y'){
-                        let diff = e.information.value - e.information.oldVal;
+                    } else if(e.data.type === 'y'){
+                        let diff = e.data.value - e.data.oldVal;
                         this.objectsOnPlatform(obj).forEach((objOnP)=>{
                             objOnP.move(0,diff);
                         })
@@ -169,7 +169,7 @@ export default class GridManager extends Manager{
                 if(obj && obj.getOption('isSolid')){
                     this.calculateGrid();
                 }
-                this.canMove(e.objectID,e.information);
+                this.canMove(e.objectID,e.data);
             }
         }
 
