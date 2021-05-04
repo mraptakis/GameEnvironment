@@ -30,6 +30,7 @@ export default class QuantizerManager extends Manager{
                 delay: this._QuantizeMS
             }); 
             
+        if(!object)return;
         an.onStart = ()=>{
             if(!object.isAlive)
                 object = Engine.ObjectManager.objects[object.id];
