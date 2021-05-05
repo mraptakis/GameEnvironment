@@ -661,10 +661,10 @@ Blockly.JavaScript['play_animation_extended'] = function(block) {
 
     return `AK.playAnimation(
         {
-           object: ${argument1},
-           anim: '${argument0}',
-           onStart: ()=>{eval(${statements_onstart || ''})},
-           onFinish: ()=>{eval(${statements_onend || ''})}
+            object: ${argument1},
+            anim: '${argument0}',
+            onStart: ${statements_onstart || ''},
+            onFinish: ${statements_onend || ''}
         })`;
 };
 

@@ -36,6 +36,7 @@ export default class ClipboardManager extends Manager{
     paste(){
         let obj = this.top();
         let oldName = obj._name;
+        obj._name = obj._name.replace(/\(.*\)/,'');
         obj._name = obj._name+'('+Math.floor(Math.random() * 1000000)+')';
         let newObj = utils.createObject(obj);
         newObj.triggerEvent('onGameStart');
