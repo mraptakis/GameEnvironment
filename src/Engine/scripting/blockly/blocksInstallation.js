@@ -107,14 +107,12 @@ Blockly.JavaScript['after_seconds_do'] = function(block) {
 Blockly.Blocks['copy_object'] = {
     init: function() {
         this.appendDummyInput()
-            .appendField(Blockly.Msg.AK_SET_OBJECT)
+            .appendField('copy')
             .appendField(new Blockly.FieldDropdown(this.getObjects()), 'MODE')
-            .appendField(Blockly.Msg.AK_APOSS);
         this.setColour(colourPalette.object);
         this.setTooltip('Get an object field.');
         this.setHelpUrl('none');
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
+        this.setOutput(true, 'ObjectCat');
     },
     getObjects(){
         let map = objManager.objects;
