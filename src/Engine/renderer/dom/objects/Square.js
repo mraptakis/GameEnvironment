@@ -4,10 +4,8 @@ import Object from './ObjectDom.js'
 export default class Square extends Object {
     
     constructor({name,texture,dim,div},id){
-        super(name,id);
-        
-        if(div)this.div = div;
-        else this.createElement({name,texture,dim});
+        super(name,id,{div,texture,dim});
+
         
         this.data.valueHandler.registerValue('width',{
             tag: "positional",

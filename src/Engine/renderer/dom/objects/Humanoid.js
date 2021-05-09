@@ -3,8 +3,20 @@ import Object from './ObjectDom.js'
 export default class Humanoid extends Object {
     
     constructor({name,texture,dim},id){
-        super(name,id);
+        super(name,id,{texture,dim});
 
+        this._category = 'Humanoid';
+
+    }
+    
+    setColor(col){
+        let children = [ ...this.div.children ];
+        children.map(child => {
+            child.style.backgroundColor = col;
+        })
+    }
+
+    createElement({name,texture,dim}){
         this.div = document.createElement('div');
         this.div.id = name;
         let X = (dim&&dim.width)?dim.width:50;
@@ -105,16 +117,6 @@ export default class Humanoid extends Object {
 
 
         this.div.style.transform = 'rotate(45deg)';
-
-        this._category = 'Humanoid';
-
-    }
-    
-    setColor(col){
-        let children = [ ...this.div.children ];
-        children.map(child => {
-            child.style.backgroundColor = col;
-        })
     }
 
 }
