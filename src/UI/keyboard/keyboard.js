@@ -9,14 +9,24 @@ export default {
 };
 
 function onKeyboardInteraction(value){
-    function action(){
+    const keyboard = Engine.ObjectManager.getObjectByName('Keyboard');
+    function pressed(){
         if(isNaN(value))
-            Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent('PressedKey'+value);
+            keyboard.triggerEvent('PressedKey'+value);
         else
-            Engine.ObjectManager.getObjectByName('Keyboard').triggerEvent('PressedDigit'+value);
+            keyboard.triggerEvent('PressedDigit'+value);
+    }
+    function unpressed(){
+        if(isNaN(value))
+            keyboard.triggerEvent('UnpressedKey'+value);
+        else
+            keyboard.triggerEvent('UnpressedDigit'+value);
     }
 
-    return action;
+    return {
+        pressed,
+        unpressed
+    };
 }
 
 
@@ -24,6 +34,8 @@ function onKeyboardLoaded(){
 
     let keys = [...document.getElementsByClassName("keyboardKey")];
     keys.forEach(key => {
-        key.addEventListener('click',onKeyboardInteraction(key.innerHTML));
-    })
+        let actions = onKeyboardInteraction(key.innerHTML);
+        key.onmousedown = () => actions.pressed();
+        key.onmouseup = () => actions.unpressed();
+    });
 }

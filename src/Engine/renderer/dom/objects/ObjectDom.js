@@ -19,7 +19,7 @@ export default class ObjectDom extends Object{
                 temp.innerHTML = extra.div;
                 this.div = temp.firstChild;
             }else{
-                this.div = div;
+                this.div = extra.div;
             }
         }
         else this.createElement({name,...extra});
