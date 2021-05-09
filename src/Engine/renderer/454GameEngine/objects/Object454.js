@@ -48,6 +48,11 @@ export default class Object454 extends Object{
             getValue: () => {return this._color;}
         });
 
+        this.data.valueHandler.registerValue('zIndex',{
+            tag: 'render',
+            value: 0,
+            onChange: (val) => scene.sortObjects(this,val),
+        });
 
         this.data.valueHandler.registerValue('film',{
             tag: 'render',
