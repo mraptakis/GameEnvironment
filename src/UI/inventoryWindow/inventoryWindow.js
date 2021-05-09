@@ -78,14 +78,25 @@ function onSettingsInventoryLoaded(){
         }
     }
 
-    if(Engine.hasManager('ObjectSnapshotManager')){
+    if(Engine.hasManager('SnapshotManager')){
         uiFactory.createElement({
             classList: 'inventory-window-tabs-item',
-            innerHTML: 'Object Snapshot',
+            innerHTML: 'Snapshots',
             parent: tabDiv
         }).onclick = () => {
-            focusTab('Object Snapshot');
+            focusTab('Snapshots');
             showSnapshots(body);
+        }
+    }
+
+    if(Engine.hasManager('SnapshotManager')){
+        uiFactory.createElement({
+            classList: 'inventory-window-tabs-item',
+            innerHTML: 'Scenes',
+            parent: tabDiv
+        }).onclick = () => {
+            focusTab('Scenes');
+            showScenes(body);
         }
     }
 
@@ -94,13 +105,57 @@ function onSettingsInventoryLoaded(){
 
 }
 
+function checkAndAddEmpty(objWrapper,object){
+    const objKeys = Object.keys(object);
+    if(objKeys.length === 0){
+        uiFactory.createElement({
+            parent: objWrapper,
+            id: 'inventory-empty-text',
+            innerHTML: 'Nothing to be shown'
+        });
+    }
+}
+
+
 function clear(){
     removeAllAnimators();
+}
+
+function showScenes(objWrapper){
+    objWrapper.innerHTML = '';
+    const items = Engine.SnapshotManager.getAllSceneSnapshots();
+    
+    checkAndAddEmpty(objWrapper,items);
+
+    for(let i in items){
+        const wrap = uiFactory.createElement({
+            parent: objWrapper,
+            classList: 'inventory-window-itemWrapper'
+        });
+
+        uiFactory.createElement({
+            parent: wrap,
+            classList: 'inventory-window-objName',
+            innerHTML: items[i].time
+        });
+
+        uiFactory.createElement({
+            parent: wrap,
+            classList: 'inventory-window-body',
+            innerHTML: 'Click to reset to scene ('+items[i].name+')'
+        });
+
+        wrap.onclick = ()=>{
+            Engine.SnapshotManager.resetSceneToSnapshot(i);
+            closeInventoryWindow();
+        }
+    }
 }
 
 function showCollisions(objWrapper){
     objWrapper.innerHTML = '';
     const items = Engine.CollisionManager.getAllCollisions();
+    checkAndAddEmpty(objWrapper,items);
 
     for(let i in items){
         const wrap = uiFactory.createElement({
@@ -130,7 +185,8 @@ function showCollisions(objWrapper){
 function showSnapshots(objWrapper){
     objWrapper.innerHTML = '';
 
-    let allSnapshots = Engine.ObjectSnapshotManager.getAllSnapshots();
+    let allSnapshots = Engine.SnapshotManager.getAllSnapshots();
+    checkAndAddEmpty(objWrapper,allSnapshots);
     for(let i in allSnapshots){
         let currSnapshots = allSnapshots[i];
         currSnapshots.forEach((snap,index)=>{
@@ -156,7 +212,7 @@ function showSnapshots(objWrapper){
             body.style.cursor = 'pointer';
             
             body.onclick = () => {
-                Engine.ObjectSnapshotManager.resetObjectToSnapshot(i,index);
+                Engine.SnapshotManager.resetObjectToSnapshot(i,index);
                 closeInventoryWindow();
             };
         });
@@ -166,6 +222,7 @@ function showSnapshots(objWrapper){
 function showClipboard(objWrapper){
     objWrapper.innerHTML = '';
     let clipboardObjs = Engine.ClipboardManager.getCollection();
+    checkAndAddEmpty(objWrapper,clipboardObjs);
     clipboardObjs.reverse();
     clipboardObjs.forEach(item=>{
         let wrap = uiFactory.createElement({

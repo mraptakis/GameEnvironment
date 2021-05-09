@@ -27,18 +27,40 @@ function hudState(){
 }
 
 function showHideCodeUI(show = 'block'){
-    let eventsTab = document.getElementById('eventsTab');
-    let infoBar = document.getElementById('infoBar');
-    let languageDiv = document.getElementById('languageDiv');
-    let playScriptButton = document.getElementById('playScriptButton');
-    let showScriptButton = document.getElementById('showScriptButton');
-    let saveScriptButton = document.getElementById('saveScriptButton');
-    languageDiv.style.display = show;
-    eventsTab.style.display = show;
-    infoBar.style.display = show;
-    playScriptButton.style.display = show;
-    saveScriptButton.style.display = show;
-    showScriptButton.style.display = show;
+    document.getElementById('codingArea').style.display = show;
+}
+
+function dragElement(elmnt,ev) {
+    if(!bb.fastGet('settings','moveUIWithControl'))return;
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    dragMouseDown();
+  
+    function dragMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      document.onmousemove = elementDrag;
+    }
+  
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+  
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+  
+      elmnt.style.left = (elmnt.offsetLeft - pos1) + 'px';
+      elmnt.style.top  = (elmnt.offsetTop - pos2) + 'px';
+    }
+  
+    function closeDragElement() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
 }
 
 function onHudLoaded(){
@@ -233,5 +255,18 @@ function onHudLoaded(){
     bb.installWatch('state','FPS',onFPSChange);
 
     ScriptManager.injectInDiv(document.getElementById('languageDiv'));
-    Engine.ClockManager.callIn(showHideCodeUI,'none',200);
+    setTimeout(()=>{
+        showHideCodeUI('none');
+        const codingArea = document.getElementById('codingArea');
+        codingArea.onmousedown = (ev)=>{
+            if(!ev.ctrlKey) return;
+            dragElement(codingArea);
+        }
+        
+        const mainInfoBox = document.getElementById('mainInfoBox');
+        mainInfoBox.onmousedown = (ev)=>{
+            if(!ev.ctrlKey) return;
+            dragElement(mainInfoBox);
+        }
+    },200);
 }

@@ -110,7 +110,6 @@ class UIManager {
     }
 
     convertHTMLtoObjects(node){
-        //TODO: UPDATE THIS FUNCTION
         let children = [ ...node.getElementsByTagName('*') ];
         children.map(child => {
             if(child.attributes.getNamedItem("category")){
@@ -123,8 +122,9 @@ class UIManager {
                         div: child
                     }
                 });
-                obj._x = child.offsetLeft;
-                obj._y = child.offsetTop;
+                obj.setPosition(child.offsetLeft,child.offsetTop);
+                child.style.left = 0;
+                child.style.top = 0;
             }
         })
     }
