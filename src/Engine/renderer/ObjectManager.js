@@ -73,14 +73,17 @@ class ObjectManager extends Manager{
         if(!this._objects[obj.id])return;
         delete this._objects[obj.id];
         delete this._objectByName[obj.name];
-        if(bb.fastGet('state','mode') !== 'paused')
-            bb.fastSet('events','last',{
+        if(bb.fastGet('state','mode') !== 'paused'){
+            const ev = {
                 type: 'removeObject',
                 objectID: obj.id,
                 data: {
                     object: obj
                 }
-            });
+            };
+            bb.fastSet('events','last',ev);
+            bb.fastSet('events','removeObject',ev);
+        }
     }
 
     get objects(){

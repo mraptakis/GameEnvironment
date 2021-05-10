@@ -17,6 +17,7 @@ export default class GridManager extends Manager{
         
         bb.installWatch('events','setValue_x',(e)=>{this.onEvent(e);});
         bb.installWatch('events','setValue_y',(e)=>{this.onEvent(e);});
+        bb.installWatch('events','removeObject',()=>{this.onObjectDeletion();});
     }
 
     calculateGrid(){
@@ -158,6 +159,11 @@ export default class GridManager extends Manager{
                 }
             }
         }
+    }
+
+    onObjectDeletion(){
+        this.calculateGrid();
+        bb.installWatch('events','removeObject',()=>{this.onObjectDeletion();});
     }
 
     /*
