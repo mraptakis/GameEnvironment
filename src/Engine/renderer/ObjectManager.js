@@ -54,14 +54,17 @@ class ObjectManager extends Manager{
         if(this._objects[obj.id] || this._objectByName[obj.name])return;
         this._objects[obj.id] = obj;
         this._objectByName[obj.name] = obj;
-        if(bb.fastGet('state','mode') !== 'paused')
-            bb.fastSet('events','last',{
+        if(bb.fastGet('state','mode') !== 'paused'){
+            const ev = {
                 type: 'addObject',
                 objectID: obj.id,
                 data: {
                     object: obj
                 }
-            });
+            };
+            bb.fastSet('events','last',ev);
+            bb.fastSet('events','addObject',ev);
+        }
     }
 
     removeFromWorld(obj){

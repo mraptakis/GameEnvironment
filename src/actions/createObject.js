@@ -11,7 +11,6 @@ function createObject({category,name,colour,position}){
     if(colour)it.setValue('colour',colour);
     if(position)it.setPosition(position.x,position.y);
     it.add();
-    if(Engine.PhysicsManager)Engine.PhysicsManager.addToWorld(it);
     logManager.logAction("Created Object ["+name+"]");
 }
 

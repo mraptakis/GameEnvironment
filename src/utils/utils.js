@@ -63,7 +63,6 @@ function createObject(item){
     }
 
     it.add();
-    if(Engine.PhysicsManager && !Engine.ObjectManager.isSystemObject(it.id))Engine.PhysicsManager.addToWorld(it);
 
     return it;
 }
