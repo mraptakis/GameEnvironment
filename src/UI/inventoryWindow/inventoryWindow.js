@@ -14,10 +14,17 @@ export default {
     loadOnInstall: true
 };
 
+
+let lastGameState;
+
 function closeInventoryWindow(){
     removeAllAnimators();
     bb.fastGet('UI','hideUI')('inventoryWindow');
     bb.fastGet('UI','removeUI')('inventoryWindow');
+
+    if(lastGameState){
+        bb.fastSet('state','mode',lastGameState);
+    }
 }
 
 function focusTab(tabName){
@@ -35,6 +42,9 @@ function onSettingsInventoryLoaded(){
     document.getElementById('inventory-window-background').addEventListener('click',closeInventoryWindow);
     document.getElementById('inventory-window-head-close').addEventListener('click',closeInventoryWindow);
     
+    lastGameState = bb.fastGet('state','mode');
+    bb.fastSet('state','mode','popUpOpen');
+
     let tabDiv = document.getElementById('inventory-window-tabs');
 
     let body = document.getElementById('inventory-window-body');

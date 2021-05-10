@@ -8,9 +8,15 @@ export default {
     loadOnInstall: true
 };
 
+let lastGameState;
+
 function closeSettingsWindow(){
     bb.fastGet('UI','hideUI')('settingsWindow');
     bb.fastGet('UI','removeUI')('settingsWindow');
+    
+    if(lastGameState){
+        bb.fastSet('state','mode',lastGameState);
+    }
 }
 
 const computedStyle = getComputedStyle(document.documentElement);
@@ -109,6 +115,9 @@ function fillUIsSettings(){
 function onSettingsWindowLoaded(){
     document.getElementById('settings-window-background').addEventListener('click',closeSettingsWindow);
 
+    lastGameState = bb.fastGet('state','mode');
+    bb.fastSet('state','mode','popUpOpen');
+
     const setWindow = document.getElementById('settings-window');
     fillSettings();
     fillUIsSettings();
@@ -145,47 +154,3 @@ function onSettingsWindowLoaded(){
         
     }
 }
-
-
-// Vue solution
-/*
-import Vue from '../../../libs/vue.min.js'
-function onSettingsWindowLoaded(){
-    document.getElementById('settings-window-background').addEventListener('click',closeSettingsWindow);
-
-    fillUIsSettings();
-
-    Vue.component('settings-category', {
-        props: ['settings','catname'],
-        template:`<div class='settings_category'>
-                    <div class='settings_category_name'>{{ catname }}</div>
-                    <settings-item
-                        v-for="set in settings"
-                        v-bind:setting="set"
-                        v-bind:key="set.name"
-                    />
-                </div>`
-    });
-
-    Vue.component('settings-item-input', {
-        props: ['setting'],
-        template: 
-        `<input :type="setting.inputType" :value="setting.initValue" v-model="setting.initValue" v-on:input="setting.onChange"></input>`
-      });
-
-    Vue.component('settings-item', {
-        props: ['setting'],
-        template: 
-        `<div class="objectItem">{{ setting.name }} <settings-item-input v-bind:setting="setting" v-bind:key="setting.name"/></div>`
-      });
-    let vue = new Vue({
-        el: '#settings-window',
-        data: {
-            settings,
-        },
-        methods: {
-            
-        }
-    })
-}
-*/

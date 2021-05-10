@@ -4,6 +4,22 @@ class CollisionHolder {
     constructor(){
     }
 
+    updateObjectName(objName,newName){
+        for(let i in this._collisionReactions){
+            let split = i.split('_');
+            let obj1Name = split[0];
+            let obj2Name = split[1];
+            // console.log(this._collisionReactions[i]);
+            if(obj1Name === objName){
+                this._collisionReactions[`${newName}_${obj2Name}`] = this._collisionReactions[i];
+                delete this._collisionReactions[i];
+            }else if(obj2Name === objName){
+                this._collisionReactions[`${obj1Name}_${newName}`] = this._collisionReactions[i];
+                delete this._collisionReactions[i];
+            }
+        }
+    }
+
     installCollision(first,second,code){
         if(this._collisionReactions[`${first}_${second}`] || this._collisionReactions[`${second}_${first}`])return false;
         this._collisionReactions[`${first}_${second}`] = code || {text: "",code: ""};

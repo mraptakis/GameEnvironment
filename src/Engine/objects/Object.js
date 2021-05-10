@@ -227,7 +227,13 @@ export default class Object {
     }
 
     clear() {
-        delete this.data.eventHandler;
+        for (let i in this.data.stateHandler) {
+            delete this.data.stateHandler[i];
+        }
+        
+        for (let i in this.data.eventHandler) {
+            delete this.data.eventHandler[i];
+        }
 
         for (let i in this.data.optionHandler) {
             delete this.data.optionHandler[i];
@@ -235,6 +241,10 @@ export default class Object {
 
         for (let i in this.data.valueHandler) {
             delete this.data.valueHandler[i];
+        }
+
+        for (let i in this.data.collisionHandler.getCollisions()) {
+            this.data.collisionHandler.removeCollision(i);
         }
 
     }

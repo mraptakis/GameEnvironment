@@ -5,6 +5,10 @@ import Engine from '../../Engine.js'
 import Manager from '../Manager.js'
 
 export default class CollisionManager extends Manager{
+    updateObjectName(objName,newName){
+        collisionHolder.updateObjectName(objName,newName);
+    }
+    
     installCollision(obj1, obj2,codeAsText){
         collisionHolder.installCollision(obj1, obj2, codeAsText);
     }

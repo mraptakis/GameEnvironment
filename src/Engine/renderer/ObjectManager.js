@@ -7,6 +7,8 @@ import changeFocus from '../../utils/focusedObject.js'
 
 import bb from '../../utils/blackboard.js'
 
+import Engine from '../../Engine.js'
+
 import Manager from '../Manager.js'
 
 class ObjectManager extends Manager{
@@ -86,8 +88,8 @@ class ObjectManager extends Manager{
     }
 
     rename(obj,newName){
-        // TODO: implement this
         if(this._objectByName[newName] || !this._objects[obj.id])return;
+        Engine.CollisionManager.updateObjectName(obj.name,newName);
         obj.name = newName;
         this._objectByName[newName] = obj;
     }
