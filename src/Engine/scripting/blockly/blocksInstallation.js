@@ -126,7 +126,7 @@ Blockly.Blocks['copy_object'] = {
 
 Blockly.JavaScript['copy_object'] = function(block) {
     let obj_val = block.getFieldValue('MODE');
-    return `AK.copyObject(AK.getObjectByID('${obj_val}');`;
+    return `AK.copyObject(AK.getObjectByID('${obj_val}').id;`;
 };
 
 Blockly.Blocks['create_object'] = {
@@ -498,7 +498,7 @@ Blockly.Blocks['get_object_field'] = {
             .appendField(new Blockly.FieldDropdown(this.getObjects(),this.validate), 'MODE')
             .appendField(Blockly.Msg.AK_APOSS);
         this.appendDummyInput('values')
-            .appendField(Blockly.Msg.AK_FIELD)
+            .appendField('attribute')
             .appendField(new Blockly.FieldDropdown([["",""]]), 'FIELD');
         this.setColour(colourPalette.object);
         this.setTooltip('Get an object field.');
@@ -519,7 +519,7 @@ Blockly.Blocks['get_object_field'] = {
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')
-            .appendField(Blockly.Msg.AK_FIELD)
+            .appendField('attribute')
             .appendField(new Blockly.FieldDropdown(toAdd), 'FIELD');
     },
 

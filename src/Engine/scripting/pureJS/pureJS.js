@@ -59,6 +59,15 @@ function clearAndLoadFromText(codes){
     // inputArea.value = codes.code;
 };
 
+
+function printInfo(){
+    console.log({
+        id: 'pureJS',
+        API: AK,
+        Blackboard: bb
+    });
+}
+
 function injectInDiv(div) {
     div.style.height = "500px";
     div.style.width = "500px";
@@ -72,5 +81,6 @@ export default {
     currentScriptAsCode,
     executeCode,
     clearAndLoadFromText,
-    injectInDiv
+    injectInDiv,
+    printInfo
 }
