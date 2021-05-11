@@ -20,7 +20,7 @@ function currentScriptAsCode() {
 function executeCode(codes,currentObject) {
     if(!codes)
         return;
-    let prevObject = currObject;
+    const prevObject = currObject;
     currObject = currentObject;
     eval(codes.code);
     currObject = prevObject;

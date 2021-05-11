@@ -37,7 +37,7 @@ class Scene {
     
 
     removeItem(id){
-        let i = this._items.indexOf(id);
+        const i = this._items.indexOf(id);
         this._items.splice(i,1);
     }
 

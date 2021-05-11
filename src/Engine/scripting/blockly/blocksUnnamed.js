@@ -1,15 +1,13 @@
 import objManager from '../../renderer/ObjectManager.js'
 
-import bb from '../../../utils/blackboard.js'
-
 const colourPalette = {
     colour: 24,
     object: 190
 };
 
 function getObjects(){
-    let map = objManager.objects;
-    let categs = [];
+    const map = objManager.objects;
+    const categs = [];
     for(let i in map){
             categs.push([map[i].name,i]);
     }
@@ -17,9 +15,9 @@ function getObjects(){
 }
 
 function getValues(objID){
-    let values = objManager.getObject(objID).getValues();
+    const values = objManager.getObject(objID).getValues();
         
-    let toAdd = [];
+    const toAdd = [];
     
     for(let i in values){
         toAdd.push([i,i])
@@ -31,8 +29,8 @@ function getValues(objID){
 
 
 function getStates(objID){
-    let values = objManager.getObject(objID).getStates();
-    let toAdd = [];
+    const values = objManager.getObject(objID).getStates();
+    const toAdd = [];
     
     for(let i in values){
         toAdd.push([i,i])
@@ -64,7 +62,7 @@ Blockly.Blocks['get_unnamed_object_field'] = {
     },
 
     updateConnections: function(newValue) {
-        let toAdd = getValues(newValue);
+        const toAdd = getValues(newValue);
         this.removeInput('values', /* no error */ true);
         this.appendDummyInput('values')
             .appendField('to get attribute')
@@ -74,9 +72,9 @@ Blockly.Blocks['get_unnamed_object_field'] = {
 };
 
 Blockly.JavaScript['get_unnamed_object_field'] = function(block) {
-    let obj_val = Blockly.JavaScript.statementToCode(block, 'objName',
+    const obj_val = Blockly.JavaScript.statementToCode(block, 'objName',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    let field_val = block.getFieldValue('FIELD');
+    const field_val = block.getFieldValue('FIELD');
     return [`AK.getAttribute(${obj_val},'${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
@@ -103,7 +101,7 @@ Blockly.Blocks['set_unnamed_object_cstate'] = {
     },
 
     updateConnections: function(newValue) {
-        let toAdd = getStates(newValue);
+        const toAdd = getStates(newValue);
         this.removeInput('values', /* no error */ true);
         this.appendDummyInput('values')
             .appendField('to set state')
@@ -113,8 +111,8 @@ Blockly.Blocks['set_unnamed_object_cstate'] = {
 };
 
 Blockly.JavaScript['set_unnamed_object_cstate'] = function(block) {
-    let obj_val = Blockly.JavaScript.statementToCode(block, 'objName',
+    const obj_val = Blockly.JavaScript.statementToCode(block, 'objName',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    let field_val = block.getFieldValue('FIELD');
+    const field_val = block.getFieldValue('FIELD');
     return [`AK.setCurrentState(${obj_val},'${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };

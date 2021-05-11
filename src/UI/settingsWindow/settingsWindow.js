@@ -80,7 +80,7 @@ const settings = {
 }
 
 function fillSettings(){
-    let set = bb.getComponent('settings').itemMap;
+    const set = bb.getComponent('settings').itemMap;
     for(let i in set){
         settings.Settings[i] = {
             onChange: (ev)=>{
@@ -95,9 +95,9 @@ function fillSettings(){
 }
 
 function fillUIsSettings(){
-    let UIs = bb.fastGet('UI','getUIs')();
+    const UIs = bb.fastGet('UI','getUIs')();
 
-    let loaded = bb.fastGet('UI','getLoadedUIs')();
+    const loaded = bb.fastGet('UI','getLoadedUIs')();
 
     UIs.forEach((item)=>{
         if(item === 'settingsWindow')return;
@@ -123,25 +123,25 @@ function onSettingsWindowLoaded(){
     fillUIsSettings();
     
     for(let cat in settings){
-        let catItems = settings[cat];
+        const catItems = settings[cat];
 
-        let wrapper = document.createElement('div');
+        const wrapper = document.createElement('div');
         wrapper.classList = 'settings_category';
         setWindow.appendChild(wrapper);
 
-        let catNameElem = document.createElement('div');
+        const catNameElem = document.createElement('div');
         catNameElem.classList = 'settings_category_name';
         catNameElem.innerHTML = cat;
         wrapper.appendChild(catNameElem);
 
         for(let item in catItems){
-            let setting = catItems[item];
-            let itemWrapper = document.createElement('div');
+            const setting = catItems[item];
+            const itemWrapper = document.createElement('div');
             itemWrapper.classList = 'objectItem';
             itemWrapper.innerHTML = setting.name;
             wrapper.appendChild(itemWrapper);
 
-            let itemInput = document.createElement('input');
+            const itemInput = document.createElement('input');
             itemInput.type = setting.inputType;
             if(setting.inputType === 'checkbox'){
                 itemInput.checked = setting.initValue;

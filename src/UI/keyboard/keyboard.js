@@ -32,9 +32,9 @@ function onKeyboardInteraction(value){
 
 function onKeyboardLoaded(){
 
-    let keys = [...document.getElementsByClassName("keyboardKey")];
+    const keys = [...document.getElementsByClassName("keyboardKey")];
     keys.forEach(key => {
-        let actions = onKeyboardInteraction(key.innerHTML);
+        const actions = onKeyboardInteraction(key.innerHTML);
         key.onmousedown = () => actions.pressed();
         key.onmouseup = () => actions.unpressed();
     });

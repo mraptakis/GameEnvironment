@@ -26,8 +26,8 @@ Blockly.Blocks['moveBy_object'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -36,7 +36,7 @@ Blockly.Blocks['moveBy_object'] = {
 };
 
 Blockly.JavaScript['moveBy_object'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
+    const obj_val = block.getFieldValue('MODE');
     var argument1 = Blockly.JavaScript.valueToCode(block, 'FIELDX',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument2 = Blockly.JavaScript.valueToCode(block, 'FIELDY',
@@ -65,8 +65,8 @@ Blockly.Blocks['moveTo_object'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -75,7 +75,7 @@ Blockly.Blocks['moveTo_object'] = {
 };
 
 Blockly.JavaScript['moveTo_object'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
+    const obj_val = block.getFieldValue('MODE');
     var argument1 = Blockly.JavaScript.valueToCode(block, 'FIELDX',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument2 = Blockly.JavaScript.valueToCode(block, 'FIELDY',
@@ -108,8 +108,8 @@ Blockly.Blocks['moveByMS_object'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -118,7 +118,7 @@ Blockly.Blocks['moveByMS_object'] = {
 };
 
 Blockly.JavaScript['moveByMS_object'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
+    const obj_val = block.getFieldValue('MODE');
     var argument1 = Blockly.JavaScript.valueToCode(block, 'FIELDX',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument2 = Blockly.JavaScript.valueToCode(block, 'FIELDY',
@@ -152,8 +152,8 @@ Blockly.Blocks['moveToMS_object'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -162,7 +162,7 @@ Blockly.Blocks['moveToMS_object'] = {
 };
 
 Blockly.JavaScript['moveToMS_object'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
+    const obj_val = block.getFieldValue('MODE');
     var argument1 = Blockly.JavaScript.valueToCode(block, 'FIELDX',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument2 = Blockly.JavaScript.valueToCode(block, 'FIELDY',

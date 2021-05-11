@@ -15,7 +15,7 @@ export default class ObjectDom extends Object{
                 
         if(extra.div){
             if(typeof extra.div === 'string'){
-                let temp = document.createElement('div');
+                const temp = document.createElement('div');
                 temp.innerHTML = extra.div;
                 this.div = temp.firstChild;
             }else{
@@ -42,7 +42,7 @@ export default class ObjectDom extends Object{
             tag: "positional",
             onChange: (value) => {this.div.style.transform = "rotate("+value+"deg)"},
             getValue: () => {
-                let val = this.div.style.getPropertyValue("transform");
+                const val = this.div.style.getPropertyValue("transform");
                 return (val)?val.slice(7,-4):0;
             }
         });
@@ -59,7 +59,7 @@ export default class ObjectDom extends Object{
     }
 
     toString(){
-        let toSave = JSON.parse(super.toString());
+        const toSave = JSON.parse(super.toString());
         toSave.extra = {
             div: this.div.outerHTML
         }

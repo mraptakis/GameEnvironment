@@ -16,7 +16,7 @@ function actionsDropdown(){
     let isVisible = false;
 
     function getActions(){
-        let actions = [];
+        const actions = [];
         for(let action in bb.getComponent('actions').itemMap){
             actions.push(action);
         }
@@ -24,14 +24,14 @@ function actionsDropdown(){
     }
 
     function createDropdown(){
-        let actions = getActions();
-        let dropdown = document.createElement('div');
+        const actions = getActions();
+        const dropdown = document.createElement('div');
         dropdown.id = 'toolbar_actions_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
         dropdown.style.left = document.getElementById('toolbar_actions').offsetLeft + 'px'; 
         document.body.appendChild(dropdown);
         actions.forEach((item)=>{
-            let ddItem = document.createElement('div');
+            const ddItem = document.createElement('div');
             ddItem.id = 'toolbar_action_'+item;
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = item;
@@ -43,7 +43,7 @@ function actionsDropdown(){
 
     function closeDropdown(){
         isVisible = false;
-        let dropdown = document.getElementById('toolbar_actions_dropdown');
+        const dropdown = document.getElementById('toolbar_actions_dropdown');
         if(dropdown)dropdown.remove();
     }
 
@@ -60,7 +60,7 @@ function objectsDropdown(){
     let isVisible = false;
 
     function getObjects(){
-        let objects = [];
+        const objects = [];
         const liveObjects = Engine.ObjectManager.objects;
         for(let object in liveObjects){
             objects.push(liveObjects[object]);
@@ -69,14 +69,14 @@ function objectsDropdown(){
     }
 
     function createDropdown(){
-        let objects = getObjects();
-        let dropdown = document.createElement('div');
+        const objects = getObjects();
+        const dropdown = document.createElement('div');
         dropdown.id = 'toolbar_liveobjects_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
         dropdown.style.left = document.getElementById('toolbar_liveobjects').offsetLeft + 'px'; 
         document.body.appendChild(dropdown);
         objects.forEach((item)=>{
-            let ddItem = document.createElement('div');
+            const ddItem = document.createElement('div');
             ddItem.id = 'toolbar_object_'+item.id;
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = item.name;
@@ -88,7 +88,7 @@ function objectsDropdown(){
   
     function closeDropdown(){
         isVisible = false;
-        let dropdown = document.getElementById('toolbar_liveobjects_dropdown');
+        const dropdown = document.getElementById('toolbar_liveobjects_dropdown');
         if(dropdown)dropdown.remove();
     }
 
@@ -105,8 +105,8 @@ function eventsDropdown(){
     let isVisible = false;
 
     function getEvents(){
-        let events = [];
-        let focused = bb.fastGet('state','focusedObject');
+        const events = [];
+        const focused = bb.fastGet('state','focusedObject');
         if(!focused)return [];
         for(let event in focused.getEvents()){
             events.push(event);
@@ -115,14 +115,14 @@ function eventsDropdown(){
     }
 
     function createDropdown(){
-        let events = getEvents();
-        let dropdown = document.createElement('div');
+        const events = getEvents();
+        const dropdown = document.createElement('div');
         dropdown.id = 'toolbar_events_dropdown';
         dropdown.classList += 'hudChild toolbar_dropdown';
         dropdown.style.left = document.getElementById('toolbar_events').offsetLeft + 'px'; 
         document.body.appendChild(dropdown);
         events.forEach((item)=>{
-            let ddItem = document.createElement('div');
+            const ddItem = document.createElement('div');
             ddItem.id = 'toolbar_object_'+item;
             ddItem.classList += 'toolbar_dropdown_item';
             ddItem.innerHTML = item;
@@ -134,7 +134,7 @@ function eventsDropdown(){
   
     function closeDropdown(){
         isVisible = false;
-        let dropdown = document.getElementById('toolbar_events_dropdown');
+        const dropdown = document.getElementById('toolbar_events_dropdown');
         if(dropdown)dropdown.remove();
     }
 
@@ -162,7 +162,7 @@ function openInventory(){
 }
 
 function onToolbarLoaded(){
-    let backBut = document.getElementById('toolbar-logo-img');
+    const backBut = document.getElementById('toolbar-logo-img');
     backBut.onclick = (() => {
         window.location = '/';
     });

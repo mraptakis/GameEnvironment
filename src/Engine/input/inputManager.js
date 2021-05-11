@@ -33,7 +33,7 @@ class InputManager extends Manager{
 
         for(let combo in this.keyCombos){
             let isCombo = true;
-            let keysForCombo = this.keyCombos[combo];
+            const keysForCombo = this.keyCombos[combo];
             for(let key in keysForCombo){
                 if(!this.currentlyPressed[keysForCombo[key]])
                     isCombo = false;
@@ -50,7 +50,7 @@ class InputManager extends Manager{
     }
     
     getReleasedKeys(){
-        let toReturn = this.releasedKeys;
+        const toReturn = this.releasedKeys;
         this.releasedKeys = [];
         return toReturn;
     }
@@ -59,7 +59,7 @@ class InputManager extends Manager{
         this.pollKeys();
         let keysPressed = [];
         for(let i in this.currentlyPressed){
-            let currP = this.currentlyPressed[i];
+            const currP = this.currentlyPressed[i];
             if(currP === InputState.TOTRIGGER 
             || currP === InputState.FOREVER){
                 // logManager.logAction(`Action for input ${i}`);

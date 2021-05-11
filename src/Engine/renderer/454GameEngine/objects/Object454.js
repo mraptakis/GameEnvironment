@@ -76,7 +76,7 @@ export default class Object454 extends Object{
     }
 
     toString(){
-        let toSave = JSON.parse(super.toString());
+        const toSave = JSON.parse(super.toString());
         toSave._film = this._film;
         toSave._frame = this._frame;
         return JSON.stringify(toSave);

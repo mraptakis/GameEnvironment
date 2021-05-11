@@ -54,7 +54,7 @@ import Engine from '../Engine.js'
 
 
 function dummyAction(){
-    let coin = Engine.ObjectManager.getObjectByName('coin(75245)');
+    const coin = Engine.ObjectManager.getObjectByName('coin(75245)');
     Engine.ObjectManager.rename(coin,'hahaha');
 }
 

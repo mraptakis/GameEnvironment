@@ -115,8 +115,8 @@ Blockly.Blocks['copy_object'] = {
         this.setOutput(true, 'ObjectCat');
     },
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -125,7 +125,7 @@ Blockly.Blocks['copy_object'] = {
 };
 
 Blockly.JavaScript['copy_object'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
+    const obj_val = block.getFieldValue('MODE');
     return `AK.copyObject(AK.getObjectByID('${obj_val}').id;`;
 };
 
@@ -183,8 +183,8 @@ Blockly.Blocks['dropdown_categ'] = {
       },
 
     getCategories(){
-        let map = objManager.constr;
-        let categs = [];
+        const map = objManager.constr;
+        const categs = [];
         for(let i in map){
                 categs.push([i,i]);
         }
@@ -193,7 +193,7 @@ Blockly.Blocks['dropdown_categ'] = {
 };
 
 Blockly.JavaScript['dropdown_categ'] = function(block) {
-    let inp_val = block.getFieldValue('TESTF');
+    const inp_val = block.getFieldValue('TESTF');
     return '"' + inp_val + '"';
 };
 
@@ -224,8 +224,8 @@ Blockly.Blocks['object_flags'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getOptions();
-        let toAdd = [];
+        const values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getOptions();
+        const toAdd = [];
         
         for(let i in values){
             toAdd.push([i,i])
@@ -245,8 +245,8 @@ Blockly.Blocks['object_flags'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -255,9 +255,9 @@ Blockly.Blocks['object_flags'] = {
 };
 
 Blockly.JavaScript['object_flags'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
-    let field_val = block.getFieldValue('FIELD');
-    let val_val = Blockly.JavaScript.valueToCode (block, 'value',
+    const obj_val = block.getFieldValue('MODE');
+    const field_val = block.getFieldValue('FIELD');
+    const val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     return `AK.setFlag(AK.getObjectByID('${obj_val}'),'${field_val}',${val_val});`;
 };
@@ -287,8 +287,8 @@ Blockly.Blocks['object_field'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getValues();
-        let toAdd = [];
+        const values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getValues();
+        const toAdd = [];
         
         for(let i in values){
             toAdd.push([i,i])
@@ -305,8 +305,8 @@ Blockly.Blocks['object_field'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -315,9 +315,9 @@ Blockly.Blocks['object_field'] = {
 };
 
 Blockly.JavaScript['object_field'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
-    let field_val = block.getFieldValue('FIELD');
-    let val_val = Blockly.JavaScript.valueToCode (block, 'value',
+    const obj_val = block.getFieldValue('MODE');
+    const field_val = block.getFieldValue('FIELD');
+    const val_val = Blockly.JavaScript.valueToCode (block, 'value',
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     return `AK.setAttribute(AK.getObjectByID('${obj_val}'),'${field_val}',${val_val});`;
 };
@@ -344,8 +344,8 @@ Blockly.Blocks['object_state'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getStates();
-        let toAdd = [];
+        const values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getStates();
+        const toAdd = [];
         
         for(let i in values){
             toAdd.push([i,i])
@@ -360,8 +360,8 @@ Blockly.Blocks['object_state'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -370,8 +370,8 @@ Blockly.Blocks['object_state'] = {
 };
 
 Blockly.JavaScript['object_state'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
-    let field_val = block.getFieldValue('FIELD');
+    const obj_val = block.getFieldValue('MODE');
+    const field_val = block.getFieldValue('FIELD');
     return `AK.setCurrentState(AK.getObjectByID('${obj_val}'),'${field_val}');`;
 };
 
@@ -391,8 +391,8 @@ Blockly.Blocks['get_current_state'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -401,7 +401,7 @@ Blockly.Blocks['get_current_state'] = {
 };
 
 Blockly.JavaScript['get_current_state'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
+    const obj_val = block.getFieldValue('MODE');
     return [`AK.getObjectByID('${obj_val}').getCurrentState()`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
@@ -427,8 +427,8 @@ Blockly.Blocks['object_event'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getEvents();
-        let toAdd = [];
+        const values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getEvents();
+        const toAdd = [];
         
         for(let i in values){
             toAdd.push([i,i])
@@ -443,8 +443,8 @@ Blockly.Blocks['object_event'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -453,8 +453,8 @@ Blockly.Blocks['object_event'] = {
 };
 
 Blockly.JavaScript['object_event'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
-    let field_val = block.getFieldValue('FIELD');
+    const obj_val = block.getFieldValue('MODE');
+    const field_val = block.getFieldValue('FIELD');
     return `AK.triggerEvent(AK.getObjectByID('${obj_val}'),'${field_val}');`;
 };
 
@@ -470,8 +470,8 @@ Blockly.Blocks['dropdown_obj'] = {
       },
 
     getCategories(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -480,7 +480,7 @@ Blockly.Blocks['dropdown_obj'] = {
 };
 
 Blockly.JavaScript['dropdown_obj'] = function(block) {
-    let inp_val = block.getFieldValue('TESTF');
+    const inp_val = block.getFieldValue('TESTF');
     return `AK.getObjectByID('${inp_val}')`;
 };
 
@@ -507,9 +507,9 @@ Blockly.Blocks['get_object_field'] = {
     },
 
     updateConnections: function(newValue) {
-        let values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getValues();
+        const values = bb.fastGet('Engine','ObjectManager').getObject(newValue).getValues();
         
-        let toAdd = [];
+        const toAdd = [];
         
         for(let i in values){
             toAdd.push([i,i])
@@ -524,8 +524,8 @@ Blockly.Blocks['get_object_field'] = {
     },
 
     getObjects(){
-        let map = objManager.objects;
-        let categs = [];
+        const map = objManager.objects;
+        const categs = [];
         for(let i in map){
                 categs.push([map[i].name,i]);
         }
@@ -534,8 +534,8 @@ Blockly.Blocks['get_object_field'] = {
 };
 
 Blockly.JavaScript['get_object_field'] = function(block) {
-    let obj_val = block.getFieldValue('MODE');
-    let field_val = block.getFieldValue('FIELD');
+    const obj_val = block.getFieldValue('MODE');
+    const field_val = block.getFieldValue('FIELD');
     return [`AK.getAttribute(AK.getObjectByID('${obj_val}'),'${field_val}')`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
@@ -575,9 +575,9 @@ Blockly.Blocks['get_animation'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('Engine','AnimationManager').getAllAnimations();
+        const map = bb.fastGet('Engine','AnimationManager').getAllAnimations();
 
-        let categs = [];
+        const categs = [];
         for(let i in map){
                 categs.push([i,i]);
         }
@@ -591,7 +591,7 @@ Blockly.Blocks['get_animation'] = {
 };
 
 Blockly.JavaScript['get_animation'] = function(block) {
-    let inp_val = block.getFieldValue('TESTF');
+    const inp_val = block.getFieldValue('TESTF');
     return inp_val;
 };
 
@@ -693,8 +693,8 @@ Blockly.Blocks['play_sound'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('Engine','SoundManager').getSounds();
-        let categs = [];
+        const map = bb.fastGet('Engine','SoundManager').getSounds();
+        const categs = [];
         for(let i in map){
                 categs.push([i,i]);
         }
@@ -703,7 +703,7 @@ Blockly.Blocks['play_sound'] = {
 };
 
 Blockly.JavaScript['play_sound'] = function(block) {
-    let inp_val = block.getFieldValue('SOUND');
+    const inp_val = block.getFieldValue('SOUND');
     return `AK.playSound('${inp_val}');`;
 };
 
@@ -720,8 +720,8 @@ Blockly.Blocks['stop_sound'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('Engine','SoundManager').getSounds();
-        let categs = [];
+        const map = bb.fastGet('Engine','SoundManager').getSounds();
+        const categs = [];
         for(let i in map){
                 categs.push([i,i]);
         }
@@ -730,7 +730,7 @@ Blockly.Blocks['stop_sound'] = {
 };
 
 Blockly.JavaScript['stop_sound'] = function(block) {
-    let inp_val = block.getFieldValue('SOUND');
+    const inp_val = block.getFieldValue('SOUND');
     return `AK.stopSound('${inp_val}');`;
 };
 
@@ -748,8 +748,8 @@ Blockly.Blocks['play_background'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('Engine','SoundManager').getSounds();
-        let categs = [];
+        const map = bb.fastGet('Engine','SoundManager').getSounds();
+        const categs = [];
         for(let i in map){
                 categs.push([i,i]);
         }
@@ -758,7 +758,7 @@ Blockly.Blocks['play_background'] = {
 };
 
 Blockly.JavaScript['play_background'] = function(block) {
-    let inp_val = block.getFieldValue('SOUND');
+    const inp_val = block.getFieldValue('SOUND');
     return `AK.playBackground('${inp_val}');`;
 };
 
@@ -776,8 +776,8 @@ Blockly.Blocks['stop_background'] = {
       },
 
     getCategories(){
-        let map = bb.fastGet('Engine','SoundManager').getSounds()
-        let categs = [];
+        const map = bb.fastGet('Engine','SoundManager').getSounds()
+        const categs = [];
         for(let i in map){
                 categs.push([i,i]);
         }
@@ -786,7 +786,7 @@ Blockly.Blocks['stop_background'] = {
 };
 
 Blockly.JavaScript['stop_background'] = function(block) {
-    let inp_val = block.getFieldValue('SOUND');
+    const inp_val = block.getFieldValue('SOUND');
     return `AK.stopBackground('${inp_val}');`;
 };
 
@@ -822,7 +822,7 @@ Blockly.Blocks['is_key_pressed'] = {
 };
 
 Blockly.JavaScript['is_key_pressed'] = function(block) {
-    let key = Blockly.JavaScript.valueToCode(block, 'key',
+    const key = Blockly.JavaScript.valueToCode(block, 'key',
         Blockly.JavaScript.ORDER_NONE) || '\'\'';
     return [`AK.isKeyPressed(${key})`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };

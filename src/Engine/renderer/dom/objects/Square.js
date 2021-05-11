@@ -26,8 +26,8 @@ export default class Square extends Object {
     createElement({name,texture,dim}){
         this.div = document.createElement('div');
         this.div.id = name;
-        let X = (dim&&dim.width)?dim.width:50;
-        let Y = (dim&&dim.height)?dim.height:50;
+        const X = (dim&&dim.width)?dim.width:50;
+        const Y = (dim&&dim.height)?dim.height:50;
         this.div.style.width = X+"px";
         this.div.style.height = Y+"px";
         this.div.style.position = "absolute";

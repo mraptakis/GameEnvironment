@@ -17,8 +17,13 @@ export default class CollisionManager extends Manager{
         return collisionHolder.removeCollision(obj1ID, obj2ID);
     }
 
-    checkAndInvoke(arrOfObj){
-        collisionHolder.checkAndInvoke(arrOfObj, (codes,currObj)=>{Engine.ScriptingManager.executeCode(codes,currObj)});
+    checkAndInvoke(){
+        collisionHolder.checkAndInvoke(
+            Engine.ObjectManager.objects, 
+            (codes,currObj)=>{
+                Engine.ScriptingManager.executeCode(codes,currObj);
+            }
+        );
     }
 
     getAllCollisions(){

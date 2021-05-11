@@ -3,7 +3,7 @@ import logManager from '../../../utils/logs.js'
 import bb from '../../../utils/blackboard.js'
 import AK from '../../../utils/API.js' //THIS IS ON PURPOSE SO IT WILL BE ON EVAL
 
-let inputArea = document.createElement('textarea');
+const inputArea = document.createElement('textarea');
 inputArea.style.width = "100%";
 inputArea.style.height = "100%";
 inputArea.style.resize = "none";
@@ -21,7 +21,7 @@ let currObject;
 function executeCode(codes,currentObject){
     if(!codes || !codes.code)
         return;
-    let prevObject = currObject;
+    const prevObject = currObject;
     currObject = currentObject;
     try{
         eval(codes.code);

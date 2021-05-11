@@ -112,13 +112,13 @@ class ObjectManager extends Manager{
     }
 
     addSystemObject(objID){
-        let index = this._systemObjects.indexOf(objID);
+        const index = this._systemObjects.indexOf(objID);
         if(index !== -1) throw Error('trying to add a system object that is already registered');
         this._systemObjects.push(objID);
     }
 
     isSystemObject(objID){
-        let index = this._systemObjects.indexOf(objID);
+        const index = this._systemObjects.indexOf(objID);
         return (index > -1);
     }
 }
@@ -127,13 +127,13 @@ const objectManager = new ObjectManager();
 
 export default objectManager;
 
-let _454Const = O454Manager.constructors;
+const _454Const = O454Manager.constructors;
 
 for(let i in _454Const){
     objectManager.addConstructor(i,_454Const[i]);
 }
 
-let domConst = ODomManager.constructors;
+const domConst = ODomManager.constructors;
 
 for(let i in domConst){
     objectManager.addConstructor(i,domConst[i]);
@@ -148,7 +148,7 @@ objectManager.addToWorld(keyObj);
 objectManager.addSystemObject(envObj.id);
 objectManager.addSystemObject(keyObj.id);
 
-let clickWrapper = document.createElement('div');
+const clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";
     clickWrapper.style.width = '100vw';
     clickWrapper.style.height = '100vh';
@@ -158,11 +158,11 @@ let clickWrapper = document.createElement('div');
     clickWrapper.style.left = 0;
     document.body.appendChild(clickWrapper);
 
-let managers = objectManager.getRenderManagers();
+const managers = objectManager.getRenderManagers();
 clickWrapper.addEventListener('click',(ev)=>{
     const objects = objectManager.objects;
     for(let i in objects){
-        let obj = objects[i];
+        const obj = objects[i];
         if(obj.div){
             obj.div.style.zIndex = '0';
         }
@@ -170,7 +170,7 @@ clickWrapper.addEventListener('click',(ev)=>{
     window.focus();
     for(let i in managers){
         if(managers[i].mouseEvents.leftClick){
-            let obj = managers[i].mouseEvents.leftClick(ev);
+            const obj = managers[i].mouseEvents.leftClick(ev);
             if(obj){
                 changeFocus(obj.id);
                 obj.triggerEvent('onClick');
@@ -184,7 +184,7 @@ clickWrapper.addEventListener('click',(ev)=>{
 clickWrapper.addEventListener('mousedown',(ev)=>{
     for(let i in managers){
         if(managers[i].mouseEvents.mouseDown){
-            let obj = managers[i].mouseEvents.mouseDown(ev);
+            const obj = managers[i].mouseEvents.mouseDown(ev);
             if(obj){
                 return;
             }
@@ -195,7 +195,7 @@ clickWrapper.addEventListener('mousedown',(ev)=>{
 clickWrapper.addEventListener('contextmenu',(ev) => {
     for(let i in managers){
         if(managers[i].mouseEvents.rightClick){
-            let obj = managers[i].mouseEvents.rightClick(ev);
+            const obj = managers[i].mouseEvents.rightClick(ev);
             if(obj){
                 obj.triggerEvent('onRightClick');
                 bb.fastSet('events','contextMenu',{objID: obj.id,event: ev});

@@ -18,14 +18,14 @@ function createObject(item){
     if(Engine.ObjectManager.getObjectByName(item._name)){
         it = Engine.ObjectManager.getObjectByName(item._name);
     }else{ 
-        let category = Engine.ObjectManager.getConstructor(item._category);
+        const category = Engine.ObjectManager.getConstructor(item._category);
         it = new category({name:item._name,...item.extra},item._id);
     }
-    let values = item.values;
-    let options = item.options;
-    let events = item.events;
-    let states = item.states;
-    let colls  = item.collisions;
+    const values = item.values;
+    const options = item.options;
+    const events = item.events;
+    const states = item.states;
+    const colls  = item.collisions;
     
     for(let a in options){
         it.setOption(a,options[a].val);
@@ -68,16 +68,16 @@ function createObject(item){
 }
 
 function resetObject(item){
-    let it = Engine.ObjectManager.objects[item._id];
+    const it = Engine.ObjectManager.objects[item._id];
     if(!it){
         createObject(item);
         return;
     }
-    let values = item.values;
-    let options = item.options;
-    let events = item.events;
-    let states = item.states;
-    let colls  = item.collisions;
+    const values = item.values;
+    const options = item.options;
+    const events = item.events;
+    const states = item.states;
+    const colls  = item.collisions;
 
     for(let a in options){
         it.setOption(a,options[a].val);
@@ -150,7 +150,7 @@ function inputHandler(key) {
 
 function msToString(ms1,ms2){
     let diff = Math.abs(ms1 - ms2);
-    let secs = Number.parseInt(diff / 1000);
+    const secs = Number.parseInt(diff / 1000);
     diff = diff - secs*1000;
     return `${secs},${diff}s`;
 }
