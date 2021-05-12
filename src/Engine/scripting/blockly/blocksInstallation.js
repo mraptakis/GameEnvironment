@@ -101,7 +101,7 @@ Blockly.JavaScript['after_seconds_do'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     var argument1 = Blockly.JavaScript.statementToCode(block, 'Value',
     Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
-    return 'AK.callIn(()=>{'+argument1+'},[],'+argument0+');';
+    return 'AK.callIn(({currObject})=>{'+argument1+'},{currObject},'+argument0+');';
 };
 
 Blockly.Blocks['copy_object'] = {

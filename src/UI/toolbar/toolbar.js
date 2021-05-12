@@ -4,6 +4,8 @@ import focusedObject from '../../utils/focusedObject.js'
 
 import Engine from '../../Engine.js'
 
+import uiFactory from '../../utils/UIFactory.js'
+
 export default {
     name:'toolbar',
     link: './src/UI/toolbar/toolbar.ahtml',
@@ -161,6 +163,46 @@ function openInventory(){
     bb.fastGet('UI','loadUI')(invWindow.name);
 }
 
+function onSearch(ev){
+    if(document.getElementById('toolbar_search_result'))document.getElementById('toolbar_search_result').remove();
+    const query = ev.target.value;
+    console.log(query);
+
+    if(query === '')return;
+
+    const objects = Engine.ObjectManager.objects;
+
+    const arr = [];
+    for(let i in objects){
+        if(objects[i].name.includes(query))arr.push(objects[i].name);
+    }
+
+    console.log(arr);
+    const searchRes = uiFactory.createElement({
+        parent: document.body,
+        id: 'toolbar_search_result',
+        classList: 'toolbar_dropdown'
+    });
+
+    const searchBar = document.getElementById('toolbar_search');
+
+    searchRes.style.top = searchBar.offsetTop + searchBar.offsetHeight + 'px';
+    searchRes.style.left = searchBar.offsetLeft + 'px';
+
+    arr.forEach((name)=>{
+        uiFactory.createElement({
+            parent: searchRes,
+            classList: 'toolbar_dropdown_item',
+            innerHTML: name
+        }).onclick = ()=>{
+            searchRes.remove();
+            searchBar.value = '';
+            const obj = Engine.ObjectManager.getObjectByName(name);
+            focusedObject(obj.id);
+        };
+    });
+}
+
 function onToolbarLoaded(){
     const backBut = document.getElementById('toolbar-logo-img');
     backBut.onclick = (() => {
@@ -184,5 +226,7 @@ function onToolbarLoaded(){
 
     document.getElementById('toolbar_settings').addEventListener('click',openSettings);
     document.getElementById('toolbar_inventory').addEventListener('click',openInventory);
+
+    document.getElementById('toolbar_search').onkeyup = onSearch;
 
 }
