@@ -627,6 +627,27 @@ Blockly.JavaScript['play_animation'] = function(block) {
         });`;
 };
 
+Blockly.Blocks['stop_animation'] = {
+    init: function() {
+        this.appendValueInput('Obj')
+            .setCheck('Object')
+            .appendField("stop animation on "+Blockly.Msg.AK_OBJECT);
+        this.setColour(colourPalette.colour);
+        this.setTooltip('remove an object with the given arguments.');
+        this.setHelpUrl('none');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        return 0;
+    }
+};
+
+Blockly.JavaScript['stop_animation'] = function(block) {
+    var argument0 = Blockly.JavaScript.statementToCode(block, 'Obj',
+    Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+    argument0 = argument0.trim();
+    return `AK.stopAnimation(${argument0});`;
+};
+
 Blockly.Blocks['play_animation_extended'] = {
     init: function() {
         this.appendValueInput("Anim")

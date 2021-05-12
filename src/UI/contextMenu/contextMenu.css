@@ -11,6 +11,15 @@
     background-color: white;
 }
 
+#contextMenu-name {
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    background-color: var(--secondary-color);
+    color: var(--main-color-text);
+    text-align: center;
+}
+
 .contextMenu-item {
     width: 195px;
     height: 30px;

@@ -28,6 +28,7 @@
     <category name="Animations" colour="%{BKY_MATH_HUE}">
       <block type="get_animation"></block>
       <block type="play_animation"></block>
+      <block type="stop_animation"></block>
       <block type="play_animation_extended"></block>
     </category>
     <category name="Unnamed Objects" colour="%{BKY_COLOUR_HUE}">
@@ -44,6 +45,7 @@
       <block type="moveTo_object"></block>
       <block type="moveByMS_object"></block>
       <block type="moveToMS_object"></block>
+      <block type="obj_is_solid_below"></block>
     </category> 
     <category name="Sounds" colour="%{BKY_LOOPS_HUE}">
       <block type="play_sound"></block>

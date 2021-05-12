@@ -171,3 +171,22 @@ Blockly.JavaScript['moveToMS_object'] = function(block) {
     Blockly.JavaScript.ORDER_NONE) || '\'\'';
     return `AK.moveToInMSeconds(AK.getObjectByID("${obj_val}"), ${argument1}, ${argument2}, ${argument3});`;
 };
+
+
+Blockly.Blocks['obj_is_solid_below'] = {
+    init: function() {
+        this.appendValueInput('objName')
+            .setCheck('Object')
+            .appendField('is solid below');
+        this.setColour(colourPalette.object);
+        this.setTooltip('Get an object field.');
+        this.setHelpUrl('none');
+        this.setOutput(true, 'Boolean');
+    }
+};
+
+Blockly.JavaScript['obj_is_solid_below'] = function(block) {
+    const obj_val = Blockly.JavaScript.statementToCode(block, 'objName',
+    Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    return [`AK.isSolidBelow(${obj_val})`,Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};

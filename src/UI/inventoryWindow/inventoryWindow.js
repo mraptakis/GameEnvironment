@@ -496,8 +496,8 @@ function createPopUp(film){
     createAnim.innerHTML = 'Create Animation';
     editArea.appendChild(createAnim);
 
-    const animator = new FRAnimator();
-    const animation = new FRAnimation({
+    let animator = new FRAnimator();
+    let animation = new FRAnimation({
         id: '_prevCreate',
         start: 0,
         end: film.totalFrames - 1,
@@ -509,7 +509,7 @@ function createPopUp(film){
     const ctx = mainAreaCanvas.getContext('2d');
     ctx.width = mainAreaCanvas.width;
     ctx.height = mainAreaCanvas.height;
-    const firstBox = film.getFrameBox(0);
+    let firstBox = film.getFrameBox(0);
     const currPos = {
         x:(mainAreaCanvas.width/2) - ((firstBox.width/firstBox.height)*(mainAreaCanvas.height/3)/2),
         y:(mainAreaCanvas.height/2) - ((mainAreaCanvas.height/3)/2)
@@ -619,7 +619,7 @@ function showFilms(objWrapper){
     function currFilmsShowing(){
         
         const starting = (currPage - 1) * itemsPerPage;
-        const ending = (currPage) * itemsPerPage;
+        let ending = (currPage) * itemsPerPage;
         if(ending > (keys.length)) ending = keys.length;
         pageSwapWrap.innerHTML = '';
         for(let i = 1; i <= pages; ++i){
