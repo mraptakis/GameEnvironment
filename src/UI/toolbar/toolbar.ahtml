@@ -25,5 +25,5 @@
         Inventory
     </div>
 
-    <input id="toolbar_search" class="toolbar_item_right"></input>
+    <input id="toolbar_search" placeholder="Search:object name" class="toolbar_item_right"></input>
 </div>

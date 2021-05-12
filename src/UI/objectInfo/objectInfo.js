@@ -426,7 +426,7 @@ function updateInfo(obj){
     }
 
     document.getElementById('mainInfoBox-head-categ').innerHTML = 'Category: '+obj.getCategory();
-
+    document.getElementById('mainInfoBox-head-id').innerHTML = 'ID: '+obj.id;
     fillObjectActions(obj);
 
     const addStateBut = document.getElementById('mainInfoBox-body-states-add');

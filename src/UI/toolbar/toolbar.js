@@ -166,7 +166,6 @@ function openInventory(){
 function onSearch(ev){
     if(document.getElementById('toolbar_search_result'))document.getElementById('toolbar_search_result').remove();
     const query = ev.target.value;
-    console.log(query);
 
     if(query === '')return;
 
@@ -174,10 +173,9 @@ function onSearch(ev){
 
     const arr = [];
     for(let i in objects){
-        if(objects[i].name.includes(query))arr.push(objects[i].name);
+        if(objects[i].name.toLowerCase().includes(query.toLowerCase()))arr.push(objects[i].name);
     }
 
-    console.log(arr);
     const searchRes = uiFactory.createElement({
         parent: document.body,
         id: 'toolbar_search_result',

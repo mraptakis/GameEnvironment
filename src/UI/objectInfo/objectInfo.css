@@ -160,6 +160,16 @@
     line-height: 21px;
 }
 
+#mainInfoBox-head-id {
+    margin-top: 10px;
+    font-style: normal;
+    font-weight: normal;
+    margin-left: 20px;
+    font-size: 18px;
+    line-height: 21px;
+    overflow: hidden;
+}
+
 #mainInfoBox-options {
     position: absolute;
     top: 0;
