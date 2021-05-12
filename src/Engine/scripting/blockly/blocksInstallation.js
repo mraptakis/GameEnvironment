@@ -231,7 +231,7 @@ Blockly.Blocks['object_flags'] = {
             toAdd.push([i,i])
         }
         
-        if(toAdd.length === 0)toAdd = [['','']];
+        if(toAdd.length === 0)toAdd.push(['','']);
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')
@@ -351,7 +351,7 @@ Blockly.Blocks['object_state'] = {
             toAdd.push([i,i])
         }
         
-        if(toAdd.length === 0)toAdd = [['','']];
+        if(toAdd.length === 0)toAdd.push(['','']);
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')
@@ -434,7 +434,7 @@ Blockly.Blocks['object_event'] = {
             toAdd.push([i,i])
         }
         
-        if(toAdd.length === 0)toAdd = [['','']];
+        if(toAdd.length === 0)toAdd.push(['','']);
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')
@@ -515,7 +515,7 @@ Blockly.Blocks['get_object_field'] = {
             toAdd.push([i,i])
         }
         
-        if(toAdd.length === 0)toAdd = [['','']];
+        if(toAdd.length === 0)toAdd.push(['','']);
         this.removeInput('values', /* no error */ true);
         this.removeInput('value',true);
         this.appendDummyInput('values')

@@ -510,7 +510,7 @@ function createPopUp(film){
     ctx.width = mainAreaCanvas.width;
     ctx.height = mainAreaCanvas.height;
     let firstBox = film.getFrameBox(0);
-    const currPos = {
+    let currPos = {
         x:(mainAreaCanvas.width/2) - ((firstBox.width/firstBox.height)*(mainAreaCanvas.height/3)/2),
         y:(mainAreaCanvas.height/2) - ((mainAreaCanvas.height/3)/2)
     };

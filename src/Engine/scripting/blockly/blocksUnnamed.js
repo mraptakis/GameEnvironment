@@ -23,7 +23,7 @@ function getValues(objID){
         toAdd.push([i,i])
     }
     
-    if(toAdd.length === 0)toAdd = [['','']];
+    if(toAdd.length === 0)toAdd.push(['','']);
     return toAdd;
 }
 
