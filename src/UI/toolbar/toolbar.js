@@ -252,5 +252,10 @@ function onToolbarLoaded(){
     document.getElementById('toolbar_inventory').addEventListener('click',openInventory);
 
     document.getElementById('toolbar_search').onkeyup = onSearch;
-
+    
+    document.getElementById('toolbar_saveLocal').style.cursor = 'pointer';
+    document.getElementById('toolbar_saveLocal').onclick = ()=>{bb.fastGet('actions','saveToLocal')()};
+    
+    document.getElementById('toolbar_downloadState').style.cursor = 'pointer';
+    document.getElementById('toolbar_downloadState').onclick = ()=>{bb.fastGet('actions','saveToDatabase')()};
 }
