@@ -42,8 +42,8 @@ export default class QuantizerManager extends Manager{
             object.move(th.animation.dx,th.animation.dy);
         };
         an.onFinish = ()=>{
-            if(dx !== 0)object.setValue('x',ogX + x);
-            if(dy !== 0)object.setValue('y',ogY + y);
+            // if(dx !== 0)object.setValue('x',ogX + x);
+            // if(dy !== 0)object.setValue('y',ogY + y);
         };
     
         an.start({
