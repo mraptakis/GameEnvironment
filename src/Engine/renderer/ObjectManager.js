@@ -193,6 +193,7 @@ clickWrapper.addEventListener('mousedown',(ev)=>{
 });
 
 clickWrapper.addEventListener('contextmenu',(ev) => {
+    console.log('a');
     for(let i in managers){
         if(managers[i].mouseEvents.rightClick){
             const obj = managers[i].mouseEvents.rightClick(ev);
