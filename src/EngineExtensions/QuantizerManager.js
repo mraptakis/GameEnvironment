@@ -31,8 +31,8 @@ export default class QuantizerManager extends Manager{
                 delay: this._QuantizeMS
             }); 
             
-        const ogX = object.getValue('x');
-        const ogY = object.getValue('y');
+        // const ogX = object.getValue('x');
+        // const ogY = object.getValue('y');
         an.onStart = ()=>{
             if(!object.isAlive)
                 object = Engine.ObjectManager.objects[object.id];
