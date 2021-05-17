@@ -63,7 +63,7 @@ export default class SaveManager extends Manager{
                     resolve(res);
                 });
             else{
-                let game = localStorage.getItem('saved');
+                const game = localStorage.getItem('saved');
                 if(!game){
                     httpRequest('GET','./assets/json/savedState.json',null).then((resp)=>{
                         let res;

@@ -215,7 +215,7 @@ function onSearch(ev){
             classList: 'toolbar_dropdown_item',
         });
 
-        item.insertAdjacentHTML('beforeend',name.replace(query,'<b style="color:var(--secondary-color);">'+query+'</b>'));
+        item.insertAdjacentHTML('beforeend',name.replace(query,'<b style="color:var(--secondary-color);">'+escape(query)+'</b>'));
 
         item.onclick = ()=>{
             searchRes.remove();
@@ -252,7 +252,7 @@ function onToolbarLoaded(){
     document.getElementById('toolbar_inventory').addEventListener('click',openInventory);
 
     document.getElementById('toolbar_search').onkeyup = onSearch;
-    
+
     document.getElementById('toolbar_saveLocal').style.cursor = 'pointer';
     document.getElementById('toolbar_saveLocal').onclick = ()=>{bb.fastGet('actions','saveToLocal')()};
     
