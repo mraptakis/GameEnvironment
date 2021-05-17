@@ -167,7 +167,7 @@ AK.prototype.isSolidBelow = (obj) => {
     const w = pos.x + pos.width;
     const h = pos.y + pos.height;
 
-    for(let i = pos.x; i < w; ++i){
+    for(let i = pos.x + 1; i < w; ++i){
         if(Engine.GridManager.isPointInGrid(i,h+1))return true;
     }
 
