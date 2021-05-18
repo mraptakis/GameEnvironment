@@ -10,7 +10,6 @@ import utils from '../../utils/utils.js'
 
 export default class SaveManager extends Manager{
     _DBName = 'superMarioReal';
-    // _DBName = 'myPersonalPage';
     _loadRemote = false;
 
     _localState = './assets/json/savedState.json'; 
