@@ -163,11 +163,11 @@ export default class SaveManager extends Manager{
 
     async getGame(){
         const gameInfo = await this.getObjects();
-
         const all = {
             objects: gameInfo.objects,
             films: [],
-            preSet: []
+            preSet: [],
+            extra: gameInfo.info.extra || []
         };
         
         const films = gameInfo.info.films;
@@ -195,8 +195,13 @@ export default class SaveManager extends Manager{
             ],
             films: [
                 this._localAnimationFilms
-            ]
+            ],
+            extra: {}
         };
+        Engine.forEachManager((name,manager)=>{
+            const temp = manager.onSave();
+            if(temp)toSave.info.extra[name] = temp;
+        });
 
         var textFileAsBlob = new Blob([JSON.stringify(toSave)], {type:'application/json'}); 
         var downloadLink = document.createElement("a");
@@ -223,9 +228,16 @@ export default class SaveManager extends Manager{
             ],
             films: [
                 this._localAnimationFilms
-            ]
+            ],
+            extra: {}
         };
+        Engine.forEachManager((name,manager)=>{
+            const temp = manager.onSave();
+            if(temp)toSave.info.extra[name] = temp;
+        });
+        console.log(toSave);
         localStorage.setItem('saved',JSON.stringify(toSave));
+
     }
 
     async setEngine(callback){
@@ -244,6 +256,11 @@ export default class SaveManager extends Manager{
 
         game.preSet.forEach((preSet)=>{
             Engine.AnimationManager.setAnimationManagement(preSet);
+        });
+
+        Engine.forEachManager((name,manager)=>{
+            if(game.extra[name])
+                manager.onRetrieve(game.extra[name]);
         });
         
 
