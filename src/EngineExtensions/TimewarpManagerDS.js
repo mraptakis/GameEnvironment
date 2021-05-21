@@ -58,6 +58,7 @@ export default class TimewarpManager extends Manager{
         bb.installWatch('events','last',this.log.bind(this));
         this._inter = Engine.ClockManager.callIn(this.saveTimeFrame.bind(this),[],interval,true);
         this._startedRecordedTime = bb.fastGet('state','gameTime');
+        this.saveTimeFrame();
     }
 
     stopRecording(){
@@ -171,9 +172,9 @@ export default class TimewarpManager extends Manager{
 
         document.getElementById('timewarp-showRecords').value = timeStamp - this._startedRecordedTime;
     
-        document.getElementById('timewarp-currFrame').innerHTML = `Frame: ${frame}`;
+        document.getElementById('timewarp-current-frame').innerHTML = `Frame: ${frame}`;
 
-        document.getElementById('timewarp-currFrameTime').innerHTML = `Time: ${utils.msToString(this._startedRecordedTime,timeStamp)}`;
+        document.getElementById('timewarp-current-frame-time').innerHTML = `Time: ${utils.msToString(this._startedRecordedTime,timeStamp)}`;
     
     }
 
