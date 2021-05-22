@@ -5,7 +5,7 @@ import utils from '../utils/utils.js'
 const UIs = [
     'keyboard',
     'objectInfo',
-    'createObjectMenu',
+    // 'createObjectMenu',
     'hud',
     'toolbar',
     'gridView',
