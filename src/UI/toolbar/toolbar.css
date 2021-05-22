@@ -119,7 +119,7 @@
     fill: var(--main-color-text);
 }
 
-#toolbar_liveobjects {
+.toolbar_icon {
     width: 18px;
     height: 18px;
     fill: var(--main-color-text);
