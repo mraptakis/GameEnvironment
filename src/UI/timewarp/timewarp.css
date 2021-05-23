@@ -8,6 +8,11 @@
     background-color: var(--main-color);
 }
 
+.timewarp-record-prompt {
+    float: left; 
+    color: var(--main-color-text);
+}
+
 #timewarp-record {
     background-color: red;
     width: 15px;

@@ -1,10 +1,8 @@
-import utils from '../utils/utils.js'
-import bb from '../utils/blackboard.js'
-import Engine from '../Engine.js';
+import utils from '../../../utils/utils.js'
+import bb from '../../../utils/blackboard.js'
+import Engine from '../../../Engine.js';
 
-import Manager from '../Engine/Manager.js'
-
-export default class TimewarpManager extends Manager{
+export default class TimewarpMechanism {
     _timeWarping;
 
     _inter;
@@ -13,7 +11,6 @@ export default class TimewarpManager extends Manager{
     _startedRecordedTime;
 
     constructor(){
-        super();
         this._playBackInter = {};
         this._timeWarping = {};
         this._startedRecordedTime = undefined;
@@ -163,6 +160,10 @@ export default class TimewarpManager extends Manager{
 
         });
         Engine.AnimationManager.timeShift(bb.fastGet('state','gameTime') - timeWarp.timeStamp);
+    }
+
+    get isReoccuring(){
+        return true;
     }
 
 }
