@@ -10,10 +10,16 @@ export default class TimewarpMechanism {
 
     _startedRecordedTime;
 
+    _timelines;
+
+    _currTimeline
+
     constructor(){
         this._playBackInter = {};
         this._timeWarping = {};
+        this._timelines = [];
         this._startedRecordedTime = undefined;
+        this._currTimeline = -1;
     }
 
     async saveTimeFrame(){
@@ -49,6 +55,7 @@ export default class TimewarpMechanism {
 
     stopRecording(){
         Engine.ClockManager.cancelCallBack(this._inter);
+        this.saveTimeline();
         Engine.PauseManager.pause();
     }
 
@@ -164,6 +171,33 @@ export default class TimewarpMechanism {
 
     get isReoccuring(){
         return true;
+    }
+
+    saveTimeline(){
+        this._currTimeline++;
+        this._timelines.push(this._timeWarping);
+    }
+
+    getTimelines(){
+        return this._timelines;
+    }
+
+    clearTimelines(index){
+        if(!index)
+            this._timelines = [];
+        else 
+            this._timelines.length = Number.parseInt(index)+1;
+    }
+
+    get currentTimeline(){
+        return Number.parseInt(this._currTimeline);
+    }
+
+    setTimeline(index){
+        if(index < 0 || index > (this._timelines.length - 1))return;
+        this._currTimeline = index;
+        this._timeWarping = this._timelines[index];
+        this._startedRecordedTime = Number.parseInt(this.getRecordedTimestamps()[0]);
     }
 
 }

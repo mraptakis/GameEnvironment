@@ -32,5 +32,13 @@
       <div id="timewarp-current-frame-time" class="timewarp-text-simple" style="float: left;"></div>
       <div id="timewarp-max-frame-time" class="timewarp-text-simple"></div>
     </div>
+    <div id="timewarp-timelines">
+      <div id="timewarp-rerecord">Click to create new record</div>
+      <label id="timewarp-timelines-wrapper-label" for="timewarp-timelines-wrapper">Jump to Timeline:</label>
+      <select name="timewarp-timelines-wrapper" id="timewarp-timelines-wrapper">
+      
+      </select>
+      <!-- <div id="timewarp-timelines-wrapper">Jump to Timeline</div> -->
+    </div>
   </div>
 </div>

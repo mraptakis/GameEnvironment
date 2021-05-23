@@ -64,4 +64,28 @@ export default class TimewarpManager extends Manager{
         return this._currentTimewarp.isReoccuring;
     }
 
+    saveTimeline(){
+        if(!this._currentTimewarp.isReoccuring)return;
+        this._currentTimewarp.saveTimeline();
+    }
+
+    getTimelines(){
+        if(!this._currentTimewarp.isReoccuring)return;
+        return this._currentTimewarp.getTimelines();
+    }
+
+    clearTimelines(index){
+        if(!this._currentTimewarp.isReoccuring)return;
+        return this._currentTimewarp.clearTimelines(index);
+    }
+
+    setTimeline(index){
+        if(!this._currentTimewarp.isReoccuring)return;
+        return this._currentTimewarp.setTimeline(index);
+    }
+
+    getCurrentTimeline(){
+        if(!this._currentTimewarp.isReoccuring)return;
+        return this._currentTimewarp.currentTimeline;
+    }
 }
