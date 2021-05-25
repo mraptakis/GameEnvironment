@@ -51,5 +51,6 @@ function openPrompt({title, description, onAccept, onDecline}){
 
 
 function onPromptViewLoaded(){
+    bb.fastSet('settings', 'Show Prompt On Actions', true);
     bb.installWatch('events', 'openPrompt', (promptInfo) => openPrompt(promptInfo));
 }
