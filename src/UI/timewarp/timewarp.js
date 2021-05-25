@@ -2,6 +2,8 @@ import Engine from '../../Engine.js'
 
 import uiFactory from '../../utils/UIFactory.js'
 
+import bb from '../../utils/blackboard.js'
+
 export default {
     name:'timewarp',
     link: './src/UI/timewarp/timewarp.ahtml',
@@ -90,14 +92,20 @@ function renderPlaybackUI(){
 
     const resumeBut = document.getElementById('timewarp-resume');
         resumeBut.style.width = '20%';
-        resumeBut.onclick = ()=>{      
-            changeTimewarpState('idle'); 
-            const number = Number.parseInt(range.value);
-            const realNumber = getLowerNumber(recordedTimes,number);
-            Engine.TimewarpManager.resumeFromRecording(firstTime+realNumber);
-            if(Engine.TimewarpManager.isReoccuring()){
-                Engine.TimewarpManager.clearTimelines();
-            }
+        resumeBut.onclick = ()=>{
+            bb.fastSet('events','openPrompt',{
+                title: 'Continue From Recording',
+                description: 'If you accept you will lose all the current recordings and you will continue from the recorded stop point',
+                onAccept: ()=>{
+                    changeTimewarpState('idle'); 
+                    const number = Number.parseInt(range.value);
+                    const realNumber = getLowerNumber(recordedTimes,number);
+                    Engine.TimewarpManager.resumeFromRecording(firstTime+realNumber);
+                    if(Engine.TimewarpManager.isReoccuring()){
+                        Engine.TimewarpManager.clearTimelines();
+                    }
+                }
+            });
         }
 
     const showForwardSingle = document.getElementById('timewarp-showForwardSingle');
@@ -165,11 +173,26 @@ function renderPlaybackUI(){
     }
     const reRecord = document.getElementById('timewarp-rerecord');
     reRecord.onclick = () => {
-        Engine.TimewarpManager.clearTimelines(timelinesWrapper.value);
-        Engine.PauseManager.resume();
-        changeTimewarpState('recording');
-        Engine.TimewarpManager.startRecording(0);
-        renderRecordingUI();
+        const currTimeline = (Number.parseInt(timelinesWrapper.value)+1);
+        if(currTimeline < timelines.length){
+            bb.fastSet('events','openPrompt',{
+                title: 'Continue From Recording',
+                description: 'If you accept you will lose all the extra recordings after timeline #'+currTimeline,
+                onAccept: ()=>{
+                    Engine.TimewarpManager.clearTimelines(timelinesWrapper.value);
+                    Engine.PauseManager.resume();
+                    changeTimewarpState('recording');
+                    Engine.TimewarpManager.startRecording(0);
+                    renderRecordingUI();
+                }
+            });
+        } else {
+            Engine.TimewarpManager.clearTimelines(timelinesWrapper.value);
+            Engine.PauseManager.resume();
+            changeTimewarpState('recording');
+            Engine.TimewarpManager.startRecording(0);
+            renderRecordingUI();
+        }
     }
         
 }
