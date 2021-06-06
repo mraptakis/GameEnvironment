@@ -17,15 +17,16 @@ let text;
 function showFeedback(feedbackInfo){
     if(callback)Engine.ClockManager.cancelCallBack(callback);
 
-    text.innerHTML = feedbackInfo;
-    block.style.visibility = 'visible';
-    block.style.opacity = '1';
+    if(bb.fastGet('settings', 'Show Action Feedback')){
+        text.innerHTML = feedbackInfo;
+        block.style.visibility = 'visible';
+        block.style.opacity = '1';
 
-    callback = Engine.ClockManager.callIn(()=>{
-        callback = undefined;
-        block.style.opacity = '0';
-    },undefined,1000);
-
+        callback = Engine.ClockManager.callIn(()=>{
+            callback = undefined;
+            block.style.opacity = '0';
+        },undefined,1000);
+    }
 
     bb.installWatch('events', 'showFeedback', (feedbackInfo) => showFeedback(feedbackInfo));
 }

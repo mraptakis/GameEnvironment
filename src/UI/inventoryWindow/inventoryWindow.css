@@ -267,7 +267,7 @@
     background-color: var(--canvas-default-bg-color);
 }
 
-#animationWorkshopCreate_popup_editarea_play {
+.animationWorkshopCreate_popup_editarea_button {
     cursor: pointer;
     text-align: center;
     padding: 5px;
@@ -276,21 +276,8 @@
     color: var(--main-color-text);
 }
 
-#animationWorkshopCreate_popup_editarea_create {
-    cursor: pointer;
-    text-align: center;
-    padding: 5px;
-    margin: 5px;
-    background-color: var(--main-color);
-    color: var(--main-color-text);
-}
 
-#animationWorkshopCreate_popup_editarea_play:hover {
-    text-decoration: underline;
-    background-color: var(--main-color-hover);
-}
-
-#animationWorkshopCreate_popup_editarea_create:hover {
+.animationWorkshopCreate_popup_editarea_button:hover {
     text-decoration: underline;
     background-color: var(--main-color-hover);
 }

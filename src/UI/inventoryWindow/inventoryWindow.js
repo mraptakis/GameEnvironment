@@ -60,6 +60,15 @@ function onSettingsInventoryLoaded(){
     }
 
     uiFactory.createElement({
+        classList: 'inventory-window-tabs-item  inventory-window-tabs-item-selected',
+        innerHTML: 'Animations',
+        parent: tabDiv
+    }).onclick = () => {
+        focusTab('Animations');
+        showAnimations(body);
+    }
+
+    uiFactory.createElement({
         classList: 'inventory-window-tabs-item',
         innerHTML: 'Objects',
         parent: tabDiv
@@ -129,6 +138,84 @@ function checkAndAddEmpty(objWrapper,object){
 
 function clear(){
     removeAllAnimators();
+}
+
+function showAnimations(objWrapper){
+    objWrapper.innerHTML = '';
+    
+    const animations = Engine.AnimationManager.getAllAnimations();
+    
+    for(let i in animations){
+        // console.log(i);
+        const animation = animations[i].animation;
+        const film = animations[i].film;
+
+        const wrap = uiFactory.createElement({
+            classList: 'inventory-window-animationPreview_itemWrapper',
+            parent: objWrapper
+        });
+        const popuplistener = wrap.addEventListener('click',()=>{
+            createPopUp(film,{
+                id: animation.id,
+                dx: animation.dx,
+                dy: animation.dy,
+                reps: animation.reps,
+                delay: animation.delay
+            });
+        });
+
+        uiFactory.createElement({
+            classList: 'inventory-window-animationPreview_objName',
+            innerHTML: i,
+            parent: wrap
+        });
+
+        const body = uiFactory.createElement({
+            classList: 'inventory-window-animationPreview_body',
+            parent: wrap
+        });
+
+        const anim = uiFactory.createElement({
+            type: 'canvas',
+            classList: 'inventory-window-animationPreview_film',
+            parent: body
+        });
+        const ctx = anim.getContext('2d');
+        ctx.canvas.width = anim.offsetWidth;
+        ctx.canvas.height = anim.offsetHeight;
+
+        const animator = new FRAnimator();
+        const newAnimation = new FRAnimation({
+            id: '_prev_'+animation.id,
+            start: animation.startFrame,
+            end: animation.endFrame,
+            reps: -1,
+            delay: animation.delay
+        });
+
+        animator.onAction = (th)=>{
+            const firstBox = film.getFrameBox(th.currentFrame);
+            ctx.clearRect(0,0,anim.width,anim.height);
+            ctx.drawImage(bb.fastGet('assets',film.bitmap),
+                firstBox.x,firstBox.y,firstBox.width,firstBox.height,
+                0,0,anim.height*(firstBox.width/firstBox.height), anim.height);
+        };
+
+        
+    
+        animator.start({
+            animation: newAnimation,
+            timestamp: bb.fastGet('state','gameTime'),
+        });
+
+
+        animatorsForPreview.push(()=>{
+            animator.stop();
+            wrap.removeEventListener('click',popuplistener);
+        });
+    }
+
+
 }
 
 function showScenes(objWrapper){
@@ -414,7 +501,7 @@ function removeAllAnimators(){
     animatorsForPreview.forEach((an)=>an());
 }
 
-function createPopUp(film){
+function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90,dx: 0, dy: 0,reps: -1}){
     const wrap = document.createElement('div');
     wrap.id = 'animationWorkshopCreateWrapper';
     document.body.appendChild(wrap);
@@ -490,7 +577,7 @@ function createPopUp(film){
     delaySlider.min = '20';
     delaySlider.max = '200';
     delaySlider.step = '1';
-    delaySlider.value = '90';
+    delaySlider.value = delay;
     delaySlider.classList += 'animationWorkshopCreate_popup_editarea_value';
     delayWrapper.appendChild(delaySlider);
 
@@ -508,7 +595,7 @@ function createPopUp(film){
     dxInput.min = '-50';
     dxInput.max = '50';
     dxInput.step = '1';
-    dxInput.value = '0';
+    dxInput.value = dx;
     dxWrapper.appendChild(dxInput);    
     
     const dyWrapper = document.createElement('div');
@@ -525,7 +612,7 @@ function createPopUp(film){
     dyInput.min = '-50';
     dyInput.max = '50';
     dyInput.step = '1';
-    dyInput.value = '0';
+    dyInput.value = dy;
     dyWrapper.appendChild(dyInput);
 
     const repsWrapper = document.createElement('div');
@@ -542,7 +629,7 @@ function createPopUp(film){
     repsInput.min = '-1';
     repsInput.max = '100';
     repsInput.step = '1';
-    repsInput.value = '-1';
+    repsInput.value = reps;
     repsWrapper.appendChild(repsInput);
 
     const idWrapper = document.createElement('div');
@@ -558,31 +645,41 @@ function createPopUp(film){
     idInput.type = 'text';
     idInput.classList = 'animationWorkshopCreate_popup_editarea_value';
     idInput.placeholder = 'my animation';
+    if(id){
+        idInput.value = id;
+        idInput.readOnly = true;
+    }
     idWrapper.appendChild(idInput);
 
     const startAnim = document.createElement('div');
-    startAnim.id = 'animationWorkshopCreate_popup_editarea_play';
+    startAnim.classList = 'animationWorkshopCreate_popup_editarea_button';
     startAnim.innerHTML = 'Reset Position';
     editArea.appendChild(startAnim);
 
+    const replayAnim = document.createElement('div');
+    replayAnim.classList = 'animationWorkshopCreate_popup_editarea_button';
+    replayAnim.innerHTML = 'Replay Animation';
+    editArea.appendChild(replayAnim);
+
     const createAnim = document.createElement('div');
-    createAnim.id = 'animationWorkshopCreate_popup_editarea_create';
-    createAnim.innerHTML = 'Create Animation';
+    createAnim.classList = 'animationWorkshopCreate_popup_editarea_button';
+    createAnim.innerHTML = (id)?'Update Animation':'Create Animation';
     editArea.appendChild(createAnim);
+
 
     let animator = new FRAnimator();
     let animation = new FRAnimation({
         id: '_prevCreate',
         start: 0,
         end: film.totalFrames - 1,
-        dx: 0,
-        dy: 0,
-        reps: -1,
-        delay: 90
+        dx: Number.parseInt(dxInput.value),
+        dy: Number.parseInt(dyInput.value),
+        reps: Number.parseInt(repsInput.value),
+        delay: Number.parseInt(delaySlider.value)
     });
     const ctx = mainAreaCanvas.getContext('2d');
-    ctx.width = mainAreaCanvas.width;
-    ctx.height = mainAreaCanvas.height;
+    ctx.width = mainAreaCanvas.offsetWidth;
+    ctx.height = mainAreaCanvas.offsetHeight;
     let firstBox = film.getFrameBox(0);
     let currPos = {
         x:(mainAreaCanvas.width/2) - ((firstBox.width/firstBox.height)*(mainAreaCanvas.height/3)/2),
@@ -664,6 +761,13 @@ function createPopUp(film){
         };
     });
     createAnim.addEventListener('click',saveAnimation);
+    replayAnim.addEventListener('click',()=>{
+        currPos = {
+            x:(mainAreaCanvas.width/2) - ((firstBox.width/firstBox.height)*(mainAreaCanvas.height/3)/2),
+            y:(mainAreaCanvas.height/2) - ((mainAreaCanvas.height/3)/2)
+        };
+        restartAnimation();
+    });
     popUpClose.addEventListener('click',destroyPopUP);
     popUpCloseBack.addEventListener('click',destroyPopUP);
 
