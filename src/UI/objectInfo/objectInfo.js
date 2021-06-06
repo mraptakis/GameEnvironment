@@ -375,6 +375,7 @@ function fillObjectActions(obj){
         const copyBut = document.getElementById('mainInfoBox-options-copy');
         copyBut.onclick = ()=>{
             Engine.ClipboardManager.copy(obj,true);
+            bb.fastSet('events','showFeedback',`${obj.name} Copied`);
         }
     }
 
@@ -383,6 +384,7 @@ function fillObjectActions(obj){
         const snapBut = document.getElementById('mainInfoBox-options-snapshot');
         snapBut.onclick = ()=>{
             Engine.SnapshotManager.snapshotObject(obj);
+            bb.fastSet('events','showFeedback',`Took a snapshot of ${obj.name}`);
         }
     }
 
@@ -393,6 +395,7 @@ function fillObjectActions(obj){
         removeBut.onclick = ()=>{
             obj.remove();
             bb.fastSet('state', 'focusedObject', undefined);
+            bb.fastSet('events','showFeedback',`${obj.name} Removed`);
         }
     }
 }

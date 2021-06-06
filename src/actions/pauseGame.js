@@ -15,9 +15,11 @@ if(Engine.hasManager('PauseManager')){
 
     bb.fastInstall('actions', 'togglePause', ()=>{
         if(Engine.PauseManager.isPaused()){
+            bb.fastSet('events','showFeedback',`Resume`);
             Engine.PauseManager.resume();
         }else{
             Engine.PauseManager.pause();
+            bb.fastSet('events','showFeedback',`Pause`);
         }
     });
 }
