@@ -101,9 +101,21 @@ function onContextChange({objID,event}){
             innerHTML: 'Remove Object'
         });
         but.onclick = ()=>{
-            obj.remove();
-            bg.click();
-            bb.fastSet('events','showFeedback',`${obj.name} Removed`);
+            if(bb.fastGet('settings','Show Prompt On Actions')){
+                bb.fastSet('events','openPrompt',{
+                    title: 'Remove Object',
+                    description: `If you accept ${obj.name} will be removed`,
+                    onAccept: ()=>{
+                        obj.remove();
+                        bg.click();
+                        bb.fastSet('events','showFeedback',`${obj.name} Removed`);
+                    }
+                });
+            }else{
+                obj.remove();
+                bg.click();
+                bb.fastSet('events','showFeedback',`${obj.name} Removed`);
+            }
         }
     }
 
