@@ -938,7 +938,7 @@ function showFilms(objWrapper){
         parent: objWrapper
     });
 
-    const itemsPerPage = 24;
+    const itemsPerPage = 18;
 
     const keys = Object.keys(items);
     const pages = Math.ceil((keys.length-1) / itemsPerPage);

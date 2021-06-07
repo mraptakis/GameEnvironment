@@ -88,8 +88,8 @@
 
 .inventory-window-body-grid {
     width: 100%;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
+    /* display: grid;
+    grid-template-columns: auto auto auto auto; */
 }
 
 .inventory-window-body-page-swap {
@@ -184,7 +184,7 @@
 
 .inventory-window-itemWrapper {
     width: 200px;
-    margin: 0 20px 0 20px;
+    margin: 0 20px 40px 20px;
     float: left;
     overflow: hidden;
     height: 200px;
