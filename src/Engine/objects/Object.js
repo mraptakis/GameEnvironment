@@ -286,7 +286,7 @@ Object.prototype.removeEvent = function(ev) {
 }
 
 Object.prototype.getEventTag = function(ev) {
-    this.data.eventHandler.getEventTag(ev);
+    return this.data.eventHandler.getEventTag(ev);
 }
 
 
