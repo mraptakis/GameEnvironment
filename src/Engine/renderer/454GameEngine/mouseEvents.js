@@ -28,6 +28,7 @@ function focused(obj,x,y){
 }
 
 function rightClick(e){
+    e.preventDefault();
     isClickThrough = bb.fastGet('settings','Clicking Through Objects');
     [mouse.x,mouse.y] = translator(e);
     const aliveItems = objManager.objects;
