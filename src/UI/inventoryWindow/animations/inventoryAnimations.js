@@ -187,7 +187,7 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
         const remAnim = document.createElement('div');
         remAnim.classList = 'animationWorkshopCreate_popup_editarea_button';
         remAnim.innerHTML = 'Remove Animation';
-        remAnim.style.backgroundColor = 'var(--secondary-color)'
+        remAnim.style.backgroundColor = 'var(--secondary-color)';
         editArea.appendChild(remAnim);
         remAnim.onclick = ()=>{
             if(bb.fastGet('settings','Show Prompt On Actions')){
@@ -207,7 +207,7 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
                 Engine.AnimationManager.removeAnimation(id);
                 closeInventoryWindow();
             }
-        }
+        };
     }
 
     let animator = new FRAnimator();

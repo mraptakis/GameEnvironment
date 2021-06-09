@@ -48,7 +48,7 @@ function showObjects(objWrapper){
                     item.remove();
                     showObjects(objWrapper);
                 }
-            }
+            };
         }
         
         const body = uiFactory.createElement({

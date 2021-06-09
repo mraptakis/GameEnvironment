@@ -10,12 +10,35 @@ class InputManager extends Manager{
     currentlyPressed = {};
     releasedKeys = [];
 
+    // DEFAULTS
     keyCombos = {
-        'Copy': ['ControlLeft', 'AltLeft', 'KeyC'],
-        'Paste': ['ControlLeft', 'AltLeft', 'KeyV'],
-        'togglePause': ['Escape'],
-        'resumeGame': ['ControlLeft', 'ShiftLeft', 'Digit2'],
+        'Copy Object': ['ControlLeft', 'KeyC'],
+        'Paste Object': ['ControlLeft', 'KeyV'],
+        'Pause/Resume Toggle': ['Escape'],
         'dummyAction': ['ControlLeft', 'KeyB']
+    }
+
+    onSave(){
+        return JSON.stringify(this.keyCombos);
+    }
+
+    onRetrieve(info){
+        const savedKeyCombos = JSON.parse(info);
+        for(let i in savedKeyCombos){
+            this.keyCombos[i] = savedKeyCombos[i];
+        }
+    }
+
+    setCombo(comboID,arr){
+        this.keyCombos[comboID] = arr;
+    }
+
+    getCombo(comboID) {
+        return this.keyCombos[comboID];
+    }
+
+    getCombos(){
+        return Object.keys(this.keyCombos);
     }
 
     constructor(){
@@ -126,8 +149,6 @@ class GamepadController {
 
     const keyMap = {
         0:  'KeyW',
-        8:  'resumeGame',
-        9:  'pauseGame',
         // 13: 'KeyS',
         // 14: 'KeyA',
         // 15: 'KeyD',

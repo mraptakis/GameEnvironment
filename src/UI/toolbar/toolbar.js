@@ -266,13 +266,13 @@ function onToolbarLoaded(){
 
     document.getElementById('toolbar_saveLocal').style.cursor = 'pointer';
     document.getElementById('toolbar_saveLocal').onclick = ()=>{
-        bb.fastGet('actions','saveToLocal')()
+        bb.fastGet('actions','Save(locally)')()
         bb.fastSet('events','showFeedback',`Saved Game Locally`);
     };
     
     document.getElementById('toolbar_downloadState').style.cursor = 'pointer';
     document.getElementById('toolbar_downloadState').onclick = ()=>{
-        bb.fastGet('actions','saveToDatabase')();
+        bb.fastGet('actions','Save(Remote)')();
         bb.fastSet('events','showFeedback',`Game Downloaded`);
     };
 }

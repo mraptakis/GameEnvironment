@@ -60,6 +60,6 @@ function showScenes(objWrapper){
                 Engine.SnapshotManager.resetSceneToSnapshot(i);
                 closeInventoryWindow();
             }
-        }
+        };
     }
 }
