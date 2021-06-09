@@ -27,7 +27,6 @@ class InputManager extends Manager{
     }
     
     keyPressed(key,forever){
-        // logManager.logAction(`Pressed Key ${key}`);
         if(forever) this.currentlyPressed[key] = InputState.FOREVER;
         else this.currentlyPressed[key] = InputState.TOTRIGGER;
 
@@ -62,7 +61,6 @@ class InputManager extends Manager{
             const currP = this.currentlyPressed[i];
             if(currP === InputState.TOTRIGGER 
             || currP === InputState.FOREVER){
-                // logManager.logAction(`Action for input ${i}`);
                 keysPressed.push(i);
             }
 
@@ -191,6 +189,7 @@ let gamep = new GamepadController();
 
 
 document.onkeydown = (ev)=>{
+    if(ev.target.type === 'text')return;
     if(!inputManager.isPressed(ev.code))
         inputManager.keyPressed(ev.code);
 }
