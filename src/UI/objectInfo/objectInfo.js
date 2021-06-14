@@ -444,8 +444,8 @@ function fillObjectActions(obj){
         removeBut.onclick = ()=>{ 
             if(bb.fastGet('settings','Show Prompt On Actions')){
                 bb.fastSet('events','openPrompt',{
-                    title: 'Remove Object',
-                    description: `If you accept ${obj.name} will be removed`,
+                    title: tr.get('Remove Object'),
+                    description: `${tr.get('If you accept')} ${tr.get('object')} ${obj.name} ${tr.get('will get removed')}`,
                     onAccept: ()=>{
                         obj.remove();
                         bb.fastSet('state', 'focusedObject', undefined);
@@ -519,6 +519,8 @@ function updateInfo(obj){
 }
 
 function onObjectInfoLoaded(){
+    document.getElementById('promptWindow-accept').innerHTML = tr.get('Accept');
+    document.getElementById('promptWindow-decline').innerHTML = tr.get('Decline');
     const focObj = bb.fastGet('state','focusedObject');
     updateInfo(focObj);
 }

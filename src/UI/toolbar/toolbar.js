@@ -228,8 +228,8 @@ function onToolbarLoaded(){
     backBut.onclick = (() => {
         if(bb.fastGet('settings','Show Prompt On Actions')){
             bb.fastSet('events','openPrompt',{
-                title: 'Go To Homepage',
-                description: `If you accept you will be redirected and you will lose all the progress if you haven't saved`,
+                title: tr.get('Go To Homepage'),
+                description: `${tr.get('If you accept')} ${tr.get('you will be redirected')} ${tr.get('and')} ${tr.get('you will lose')} ${tr.get('all the progress')} ${tr.get("if you haven't saved")}`,
                 onAccept: ()=>{
                     window.location = '/';
                 }

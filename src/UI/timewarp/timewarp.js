@@ -97,8 +97,8 @@ function renderPlaybackUI(){
         resumeBut.onclick = ()=>{
             if(bb.fastGet('settings','Show Prompt On Actions')){
                 bb.fastSet('events','openPrompt',{
-                    title: 'Continue From Recording',
-                    description: 'If you accept you will lose all the current recordings and you will continue from the current stop point',
+                    title: tr.get('Continue From Recording'),
+                    description: `${tr.get('If you accept')} ${tr.get('you will lose')} ${tr.get('every')} ${tr.get('recording')} ${tr.get('and')} ${tr.get('continue from stop point')}`,
                     onAccept: ()=>{
                         changeTimewarpState('idle'); 
                         const number = Number.parseInt(range.value);
@@ -188,8 +188,8 @@ function renderPlaybackUI(){
         const currTimeline = (Number.parseInt(timelinesWrapper.value)+1);
         if(currTimeline < timelines.length && bb.fastGet('settings','Show Prompt On Actions')){
             bb.fastSet('events','openPrompt',{
-                title: 'New Recording',
-                description: 'If you accept you will lose all the extra recordings after timeline #'+currTimeline,
+                title: tr.get('New Recording'),
+                description: `${tr.get('If you accept')} ${tr.get('you will lose')} ${tr.get('all the recordings')} ${tr.get("after timeline")} #${currTimeline}`,
                 onAccept: ()=>{
                     Engine.TimewarpManager.clearTimelines(timelinesWrapper.value);
                     Engine.PauseManager.resume();
