@@ -519,8 +519,8 @@ function updateInfo(obj){
 }
 
 function onObjectInfoLoaded(){
-    document.getElementById('promptWindow-accept').innerHTML = tr.get('Accept');
-    document.getElementById('promptWindow-decline').innerHTML = tr.get('Decline');
     const focObj = bb.fastGet('state','focusedObject');
     updateInfo(focObj);
+    document.getElementById('promptWindow-accept').innerHTML = tr.get('Accept');
+    document.getElementById('promptWindow-decline').innerHTML = tr.get('Decline');
 }
