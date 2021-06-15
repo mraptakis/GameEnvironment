@@ -10,6 +10,7 @@ class Translator {
         this.map = {}
         this.loadLanguage('GR');
         this.loadLanguage('EN');
+        // this.loadLanguage('FR');
     }
     
     async loadLanguage(lang){
