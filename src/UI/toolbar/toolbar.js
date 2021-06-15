@@ -265,7 +265,7 @@ function onToolbarLoaded(){
             const res = document.getElementsByClassName('toolbar_dropdown_item');
             res.item(0)?.click();
         }
-    }
+    };
 
     document.getElementById('toolbar_saveLocal').style.cursor = 'pointer';
     document.getElementById('toolbar_saveLocal').onclick = ()=>{
