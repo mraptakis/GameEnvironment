@@ -193,8 +193,8 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
         remAnim.onclick = ()=>{
             if(bb.fastGet('settings','Show Prompt On Actions')){
                 bb.fastSet('events','openPrompt',{
-                    title: 'Remove Animation',
-                    description: `If you accept animation ${id} will get removed`,
+                    title: tr.get('Remove Animation'),
+                    description: `${tr.get('If you accept')} ${tr.get('animation')} ${id} ${tr.get('will get removed')}`,
                     onAccept: ()=>{
                         animator.stop();
                         wrap.remove();
