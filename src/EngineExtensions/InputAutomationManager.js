@@ -1,7 +1,5 @@
 import Manager from '../Engine/Manager.js'
 
-import bb from '../utils/blackboard.js'
-
 import Engine from '../Engine.js'
 
 function pressKey(key){
