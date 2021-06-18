@@ -85,7 +85,7 @@ function translateAction(action){
         extraType,
         from,
         to
-    }
+    };
 
 
     // return {

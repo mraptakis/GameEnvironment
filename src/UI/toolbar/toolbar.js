@@ -267,14 +267,16 @@ function onToolbarLoaded(){
         }
     };
 
-    document.getElementById('toolbar_saveLocal').style.cursor = 'pointer';
-    document.getElementById('toolbar_saveLocal').onclick = ()=>{
+    document.getElementById('toolbar_saveLocal').title = 'Save the current game and go to game "local" to continue';
+    document.getElementById('toolbar_saveLocal-icon').style.cursor = 'pointer';
+    document.getElementById('toolbar_saveLocal-icon').onclick = ()=>{
         bb.fastGet('actions','Save(locally)')()
         bb.fastSet('events','showFeedback',`Saved Game Locally`);
     };
-    
-    document.getElementById('toolbar_downloadState').style.cursor = 'pointer';
-    document.getElementById('toolbar_downloadState').onclick = ()=>{
+
+    document.getElementById('toolbar_downloadState').title = 'Download the current game state for later use';
+    document.getElementById('toolbar_downloadState-icon').style.cursor = 'pointer';
+    document.getElementById('toolbar_downloadState-icon').onclick = ()=>{
         bb.fastGet('actions','Save(Remote)')();
         bb.fastSet('events','showFeedback',`Game Downloaded`);
     };

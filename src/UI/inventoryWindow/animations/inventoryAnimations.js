@@ -297,8 +297,8 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
     dxInput.addEventListener('change',restartAnimation);
     dyInput.addEventListener('change',restartAnimation);
     repsInput.addEventListener('change',restartAnimation);
-    delaySlider.addEventListener('change',(ev)=>{
-        delaySliderPrompt.innerHTML = `${tr.get('Delay')}: ${ev.target.value}`;
+    delaySlider.addEventListener('change',()=>{
+        delaySliderPrompt.innerHTML = `${tr.get('Delay')}: ${escape(delaySlider.value)}`;
         restartAnimation()
     });
     startAnim.addEventListener('click',()=>{
