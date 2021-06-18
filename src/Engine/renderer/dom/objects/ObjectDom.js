@@ -13,6 +13,7 @@ export default class ObjectDom extends Object{
     constructor(name,id,extra){
         super(name,id);
                 
+        this._state = 'loaded';
         if(extra.div){
             if(typeof extra.div === 'string'){
                 const temp = document.createElement('div');
@@ -90,14 +91,25 @@ export default class ObjectDom extends Object{
     animate(){}
 
     add(){
+        this._state = 'alive';
         objectManager.addToWorld(this);
         scene.addItem(this);
     }
 
     remove(){
+        this._state = 'removed';
         super.remove();
         objectManager.removeFromWorld(this);
         scene.remove(this);
+    }
+
+    addDivToScene(){
+        scene.addItem(this);
+    }
+
+    removeDivFromScene(){
+        if(this._state === 'alive')
+            scene.remove(this);
     }
 
     render(){        
