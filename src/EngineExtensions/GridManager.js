@@ -114,7 +114,9 @@ export default class GridManager extends Manager{
                         // |        ||        |
                         // | colRec || player |
                         // |________||________|
-                        obj.setValue('x',(collisionRect.x + collisionRect.width) - 1);
+                        obj.setValue('x',(collisionRect.x + collisionRect.width) - 1, {
+                            explanation: 'Action due to grid'
+                        });
                         return;
                     }
                 }
@@ -128,7 +130,9 @@ export default class GridManager extends Manager{
                         // |        ||        |
                         // x player w| colRec |
                         // |___h____||________|
-                        obj.setValue('x',(collisionRect.x - boundingBox.width) + 1);
+                        obj.setValue('x',(collisionRect.x - boundingBox.width) + 1, {
+                            explanation: 'Action due to grid'
+                        });
                         return;
                     }
                 }
@@ -147,7 +151,9 @@ export default class GridManager extends Manager{
                         // |        |
                         // | player |
                         // |________|
-                        obj.setValue('y',(collisionRect.y + collisionRect.height) - 1);
+                        obj.setValue('y',(collisionRect.y + collisionRect.height) - 1, {
+                            explanation: 'Action due to grid'
+                        });
                         return;
                     }
                 }
@@ -165,7 +171,9 @@ export default class GridManager extends Manager{
                         // |        |
                         // | colRec |
                         // |________|
-                        obj.setValue('y',(collisionRect.y - boundingBox.height) + 1);
+                        obj.setValue('y',(collisionRect.y - boundingBox.height) + 1, {
+                            explanation: 'Action due to grid'
+                        });
                         return;
                     }
                 }
