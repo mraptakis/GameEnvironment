@@ -42,7 +42,6 @@ export default class GridManager extends Manager{
                 this._gridRectangles.push(obj.getPositional());
             }
         }
-        console.log(this._gridRectangles);
         bb.fastSet('events', 'gridUpdated',this._gridRectangles);
     }
 
