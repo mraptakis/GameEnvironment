@@ -18,11 +18,21 @@ export default class ScriptingManager extends Manager{
         this._currentEditor = blScr;
     }
 
+    onSave(){
+        return this._currentEditor.id;
+    }
+
+    onRetrieve(id){
+        if(!this._installedMechanisms[id])return;
+        this._currentEditor = this._installedMechanisms[id];
+    }
+
     getCurrentEditorID(){
         return this._currentEditor.id;
     }
 
     setNewEditor(editorID){
+        if(!this._installedMechanisms[editorID])return;
         this._currentEditor = this._installedMechanisms[editorID];
         this._div.innerHTML = '';
         this.injectInDiv(this._div); 

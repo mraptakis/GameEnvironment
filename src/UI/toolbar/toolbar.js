@@ -306,4 +306,8 @@ function onToolbarLoaded(){
         bb.fastGet('actions','Save(Remote)')();
         bb.fastSet('events','showFeedback',`Game Downloaded`);
     };
+
+    document.getElementById('toolbar-dummyButton').onclick = ()=>{
+        console.log(Engine.SaveManager.getGameProjection());
+    }
 }
