@@ -57,6 +57,18 @@ export default class ScriptingManager extends Manager{
 
     injectInDiv(div) {
         this._div = div;
+        div.style.height = 500 + 'px';
+        div.style.width = 750 + 'px';
+        if(window.innerWidth < 1250){
+            div.style.width = (window.innerWidth - 425) + 'px';
+            div.style.height = (window.innerHeight - 50) + 'px';
+
+            const infoBar = document.getElementById('infoBar');
+            infoBar.style.width = (window.innerWidth - 275) + 'px';
+
+            const eventsTab = document.getElementById('eventsTab');
+            eventsTab.style.height = (window.innerHeight - 50) + 'px';
+        }
         this._currentEditor.injectInDiv(div);
     }
 
