@@ -190,7 +190,7 @@ clickWrapper.ontouchstart = (ev)=>{
             if(obj)return;
         }
     }
-}
+};
 
 clickWrapper.onmousedown = (ev)=>{
     for(let i in managers){
