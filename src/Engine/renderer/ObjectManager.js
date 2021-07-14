@@ -150,11 +150,11 @@ objectManager.addSystemObject(keyObj.id);
 
 const clickWrapper = document.createElement('div');
     clickWrapper.id = "clickWrapper";
-    clickWrapper.style.width = '100vw';
-    clickWrapper.style.height = '100vh';
+    clickWrapper.style.width = (envObj._windowWidth/envObj._aspectRatio) + 'px';
+    clickWrapper.style.height = (envObj._windowHeight/envObj._aspectRatio) + 'px';
     clickWrapper.style.opacity = 0;
     clickWrapper.style.position = 'absolute';
-    clickWrapper.style.top = 0;
+    clickWrapper.style.top = ((window.innerHeight - (envObj._windowHeight/envObj._aspectRatio) )/2) + 'px';
     clickWrapper.style.left = 0;
     document.body.appendChild(clickWrapper);
 
@@ -182,8 +182,8 @@ clickWrapper.onclick = (ev)=>{
 };
 
 clickWrapper.ontouchstart = (ev)=>{
-    ev.offsetX = ev.touches[0].clientX;
-    ev.offsetY = ev.touches[0].clientY;
+    ev.offsetX = ev.touches[0].offsetX;
+    ev.offsetY = ev.touches[0].offsetY;
     for(let i in managers){
         if(managers[i].mouseEvents.mouseDown){
             const obj = managers[i].mouseEvents.mouseDown(ev);

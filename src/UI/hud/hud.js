@@ -40,8 +40,8 @@ function dragElement(elmnt) {
     function dragMouseDown(e) {
       e = e || window.event;
       e.preventDefault();
-      pos3 = e.clientX;
-      pos4 = e.clientY;
+      pos3 = e.offsetX;
+      pos4 = e.offsetY;
       document.onmouseup = closeDragElement;
       document.onmousemove = elementDrag;
     }
@@ -50,10 +50,10 @@ function dragElement(elmnt) {
       e = e || window.event;
       e.preventDefault();
   
-      pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
-      pos3 = e.clientX;
-      pos4 = e.clientY;
+      pos1 = pos3 - e.offsetX;
+      pos2 = pos4 - e.offsetY;
+      pos3 = e.offsetX;
+      pos4 = e.offsetY;
   
       elmnt.style.left = (elmnt.offsetLeft - pos1) + 'px';
       elmnt.style.top  = (elmnt.offsetTop - pos2) + 'px';
