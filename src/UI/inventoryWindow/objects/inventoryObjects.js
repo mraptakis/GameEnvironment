@@ -213,7 +213,7 @@ function showObjects(objWrapper){
     searchBox.oninput = ()=>{
         renderManager.applyFilter(searchBox.value);
         renderManager.renderObjects();
-    }
+    };
 
     renderManager.renderObjects();
 

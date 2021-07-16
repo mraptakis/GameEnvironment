@@ -1,7 +1,6 @@
 import Object from './Object454.js'
 
 import bb from '../../../../utils/blackboard.js'
-import scene from './Scene.js';
 
 
 export default class Rectangle extends Object {
