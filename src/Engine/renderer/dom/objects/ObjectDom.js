@@ -27,6 +27,9 @@ export default class ObjectDom extends Object{
         }
         else this.createElement({name,...extra});
 
+        this._width = this.div.style.width;
+        this._height = this.div.style.height;
+
 
         this.renderer = 'dom';
         this.data.valueHandler.registerValue('x',{
