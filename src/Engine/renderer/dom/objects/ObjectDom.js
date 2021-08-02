@@ -72,7 +72,7 @@ export default class ObjectDom extends Object{
             }
         });
 
-        this.data.valueHandler.registerValue('colour',{
+        this.data.valueHandler.registerValue('color',{
             tag: "texture",
             onChange: (value) => this.div.style.backgroundColor = value,
             getValue: () => {return this.div.style.backgroundColor;}
