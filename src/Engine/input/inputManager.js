@@ -16,7 +16,7 @@ class InputManager extends Manager{
     keyCombos = {
         'Copy Object': ['ControlLeft', 'KeyC'],
         'Paste Object': ['ControlLeft', 'KeyV'],
-        'Pause/Resume Toggle': ['Escape'],
+        'Pause/Resume Toggle': ['KeyP'],
         'dummyAction': ['ControlLeft', 'KeyB']
     }
 
