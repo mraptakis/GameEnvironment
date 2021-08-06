@@ -65,7 +65,7 @@ function createPopUp(film, {id,delay = 90,dx = 0, dy = 0,reps = -1} = {delay: 90
         const previewCtx = preview.getContext('2d');
         previewCtx.canvas.width = width;
         previewCtx.canvas.height = width;
-        const endW = width*(box.width/box.height)
+        const endW = width*(box.width/box.height);
         previewCtx.drawImage(bb.fastGet('assets',film.bitmap),
         box.x,box.y,box.width,box.height,
         (preview.width - endW)/2, 0, endW, width);
