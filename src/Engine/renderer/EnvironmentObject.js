@@ -87,7 +87,7 @@ class EnvironmentObject extends Object {
             tag: "texture",
             value: '#ffffff',
             onChange: (value) => {
-                const scene = document.getElementById('scene');
+                const scene = document.getElementById('gamebackground');
                 if(scene)scene.style.backgroundColor = value;
             }
         });
@@ -95,7 +95,7 @@ class EnvironmentObject extends Object {
         this.data.valueHandler.registerValue('background',{
             tag: "texture",
             onChange: (value) => {
-                const scene = document.getElementById('scene');
+                const scene = document.getElementById('gamebackground');
                 if(value === '')
                     scene.style.backgroundImage = '';    
                 else

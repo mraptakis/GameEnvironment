@@ -77,6 +77,12 @@ canvas {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+#gamebackground {
+    overflow: hidden; 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 /* 
 div { 
 	user-select: none; 

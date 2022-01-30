@@ -1,7 +1,7 @@
 import envObj from './EnvironmentObject.js'
 import keyObj from './KeyboardObject.js'
-import ODomManager from './dom/renderer.js'
 import O454Manager from './454GameEngine/renderer.js'
+import ODomManager from './dom/renderer.js'
 
 import changeFocus from '../../utils/focusedObject.js'
 
@@ -142,8 +142,8 @@ for(let i in domConst){
     objectManager.addConstructor(i,domConst[i]);
 }
 
-objectManager._renderManagers.push(O454Manager);
 objectManager._renderManagers.push(ODomManager);
+objectManager._renderManagers.push(O454Manager);
 
 objectManager.addToWorld(envObj);
 objectManager.addToWorld(keyObj);
